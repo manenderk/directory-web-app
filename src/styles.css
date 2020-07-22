@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+.slider-action-prev, .slider-action-next {
+  position: absolute;
+  top: 50%;
+  z-index: 9;
+  margin-top: -33px;
+}
+
+.slider-action-prev {
+  left: 0;
+}
+.slider-action-next {
+  right: 0
+}

@@ -7,7 +7,13 @@ import { SectionsModule } from './sections/sections.module';
 const routes: Routes = [
   {
     path: '',
-    component: FrontendPageComponent
+    component: FrontendPageComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./frontend-pages/frontend-home/frontend-home.module').then(mod => mod.FrontendHomeModule)
+      }
+    ]
   }
 ]
 

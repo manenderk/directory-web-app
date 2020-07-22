@@ -1,0 +1,20 @@
+<!-- <div class="slider-container">
+  <div class="action-button vertical-center">
+    <i class="fa fa-3x fa-angle-left left-slide-action px-3"></i>
+    <i class="fa fa-3x fa-angle-right right-slide-action px-3"></i>
+  </div>
+  <div class="slides">
+    <div class="slide" *ngFor="let slide of filteredSlides">
+      <img class="img-fluid mx-2 rounded" [src]="slide">
+    </div>
+  </div>
+</div>
+ -->
+<div id="the-slider">
+  <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of slides" class="slide mx-2">
+      <img [src]="slide" alt="" width="100%">
+    </div>
+  </ngx-slick-carousel>
+</div>
+
