@@ -18,7 +18,16 @@ export class FrontendHomeSliderComponent implements OnInit {
     "centerPadding": '25vw',
     "lazyLoad": true,
     "prevArrow":  '<button type="button" class="btn btn-light slider-action-prev"><i class="fa fa-2x fa-angle-left"></i></button>',
-    "nextArrow":  '<button type="button" class="btn btn-light slider-action-next"><i class="fa fa-2x fa-angle-right"></i></button>'
+    "nextArrow":  '<button type="button" class="btn btn-light slider-action-next"><i class="fa fa-2x fa-angle-right"></i></button>',
+    "responsive": [
+      {
+        breakpoint: 992,
+        settings: {
+          centerMode: false,
+        }
+      }
+
+    ]
   };
 
   slides: string[] = [];
@@ -34,7 +43,7 @@ export class FrontendHomeSliderComponent implements OnInit {
   initializeSlideUrls() {
     const imageIds = [1021, 1036, 1037, 1038, 1044, 1045];
     imageIds.forEach(id => {
-      this.slides.push(`https://picsum.photos/id/${id}/800/200`);
+      this.slides.push(`https://picsum.photos/id/${id}/800/300`);
     })
 
     console.log(this.slides);

@@ -1,0 +1,10 @@
+.slide {
+  margin: 0 5px 0 5px
+}
+
+
+@media screen and (max-width: 991px) {
+  .slide {
+    margin: 0;
+  }
+}
