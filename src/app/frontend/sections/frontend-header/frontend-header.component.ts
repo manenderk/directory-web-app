@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-frontend-header',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrontendHeaderComponent implements OnInit {
 
+
+  appName: string = environment.appName;
+  appLogo: string = environment.appLogo;
+  isCollapsed: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }
