@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FrontendHomeComponent } from './frontend-home/frontend-home.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FrontendHomeSliderModule } from '../../frontend-modules/frontend-home-slider/frontend-home-slider.module';
+import { FrontendCategoryCardModule } from '../../frontend-modules/frontend-category-card/frontend-category-card.module';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FrontendHomeSliderModule
+    FrontendHomeSliderModule,
+    FrontendCategoryCardModule
   ]
 })
 export class FrontendHomeModule { }

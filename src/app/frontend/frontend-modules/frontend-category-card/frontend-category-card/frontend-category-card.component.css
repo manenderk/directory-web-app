@@ -1,0 +1,17 @@
+.category-card-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.the-category-thumbnail {
+  border: 1px solid #fff;
+}
+
+.category-card-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
