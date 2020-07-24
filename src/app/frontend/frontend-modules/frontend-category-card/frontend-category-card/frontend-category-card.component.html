@@ -1,9 +1,12 @@
-<div class="category-card-container">
-  <div class="category-card-content">
-    <img class="img img-fluid rounded the-category-thumbnail" [src]="img">
-  </div>
+<ng-container *ngIf="category">
+  <div class="category-card-container">
+    <div class="category-card-content" [ngStyle]="{'background-image': 'url(' + category.imageUrl + ')'}">
+      <!-- <img class="img img-fluid rounded the-category-thumbnail" [src]="category.imageUrl"> -->
+    </div>
 
-</div>
-<div class="the-category-title">
-  <h6>The Category</h6>
-</div>
+  </div>
+  <div class="the-category-title mb-2">
+    <h6 class="text-center">{{category.name}}</h6>
+  </div>
+</ng-container>
+

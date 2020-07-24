@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Category } from 'src/app/models/category/category.model';
 
 @Component({
   selector: 'app-frontend-category-card',
@@ -8,13 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class FrontendCategoryCardComponent implements OnInit {
 
 
-  img: string;
+  @Input() category: Category;
 
   constructor() { }
 
   ngOnInit(): void {
-    const id = Math.ceil(Math.random() * 2000);
-    this.img = `https://picsum.photos/id/${id}/400/400`;
   }
 
 }

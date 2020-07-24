@@ -5,10 +5,28 @@
     </div>
   </div>
 </div>
-<div class="container-fluid my-3">
+<div class="container-fluid my-4 py-2 bg-grey">
   <div class="row">
-    <div class="col px-0" *ngFor="let category of categories">
-      <app-frontend-category-card></app-frontend-category-card>
+    <div class="col section-heading">
+      <h2>{{categoryData.categoryHeading}}</h2>
+      <div class="header-bottom-bar my-1"></div>
+      <p>{{categoryData.categorySubheading}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col px-0" *ngIf="sliderConfig" >
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfig" >
+        <div ngxSlickItem  class="slide" *ngFor="let catArr of categoryData.organizedCategories">
+            <div *ngFor="let cat of catArr">
+              <app-frontend-category-card [category]="cat"></app-frontend-category-card>
+            </div>
+        </div>
+      </ngx-slick-carousel>
+    </div>
+  </div>
+  <div class="row my-2 px-3">
+    <div class="col text-right">
+      <a [routerLink]="['/categories']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 </div>

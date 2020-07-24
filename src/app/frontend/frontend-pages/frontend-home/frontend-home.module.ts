@@ -4,6 +4,8 @@ import { FrontendHomeComponent } from './frontend-home/frontend-home.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FrontendHomeSliderModule } from '../../frontend-modules/frontend-home-slider/frontend-home-slider.module';
 import { FrontendCategoryCardModule } from '../../frontend-modules/frontend-category-card/frontend-category-card.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 
 const routes: Routes = [
   {
@@ -18,7 +20,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FrontendHomeSliderModule,
-    FrontendCategoryCardModule
+    FrontendCategoryCardModule,
+    SlickCarouselModule
   ]
 })
 export class FrontendHomeModule { }
