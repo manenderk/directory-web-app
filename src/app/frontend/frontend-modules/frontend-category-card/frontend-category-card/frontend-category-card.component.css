@@ -5,11 +5,12 @@
 
 }
 
-.the-category-thumbnail {
-  border: 1px solid #fff;
-}
+/* .the-category-thumbnail {
+
+} */
 
 .category-card-content {
+  border: 2px solid #fff;
   position: absolute;
   top: 0;
   right: 0;
@@ -18,4 +19,5 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: .5rem;
 }

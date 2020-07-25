@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 .slider-action-prev, .slider-action-next {
   position: absolute;
   top: 50%;
@@ -24,15 +25,79 @@
   padding-right: .5rem;
 }
 
-.do-zoom-hover {
-  transition: transform .2s;
-}
-
-.do-zoom-hover:hover {
-  transform: scale(1.5);
-}
 
 
-.bg-grey {
-  background-color: #eee;;
+/************************/
+/*     MEDIA QUERIES    */
+/************************/
+
+
+@media screen and (min-width: 1600px) {
+
 }
+
+/* XL Break Point*/
+@media screen and (min-width: 1200px) {
+
+
+  .do-zoom-hover {
+    transition: transform .2s;
+  }
+
+  .do-zoom-hover:hover {
+    transform: scale(1.5);
+  }
+
+
+  .bg-grey {
+    background-color: #eee;;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+
+}
+
+@media screen and (max-width: 1599px) {
+
+}
+
+/* LG Break Point*/
+
+@media screen and (min-width: 992px) and (max-width: 1199px ) {
+
+}
+
+@media screen and (max-width: 1199px) {
+
+}
+
+/* MD Break Point*/
+@media screen and (min-width: 738px) and (max-width: 991px) {
+
+}
+
+@media screen and (max-width: 991px) {
+
+}
+
+/* SM Break Point*/
+@media screen and (min-width: 576px) and (max-width: 767px) {
+
+}
+
+@media screen and (max-width: 767px) {
+  .section-heading {
+    text-align: center;
+  }
+  .header-bottom-bar {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* XS Break Point*/
+@media screen and (max-width: 575px) {
+
+}
+

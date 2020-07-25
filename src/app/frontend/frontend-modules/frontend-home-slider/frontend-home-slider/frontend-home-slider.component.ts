@@ -46,8 +46,6 @@ export class FrontendHomeSliderComponent implements OnInit {
       this.slides.push(`https://picsum.photos/id/${id}/800/300`);
     })
 
-    console.log(this.slides);
-
     this.filteredSlides = [
       this.slides[this.slides.length - 2],
       this.slides[this.slides.length - 1],
@@ -56,7 +54,6 @@ export class FrontendHomeSliderComponent implements OnInit {
       this.slides[2]
     ]
 
-    console.log(this.filteredSlides);
   }
 
 
