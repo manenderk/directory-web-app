@@ -1,0 +1,12 @@
+export interface TheEvent {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  date: Date;
+  active: boolean;
+  featured: boolean;
+  order: number;
+  created: Date;
+  modified: Date;
+}

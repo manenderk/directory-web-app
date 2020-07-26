@@ -1,0 +1,14 @@
+.the-card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.the-card {
+  max-width: 300px;
+}
+
+@media screen and (min-width: 1200px) {
+  .the-card-container {
+    margin-bottom: 5rem;
+  }
+}

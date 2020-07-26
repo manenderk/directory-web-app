@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FrontendHomeSliderModule } from '../../frontend-modules/frontend-home-slider/frontend-home-slider.module';
 import { FrontendCategoryCardModule } from '../../frontend-modules/frontend-category-card/frontend-category-card.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { FrontendEventCardModule } from '../../frontend-modules/frontend-event-card/frontend-event-card.module';
 
 
 const routes: Routes = [
@@ -19,9 +20,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    SlickCarouselModule,
     FrontendHomeSliderModule,
     FrontendCategoryCardModule,
-    SlickCarouselModule
+    FrontendEventCardModule,
   ]
 })
 export class FrontendHomeModule { }

@@ -8,14 +8,14 @@
 <div class="container-fluid my-4 py-2 bg-grey">
   <div class="row">
     <div class="col section-heading">
-      <h2>{{categoryData.categoryHeading}}</h2>
+      <h2>{{categoryData?.categoryHeading}}</h2>
       <div class="header-bottom-bar my-1"></div>
-      <p>{{categoryData.categorySubheading}}</p>
+      <p>{{categoryData?.categorySubheading}}</p>
     </div>
   </div>
   <div class="row">
-    <div class="col px-0" *ngIf="sliderConfig" >
-      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfig" >
+    <div class="col px-0" *ngIf="categorySliderConfig" >
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="categorySliderConfig" >
         <div ngxSlickItem  class="slide" *ngFor="let catArr of categoryData.organizedCategories">
             <div *ngFor="let cat of catArr">
               <app-frontend-category-card [category]="cat"></app-frontend-category-card>
@@ -33,17 +33,17 @@
 <div class="container-fluid my-4 py-2">
   <div class="row">
     <div class="col section-heading">
-      <h2>{{categoryData.categoryHeading}}</h2>
+      <h2>{{eventData?.eventHeading}}</h2>
       <div class="header-bottom-bar my-1"></div>
-      <p>{{categoryData.categorySubheading}}</p>
+      <p>{{eventData?.eventSubheading}}</p>
     </div>
   </div>
   <div class="row">
-    <div class="col px-0" *ngIf="sliderConfig" >
-      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfig" >
-        <div ngxSlickItem  class="slide" *ngFor="let catArr of categoryData.organizedCategories">
-            <div *ngFor="let cat of catArr">
-              <app-frontend-category-card [category]="cat"></app-frontend-category-card>
+    <div class="col px-0" *ngIf="eventSliderConfig" >
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="eventSliderConfig" >
+        <div ngxSlickItem  class="slide" *ngFor="let eventArr of eventData.organizedEvents">
+            <div *ngFor="let evt of eventArr">
+             <app-frontend-event-card [theEvent]="evt"></app-frontend-event-card>
             </div>
         </div>
       </ngx-slick-carousel>

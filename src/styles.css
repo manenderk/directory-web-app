@@ -25,6 +25,14 @@
   padding-right: .5rem;
 }
 
+.slide:focus {
+  outline: none;
+}
+
+.link {
+  cursor: pointer;
+}
+
 
 
 /************************/
