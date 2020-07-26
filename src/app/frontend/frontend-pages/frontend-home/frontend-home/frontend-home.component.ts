@@ -26,6 +26,19 @@ export class FrontendHomeComponent implements OnInit {
     organizedCategories: Category[][]
   };
 
+  eventData: {
+    desktopRows: number,
+    desktopCols: number,
+    tabletRows: number;
+    tabletCols: number;
+    mobileRows: number;
+    mobileCols: number;
+    eventHeading: string,
+    eventSubheading: string,
+    events: Category[],
+    organizedEvents: Category[][]
+  };
+
   constructor(
     private picsumService: PicsumService,
     private screenService: ScreenService
@@ -101,7 +114,8 @@ export class FrontendHomeComponent implements OnInit {
         {
           breakpoint: this.screenService.breakpoints.md,
           settings: {
-            centerMode: false,
+            arrows: false,
+            dots: true,
             slidesToShow: this.categoryData.tabletCols,
             slidesToScroll: this.categoryData.tabletCols
           }
@@ -109,7 +123,8 @@ export class FrontendHomeComponent implements OnInit {
         {
           breakpoint: this.screenService.breakpoints.sm,
           settings: {
-            centerMode: false,
+            arrows: false,
+            dots: true,
             slidesToShow: this.categoryData.mobileCols,
             slidesToScroll: this.categoryData.mobileCols
           }
