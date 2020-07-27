@@ -1,57 +1,95 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col px-0">
-      <app-frontend-home-slider></app-frontend-home-slider>
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col px-0">
+        <app-frontend-home-slider></app-frontend-home-slider>
+      </div>
     </div>
   </div>
-</div>
-<div class="container-fluid my-4 py-2 bg-grey">
-  <div class="row">
-    <div class="col section-heading">
-      <h2>{{categoryData?.categoryHeading}}</h2>
-      <div class="header-bottom-bar my-1"></div>
-      <p>{{categoryData?.categorySubheading}}</p>
+</section>
+
+<section>
+  <div class="container-fluid my-4 py-2 bg-grey">
+    <div class="row">
+      <div class="col section-heading px-5">
+        <h2>{{categoryData?.categoryHeading}}</h2>
+        <div class="header-bottom-bar my-1"></div>
+        <p>{{categoryData?.categorySubheading}}</p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col px-0" *ngIf="categorySliderConfig" >
-      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="categorySliderConfig" >
-        <div ngxSlickItem  class="slide" *ngFor="let catArr of categoryData.organizedCategories">
+    <div class="row">
+      <div class="col px-0" *ngIf="categorySliderConfig" >
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="categorySliderConfig" >
+          <div ngxSlickItem  class="slide" *ngFor="let catArr of categoryData.organizedCategories">
             <div *ngFor="let cat of catArr">
               <app-frontend-category-card [category]="cat"></app-frontend-category-card>
             </div>
-        </div>
-      </ngx-slick-carousel>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+    <div class="row my-2 px-3">
+      <div class="col text-right">
+        <a [routerLink]="['/categories']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
+      </div>
     </div>
   </div>
-  <div class="row my-2 px-3">
-    <div class="col text-right">
-      <a [routerLink]="['/categories']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
+</section>
+
+
+<section>
+  <div class="container-fluid my-4 py-2">
+    <div class="row">
+      <div class="col section-heading px-5">
+        <h2>{{eventData?.eventHeading}}</h2>
+        <div class="header-bottom-bar my-1"></div>
+        <p>{{eventData?.eventSubheading}}</p>
+      </div>
     </div>
-  </div>
-</div>
-<div class="container-fluid my-4 py-2">
-  <div class="row">
-    <div class="col section-heading">
-      <h2>{{eventData?.eventHeading}}</h2>
-      <div class="header-bottom-bar my-1"></div>
-      <p>{{eventData?.eventSubheading}}</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col px-0" *ngIf="eventSliderConfig" >
-      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="eventSliderConfig" >
-        <div ngxSlickItem  class="slide" *ngFor="let eventArr of eventData.organizedEvents">
+    <div class="row">
+      <div class="col px-0" *ngIf="eventSliderConfig" >
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="eventSliderConfig" >
+          <div ngxSlickItem  class="slide" *ngFor="let eventArr of eventData.organizedEvents">
             <div *ngFor="let evt of eventArr">
-             <app-frontend-event-card [theEvent]="evt"></app-frontend-event-card>
+              <app-frontend-event-card [theEvent]="evt"></app-frontend-event-card>
             </div>
-        </div>
-      </ngx-slick-carousel>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+    <div class="row my-2 px-3">
+      <div class="col text-right">
+        <a [routerLink]="['/categories']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
+      </div>
     </div>
   </div>
-  <div class="row my-2 px-3">
-    <div class="col text-right">
-      <a [routerLink]="['/categories']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
+</section>
+
+<section>
+  <div class="container-fluid my-4 py-2">
+    <div class="row">
+      <div class="col section-heading px-5">
+        <h2>{{newsData?.newsHeading}}</h2>
+        <div class="header-bottom-bar my-1"></div>
+        <p>{{newsData?.newsSubheading}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col px-0" *ngIf="newsSliderConfig" >
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="newsSliderConfig" >
+          <div ngxSlickItem  class="slide" *ngFor="let newsArr of newsData.organizedNews">
+            <div *ngFor="let news of newsArr">
+              <app-frontend-news-card [news]="news"></app-frontend-news-card>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+    <div class="row my-2 px-3">
+      <div class="col text-right">
+        <a [routerLink]="['/categories']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
+      </div>
     </div>
   </div>
-</div>
+</section>
+

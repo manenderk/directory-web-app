@@ -3,6 +3,8 @@ import { Category } from 'src/app/models/category/category.model';
 import { TheEvent } from 'src/app/models/event/event.model';
 import { PicsumService } from 'src/app/services/extra/picsum.service';
 import { ScreenService } from 'src/app/services/common/screen.service';
+import { News } from 'src/app/models/news/news.model';
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-frontend-home',
@@ -16,6 +18,7 @@ export class FrontendHomeComponent implements OnInit {
 
   categorySliderConfig: any;
   eventSliderConfig: any;
+  newsSliderConfig: any;
 
   categoryData: {
     desktopRows: number,
@@ -43,6 +46,19 @@ export class FrontendHomeComponent implements OnInit {
     organizedEvents: TheEvent[][],
   };
 
+  newsData: {
+    desktopRows: number,
+    desktopCols: number,
+    tabletRows: number;
+    tabletCols: number;
+    mobileRows: number;
+    mobileCols: number;
+    newsHeading: string,
+    newsSubheading: string,
+    news: News[],
+    organizedNews: News[][],
+  }
+
   constructor(
     private picsumService: PicsumService,
     private screenService: ScreenService
@@ -53,6 +69,7 @@ export class FrontendHomeComponent implements OnInit {
   ngOnInit(): void {
     this.setCategoriesData();
     this.setEventsData();
+    this.setNewsData();
   }
 
 
@@ -64,8 +81,8 @@ export class FrontendHomeComponent implements OnInit {
       desktopCols: 6,
       tabletRows: 2,
       tabletCols: 4,
-      mobileRows: 2,
-      mobileCols: 3,
+      mobileRows: 3,
+      mobileCols: 4,
       categoryHeading: 'Categories',
       categorySubheading: 'Browse through our catalog',
       categories: [],
@@ -162,7 +179,7 @@ export class FrontendHomeComponent implements OnInit {
         id: '',
         name: 'Event' + i++,
         description: null,
-        imageUrl: `https://picsum.photos/id/${id}/400`,
+        imageUrl: `https://picsum.photos/id/${id}/400/300`,
         date: eventDate,
         active: true,
         featured: true,
@@ -176,10 +193,7 @@ export class FrontendHomeComponent implements OnInit {
     this.organizeEvents(rows);
 
     this.eventSliderConfig = this.getSliderConfig('event');
-
-
   }
-
 
   organizeEvents(rows: number) {
     let eventArr: TheEvent[] = [];
@@ -195,6 +209,78 @@ export class FrontendHomeComponent implements OnInit {
     if (eventArr.length > 0) {
       this.eventData.organizedEvents.push(eventArr);
     }
+  }
+
+  async setNewsData() {
+
+    // SETTING DEFAULT CATEGORY DATA
+    this.newsData = {
+      desktopRows: 2,
+      desktopCols: 4,
+      tabletRows: 2,
+      tabletCols: 3,
+      mobileRows: 2,
+      mobileCols: 2,
+      newsHeading: 'News',
+      newsSubheading: 'Our latest publications',
+      news: [],
+      organizedNews: [],
+    };
+
+
+    let rows: number = this.newsData.desktopRows;
+    let cols: number = this.newsData.desktopCols;
+    if (this.screenSize === 'xs') {
+      rows = this.newsData.mobileRows;
+      cols = this.newsData.mobileCols;
+    } else if (this.screenSize === 'sm') {
+      rows = this.newsData.tabletRows;
+      cols = this.newsData.tabletCols;
+    }
+
+    const count = rows * cols * 4;
+    const ids: number[] = await this.picsumService.getPicsumImageIds(count).toPromise();
+    let i = 1;
+    ids.forEach(id => {
+      const dateIncrement = Math.ceil(Math.random() * 10);
+      const monthIncrement = Math.ceil(Math.random() * 10);
+      const eventDate = new Date(new Date().getTime() + (dateIncrement * 24 * 60 * 60 * 1000));
+      eventDate.setMonth(eventDate.getMonth() + monthIncrement);
+      this.newsData.news.push({
+        id: '',
+        name: 'News' + i++,
+        description: null,
+        imageUrl: `https://picsum.photos/id/${id}/400/300`,
+        date: eventDate,
+        active: true,
+        featured: true,
+        created: null,
+        modified: null
+      })
+    });
+
+
+    this.organizeNews(rows);
+
+    this.newsSliderConfig = this.getSliderConfig('news');
+  }
+
+  organizeNews(rows: number) {
+    let newsArr: News[] = [];
+    this.newsData.organizedNews = [];
+    this.newsData.news.forEach(cat => {
+      newsArr.push(cat);
+      if (newsArr.length == rows) {
+        this.newsData.organizedNews.push(newsArr);
+        newsArr = [];
+      }
+    })
+
+    if (newsArr.length > 0) {
+      this.newsData.organizedNews.push(newsArr);
+    }
+
+    console.log(this.newsData.organizedNews);
   }
 
   getSliderConfig(type: string): any {
@@ -225,6 +311,15 @@ export class FrontendHomeComponent implements OnInit {
         tCols: this.eventData.tabletCols,
         mRows: this.eventData.mobileRows,
         mCols: this.eventData.mobileCols
+      }
+    } else if (type === 'news') {
+      matrix = {
+        dRows: this.newsData.desktopRows,
+        dCols: this.newsData.desktopCols,
+        tRows: this.newsData.tabletRows,
+        tCols: this.newsData.tabletCols,
+        mRows: this.newsData.mobileRows,
+        mCols: this.newsData.mobileCols
       }
     }
 

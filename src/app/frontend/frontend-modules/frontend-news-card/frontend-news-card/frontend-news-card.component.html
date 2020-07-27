@@ -1,0 +1,13 @@
+<ng-container  *ngIf="news">
+  <div class="the-card-container">
+    <div class="card the-card link">
+      <img class="card-img-top" [src]="news.imageUrl">
+      <div class="card-body">
+        <h5 class="card-title">{{news.name}}</h5>
+        <p class="card-text"> {{news.date | date}} </p>
+        <p class="card-text">{{news.description}}</p>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
