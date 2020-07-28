@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-7">
       <div class="row">
-        <div class="col-md-4 py-4">
+        <div class="col-md-4 py-4 maxheight100vhRelHeader">
           <form>
             <div class="form-group">
               <div class="input-group">
@@ -27,7 +27,12 @@
             </div>
           </form>
         </div>
-        <div class="col-md-8 py-3">
+        <div class="col-md-8 py-3 maxheight100vhRelHeader bg-grey-1">
+
+          <div class="">
+            <p>Showing {{businesses.length}} results</p>
+          </div>
+
           <div
           *ngFor="let business of businesses"
           class="mb-2"

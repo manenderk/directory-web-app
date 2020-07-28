@@ -45,6 +45,11 @@
   height: calc(100vh - 56px);
 }
 
+.maxheight100vhRelHeader {
+  max-height: calc(100vh - 56px);
+  overflow-y: scroll;
+}
+
 .input-group .input-group-text {
   background: #fff;
 }
