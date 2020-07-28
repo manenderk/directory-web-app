@@ -1,0 +1,27 @@
+<ng-container *ngIf="business">
+
+  <ng-container *ngIf="this.displayType === 'horizontal'; else showVerticalCard">
+    <div class="card">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img [src]="business.thumbnail" class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{business.name}}</h5>
+            <p class="card-text">{{business.shortAddress}}</p>
+            <p class="card-text"><small class="text-muted">{{business.rating}} {{business.reviews}}</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #showVerticalCard>
+
+  </ng-template>
+
+
+</ng-container>
+
+

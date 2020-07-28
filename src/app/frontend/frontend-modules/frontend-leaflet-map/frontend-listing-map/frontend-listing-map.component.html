@@ -1,0 +1,7 @@
+<div *ngIf="mapOptions" id="listing-map" class="height100vhResHeader"
+     leaflet
+     [leafletOptions]="mapOptions"
+>
+     <div *ngIf="userPositionLayer" [leafletLayer]="userPositionLayer"></div>
+     <div *ngIf="layers && layers.length > 0" [leafletMarkerCluster]="layers"></div>
+</div>

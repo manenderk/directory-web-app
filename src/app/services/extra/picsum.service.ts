@@ -24,7 +24,15 @@ export class PicsumService {
     )
   }
 
-  mapResponseToImageUrl(res: any): number {
+  getImageUrl(id: number, width: number, height?: number) {
+    let url = `https://picsum.photos/id/${id}/${width}`;
+    if (height) {
+      url = url + '/' + height;
+    }
+    return url;
+  }
+
+  private mapResponseToImageUrl(res: any): number {
     return res.id;
   }
 }
