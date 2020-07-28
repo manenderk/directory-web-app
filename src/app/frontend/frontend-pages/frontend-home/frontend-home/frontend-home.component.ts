@@ -105,7 +105,7 @@ export class FrontendHomeComponent implements OnInit {
     let i = 1;
     ids.forEach(id => {
       this.categoryData.categories.push({
-        id: '',
+        id: i.toString(),
         name: 'Category' + i++,
         description: null,
         imageUrl: `https://picsum.photos/id/${id}/400`,
@@ -176,7 +176,7 @@ export class FrontendHomeComponent implements OnInit {
       const eventDate = new Date(new Date().getTime() + (dateIncrement * 24 * 60 * 60 * 1000));
       eventDate.setMonth(eventDate.getMonth() + monthIncrement);
       this.eventData.events.push({
-        id: '',
+        id: i.toString(),
         name: 'Event' + i++,
         description: null,
         imageUrl: `https://picsum.photos/id/${id}/400/300`,

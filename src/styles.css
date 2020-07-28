@@ -7,9 +7,17 @@
   margin-top: -33px;
 }
 
-.slider-action-btn {
+/* .slider-action-btn {
   border: 1px solid #212529;
+} */
 
+.carousel .slider-action-btn {
+  opacity: 0;
+  transition: opacity .5s ease-out;
+}
+
+.carousel:hover .slider-action-btn {
+  opacity: 1;
 }
 
 .slider-action-prev {
@@ -49,7 +57,7 @@
 
 
   .do-zoom-hover {
-    transition: transform .2s;
+    transition: transform .5s;
   }
 
   .do-zoom-hover:hover {
