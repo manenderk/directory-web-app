@@ -12,6 +12,8 @@ import { WordsService } from 'src/app/services/extra/words.service';
 })
 export class FrontendListingComponent implements OnInit {
 
+  cardDisplayType = 'horizontal';
+
   categoryDropdownSettings: IDropdownSettings;
   categories: Category[] = [];
   businesses: Business[] = [];
@@ -82,5 +84,13 @@ export class FrontendListingComponent implements OnInit {
       limitSelection: 5
     };
   } */
+
+  toggleCardDisplayType() {
+    if (this.cardDisplayType === 'horizontal') {
+      this.cardDisplayType = 'vertical';
+    } else {
+      this.cardDisplayType = 'horizontal';
+    }
+  }
 
 }

@@ -1,0 +1,14 @@
+.business-thumbnail {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card-vertical .business-thumbnail {
+  padding-top: 75%
+}
+
+.card-horizontal .card-body {
+  min-height: 175px;;
+}
+

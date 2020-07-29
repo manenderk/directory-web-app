@@ -1,0 +1,12 @@
+.vertical-card.even-place {
+  padding-right: 7.5px;
+}
+
+.vertical-card.odd-place {
+  padding-left: 7.5px;
+}
+
+.listing-grid {
+  max-height: calc(100vh - 56px - 68px);
+  overflow-y: scroll;
+}

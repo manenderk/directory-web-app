@@ -45,11 +45,6 @@
   height: calc(100vh - 56px);
 }
 
-.maxheight100vhRelHeader {
-  max-height: calc(100vh - 56px);
-  overflow-y: scroll;
-}
-
 .input-group .input-group-text {
   background: #fff;
 }
@@ -64,6 +59,18 @@
 
 .bg-grey-1 {
   background-color: #f7f7f7;
+}
+
+.breadcrumb.my-breadcrumb {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+.btn-icon-circle {
+  border-radius: 100%;
+  width: 42px;
+  height: 42px;
 }
 
 /************************/

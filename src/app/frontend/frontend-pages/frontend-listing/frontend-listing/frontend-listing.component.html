@@ -2,7 +2,26 @@
   <div class="row">
     <div class="col-md-7">
       <div class="row">
-        <div class="col-md-4 py-4 maxheight100vhRelHeader">
+        <div class="col py-2">
+          <nav class="mb-1" aria-label="breadcrumb">
+            <ol class="breadcrumb my-breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Library</li>
+            </ol>
+          </nav>
+          <div>
+            Showing {{businesses.length}} results
+          </div>
+        </div>
+        <div class="col text-right align-self-center">
+          <button type="button" class="btn btn-info btn-icon-circle" (click)="toggleCardDisplayType()" >
+            <i [ngClass]="cardDisplayType === 'horizontal' ? 'fa fa-bars' : 'fa fa-th'"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 py-4">
           <form>
             <div class="form-group">
               <div class="input-group">
@@ -27,20 +46,22 @@
             </div>
           </form>
         </div>
-        <div class="col-md-8 py-3 maxheight100vhRelHeader bg-grey-1">
+        <div class="col-md-8 py-3 bg-grey-1 listing-grid">
 
-          <div class="">
-            <p>Showing {{businesses.length}} results</p>
+          <div class="row">
+            <ng-container *ngFor="let business of businesses; let odd = odd;">
+              <div
+                class="mb-3"
+                [ngClass]="{'col-12': cardDisplayType === 'horizontal', 'col-6 vertical-card': cardDisplayType !== 'horizontal', 'odd-place': odd, 'even-place': !odd }"
+              >
+                <app-frontend-business-listing-card
+                  [business]="business" [displayType]="cardDisplayType"
+                ></app-frontend-business-listing-card>
+              </div>
+            </ng-container>
+
           </div>
 
-          <div
-          *ngFor="let business of businesses"
-          class="mb-2"
-          >
-            <app-frontend-business-listing-card
-            [business]="business"
-            ></app-frontend-business-listing-card>
-          </div>
 
         </div>
       </div>
