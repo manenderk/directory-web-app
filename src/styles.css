@@ -1,5 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --c-color-1: #03045e;
+  --c-color-2: #023e8a;
+  --c-color-3: #0077b6;
+  --c-color-4: #00b4d8;
+  --c-color-5: #90e0ef;
+  --c-color-6: #caf0f8;
+  --c-color-default: #212529;
+}
+
+.color-1, .color-1:hover {
+  color: var(--c-color-1);
+}
+
+.color-2, .color-2:hover {
+  color: var(--c-color-2);
+}
+
+.color-3 {
+  color: var(--c-color-3);
+}
+
+.color-4 {
+  color: var(--c-color-4);
+}
+
+.color-default, .color-default:hover {
+  color: var(--c-color-default)
+}
+
+.border-color-2 {
+  border-color: var(--c-color-2);
+}
+
+.no-decoration, .no-decoration:hover {
+  text-decoration: none;
+}
+
 .slider-action-prev, .slider-action-next {
   position: absolute;
   top: 50%;
@@ -72,6 +110,26 @@
   width: 42px;
   height: 42px;
 }
+
+.custom-list-1 {
+  list-style: none;
+  padding-left: 0;
+}
+
+.custom-list-1 li {
+  display: block;
+  padding: 6px 8px;
+}
+
+.custom-list-1 span {
+  float: right;
+}
+
+.header-bottom-bar {
+  border: 1px solid ;
+  width: 100px;
+}
+
 
 /************************/
 /*     MEDIA QUERIES    */

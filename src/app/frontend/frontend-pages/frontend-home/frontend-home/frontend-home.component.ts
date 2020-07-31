@@ -13,6 +13,7 @@ import { newArray } from '@angular/compiler/src/util';
 })
 export class FrontendHomeComponent implements OnInit {
 
+  bannerSlides: string[] = [];
 
   screenSize: string;
 
@@ -67,11 +68,20 @@ export class FrontendHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.setBannerSlides();
     this.setCategoriesData();
     this.setEventsData();
     this.setNewsData();
   }
 
+
+  async setBannerSlides() {
+    const imageIds = await this.picsumService.getPicsumImageIds(5).toPromise();
+    imageIds.forEach(imgId => {
+      this.bannerSlides.push(this.picsumService.getImageUrl(imgId, 800, 300))
+    });
+  }
 
   async setCategoriesData() {
 

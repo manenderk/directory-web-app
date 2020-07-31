@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col px-0">
-        <app-frontend-home-slider></app-frontend-home-slider>
+        <app-frontend-home-slider [images]="bannerSlides"></app-frontend-home-slider>
       </div>
     </div>
   </div>
@@ -11,9 +11,9 @@
 <section>
   <div class="container-fluid my-4 py-2 bg-grey">
     <div class="row">
-      <div class="col section-heading px-5">
+      <div class="col section-heading color-1 px-5">
         <h2>{{categoryData?.categoryHeading}}</h2>
-        <div class="header-bottom-bar my-1"></div>
+        <div class="header-bottom-bar color-2 my-1"></div>
         <p>{{categoryData?.categorySubheading}}</p>
       </div>
     </div>
@@ -40,9 +40,9 @@
 <section>
   <div class="container-fluid my-4 py-2">
     <div class="row">
-      <div class="col section-heading px-5">
+      <div class="col section-heading color-1 px-5">
         <h2>{{eventData?.eventHeading}}</h2>
-        <div class="header-bottom-bar my-1"></div>
+        <div class="header-bottom-bar color-2 my-1"></div>
         <p>{{eventData?.eventSubheading}}</p>
       </div>
     </div>
@@ -68,9 +68,9 @@
 <section>
   <div class="container-fluid my-4 py-2">
     <div class="row">
-      <div class="col section-heading px-5">
+      <div class="col section-heading color-1 px-5">
         <h2>{{newsData?.newsHeading}}</h2>
-        <div class="header-bottom-bar my-1"></div>
+        <div class="header-bottom-bar color-2 my-1"></div>
         <p>{{newsData?.newsSubheading}}</p>
       </div>
     </div>

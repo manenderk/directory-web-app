@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-frontend-home-slider',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrontendHomeSliderComponent implements OnInit {
 
+  @Input() images: string[];
 
   slideConfig = {
     "slidesToShow": 1,
@@ -31,32 +32,9 @@ export class FrontendHomeSliderComponent implements OnInit {
     ]
   };
 
-  slides: string[] = [];
-
-  filteredSlides: string[] = [];
-
   constructor() { }
 
   ngOnInit(): void {
-    this.initializeSlideUrls();
+    // this.initializeSlideUrls();
   }
-
-  initializeSlideUrls() {
-    const imageIds = [1021, 1036, 1037, 1038, 1044, 1045];
-    imageIds.forEach(id => {
-      this.slides.push(`https://picsum.photos/id/${id}/800/300`);
-    })
-
-    this.filteredSlides = [
-      this.slides[this.slides.length - 2],
-      this.slides[this.slides.length - 1],
-      this.slides[0],
-      this.slides[1],
-      this.slides[2]
-    ]
-
-  }
-
-
-
 }
