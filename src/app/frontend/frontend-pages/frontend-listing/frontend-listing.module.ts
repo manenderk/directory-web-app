@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FrontendLeafletMapModule } from '../../frontend-modules/frontend-leaflet-map/frontend-leaflet-map.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FrontendBusinessListingCardModule } from '../../frontend-modules/frontend-business-listing-card/frontend-business-listing-card.module';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FrontendLeafletMapModule,
     FrontendBusinessListingCardModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    MatSliderModule
   ]
 })
 export class FrontendListingModule { }
