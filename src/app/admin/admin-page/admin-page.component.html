@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4 col-md-3 col-lg-2 height100vh px-0">
+      <app-admin-sidebar></app-admin-sidebar>
+    </div>
+
+    <div class="col-sm-8 col-md-9 col-lg-10 height100vh">
+      <div class="row">
+        <div class="col px-0">
+          <app-admin-header></app-admin-header>
+        </div>
+      </div>
+
+      <div class="admin-content-pane">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

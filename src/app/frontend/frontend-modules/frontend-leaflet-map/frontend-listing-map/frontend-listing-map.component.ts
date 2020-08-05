@@ -126,7 +126,7 @@ export class FrontendListingMapComponent implements OnInit {
     console.log('test');
     this.mapOptions = {
       center: latLng(this.userLoc.lat, this.userLoc.lon),
-      zoom: 12,
+      zoom: 15,
       layers: [
         tileLayer(
           'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {

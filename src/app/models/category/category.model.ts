@@ -2,10 +2,12 @@ export interface Category {
   id: string;
   name: string;
   description: string;
-  imageUrl: string;
+  thumbnailFile?: File;
+  thumbnail: string;
+  parentCategoryId: string;
   active: boolean;
   featured: boolean;
   order: number;
-  created: Date;
-  modified: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }

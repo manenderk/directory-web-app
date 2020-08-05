@@ -4,6 +4,7 @@ import { Category } from 'src/app/models/category/category.model';
 import { Business } from 'src/app/models/business/business.model';
 import { PicsumService } from 'src/app/services/extra/picsum.service';
 import { WordsService } from 'src/app/services/extra/words.service';
+import { ScreenService } from 'src/app/services/common/screen.service';
 
 @Component({
   selector: 'app-frontend-listing',
@@ -14,14 +15,25 @@ export class FrontendListingComponent implements OnInit {
 
   cardDisplayType = 'horizontal';
 
+  screenType: string;
+  toggleScreenType = ['xs','sm'];
+  toggleDisplayVars = {
+    filter: true,
+    map: true
+  };
+
   categoryDropdownSettings: IDropdownSettings;
   categories: Category[] = [];
   businesses: Business[] = [];
 
   constructor(
     private picsumService: PicsumService,
-    private wordService: WordsService
-  ) { }
+    private wordService: WordsService,
+    private screenService: ScreenService
+  ) {
+    this.screenType = this.screenService.getScreenType();
+    console.log(this.screenType);
+  }
 
   ngOnInit(): void {
     this.intialize();
@@ -40,12 +52,13 @@ export class FrontendListingComponent implements OnInit {
         id: i.toString(),
         name: names[i],
         description: null,
-        imageUrl: null,
+        thumbnail: null,
+        parentCategoryId: null,
         active: null,
         featured: null,
         order: null,
-        created: null,
-        modified: null
+        createdAt: null,
+        updatedAt: null
       });
     }
   }
@@ -71,19 +84,6 @@ export class FrontendListingComponent implements OnInit {
       })
     }
   }
-
-  /* intializeCategorySelectbox() {
-    this.categoryDropdownSettings = {
-      singleSelection: false,
-      idField: 'id',
-      textField: 'name',
-      enableCheckAll: false,
-      allowSearchFilter: true,
-      searchPlaceholderText: 'Find a category',
-      itemsShowLimit: 2,
-      limitSelection: 5
-    };
-  } */
 
   toggleCardDisplayType() {
     if (this.cardDisplayType === 'horizontal') {

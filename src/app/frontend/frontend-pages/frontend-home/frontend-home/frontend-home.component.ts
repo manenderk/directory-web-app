@@ -88,7 +88,7 @@ export class FrontendHomeComponent implements OnInit {
     // SETTING DEFAULT CATEGORY DATA
     this.categoryData = {
       desktopRows: 2,
-      desktopCols: 6,
+      desktopCols: 5,
       tabletRows: 2,
       tabletCols: 4,
       mobileRows: 3,
@@ -118,12 +118,13 @@ export class FrontendHomeComponent implements OnInit {
         id: i.toString(),
         name: 'Category' + i++,
         description: null,
-        imageUrl: `https://picsum.photos/id/${id}/400`,
+        thumbnail: `https://picsum.photos/id/${id}/400`,
+        parentCategoryId: null,
         active: true,
         featured: true,
         order: i,
-        created: null,
-        modified: null
+        createdAt: null,
+        updatedAt: null
       })
     });
 
@@ -339,8 +340,8 @@ export class FrontendHomeComponent implements OnInit {
       "autoplay": false,
       "arrows": true,
       "lazyLoad": true,
-      "prevArrow":  '<button type="button" class="btn btn-light slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>',
-      "nextArrow":  '<button type="button" class="btn btn-light slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>',
+      "prevArrow":  '<button type="button" class="btn btn-info slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>',
+      "nextArrow":  '<button type="button" class="btn btn-info slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>',
       "responsive": [
         {
           breakpoint: this.screenService.breakpoints.md,

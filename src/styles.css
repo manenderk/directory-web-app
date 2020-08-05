@@ -45,10 +45,6 @@
   margin-top: -33px;
 }
 
-/* .slider-action-btn {
-  border: 1px solid #212529;
-} */
-
 .carousel .slider-action-btn {
   opacity: 0;
   transition: opacity .5s ease-out;
@@ -131,6 +127,12 @@
 }
 
 
+.hide-element {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
 /************************/
 /*     MEDIA QUERIES    */
 /************************/
@@ -199,4 +201,5 @@
 @media screen and (max-width: 575px) {
 
 }
+
 

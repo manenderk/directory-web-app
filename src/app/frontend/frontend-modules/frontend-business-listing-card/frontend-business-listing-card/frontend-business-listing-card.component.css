@@ -12,3 +12,8 @@
   min-height: 175px;;
 }
 
+@media screen and (max-width: 767px) {
+  .card-horizontal .card-body {
+    min-height: 124px;
+  }
+}

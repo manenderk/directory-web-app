@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   appName: 'BizBox',
-  appLogo: 'assets/frontend/images/logo-bb.JPG'
+  appLogo: 'assets/frontend/images/logo-bb.JPG',
+  adminRoutePrefix: 'dir-adm'
 };
 
 /*
