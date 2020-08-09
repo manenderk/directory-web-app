@@ -24,7 +24,7 @@ export class FrontendHomeSliderComponent implements OnInit {
       {
         breakpoint: 992,
         settings: {
-          centerPadding: '10vw',
+          centerPadding: '8vw',
           arrows: false
         }
       }

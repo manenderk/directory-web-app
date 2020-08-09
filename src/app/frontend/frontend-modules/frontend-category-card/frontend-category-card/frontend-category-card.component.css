@@ -9,7 +9,7 @@
 } */
 
 .category-card-content {
-  border: 2px solid #fff;
+  border: 3px solid #fff;
   position: absolute;
   top: 0;
   right: 0;
@@ -18,5 +18,17 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+}
 
+
+@media screen and (max-width: 1024px) {
+  .category-text {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .category-text {
+    font-size: 0.6rem;
+  }
 }

@@ -5,6 +5,7 @@ import { Business } from 'src/app/models/business/business.model';
 import { PicsumService } from 'src/app/services/extra/picsum.service';
 import { WordsService } from 'src/app/services/extra/words.service';
 import { ScreenService } from 'src/app/services/common/screen.service';
+import { VariableService } from 'src/app/services/common/variable.service';
 
 @Component({
   selector: 'app-frontend-listing',
@@ -16,7 +17,7 @@ export class FrontendListingComponent implements OnInit {
   cardDisplayType = 'horizontal';
 
   screenType: string;
-  toggleScreenType = ['xs','sm'];
+  toggleScreenType: string[];
   toggleDisplayVars = {
     filter: true,
     map: true
@@ -29,7 +30,8 @@ export class FrontendListingComponent implements OnInit {
   constructor(
     private picsumService: PicsumService,
     private wordService: WordsService,
-    private screenService: ScreenService
+    private screenService: ScreenService,
+    private variableService: VariableService
   ) {
     this.screenType = this.screenService.getScreenType();
     console.log(this.screenType);
@@ -40,6 +42,7 @@ export class FrontendListingComponent implements OnInit {
   }
 
   async intialize() {
+    this.toggleScreenType = this.variableService.toggleScreenType;
     await this.initializeCategories();
     await this.intiializeBusinesses();
   }

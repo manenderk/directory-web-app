@@ -1,18 +1,8 @@
 .frontend-header {
   background: rgb(33,33,33);
   background: linear-gradient(90deg, rgba(33,33,33,1) 0%, rgba(66,66,66,1) 50%, rgba(97,97,97,1) 100%);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
   z-index: 9999999;
 }
-
-#header-spacer {
-  height: 56px;;
-}
-
 
 #keyword-search {
   border-radius: 50vh 0 0 50vh;
@@ -31,7 +21,7 @@
 }
 
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
 
   #keyword-search, #search-button {
     border-radius: 0;
@@ -42,10 +32,13 @@
   #category-search {
     height: 38px;
   }
+  .header-form input, .header-form select {
+    margin-bottom: 4px;
+  }
 }
 
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .header-form input, .header-form select, .header-form input:focus, .header-form select:focus {
     border: none;
     box-shadow: none;

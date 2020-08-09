@@ -1,47 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-dark frontend-header">
+<nav class="navbar sticky-top navbar-dark frontend-header">
   <a class="navbar-brand" [routerLink]="['/']" >
     <img [src]="appLogo" height="30" class="d-inline-block align-top" alt="">
-    {{appName}}
   </a>
 
-  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <!-- Search bar as dropdown in case of mobile devices -->
+  <ng-container *ngIf="toggleScreenTypes.includes(currentScreenType); else headerSearchBar">
+    <div class="text-white ml-auto" dropdown [insideClick]="true" [isAnimated]="true">
+      <a
+        dropdownToggle
+        (click)="false"
+        class="px-2"
+      >
+        <i class="fa fa-search"></i>
+      </a>
+      <!-- <div *dropdownMenu class="dropdown-menu dropdown-menu-right mx-2 p-0" role="menu">
+        <ng-container *ngTemplateOutlet="headerSearchBar"></ng-container>
+      </div> -->
+    </div>
+  </ng-container>
 
-  <div class="collapse navbar-collapse" [ngClass]="{'show': !isCollapsed}" id="navbarNav">
-    <form class="form-inline mr-auto header-form" >
-      <input id="keyword-search" class="form-control" type="text" placeholder="Search for a place" aria-label="Search">
-      <input id="location-search" class="form-control" type="text" placeholder="Location" aria-label="Search">
-      <select id="category-search" class="form-control" placeholder="Category" aria-label="Search">
-        <option>Category</option>
-        <option>Cafe</option>
-        <option>Hospitals</option>
-        <option>Coffee Shops</option>
-        <option>Furnishing</option>
-      </select>
-      <button id="search-button" type="button" class="btn btn-danger right-round">Search</button>
-    </form>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
+
+  <div class="text-white" dropdown [isAnimated]="true">
+    <a
+      dropdownToggle
+      (click)="false"
+    >
+      <i class="fa fa-user"></i>
+    </a>
+    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+      <li>
+        <a class="dropdown-item" >Settings</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/']" ><i class="fa fa-home"></i></a>
-      </li>
-      <li class="nav-item active link" dropdown placement="bottom left">
-        <a class="nav-link"
-          dropdownToggle
-          (click)="false"
-          aria-controls="basic-link-dropdown"
-        >Hi Vishal</a>
-        <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-          <li>
-            <a class="dropdown-item" >Settings</a>
-            <a class="dropdown-item" >Logout</a>
-          </li>
-        </ul>
+      <li>
+        <a class="dropdown-item" >Logout</a>
       </li>
     </ul>
   </div>
-
 </nav>
-<div id="header-spacer"></div>
+
+
+<ng-template #headerSearchBar>
+  <form class="form-inline ml-auto mr-auto header-form" >
+    <input id="keyword-search" class="form-control" type="text" placeholder="Search for a place" aria-label="Search">
+    <input id="location-search" class="form-control" type="text" placeholder="Location" aria-label="Search">
+    <select id="category-search" class="form-control" placeholder="Category" aria-label="Search">
+      <option selected>Category</option>
+      <option>Cafe</option>
+      <option>Hospitals</option>
+      <option>Coffee Shops</option>
+      <option>Furnishing</option>
+    </select>
+    <button id="search-button" type="button" class="btn btn-danger right-round">Search</button>
+  </form>
+</ng-template>

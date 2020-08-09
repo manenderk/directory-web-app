@@ -77,10 +77,11 @@ export class FrontendHomeComponent implements OnInit {
 
 
   async setBannerSlides() {
-    const imageIds = await this.picsumService.getPicsumImageIds(5).toPromise();
-    imageIds.forEach(imgId => {
-      this.bannerSlides.push(this.picsumService.getImageUrl(imgId, 800, 300))
-    });
+    for(let i = 1; i <= 5; i++) {
+      this.bannerSlides.push(
+        `assets/demo/slider${i}.jpg`
+      );
+    }
   }
 
   async setCategoriesData() {
@@ -110,15 +111,37 @@ export class FrontendHomeComponent implements OnInit {
       cols = this.categoryData.tabletCols;
     }
 
-    const count = rows * cols * 4;
-    const ids: number[] = await this.picsumService.getPicsumImageIds(count).toPromise();
+
+    const categoryNames = [
+      'Restaurants',
+      'Movies',
+      'Medical',
+      'Travel',
+      'Flights',
+      'Luxury',
+      'Cabs',
+      'Bars & Lounges',
+      'Shopping',
+      'Daily Needs',
+      'Flowers',
+      'Coffee Shops',
+      'Home Services',
+      'Auto Services',
+      'Beauty & Spa',
+      'Home Service',
+      'Pets',
+      'Education'
+    ];
+
     let i = 1;
-    ids.forEach(id => {
+    categoryNames.forEach(catName => {
+      const imgName = catName.replace('&', '').replace('  ', '').replace(' ', '');
+      console.log(imgName);
       this.categoryData.categories.push({
         id: i.toString(),
-        name: 'Category' + i++,
+        name: catName,
         description: null,
-        thumbnail: `https://picsum.photos/id/${id}/400`,
+        thumbnail: `assets/demo/${imgName}.jpg`,
         parentCategoryId: null,
         active: true,
         featured: true,
@@ -167,6 +190,20 @@ export class FrontendHomeComponent implements OnInit {
       organizedEvents: [],
     };
 
+    const eventNames = [
+      'Festival of Festivals',
+      'South Side Story',
+      'Opening Night Gala',
+      'Learn French',
+      'Personal Branding',
+      'Alex Back International',
+      'Sing like a pro',
+      'NGT- Food and Travel',
+      'Junior MBA Programmes',
+      'Fitness for Kids',
+      'Indenpendent Together',
+      'Gaurav Gupta Live'
+    ];
 
     let rows: number = this.eventData.desktopRows;
     let cols: number = this.eventData.desktopCols;
@@ -178,19 +215,17 @@ export class FrontendHomeComponent implements OnInit {
       cols = this.eventData.tabletCols;
     }
 
-    const count = rows * cols * 4;
-    const ids: number[] = await this.picsumService.getPicsumImageIds(count).toPromise();
     let i = 1;
-    ids.forEach(id => {
+    eventNames.forEach(name => {
       const dateIncrement = Math.ceil(Math.random() * 10);
       const monthIncrement = Math.ceil(Math.random() * 10);
       const eventDate = new Date(new Date().getTime() + (dateIncrement * 24 * 60 * 60 * 1000));
       eventDate.setMonth(eventDate.getMonth() + monthIncrement);
       this.eventData.events.push({
-        id: i.toString(),
-        name: 'Event' + i++,
+        id: name,
+        name: name,
         description: null,
-        imageUrl: `https://picsum.photos/id/${id}/400/300`,
+        imageUrl: `assets/demo/event${i++}.jpg`,
         date: eventDate,
         active: true,
         featured: true,
@@ -238,6 +273,21 @@ export class FrontendHomeComponent implements OnInit {
       organizedNews: [],
     };
 
+    const news = [
+      'f9 Go Karting',
+      'Paramotor Air Safari',
+      'Set Menu at County',
+      'Staycation at Country',
+      'Shooting Activity',
+      'Dine on Wings',
+      'Flying Experience',
+      'Air Adventure Paragliding',
+      'Online Clue Hunt',
+      'The Great India Heist',
+      'Online Game Mission',
+      'The Quarantine Murder'
+    ];
+
 
     let rows: number = this.newsData.desktopRows;
     let cols: number = this.newsData.desktopCols;
@@ -249,19 +299,18 @@ export class FrontendHomeComponent implements OnInit {
       cols = this.newsData.tabletCols;
     }
 
-    const count = rows * cols * 4;
-    const ids: number[] = await this.picsumService.getPicsumImageIds(count).toPromise();
+
     let i = 1;
-    ids.forEach(id => {
+    news.forEach(title => {
       const dateIncrement = Math.ceil(Math.random() * 10);
       const monthIncrement = Math.ceil(Math.random() * 10);
       const eventDate = new Date(new Date().getTime() + (dateIncrement * 24 * 60 * 60 * 1000));
       eventDate.setMonth(eventDate.getMonth() + monthIncrement);
       this.newsData.news.push({
-        id: '',
-        name: 'News' + i++,
+        id: title,
+        name: title,
         description: null,
-        imageUrl: `https://picsum.photos/id/${id}/400/300`,
+        imageUrl: `assets/demo/news${i++}.jpg`,
         date: eventDate,
         active: true,
         featured: true,

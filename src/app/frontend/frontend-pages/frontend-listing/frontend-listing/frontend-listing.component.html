@@ -2,27 +2,43 @@
   <div class="row">
     <div class="col-md-7">
       <div class="row">
-        <div class="col py-2">
+        <div class="col-sm-8 py-2">
           <nav class="mb-1" aria-label="breadcrumb">
             <ol class="breadcrumb my-breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Library</li>
             </ol>
           </nav>
-          <div>
-            Showing {{businesses.length}} results
-          </div>
+
         </div>
-        <div class="col text-right align-self-center">
-          <button *ngIf="toggleScreenType.includes(screenType)" type="button" class="btn btn-info btn-icon-circle mr-1" (click)="toggleDisplayVars.filter = !toggleDisplayVars.filter" >
-            <i class="fa fa-filter"></i>
-          </button>
-          <button *ngIf="toggleScreenType.includes(screenType)" type="button" class="btn btn-info btn-icon-circle mr-1" (click)="toggleDisplayVars.map = !toggleDisplayVars.map" >
-            <i class="fa fa-map"></i>
-          </button>
-          <button type="button" class="btn btn-info btn-icon-circle" (click)="toggleCardDisplayType()" >
-            <i [ngClass]="cardDisplayType === 'horizontal' ? 'fa fa-bars' : 'fa fa-th'"></i>
-          </button>
+        <div class="col-sm-4 py-2">
+          <div class="row align-items-center">
+            <div class="col">
+              <select class="form-control">
+                <option selected>Sort</option>
+                <option>Distance</option>
+                <option>Name</option>
+              </select>
+
+
+            </div>
+            <div class="col text-right">
+              <button *ngIf="toggleScreenType.includes(screenType)" type="button" class="btn btn-info btn-icon-circle mr-1" (click)="toggleDisplayVars.filter = !toggleDisplayVars.filter" >
+                <i class="fa fa-filter"></i>
+              </button>
+              <button *ngIf="toggleScreenType.includes(screenType)" type="button" class="btn btn-info btn-icon-circle mr-1" (click)="toggleDisplayVars.map = !toggleDisplayVars.map" >
+                <i class="fa fa-map"></i>
+              </button>
+              <button type="button" class="btn btn-info btn-icon-circle mr-1" (click)="toggleCardDisplayType()" >
+                <i [ngClass]="cardDisplayType === 'horizontal' ? 'fa fa-bars' : 'fa fa-th'"></i>
+              </button>
+            </div>
+          </div>
+
+
+
+
+
         </div>
       </div>
 
