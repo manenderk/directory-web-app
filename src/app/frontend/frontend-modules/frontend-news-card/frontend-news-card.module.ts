@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FrontendNewsCardComponent } from './frontend-news-card/frontend-news-card.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -8,6 +9,7 @@ import { FrontendNewsCardComponent } from './frontend-news-card/frontend-news-ca
   declarations: [FrontendNewsCardComponent],
   imports: [
     CommonModule,
+    RouterModule
   ],
   exports: [
     FrontendNewsCardComponent

@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <div class="col p-1">
+      <img [src]="news.imageUrl">
+    </div>
+  </div>
+</div>
+<div class="container my-3">
+  <div class="row">
+    <div class="col-md-8">
+
+      <h2 class="color-1">{{news.name}}</h2>
+        <div class="header-bottom-bar color-2 my-1"></div>
+      <p class="text-muted">
+        <b>Date: </b>{{news.date}}
+      </p>
+      <p>{{news.description}}</p>
+    </div>
+
+    <div class="col-md-4 pt-3 bg-grey-1">
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group pb-0 mb-0">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Whare are you looking for?">
+              <div class="input-group-append">
+                <span class="input-group-text" ><i class="fa fa-search"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title color-2">Opening Hours</h5>
+          <hr>
+          <ul class="custom-list-1">
+            <li>Monday <span>9 AM - 5 PM</span></li>
+            <li>Tuesday <span>9 AM - 5 PM</span></li>
+            <li>Wednesday <span>9 AM - 5 PM</span></li>
+            <li>Thursday <span>9 AM - 5 PM</span></li>
+            <li>Friday <span>9 AM - 5 PM</span></li>
+            <li>Saturday <span>9 AM - 3 PM</span></li>
+            <li>Sunday <span>Closed</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title color-2">Contact</h5>
+          <hr>
+          <ul class="custom-list-1">
+            <li><i class="fa fa-phone"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="tel:123123123" target="_blank">123-123-123</a></li>
+            <li><i class="fa fa-envelope"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="mailto:someone@example.com" target="_blank">someone@example.com</a></li>
+            <li><i class="fa fa-globe"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="http://example.com/" target="_blank">example.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>

@@ -28,6 +28,12 @@ const routes: Routes = [
         loadChildren: () => import(
           './frontend-pages/frontend-event-details/frontend-event-details.module'
         ).then(mod => mod.FrontendEventDetailsModule)
+      },
+      {
+        path: 'news/:id',
+        loadChildren: () => import(
+          './frontend-pages/frontend-news-details/frontend-news-details.module'
+        ).then(mod => mod.FrontendNewsDetailsModule)
       }
     ]
   }
