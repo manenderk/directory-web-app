@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Category } from 'src/app/models/category/category.model';
 import { TheEvent } from 'src/app/models/event/event.model';
 import { PicsumService } from 'src/app/services/extra/picsum.service';
 import { ScreenService } from 'src/app/services/common/screen.service';
 import { News } from 'src/app/models/news/news.model';
 import { newArray } from '@angular/compiler/src/util';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-frontend-home',
   templateUrl: './frontend-home.component.html',
   styleUrls: ['./frontend-home.component.css']
 })
-export class FrontendHomeComponent implements OnInit {
+export class FrontendHomeComponent implements OnInit, OnDestroy {
 
   bannerSlides: string[] = [];
 
@@ -60,19 +61,32 @@ export class FrontendHomeComponent implements OnInit {
     organizedNews: News[][],
   }
 
+  private subs = new SubSink();
+
   constructor(
     private picsumService: PicsumService,
     private screenService: ScreenService
   ) {
-    this.screenSize =  this.screenService.getScreenType();
+
   }
 
   ngOnInit(): void {
-
+    this.setCurrentScreenType();
     this.setBannerSlides();
     this.setCategoriesData();
     this.setEventsData();
     this.setNewsData();
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+
+  setCurrentScreenType() {
+    this.subs.sink = this.screenService.currentScreenType.subscribe(screenType => {
+      this.screenSize = screenType;
+    })
+
   }
 
 
@@ -100,13 +114,13 @@ export class FrontendHomeComponent implements OnInit {
       organizedCategories: [],
     };
 
-    const screenSize: string = this.screenService.getScreenType();
+
     let rows: number = this.categoryData.desktopRows;
     let cols: number = this.categoryData.desktopCols;
-    if (screenSize === 'xs') {
+    if (this.screenSize === 'xs') {
       rows = this.categoryData.mobileRows;
       cols = this.categoryData.mobileCols;
-    } else if (screenSize === 'sm') {
+    } else if (this.screenSize === 'sm') {
       rows = this.categoryData.tabletRows;
       cols = this.categoryData.tabletCols;
     }
@@ -136,7 +150,6 @@ export class FrontendHomeComponent implements OnInit {
     let i = 1;
     categoryNames.forEach(catName => {
       const imgName = catName.replace('&', '').replace('  ', '').replace(' ', '');
-      console.log(imgName);
       this.categoryData.categories.push({
         id: i.toString(),
         name: catName,
@@ -339,8 +352,6 @@ export class FrontendHomeComponent implements OnInit {
     if (newsArr.length > 0) {
       this.newsData.organizedNews.push(newsArr);
     }
-
-    console.log(this.newsData.organizedNews);
   }
 
   getSliderConfig(type: string): any {

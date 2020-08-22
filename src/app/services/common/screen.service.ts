@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { fromEvent, BehaviorSubject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScreenService {
 
-
-  window = window;
+  currentScreenType: BehaviorSubject<string> = new BehaviorSubject('');
   windowHeight: number;
   windowWidth: number;
 
@@ -17,10 +18,9 @@ export class ScreenService {
     lg: 1199,
   };
 
-
-  constructor(
-
-  ) {}
+  constructor() {
+    this.subscribecurrentScreenTypeUpdates();
+  }
 
   getWindowWidth(): number {
     return window.innerWidth;
@@ -30,22 +30,31 @@ export class ScreenService {
     return window.innerHeight;
   }
 
-  getScreenType(): string {
-    const width: number = window.innerWidth;
-
-    if (width <= this.breakpoints.xs) {
-      return 'xs';
-    } else if (width <= this.breakpoints.sm) {
-      return 'sm';
-    } else if (width <= this.breakpoints.md) {
-      return 'md';
-    } else if (width <= this.breakpoints.lg) {
-      return 'lg'
-    } else {
-      return 'xl';
-    }
+  subscribecurrentScreenTypeUpdates() {
+    this.setCurrentScreenType();
+    fromEvent(window, 'resize').pipe(
+      debounceTime(1000)
+    ).subscribe(() => {
+      this.setCurrentScreenType()
+    })
   }
 
+
+  private setCurrentScreenType(): void {
+    const width: number = window.innerWidth;
+    let type = 'xl';
+    if (width <= this.breakpoints.xs) {
+      type = 'xs';
+    } else if (width <= this.breakpoints.sm) {
+      type = 'sm';
+    } else if (width <= this.breakpoints.md) {
+      type = 'md';
+    } else if (width <= this.breakpoints.lg) {
+      type = 'lg'
+    }
+    console.log('New screen type determined as: ' + type);
+    this.currentScreenType.next(type);
+  }
 
 
 }

@@ -1,5 +1,5 @@
 <ng-container *ngIf="business">
-  <a [routerLink]="['/business', business.id]" routerLinkActive="router-link-active" >
+
     <div class="card" [ngClass]="displayType === 'horizontal' ? 'card-horizontal' : 'card-vertical'">
       <div class="row no-gutters">
         <div class="rounded business-thumbnail"
@@ -8,18 +8,24 @@
         >
         </div>
         <div [ngClass]="displayType === 'horizontal' ? 'col-8' : 'col-12'">
-          <div class="card-body">
-            <h5 class="card-title">{{business.name}}</h5>
+          <div class="card-body color-default">
+            <a [routerLink]="['/business', business.id]" routerLinkActive="router-link-active" >
+            <h5 class="card-title color-2">{{business.name}}</h5>
+            </a>
             <p class="card-text">
               {{business.shortAddress}}
               <br>
               <small class="text-muted">{{business.rating}} {{business.reviews}}</small>
             </p>
+            <div class="d-flex justify-content-around color-4">
+              <a href="example.com" target="_blank"><i class="fa fa-globe"></i></a>
+              <a href="mailto:johndoe@example.com"><i class="fa fa-envelope"></i></a>
+              <a href="tel:9999999999"></a><i class="fa fa-phone"></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </a>
 </ng-container>
 
 

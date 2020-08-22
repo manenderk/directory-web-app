@@ -1,11 +1,36 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <div class="col px-0">
-      <app-frontend-home-slider [images]="bannerSlides"></app-frontend-home-slider>
+    <div class="col p-1">
+      <app-frontend-home-slider [images]="bannerSlides" *ngIf="showSlider;else showGallery"></app-frontend-home-slider>
+      <ng-template #showGallery>
+        <div class="row">
+          <div class="col-8 p-1">
+            <img class="img-fluid" *ngIf="bannerSlides[0]" [src]="bannerSlides[0]">
+          </div>
+          <div class="col-4">
+            <div class="row">
+              <div class="col-6 p-1">
+                <img class="img-fluid" *ngIf="bannerSlides[1]" [src]="bannerSlides[1]">
+              </div>
+              <div class="col-6 p-1">
+                <img class="img-fluid" *ngIf="bannerSlides[2]" [src]="bannerSlides[2]">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 p-1">
+                <img class="img-fluid"  *ngIf="bannerSlides[3]" [src]="bannerSlides[3]">
+              </div>
+              <div class="col-6 p-1">
+                <img class="img-fluid" *ngIf="bannerSlides[4]" [src]="bannerSlides[4]">
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
-<div class="container my-5">
+<div class="container my-3">
   <div class="row">
     <div class="col-md-8" *ngIf="business">
 

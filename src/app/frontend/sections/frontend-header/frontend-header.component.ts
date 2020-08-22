@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ScreenService } from 'src/app/services/common/screen.service';
 import { VariableService } from 'src/app/services/common/variable.service';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-frontend-header',
   templateUrl: './frontend-header.component.html',
   styleUrls: ['./frontend-header.component.css']
 })
-export class FrontendHeaderComponent implements OnInit {
+export class FrontendHeaderComponent implements OnInit, OnDestroy {
 
 
   appName: string = environment.appName;
@@ -19,18 +20,26 @@ export class FrontendHeaderComponent implements OnInit {
   toggleScreenTypes: string[];
   currentScreenType: string;
 
+  private subs = new SubSink();
+
   constructor(
     private screenService: ScreenService,
     private variableService: VariableService
   ) { }
 
   ngOnInit(): void {
+    this.toggleScreenTypes = this.variableService.toggleScreenType;
     this.setCurrentScreenType();
   }
 
-  setCurrentScreenType() {
-    this.toggleScreenTypes = this.variableService.toggleScreenType;
-    this.currentScreenType = this.screenService.getScreenType();
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
+  setCurrentScreenType() {
+    this.subs.sink = this.screenService.currentScreenType.subscribe(screenType => {
+      this.currentScreenType = screenType;
+    })
+
+  }
 }

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-7">
       <div class="row">
-        <div class="col-sm-8 py-2">
+        <div class="col-md-6 col-lg-8 py-2">
           <nav class="mb-1" aria-label="breadcrumb">
             <ol class="breadcrumb my-breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -11,16 +11,15 @@
           </nav>
 
         </div>
-        <div class="col-sm-4 py-2">
+        <div class="col-md-6 col-lg-4 log- py-2">
           <div class="row align-items-center">
             <div class="col">
               <select class="form-control">
                 <option selected>Sort</option>
+                <option>Top Listing</option>
                 <option>Distance</option>
                 <option>Name</option>
               </select>
-
-
             </div>
             <div class="col text-right">
               <button *ngIf="toggleScreenType.includes(screenType)" type="button" class="btn btn-info btn-icon-circle mr-1" (click)="toggleDisplayVars.filter = !toggleDisplayVars.filter" >
@@ -34,25 +33,28 @@
               </button>
             </div>
           </div>
-
-
-
-
-
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-4 filter-container">
           <form>
-            <div class="form-group">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Whare are you looking for?">
-                <div class="input-group-append">
-                  <span class="input-group-text" ><i class="fa fa-search"></i></span>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Whare are you looking for?">
+                    <div class="input-group-append">
+                      <span class="input-group-text" ><i class="fa fa-search"></i></span>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div class="col text-right">
+                <button class="btn btn-info">Top Listing</button>
+              </div>
             </div>
+
             <div [ngClass]="{'hide-element': toggleDisplayVars.filter && toggleScreenType.includes(screenType)}">
               <div class="form-group">
                 <div class="input-group">

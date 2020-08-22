@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Category } from 'src/app/models/category/category.model';
 import { Business } from 'src/app/models/business/business.model';
@@ -6,13 +6,14 @@ import { PicsumService } from 'src/app/services/extra/picsum.service';
 import { WordsService } from 'src/app/services/extra/words.service';
 import { ScreenService } from 'src/app/services/common/screen.service';
 import { VariableService } from 'src/app/services/common/variable.service';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-frontend-listing',
   templateUrl: './frontend-listing.component.html',
   styleUrls: ['./frontend-listing.component.css']
 })
-export class FrontendListingComponent implements OnInit {
+export class FrontendListingComponent implements OnInit, OnDestroy {
 
   cardDisplayType = 'horizontal';
 
@@ -27,24 +28,34 @@ export class FrontendListingComponent implements OnInit {
   categories: Category[] = [];
   businesses: Business[] = [];
 
+  private subs = new SubSink();
+
   constructor(
     private picsumService: PicsumService,
     private wordService: WordsService,
     private screenService: ScreenService,
     private variableService: VariableService
-  ) {
-    this.screenType = this.screenService.getScreenType();
-    console.log(this.screenType);
-  }
+  ) { }
 
   ngOnInit(): void {
     this.intialize();
   }
 
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+
   async intialize() {
     this.toggleScreenType = this.variableService.toggleScreenType;
+    this.setCurrentScreenType();
     await this.initializeCategories();
     await this.intiializeBusinesses();
+  }
+
+  setCurrentScreenType() {
+    this.subs.sink = this.screenService.currentScreenType.subscribe(screenType => {
+      this.screenType = screenType;
+    })
   }
 
   async initializeCategories() {
@@ -70,7 +81,7 @@ export class FrontendListingComponent implements OnInit {
   async intiializeBusinesses() {
     const names: string[] = await this.wordService.getRandomWords(202).toPromise();
     const addresses: string[] = await this.wordService.getRandomWords(202).toPromise();
-    const imageIds: number[] = await this.picsumService.getPicsumImageIds(101).toPromise();
+    const imageIds: number[] = await this.picsumService.getPicsumImageIds(104).toPromise();
 
     for (let i = 1; i <= 100; i++) {
       this.businesses.push({
