@@ -1,14 +1,15 @@
 <ng-container  *ngIf="theEvent">
-  <div class="the-card-container">
-    <div class="card the-card link">
-      <img class="card-img-top" [src]="theEvent.imageUrl">
-      <div class="card-body">
-        <h5 class="card-title">{{theEvent.name}}</h5>
-        <p class="card-text"> {{theEvent.date | date}} </p>
-        <p class="card-text">{{theEvent.description}}</p>
+  <a [routerLink]="['/event/', theEvent.id]" routerLinkActive="router-link-active" >
+    <div class="the-card-container">
+      <div class="card the-card">
+        <img class="card-img-top" [src]="theEvent.imageUrl">
+        <div class="card-body">
+          <h5 class="card-title">{{theEvent.name}}</h5>
+          <p class="card-text"> {{theEvent.date | date}} </p>
+          <p class="card-text">{{theEvent.description}}</p>
+        </div>
       </div>
     </div>
-  </div>
-
+  </a>
 </ng-container>
 

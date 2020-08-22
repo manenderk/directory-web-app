@@ -1,9 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PicsumService } from 'src/app/services/extra/picsum.service';
 import { Business } from 'src/app/models/business/business.model';
-import { SubSink } from 'subsink';
-import { ScreenService } from 'src/app/services/common/screen.service';
-import { VariableService } from 'src/app/services/common/variable.service';
+import { PicsumService } from 'src/app/services/extra/picsum.service';
 
 @Component({
   selector: 'app-frontend-business-detail',
@@ -12,48 +9,31 @@ import { VariableService } from 'src/app/services/common/variable.service';
 })
 export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
 
-  bannerSlides: string[] = [];
-
   business: Business;
 
   screenType: string;
 
-  showSlider = false;
-
-  private subs = new SubSink();
+  images: string[] = [];
 
   constructor(
-    private picsumService: PicsumService,
-    private screenService: ScreenService,
-    private vService: VariableService
+    private picsumService: PicsumService
   ) { }
 
   ngOnInit(): void {
-    this.setCurrentScreenTypeAndSliderDisplay();
-    this.setBannerSlides();
+    this.setBusinessImages();
     this.setBusinessData();
   }
 
   ngOnDestroy(): void {
-    this.subs.unsubscribe();
+
   }
 
-  async setBannerSlides() {
-    const imageIds = await this.picsumService.getPicsumImageIds(5).toPromise();
-    imageIds.forEach(imgId => {
-      this.bannerSlides.push(this.picsumService.getImageUrl(imgId, 800, 300))
-    });
-  }
-
-  setCurrentScreenTypeAndSliderDisplay() {
-    this.subs.sink = this.screenService.currentScreenType.subscribe(screenType => {
-      this.screenType = screenType;
-      if (this.vService.toggleScreenType.includes(this.screenType)) {
-        this.showSlider = true;
-      } else {
-        this.showSlider = false;
-      }
-    });
+  setBusinessImages(): void {
+    this.images.push('https://picsum.photos/id/237/800/600');
+    this.images.push('https://picsum.photos/id/1000/300');
+    this.images.push('https://picsum.photos/id/1008/300');
+    this.images.push('https://picsum.photos/id/101/300');
+    this.images.push('https://picsum.photos/id/104/300');
   }
 
   setBusinessData() {
@@ -67,6 +47,6 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
       categoryIds: null,
       reviews: 20,
       rating: 5
-    }
+    };
   }
 }

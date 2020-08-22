@@ -59,7 +59,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     newsSubheading: string,
     news: News[],
     organizedNews: News[][],
-  }
+  };
 
   private subs = new SubSink();
 
@@ -85,13 +85,13 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
   setCurrentScreenType() {
     this.subs.sink = this.screenService.currentScreenType.subscribe(screenType => {
       this.screenSize = screenType;
-    })
+    });
 
   }
 
 
   async setBannerSlides() {
-    for(let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 5; i++) {
       this.bannerSlides.push(
         `assets/demo/slider${i}.jpg`
       );
@@ -147,7 +147,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
       'Education'
     ];
 
-    let i = 1;
+    const i = 1;
     categoryNames.forEach(catName => {
       const imgName = catName.replace('&', '').replace('  ', '').replace(' ', '');
       this.categoryData.categories.push({
@@ -161,7 +161,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
         order: i,
         createdAt: null,
         updatedAt: null
-      })
+      });
     });
 
 
@@ -176,11 +176,11 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     this.categoryData.organizedCategories = [];
     this.categoryData.categories.forEach(cat => {
       categoryArr.push(cat);
-      if (categoryArr.length == rows) {
+      if (categoryArr.length === rows) {
         this.categoryData.organizedCategories.push(categoryArr);
         categoryArr = [];
       }
-    })
+    });
 
     if (categoryArr.length > 0) {
       this.categoryData.organizedCategories.push(categoryArr);
@@ -236,7 +236,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
       eventDate.setMonth(eventDate.getMonth() + monthIncrement);
       this.eventData.events.push({
         id: name,
-        name: name,
+        name,
         description: null,
         imageUrl: `assets/demo/event${i++}.jpg`,
         date: eventDate,
@@ -245,7 +245,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
         order: i,
         created: null,
         modified: null
-      })
+      });
     });
 
 
@@ -259,11 +259,11 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     this.eventData.organizedEvents = [];
     this.eventData.events.forEach(cat => {
       eventArr.push(cat);
-      if (eventArr.length == rows) {
+      if (eventArr.length === rows) {
         this.eventData.organizedEvents.push(eventArr);
         eventArr = [];
       }
-    })
+    });
 
     if (eventArr.length > 0) {
       this.eventData.organizedEvents.push(eventArr);
@@ -329,7 +329,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
         featured: true,
         created: null,
         modified: null
-      })
+      });
     });
 
 
@@ -343,11 +343,11 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     this.newsData.organizedNews = [];
     this.newsData.news.forEach(cat => {
       newsArr.push(cat);
-      if (newsArr.length == rows) {
+      if (newsArr.length === rows) {
         this.newsData.organizedNews.push(newsArr);
         newsArr = [];
       }
-    })
+    });
 
     if (newsArr.length > 0) {
       this.newsData.organizedNews.push(newsArr);
@@ -373,7 +373,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
         tCols: this.categoryData.tabletCols,
         mRows: this.categoryData.mobileRows,
         mCols: this.categoryData.mobileCols
-      }
+      };
     } else if (type === 'event') {
       matrix = {
         dRows: this.eventData.desktopRows,
@@ -382,7 +382,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
         tCols: this.eventData.tabletCols,
         mRows: this.eventData.mobileRows,
         mCols: this.eventData.mobileCols
-      }
+      };
     } else if (type === 'news') {
       matrix = {
         dRows: this.newsData.desktopRows,
@@ -391,18 +391,18 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
         tCols: this.newsData.tabletCols,
         mRows: this.newsData.mobileRows,
         mCols: this.newsData.mobileCols
-      }
+      };
     }
 
     const sliderConfig  = {
-      "slidesToShow": matrix.dCols,
-      "slidesToScroll": matrix.dCols,
-      "autoplay": false,
-      "arrows": true,
-      "lazyLoad": true,
-      "prevArrow":  '<button type="button" class="btn btn-info slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>',
-      "nextArrow":  '<button type="button" class="btn btn-info slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>',
-      "responsive": [
+      'slidesToShow': matrix.dCols,
+      'slidesToScroll': matrix.dCols,
+      'autoplay': false,
+      'arrows': true,
+      'lazyLoad': true,
+      'prevArrow':  '<button type="button" class="btn btn-info slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>',
+      'nextArrow':  '<button type="button" class="btn btn-info slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>',
+      'responsive': [
         {
           breakpoint: this.screenService.breakpoints.md,
           settings: {

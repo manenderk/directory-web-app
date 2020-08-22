@@ -19,11 +19,19 @@ const routes: Routes = [
       },
       {
         path: 'business/:id',
-        loadChildren: () => import('./frontend-pages/frontend-business-details/frontend-business-details.module').then(mod => mod.FrontendBusinessDetailsModule)
+        loadChildren: () => import(
+          './frontend-pages/frontend-business-details/frontend-business-details.module'
+        ).then(mod => mod.FrontendBusinessDetailsModule)
+      },
+      {
+        path: 'event/:id',
+        loadChildren: () => import(
+          './frontend-pages/frontend-event-details/frontend-event-details.module'
+        ).then(mod => mod.FrontendEventDetailsModule)
       }
     ]
   }
-]
+];
 
 @NgModule({
   declarations: [FrontendPageComponent],
