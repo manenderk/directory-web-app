@@ -9,10 +9,14 @@ const routes: Routes = [
     path: '',
     component: AdminPageComponent,
     children: [
+      {
+        path: 'category',
+        loadChildren: () => import('./admin-modules/category/category.module').then(mod => mod.CategoryModule)
+      }
 
     ]
   }
-]
+];
 
 @NgModule({
   declarations: [AdminPageComponent],

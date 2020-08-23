@@ -6,4 +6,10 @@
   color: #fff;
 }
 
+.nav-item {
+  cursor: pointer;
+}
 
+#admin-sidebar {
+  height: 100%;
+}

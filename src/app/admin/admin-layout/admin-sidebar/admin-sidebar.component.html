@@ -1,4 +1,4 @@
-<ul class="nav flex-column nav-dark bg-primary">
+<ul id="admin-sidebar" class="nav flex-column nav-dark bg-primary">
   <li class="nav-item admin-branding d-flex ">
     <a class="nav-link align-self-center" [routerLink]="[adminUrl]" >{{appName}}</a>
   </li>
@@ -26,7 +26,7 @@
       <i class="fa fa-angle-down"></i>
     </a>
   </li>
-  <ul class="nav flex-column nav-dark bg-primary" *ngIf="data.expanded">
+  <ul class="nav flex-column nav-dark bg-primary pl-3" *ngIf="data.expanded">
     <ng-container *ngFor="let innerItem of data.item.innerItems">
       <ng-container
         *ngTemplateOutlet="hasChildren(data.item.innerItems) ? dropdownItem : simpleItem ; context: {
