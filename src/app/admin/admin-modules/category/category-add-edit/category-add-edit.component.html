@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-12">
+    <h3>{{categoryId ? 'Edit Category' : 'Add Category'}}</h3>
+  </div>
+</div>
+<form *ngIf="catFormGroup" [formGroup]="catFormGroup">
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input type="text" matInput formControlName="name" required>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field>
+        <mat-label>Parent Category</mat-label>
+        <mat-select formControlName="parentCategoryId">
+          <mat-option *ngFor="let category of allCategories" [value]="category.id">{{category.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-4">
+      <mat-form-field>
+        <mat-label>Order</mat-label>
+        <input type="number" matInput formControlName="order">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-4 align-self-center">
+      <mat-checkbox formControlName="active" [color]="'primary'">Active</mat-checkbox>
+    </div>
+    <div class="col-sm-4 align-self-center">
+      <mat-checkbox formControlName="featured" [color]="'primary'">Featured</mat-checkbox>
+    </div>
+    <div class="col-sm-12">
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" cdkTextareaAutosize></textarea>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-12 mb-20px">
+      <app-image-input-preview
+      [allowedFileTypes]="['png', 'jpg', 'jpeg']"
+      [showImagePreview]="true"
+      (filesAdded)="patchImage($event)"
+      ></app-image-input-preview>
+    </div>
+    <div class="col-sm-12 text-right">
+      <button mat-raised-button type="button" (click)="saveCategory()">Save</button>
+    </div>
+  </div>
+</form>
+

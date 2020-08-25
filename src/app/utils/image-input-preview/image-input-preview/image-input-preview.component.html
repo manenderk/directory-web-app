@@ -1,0 +1,32 @@
+<button mat-raised-button color="info" (click)="fileInput.click()" >Upload</button>
+<input type="file" class="hide-element" #fileInput
+  (change)="fileInputChanged($event)"
+  [attr.multiple]="maxFiles > 1 ? 'multiple' : null"
+>
+
+<div class="error-messages text-danger" *ngIf="this.errorMessages.length > 0">
+  <div *ngFor="let error of this.errorMessages">{{error}}</div>
+</div>
+
+<div class="row" *ngIf="addedFiles; else showPreviousFiles">
+  <ng-container *ngIf="showImagePreview; else showFileNames">
+    <div class="col-sm-3" *ngFor="let file of addedFiles">
+      <img [src]="file | previewImage | async" class="img-fluid">
+    </div>
+  </ng-container>
+  <ng-template #showFileNames>
+    <div class="col">
+      <div *ngFor="let file of addedFiles">{{file.name}}</div>
+    </div>
+  </ng-template>
+</div>
+<ng-template #showPreviousFiles>
+  <div class="row">
+    <ng-container *ngIf="showImagePreview">
+      <div class="col-sm-3" *ngFor="let file of previousFiles">
+        <img [src]="file" class="img-fluid">
+      </div>
+    </ng-container>
+  </div>
+
+</ng-template>

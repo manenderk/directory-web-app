@@ -43,7 +43,7 @@
 
 <ng-template #simpleItem let-data>
   <li class="nav-item">
-    <a class="nav-link d-flex align-items-center justify-content-between">
+    <a class="nav-link d-flex align-items-center justify-content-between" [routerLink]="[data.item.link]" routerLinkActive="router-link-active" >
       <span>
         <i *ngIf="data.item.icon" [ngClass]="data.item.icon"></i> {{data.item.name}}
       </span>

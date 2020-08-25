@@ -137,6 +137,14 @@
   color: #fff;
 }
 
+.mat-form-field {
+  width: 100%;
+}
+
+.mb-20px {
+  margin-bottom: 20px;
+}
+
 /************************/
 /*     MEDIA QUERIES    */
 /************************/
@@ -205,5 +213,4 @@
 @media screen and (max-width: 575px) {
 
 }
-
 
