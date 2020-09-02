@@ -1,0 +1,6 @@
+@media screen and (max-width: 767px) {
+  .header-bottom-bar {
+      margin-left: 0;
+      margin-right: 0;
+  }
+}

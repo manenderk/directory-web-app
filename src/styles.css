@@ -145,6 +145,11 @@
   margin-bottom: 20px;
 }
 
+.px-15px {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 /************************/
 /*     MEDIA QUERIES    */
 /************************/

@@ -1,65 +1,101 @@
 <div class="container">
-  <div class="row">
-    <div class="col p-1">
-      <div class="row">
-        <div class="col-8 p-1">
-          <img class="img-fluid" *ngIf="images[0]" [src]="images[0]">
-        </div>
-        <div class="col-4">
-          <div class="row">
-            <div class="col-6 p-1">
-              <img class="img-fluid" *ngIf="images[1]" [src]="images[1]">
+  <div class="px-15px">
+
+        <div class="row">
+          <div class="col-8 p-1">
+            <img class="img-fluid" *ngIf="images[0]" [src]="images[0]">
+          </div>
+          <div class="col-4">
+            <div class="row">
+              <div class="col-6 p-1">
+                <img class="img-fluid" *ngIf="images[1]" [src]="images[1]">
+              </div>
+              <div class="col-6 p-1">
+                <img class="img-fluid" *ngIf="images[2]" [src]="images[2]">
+              </div>
             </div>
-            <div class="col-6 p-1">
-              <img class="img-fluid" *ngIf="images[2]" [src]="images[2]">
+            <div class="row">
+              <div class="col-6 p-1">
+                <img class="img-fluid" *ngIf="images[3]" [src]="images[3]">
+              </div>
+              <div class="col-6 p-1">
+                <img class="img-fluid" *ngIf="images[4]" [src]="images[4]">
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-6 p-1">
-              <img class="img-fluid"  *ngIf="images[3]" [src]="images[3]">
-            </div>
-            <div class="col-6 p-1">
-              <img class="img-fluid" *ngIf="images[4]" [src]="images[4]">
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
+
   </div>
+
 </div>
 <div class="container my-3">
   <div class="row">
     <div class="col-md-8" *ngIf="business">
 
-      <h2 class="color-1">{{business.name}}</h2>
-        <div class="header-bottom-bar color-2 my-1"></div>
-      <p class="text-muted">
-        <rating [(ngModel)]="business.rating" [max]="5" [readonly]="true"></rating> &nbsp; ({{business.reviews}} Reviews)
-      </p>
+      <!-- BUSINESS TITLE-->
+      <div class="row mb-2">
+        <div class="col-lg-6">
+          <h2 class="color-1">{{business.name}}</h2>
+          <div class="header-bottom-bar color-2 my-1"></div>
+        </div>
+        <div class="col-lg-6 align-items-center">
+          <div class="text-lg-right text-muted">
+            <rating [(ngModel)]="business.rating" [max]="5" [readonly]="true"></rating> &nbsp; ({{business.reviews}}
+            Reviews)
+          </div>
+        </div>
+      </div>
+
+      <!-- BUSINESS AND OWNER DETAILS-->
+      <div class="card mb-2">
+        <div class="row no-gutters">
+          <div class="col-3">
+            <img *ngIf="images[0]" [src]="images[0]" class="card-img" alt="...">
+          </div>
+          <div class="col-9">
+            <div class="card-body p-2">
+              <h5 class="card-title">Owner Name</h5>
+              <p class="card-text mb-1">Business Address</p>
+              <div class="d-flex flex-wrap justify-content-around">
+                <div>
+                  <a href="tel:9999999999"><i class="fa fa-phone"></i> 9999999999</a>
+                </div>
+                <div>
+                  <a href="https://example.com" target="_blank"><i class="fa fa-globe"></i> example.com</a>
+                </div>
+                <div>
+                  <a href="maps.google.com" ><i class="fa fa-map-marker"></i> Directions</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <p>{{business.description}}</p>
 
-      <h5 class="color-2">Services</h5>
+      <h5 class="color-2">Products & Services</h5>
       <div class="row">
-        <div class="col-4 mb-3">
+        <div class="col-6 mb-3">
           <i class="fa fa-check"></i> Friendly workspace
         </div>
-        <div class="col-4 mb-3">
+        <div class="col-6 mb-3">
           <i class="fa fa-check"></i> Friendly workspace
         </div>
-        <div class="col-4 mb-3">
+        <div class="col-6 mb-3">
           <i class="fa fa-check"></i> Friendly workspace
         </div>
-        <div class="col-4 mb-3">
+        <div class="col-6 mb-3">
           <i class="fa fa-check"></i> Friendly workspace
         </div>
-        <div class="col-4 mb-3">
+        <div class="col-6 mb-3">
           <i class="fa fa-check"></i> Friendly workspace
         </div>
-        <div class="col-4 mb-3">
+        <div class="col-6 mb-3">
           <i class="fa fa-check"></i> Friendly workspace
         </div>
       </div>
-      <div>
+      <div id="business-map">
         <app-frontend-single-point-map></app-frontend-single-point-map>
       </div>
     </div>
@@ -75,7 +111,7 @@
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Whare are you looking for?">
               <div class="input-group-append">
-                <span class="input-group-text" ><i class="fa fa-search"></i></span>
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
               </div>
             </div>
           </div>
@@ -103,9 +139,12 @@
           <h5 class="card-title color-2">Contact</h5>
           <hr>
           <ul class="custom-list-1">
-            <li><i class="fa fa-phone"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="tel:123123123" target="_blank">123-123-123</a></li>
-            <li><i class="fa fa-envelope"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="mailto:someone@example.com" target="_blank">someone@example.com</a></li>
-            <li><i class="fa fa-globe"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="http://example.com/" target="_blank">example.com</a></li>
+            <li><i class="fa fa-phone"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="tel:123123123"
+                target="_blank">123-123-123</a></li>
+            <li><i class="fa fa-envelope"></i>&nbsp;&nbsp;<a class="color-default no-decoration"
+                href="mailto:someone@example.com" target="_blank">someone@example.com</a></li>
+            <li><i class="fa fa-globe"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="http://example.com/"
+                target="_blank">example.com</a></li>
           </ul>
         </div>
       </div>
