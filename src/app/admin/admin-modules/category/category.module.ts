@@ -11,7 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { FormErrorModule } from 'src/app/utils/form-error/form-error.module';
 import { ImageInputPreviewModule } from 'src/app/utils/image-input-preview/image-input-preview.module';
-
+import { NgxBasicTableModule } from '@manenderk/ngx-basic-table';
 
 const routes: Routes = [
   {
@@ -41,7 +41,8 @@ const routes: Routes = [
     MatCheckboxModule,
     MatButtonModule,
     FormErrorModule,
-    ImageInputPreviewModule
+    ImageInputPreviewModule,
+    NgxBasicTableModule
   ]
 })
 export class CategoryModule { }
