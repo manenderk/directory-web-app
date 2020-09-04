@@ -6,13 +6,14 @@ import { FrontendHomeSliderModule } from '../../frontend-modules/frontend-home-s
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { FormsModule } from '@angular/forms';
 import { FrontendLeafletMapModule } from '../../frontend-modules/frontend-leaflet-map/frontend-leaflet-map.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 const routes: Routes = [
   {
     path: '',
     component: FrontendBusinessDetailComponent
   }
-]
+];
 
 @NgModule({
   declarations: [FrontendBusinessDetailComponent],
@@ -22,7 +23,8 @@ const routes: Routes = [
     FrontendHomeSliderModule,
     RatingModule.forRoot(),
     FormsModule,
-    FrontendLeafletMapModule
+    FrontendLeafletMapModule,
+    SlickCarouselModule
   ]
 })
 export class FrontendBusinessDetailsModule { }

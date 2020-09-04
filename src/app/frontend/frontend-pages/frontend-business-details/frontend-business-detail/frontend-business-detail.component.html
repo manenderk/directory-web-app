@@ -1,29 +1,29 @@
 <div class="container">
   <div class="px-15px">
 
+    <div class="row">
+      <div class="col-8 p-1">
+        <img class="img-fluid" *ngIf="images[0]" [src]="images[0]">
+      </div>
+      <div class="col-4">
         <div class="row">
-          <div class="col-8 p-1">
-            <img class="img-fluid" *ngIf="images[0]" [src]="images[0]">
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[1]" [src]="images[1]">
           </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-6 p-1">
-                <img class="img-fluid" *ngIf="images[1]" [src]="images[1]">
-              </div>
-              <div class="col-6 p-1">
-                <img class="img-fluid" *ngIf="images[2]" [src]="images[2]">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 p-1">
-                <img class="img-fluid" *ngIf="images[3]" [src]="images[3]">
-              </div>
-              <div class="col-6 p-1">
-                <img class="img-fluid" *ngIf="images[4]" [src]="images[4]">
-              </div>
-            </div>
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[2]" [src]="images[2]">
           </div>
         </div>
+        <div class="row">
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[3]" [src]="images[3]">
+          </div>
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[4]" [src]="images[4]">
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -33,7 +33,7 @@
     <div class="col-md-8" *ngIf="business">
 
       <!-- BUSINESS TITLE-->
-      <div class="row mb-2">
+      <div class="row my-2">
         <div class="col-lg-6">
           <h2 class="color-1">{{business.name}}</h2>
           <div class="header-bottom-bar color-2 my-1"></div>
@@ -47,7 +47,7 @@
       </div>
 
       <!-- BUSINESS AND OWNER DETAILS-->
-      <div class="card mb-2">
+      <div class="card my-2">
         <div class="row no-gutters">
           <div class="col-3">
             <img *ngIf="images[0]" [src]="images[0]" class="card-img" alt="...">
@@ -64,7 +64,7 @@
                   <a href="https://example.com" target="_blank"><i class="fa fa-globe"></i> example.com</a>
                 </div>
                 <div>
-                  <a href="maps.google.com" ><i class="fa fa-map-marker"></i> Directions</a>
+                  <a href="maps.google.com"><i class="fa fa-map-marker"></i> Directions</a>
                 </div>
               </div>
             </div>
@@ -72,30 +72,62 @@
         </div>
       </div>
 
-      <p>{{business.description}}</p>
+      <div class="my-2">
+        {{business.description}}
+      </div>
 
-      <h5 class="color-2">Products & Services</h5>
-      <div class="row">
-        <div class="col-6 mb-3">
-          <i class="fa fa-check"></i> Friendly workspace
+      <hr>
+
+      <div class="my-2">
+        <h5 class="color-2">Products & Services</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-md-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-md-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-md-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-md-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-md-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
         </div>
-        <div class="col-6 mb-3">
-          <i class="fa fa-check"></i> Friendly workspace
-        </div>
-        <div class="col-6 mb-3">
-          <i class="fa fa-check"></i> Friendly workspace
-        </div>
-        <div class="col-6 mb-3">
-          <i class="fa fa-check"></i> Friendly workspace
-        </div>
-        <div class="col-6 mb-3">
-          <i class="fa fa-check"></i> Friendly workspace
-        </div>
-        <div class="col-6 mb-3">
-          <i class="fa fa-check"></i> Friendly workspace
+        <div>
+          <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfig">
+            <div ngxSlickItem class="slide" *ngFor="let img of images">
+              <img [src]="img" class="img-fluid">
+            </div>
+          </ngx-slick-carousel>
         </div>
       </div>
-      <div id="business-map">
+
+      <hr>
+
+      <div class="my-2">
+        <h5 class="color-2">Specialties</h5>
+        <div class="mb-1">
+          <i class="fa fa-star"></i> Comprehensive Inspection, Diagnosis &amp; Repair,
+        </div>
+        <div class="mb-1">
+          <i class="fa fa-star"></i> Preventative &amp; Scheduled Maintenance,
+        </div>
+        <div class="mb-1">
+          <i class="fa fa-star"></i> Reliable Auto Repairs on European Vehicles
+        </div>
+      </div>
+
+      <hr>
+
+      <div id="business-map" class="my-2">
+        <h5 class="color-2">Location</h5>
         <app-frontend-single-point-map></app-frontend-single-point-map>
       </div>
     </div>
@@ -145,6 +177,18 @@
                 href="mailto:someone@example.com" target="_blank">someone@example.com</a></li>
             <li><i class="fa fa-globe"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="http://example.com/"
                 target="_blank">example.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title color-2">Language Spoken</h5>
+          <hr>
+          <ul class="custom-list-1">
+            <li>English</li>
+            <li>Hindi</li>
+            <li>Punjabi</li>
           </ul>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Business } from 'src/app/models/business/business.model';
 import { PicsumService } from 'src/app/services/extra/picsum.service';
+import { ScreenService } from 'src/app/services/common/screen.service';
 
 @Component({
   selector: 'app-frontend-business-detail',
@@ -15,11 +16,15 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
 
   images: string[] = [];
 
+  sliderConfig: any;
+
   constructor(
-    private picsumService: PicsumService
+    private picsumService: PicsumService,
+    private screenService: ScreenService
   ) { }
 
   ngOnInit(): void {
+    this.setSliderConfig();
     this.setBusinessImages();
     this.setBusinessData();
   }
@@ -47,6 +52,38 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
       categoryIds: null,
       reviews: 20,
       rating: 5
+    };
+  }
+
+  setSliderConfig() {
+    this.sliderConfig = {
+      'slidesToShow': 3,
+      'slidesToScroll': 1,
+      'autoplay': false,
+      'arrows': true,
+      'lazyLoad': true,
+      'prevArrow':  '<button type="button" class="btn btn-info slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>',
+      'nextArrow':  '<button type="button" class="btn btn-info slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>',
+      'responsive': [
+        {
+          breakpoint: this.screenService.breakpoints.md,
+          settings: {
+            arrows: false,
+            dots: true,
+            slidesToShow: 3,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: this.screenService.breakpoints.sm,
+          settings: {
+            arrows: false,
+            dots: true,
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        }
+      ]
     };
   }
 }
