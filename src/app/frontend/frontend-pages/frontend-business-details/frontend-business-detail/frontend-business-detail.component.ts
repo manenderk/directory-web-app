@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Business } from 'src/app/models/business/business.model';
 import { PicsumService } from 'src/app/services/extra/picsum.service';
 import { ScreenService } from 'src/app/services/common/screen.service';
+import { NgxSlickCarouselService } from 'src/app/services/common/ngx-slick-carousel.service';
+import { AvailablePaymentMethods } from 'src/app/models/payment/available-payment-methods.model';
+import { TeamMember } from 'src/app/models/team/team-member.model';
 
 @Component({
   selector: 'app-frontend-business-detail',
@@ -16,17 +19,30 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
 
   images: string[] = [];
 
-  sliderConfig: any;
+  paymentMethods: AvailablePaymentMethods = {
+    mastercard: true,
+    visa: true,
+    amex: true,
+    paypal: true
+  };
+
+  sliderConfigs: {
+    productsAndServices: any,
+  };
+
+  teamMembers: TeamMember[];
 
   constructor(
     private picsumService: PicsumService,
-    private screenService: ScreenService
+    private screenService: ScreenService,
+    private sliderConfigService: NgxSlickCarouselService
   ) { }
 
   ngOnInit(): void {
     this.setSliderConfig();
     this.setBusinessImages();
     this.setBusinessData();
+    this.setTeamMmebers();
   }
 
   ngOnDestroy(): void {
@@ -56,34 +72,25 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
   }
 
   setSliderConfig() {
-    this.sliderConfig = {
-      'slidesToShow': 3,
-      'slidesToScroll': 1,
-      'autoplay': false,
-      'arrows': true,
-      'lazyLoad': true,
-      'prevArrow':  '<button type="button" class="btn btn-info slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>',
-      'nextArrow':  '<button type="button" class="btn btn-info slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>',
-      'responsive': [
-        {
-          breakpoint: this.screenService.breakpoints.md,
-          settings: {
-            arrows: false,
-            dots: true,
-            slidesToShow: 3,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: this.screenService.breakpoints.sm,
-          settings: {
-            arrows: false,
-            dots: true,
-            slidesToShow: 2,
-            slidesToScroll: 1
-          }
-        }
-      ]
+    this.sliderConfigs = {
+      productsAndServices: this.sliderConfigService.getResponsiveSliderConfig()
     };
+  }
+
+  setTeamMmebers() {
+    this.teamMembers = [
+      {
+        name: 'Person 1',
+        imageUrl: this.images[1]
+      },
+      {
+        name: 'Person 2',
+        imageUrl: this.images[2]
+      },
+      {
+        name: 'Person 3',
+        imageUrl: this.images[3]
+      },
+    ];
   }
 }

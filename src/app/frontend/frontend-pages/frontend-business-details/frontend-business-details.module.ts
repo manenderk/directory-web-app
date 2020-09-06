@@ -7,6 +7,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 import { FormsModule } from '@angular/forms';
 import { FrontendLeafletMapModule } from '../../frontend-modules/frontend-leaflet-map/frontend-leaflet-map.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { FrontendTeamMembersModule } from '../../frontend-modules/frontend-team-members/frontend-team-members.module';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
     RatingModule.forRoot(),
     FormsModule,
     FrontendLeafletMapModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    FrontendTeamMembersModule
   ]
 })
 export class FrontendBusinessDetailsModule { }

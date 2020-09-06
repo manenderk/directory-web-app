@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-sm-4 my-15px" *ngFor="let member of teamMembers">
+    <div class="card text-center">
+      <div class="mt-4 mb-2">
+        <img class="w-50 rounded-circle" [src]="member.imageUrl">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{member.name}}</h5>
+      </div>
+    </div>
+  </div>
+</div>

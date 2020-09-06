@@ -50,7 +50,7 @@
       <div class="card my-2">
         <div class="row no-gutters">
           <div class="col-3">
-            <img *ngIf="images[0]" [src]="images[0]" class="card-img" alt="...">
+            <img *ngIf="images[1]" [src]="images[1]" class="card-img" alt="...">
           </div>
           <div class="col-9">
             <div class="card-body p-2">
@@ -101,7 +101,7 @@
           </div>
         </div>
         <div>
-          <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfig">
+          <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfigs.productsAndServices">
             <div ngxSlickItem class="slide" *ngFor="let img of images">
               <img [src]="img" class="img-fluid">
             </div>
@@ -125,6 +125,11 @@
       </div>
 
       <hr>
+
+      <div class="my-2">
+        <h5 class="color-2">Team</h5>
+        <app-frontend-team-members [teamMembers]="teamMembers"></app-frontend-team-members>
+      </div>
 
       <div id="business-map" class="my-2">
         <h5 class="color-2">Location</h5>
@@ -181,6 +186,18 @@
         </div>
       </div>
 
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title color-2">Payment Methods</h5>
+          <hr>
+          <div>
+            <img *ngIf="paymentMethods.visa" class="m-2" src="assets/payment-methods/visa.png">
+            <img *ngIf="paymentMethods.mastercard" class="m-2" src="assets/payment-methods/mastercard.png">
+            <img *ngIf="paymentMethods.amex" class="m-2" src="assets/payment-methods/american-express.png">
+            <img *ngIf="paymentMethods.paypal" class="m-2" src="assets/payment-methods/paypal.png">
+          </div>
+        </div>
+      </div>
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title color-2">Language Spoken</h5>

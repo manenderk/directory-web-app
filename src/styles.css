@@ -142,13 +142,19 @@
 }
 
 .mb-20px {
-  margin-bottom: 20px;
+  margin-bottom: 20px !important;
+}
+
+.my-15px {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
 }
 
 .px-15px {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
 }
+
 
 /************************/
 /*     MEDIA QUERIES    */
