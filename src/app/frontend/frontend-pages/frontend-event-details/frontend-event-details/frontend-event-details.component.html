@@ -1,31 +1,212 @@
 <div class="container">
-  <div class="row">
-    <div class="col p-1">
-      <img [src]="theEvent.imageUrl">
+  <div class="px-15px">
+
+    <div class="row">
+      <div class="col-8 p-1">
+        <img class="img-fluid" *ngIf="images[0]" [src]="images[0]">
+      </div>
+      <div class="col-4">
+        <div class="row">
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[1]" [src]="images[1]">
+          </div>
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[2]" [src]="images[2]">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[3]" [src]="images[3]">
+          </div>
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[4]" [src]="images[4]">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[1]" [src]="images[1]">
+          </div>
+          <div class="col-6 p-1">
+            <img class="img-fluid" *ngIf="images[2]" [src]="images[2]">
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
+
 </div>
+
 <div class="container my-3">
   <div class="row">
+
+
     <div class="col-md-8">
 
-      <h2 class="color-1">{{theEvent.name}}</h2>
-        <div class="header-bottom-bar color-2 my-1"></div>
-      <p class="text-muted">
-        <b>Date: </b>{{theEvent.date}}
-      </p>
-      <p>{{theEvent.description}}</p>
+      <!-- EVENT TITLE-->
+      <div class="row my-2">
+        <div class="col">
+          <h2 class="color-1">{{theEvent.name}}</h2>
+          <div class="header-bottom-bar color-2 my-1"></div>
+          <div class="row">
+            <div class="col-sm-4 ">
+              <h5 class="color-2 my-2"><i class="fa fa-map-marker"></i> {{theEvent.location}}</h5>
+            </div>
+            <div class="col-sm-4 ">
+              <h5 class="color-2 my-2"><i class="fa fa-calendar"></i> {{theEvent.date | date}}</h5>
+            </div>
+            <div class="col-sm-4 ">
+              <h5 class="color-2 my-2">{{theEvent.priceRange}}</h5>
+            </div>
+          </div>
+
+
+
+          <div class="my-3">
+            <a class="mr-2" href=""><img class="social-icon" src="assets/social-icons/facebook.png"></a>
+            <a class="mr-2" href=""><img class="social-icon" src="assets/social-icons/instagram.png"></a>
+            <a class="mr-2" href=""><img class="social-icon" src="assets/social-icons/twitter.png"></a>
+            <a class="mr-2" href=""><img class="social-icon" src="assets/social-icons/youtube.png"></a>
+          </div>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <div class="row my-2">
+        <div class="col">
+          <h2>Presented By</h2>
+          <div class="header-bottom-bar color-2 my-1"></div>
+          <div class="my-3">
+            <div class="row">
+              <div class="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2 my-15px d-flex" *ngFor="let image of brandImages">
+                <img [src]="image" class="img-fluid align-self-center">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row my-2">
+        <div class="col">
+          <h2>In Association With</h2>
+          <div class="header-bottom-bar color-2 my-1"></div>
+          <div class="my-3">
+            <div class="row">
+              <div class="col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2 my-15px d-flex" *ngFor="let image of brandImages">
+                <img [src]="image" class="img-fluid align-self-center">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row my-2">
+        <div class="col">
+          <h2>Pricing</h2>
+          <div class="header-bottom-bar color-2 my-1"></div>
+          <div class="my-3">
+            <div class="row">
+              <!-- Free Tier -->
+              <div class="col-sm-4 text-center ">
+                <h4>Package 1</h4>
+                <hr>
+                <h5>$100</h5>
+                <hr>
+                <ul class="list-style-none p-0">
+                  <li><span></span>Single User</li>
+                  <li><span></span>5GB Storage</li>
+                  <li><span></span>Unlimited Public Projects</li>
+                  <li><span></span>Community Access</li>
+                </ul>
+
+              </div>
+
+              <div class="col-sm-4 text-center ">
+                <h4>Package 2</h4>
+                <hr>
+                <h5>$300</h5>
+                <hr>
+                <ul class="list-style-none p-0">
+                  <li><span></span>Single User</li>
+                  <li><span></span>5GB Storage</li>
+                  <li><span></span>Unlimited Public Projects</li>
+                  <li><span></span>Community Access</li>
+                </ul>
+
+              </div>
+
+              <div class="col-sm-4 text-center ">
+                <h4>Package 3</h4>
+                <hr>
+                <h5>$500</h5>
+                <hr>
+                <ul class="list-style-none p-0">
+                  <li><span></span>Single User</li>
+                  <li><span></span>5GB Storage</li>
+                  <li><span></span>Unlimited Public Projects</li>
+                  <li><span></span>Community Access</li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <div class="row my-2">
+        <div class="col">
+          <h2>Details</h2>
+          <div class="header-bottom-bar color-2 my-1"></div>
+          <div class="my-3">
+            {{theEvent.description}}
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="row my-2">
+        <div class="col">
+          <h2>Sponsors</h2>
+          <div class="header-bottom-bar color-2 my-1"></div>
+          <div class="my-3">
+            <div class="row">
+              <div class="col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2 my-15px d-flex" *ngFor="let image of brandImages">
+                <img [src]="image" class="img-fluid align-self-center">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="business-map" class="my-2">
+        <h5 class="color-2">Location</h5>
+        <app-frontend-single-point-map></app-frontend-single-point-map>
+      </div>
     </div>
 
-    <div class="col-md-4 pt-3 bg-grey-1">
 
-      <div class="card mb-3">
+
+
+    <div class="col-md-4 pt-3 bg-grey-1  px-sm-2">
+
+      <div class="card mb-3 d-none d-md-block d-lg-block d-xl-block">
         <div class="card-body">
           <div class="form-group pb-0 mb-0">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Whare are you looking for?">
               <div class="input-group-append">
-                <span class="input-group-text" ><i class="fa fa-search"></i></span>
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
               </div>
             </div>
           </div>
@@ -34,16 +215,12 @@
 
       <div class="card mb-3">
         <div class="card-body">
-          <h5 class="card-title color-2">Opening Hours</h5>
+          <h5 class="card-title color-2">Tickets Available At</h5>
           <hr>
           <ul class="custom-list-1">
-            <li>Monday <span>9 AM - 5 PM</span></li>
-            <li>Tuesday <span>9 AM - 5 PM</span></li>
-            <li>Wednesday <span>9 AM - 5 PM</span></li>
-            <li>Thursday <span>9 AM - 5 PM</span></li>
-            <li>Friday <span>9 AM - 5 PM</span></li>
-            <li>Saturday <span>9 AM - 3 PM</span></li>
-            <li>Sunday <span>Closed</span></li>
+            <li>Address 1</li>
+            <li>Address 2</li>
+            <li>Address 3</li>
           </ul>
         </div>
       </div>
@@ -52,13 +229,46 @@
         <div class="card-body">
           <h5 class="card-title color-2">Contact</h5>
           <hr>
-          <ul class="custom-list-1">
-            <li><i class="fa fa-phone"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="tel:123123123" target="_blank">123-123-123</a></li>
-            <li><i class="fa fa-envelope"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="mailto:someone@example.com" target="_blank">someone@example.com</a></li>
-            <li><i class="fa fa-globe"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="http://example.com/" target="_blank">example.com</a></li>
-          </ul>
+
+          <div class="row no-gutter my-2">
+            <div class="col-4">
+              <img *ngIf="images[1]" [src]="images[1]" class="img-fluid" alt="...">
+            </div>
+            <div class="col-8">
+
+              <h5 class="card-title">Contact Name</h5>
+              <p class="card-text mb-1">example@someaddress.com</p>
+              <p class="card-text mb-1">999999</p>
+
+            </div>
+          </div>
+
         </div>
       </div>
+
+    <!--   <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title color-2">Payment Methods</h5>
+          <hr>
+          <div>
+            <img *ngIf="paymentMethods.visa" class="m-2" src="assets/payment-methods/visa.png">
+            <img *ngIf="paymentMethods.mastercard" class="m-2" src="assets/payment-methods/mastercard.png">
+            <img *ngIf="paymentMethods.amex" class="m-2" src="assets/payment-methods/american-express.png">
+            <img *ngIf="paymentMethods.paypal" class="m-2" src="assets/payment-methods/paypal.png">
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title color-2">Language Spoken</h5>
+          <hr>
+          <ul class="custom-list-1">
+            <li>English</li>
+            <li>Hindi</li>
+            <li>Punjabi</li>
+          </ul>
+        </div>
+      </div> -->
 
 
 

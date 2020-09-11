@@ -4,6 +4,8 @@ export interface TheEvent {
   description: string;
   imageUrl: string;
   date: Date;
+  location: string;
+  priceRange: string;
   active: boolean;
   featured: boolean;
   order: number;

@@ -240,6 +240,8 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
         description: null,
         imageUrl: `assets/demo/event${i++}.jpg`,
         date: eventDate,
+        priceRange: null,
+        location: null,
         active: true,
         featured: true,
         order: i,
@@ -395,14 +397,14 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     }
 
     const sliderConfig  = {
-      'slidesToShow': matrix.dCols,
-      'slidesToScroll': matrix.dCols,
-      'autoplay': false,
-      'arrows': true,
-      'lazyLoad': true,
-      'prevArrow':  '<button type="button" class="btn btn-info slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>',
-      'nextArrow':  '<button type="button" class="btn btn-info slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>',
-      'responsive': [
+      slidesToShow: matrix.dCols,
+      slidesToScroll: matrix.dCols,
+      autoplay: false,
+      arrows: true,
+      lazyLoad: true,
+      prevArrow:  '<button type="button" class="btn btn-info slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>',
+      nextArrow:  '<button type="button" class="btn btn-info slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>',
+      responsive: [
         {
           breakpoint: this.screenService.breakpoints.md,
           settings: {
