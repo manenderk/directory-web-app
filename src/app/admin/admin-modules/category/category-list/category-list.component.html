@@ -1,3 +1,15 @@
-<p>category-list works!</p>
+<div class="row">
+  <div class="col-12">
+    <h3>Categories</h3>
+  </div>
+  <div class="col-12">
+    <ngx-basic-table
+    [data]="categories"
+    [tabMeta]="tabMeta"
+    [colMeta]="colMeta"
+    (linkColClicked)="categoryClicked($event)"
+  ></ngx-basic-table>
+  </div>
+</div>
 
-<ngx-basic-table></ngx-basic-table>
+
