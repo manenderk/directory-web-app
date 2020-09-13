@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category/category.model';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category-add-edit',
@@ -20,7 +21,8 @@ export class CategoryAddEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private catService: CategoryService
+    private catService: CategoryService,
+    private router: Router
   ) { }
 
   async ngOnInit() {
@@ -66,6 +68,7 @@ export class CategoryAddEditComponent implements OnInit {
         await this.catService.addCategory(categoryToSave).toPromise();
       }
       Swal.fire('Success', 'Category saved', 'success');
+      this.router.navigate([`/${environment.adminRoutePrefix}/category/category-list`]);
     }
   }
 
