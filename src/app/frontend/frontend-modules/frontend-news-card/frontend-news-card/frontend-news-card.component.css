@@ -4,22 +4,33 @@
 
 
 .the-card-container {
-  padding: 6px;
+  padding: 0 6px 12px 6px;
 }
 
 .card-text {
   margin-bottom: 0;
 }
 
-.card-img-top {
-  height: 300px;
-}
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .card-title {
     font-size: 1rem;
   }
   .card-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card-body {
+    padding: 1rem;
+  }
+
+  .card-title {
     font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  .card-text {
+    font-size: 0.7rem;
   }
 }
