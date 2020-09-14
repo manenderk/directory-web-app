@@ -118,6 +118,10 @@ html, body {
   cursor: pointer;
 }
 
+.height100Per {
+  height: 100%;
+}
+
 .height100vhResHeader{
   height: calc(100vh - 56px);
 }
