@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-:root {
+/* :root {
   --c-color-1: #03045e;
   --c-color-2: #023e8a;
   --c-color-3: #0077b6;
@@ -32,7 +32,46 @@
 
 .border-color-2 {
   border-color: var(--c-color-2);
+} */
+
+html, body {
+  font-family: 'Roboto', sans-serif;
 }
+
+:root {
+  --c-color-primary: #1a237e;
+  --c-color-secondary: #283593;
+  --c-color-primary-accent: #1976d2;
+}
+
+.fw-light, .fw-300 {
+  font-weight: 300;
+}
+
+.fw-medium, .fw-400 {
+  font-weight: 400;
+}
+
+.fw-bold, .fw-500  {
+  font-weight: 500;
+}
+
+.fw-xbold, .fw-700 {
+  font-weight: 700;
+}
+
+.f-color-primary {
+  color: var(--c-color-primary);
+}
+
+.f-color-secondary {
+  color: var(--c-color-secondary);
+}
+
+.b-color-primary-accent {
+  border-color: var(--c-color-primary-accent) !important;
+}
+
 
 .no-decoration, .no-decoration:hover {
   text-decoration: none;
@@ -52,6 +91,10 @@
 
 .carousel:hover .slider-action-btn {
   opacity: 1;
+}
+
+.slider-action-btn:not(:disabled):active {
+  border: none !important;
 }
 
 .slider-action-prev {
@@ -123,7 +166,7 @@
 
 .header-bottom-bar {
   border: 1px solid ;
-  width: 100px;
+  width: 150px;
 }
 
 
@@ -170,7 +213,7 @@
 
 
   .do-zoom-hover {
-    transition: transform .5s;
+    transition: transform .1s ease-in;
   }
 
   .do-zoom-hover:hover {

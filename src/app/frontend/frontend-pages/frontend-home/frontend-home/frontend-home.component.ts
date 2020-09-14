@@ -6,6 +6,8 @@ import { ScreenService } from 'src/app/services/common/screen.service';
 import { News } from 'src/app/models/news/news.model';
 import { newArray } from '@angular/compiler/src/util';
 import { SubSink } from 'subsink';
+import { NgxSlickCarouselService } from 'src/app/services/common/ngx-slick-carousel.service';
+import { NgxSlickSliderModel } from 'src/app/models/app/ngx-slick-slider.model';
 
 @Component({
   selector: 'app-frontend-home',
@@ -18,9 +20,11 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
 
   screenSize: string;
 
-  categorySliderConfig: any;
-  eventSliderConfig: any;
-  newsSliderConfig: any;
+  sliderConfigs: {
+    categorySliderConfig: any,
+    eventSliderConfig: any,
+    newsSliderConfig: any,
+  };
 
   categoryData: {
     desktopRows: number,
@@ -65,12 +69,14 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private picsumService: PicsumService,
-    private screenService: ScreenService
+    private screenService: ScreenService,
+    private sliderService: NgxSlickCarouselService
   ) {
 
   }
 
   ngOnInit(): void {
+    this.initializeVariables();
     this.setCurrentScreenType();
     this.setBannerSlides();
     this.setCategoriesData();
@@ -82,11 +88,18 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
+  initializeVariables() {
+    this.sliderConfigs = {
+      categorySliderConfig: null,
+      eventSliderConfig: null,
+      newsSliderConfig: null
+    };
+  }
+
   setCurrentScreenType() {
     this.subs.sink = this.screenService.currentScreenType.subscribe(screenType => {
       this.screenSize = screenType;
     });
-
   }
 
 
@@ -167,7 +180,26 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
 
     this.organizeCategories(rows);
 
-    this.categorySliderConfig = this.getSliderConfig('category');
+    this.sliderConfigs.categorySliderConfig = this.sliderService.getResponsiveSliderConfig(
+      {
+        slidesToScroll: this.categoryData.desktopCols,
+        slidesToShow: this.categoryData.desktopCols,
+        autoplay: true,
+        arrows: true,
+      },
+      {
+        slidesToScroll: this.categoryData.tabletCols,
+        slidesToShow: this.categoryData.tabletCols,
+        autoplay: true,
+        arrows: true,
+      },
+      {
+        slidesToScroll: this.categoryData.mobileCols,
+        slidesToShow: this.categoryData.mobileCols,
+        autoplay: true,
+        arrows: true,
+      }
+    );
   }
 
 
@@ -253,7 +285,26 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
 
     this.organizeEvents(rows);
 
-    this.eventSliderConfig = this.getSliderConfig('event');
+    this.sliderConfigs.eventSliderConfig = this.sliderService.getResponsiveSliderConfig(
+      {
+        slidesToScroll: this.eventData.desktopCols,
+        slidesToShow: this.eventData.desktopCols,
+        autoplay: true,
+        arrows: true,
+      },
+      {
+        slidesToScroll: this.eventData.tabletCols,
+        slidesToShow: this.eventData.tabletCols,
+        autoplay: true,
+        arrows: true,
+      },
+      {
+        slidesToScroll: this.eventData.mobileCols,
+        slidesToShow: this.eventData.mobileCols,
+        autoplay: true,
+        arrows: true,
+      }
+    );
   }
 
   organizeEvents(rows: number) {
@@ -337,7 +388,26 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
 
     this.organizeNews(rows);
 
-    this.newsSliderConfig = this.getSliderConfig('news');
+    this.sliderConfigs.newsSliderConfig = this.sliderService.getResponsiveSliderConfig(
+      {
+        slidesToScroll: this.newsData.desktopCols,
+        slidesToShow: this.newsData.desktopCols,
+        autoplay: true,
+        arrows: true,
+      },
+      {
+        slidesToScroll: this.newsData.tabletCols,
+        slidesToShow: this.newsData.tabletCols,
+        autoplay: true,
+        arrows: true,
+      },
+      {
+        slidesToScroll: this.newsData.mobileCols,
+        slidesToShow: this.newsData.mobileCols,
+        autoplay: true,
+        arrows: true,
+      }
+    );
   }
 
   organizeNews(rows: number) {
@@ -354,78 +424,5 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     if (newsArr.length > 0) {
       this.newsData.organizedNews.push(newsArr);
     }
-  }
-
-  getSliderConfig(type: string): any {
-
-    let matrix = {
-      dRows: 0,
-      dCols: 0,
-      tRows: 0,
-      tCols: 0,
-      mRows: 0,
-      mCols: 0
-    };
-
-    if (type === 'category') {
-      matrix = {
-        dRows: this.categoryData.desktopRows,
-        dCols: this.categoryData.desktopCols,
-        tRows: this.categoryData.tabletRows,
-        tCols: this.categoryData.tabletCols,
-        mRows: this.categoryData.mobileRows,
-        mCols: this.categoryData.mobileCols
-      };
-    } else if (type === 'event') {
-      matrix = {
-        dRows: this.eventData.desktopRows,
-        dCols: this.eventData.desktopCols,
-        tRows: this.eventData.tabletRows,
-        tCols: this.eventData.tabletCols,
-        mRows: this.eventData.mobileRows,
-        mCols: this.eventData.mobileCols
-      };
-    } else if (type === 'news') {
-      matrix = {
-        dRows: this.newsData.desktopRows,
-        dCols: this.newsData.desktopCols,
-        tRows: this.newsData.tabletRows,
-        tCols: this.newsData.tabletCols,
-        mRows: this.newsData.mobileRows,
-        mCols: this.newsData.mobileCols
-      };
-    }
-
-    const sliderConfig  = {
-      slidesToShow: matrix.dCols,
-      slidesToScroll: matrix.dCols,
-      autoplay: false,
-      arrows: true,
-      lazyLoad: true,
-      prevArrow:  '<button type="button" class="btn btn-info slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>',
-      nextArrow:  '<button type="button" class="btn btn-info slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>',
-      responsive: [
-        {
-          breakpoint: this.screenService.breakpoints.md,
-          settings: {
-            arrows: false,
-            dots: true,
-            slidesToShow: matrix.tCols,
-            slidesToScroll: matrix.tCols
-          }
-        },
-        {
-          breakpoint: this.screenService.breakpoints.sm,
-          settings: {
-            arrows: false,
-            dots: true,
-            slidesToShow: matrix.mCols,
-            slidesToScroll: matrix.mCols
-          }
-        }
-      ]
-    };
-
-    return sliderConfig;
   }
 }

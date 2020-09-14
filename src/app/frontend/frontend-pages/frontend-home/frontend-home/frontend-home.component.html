@@ -8,18 +8,18 @@
   </div>
 </section>
 
-<section class="bg-grey py-md-4 py-2">
+<section class="bg-grey py-2 py-md-4">
   <div class="container">
-    <div class="row">
-      <div class="col px-0 section-heading color-1">
-        <h2>{{categoryData?.categoryHeading}}</h2>
-        <div class="header-bottom-bar color-2 my-1 d-md-block d-none"></div>
-        <p class="d-md-block d-none">{{categoryData?.categorySubheading}}</p>
+    <div class="row mb-3">
+      <div class="col px-0 section-heading">
+        <h2 class="fw-medium mb-1 f-color-primary">{{categoryData?.categoryHeading}}</h2>
+        <div class="header-bottom-bar mb-1 d-none d-md-block b-color-primary-accent"></div>
+        <h5 class="d-none d-md-block mb-0 fw-medium f-color-secondary">{{categoryData?.categorySubheading}}</h5>
       </div>
     </div>
-    <div class="row">
-      <div class="col px-0" *ngIf="categorySliderConfig" >
-        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="categorySliderConfig" >
+    <div class="row mb-3">
+      <div class="col px-0" *ngIf="sliderConfigs?.categorySliderConfig" >
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfigs.categorySliderConfig" >
           <div ngxSlickItem  class="slide" *ngFor="let catArr of categoryData.organizedCategories">
             <div *ngFor="let cat of catArr">
               <app-frontend-category-card [category]="cat"></app-frontend-category-card>
@@ -28,8 +28,8 @@
         </ngx-slick-carousel>
       </div>
     </div>
-    <div class="row my-2 px-3">
-      <div class="col text-right">
+    <div class="row mb-1">
+      <div class="col px-0 text-right">
         <a [routerLink]="['/categories']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
       </div>
     </div>
@@ -38,17 +38,17 @@
 
 
 <section>
-  <div class="container py-md-4 py-2">
-    <div class="row">
-      <div class="col section-heading color-1 px-0">
-        <h2>{{eventData?.eventHeading}}</h2>
-        <div class="header-bottom-bar color-2 my-1 d-md-block d-none"></div>
-        <p class="d-md-block d-none">{{eventData?.eventSubheading}}</p>
+  <div class="container py-2 py-md-4">
+    <div class="row mb-3">
+      <div class="col px-0 section-heading">
+        <h2 class="fw-medium mb-1 f-color-primary">{{eventData?.eventHeading}}</h2>
+        <div class="header-bottom-bar mb-1 d-none d-md-block b-color-primary-accent"></div>
+        <h5 class="d-none d-md-block mb-0 fw-medium f-color-secondary">{{eventData?.eventSubheading}}</h5>
       </div>
     </div>
-    <div class="row">
-      <div class="col px-0" *ngIf="eventSliderConfig" >
-        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="eventSliderConfig" >
+    <div class="row mb-3">
+      <div class="col px-0" *ngIf="sliderConfigs?.eventSliderConfig" >
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfigs.eventSliderConfig" >
           <div ngxSlickItem  class="slide" *ngFor="let eventArr of eventData.organizedEvents">
             <div *ngFor="let evt of eventArr">
               <app-frontend-event-card [theEvent]="evt"></app-frontend-event-card>
@@ -68,15 +68,15 @@
 <section class="bg-grey-1">
   <div class="container py-md-4 py-2">
     <div class="row">
-      <div class="col section-heading color-1 px-0">
+      <div class="col section-heading  px-0">
         <h2>{{newsData?.newsHeading}}</h2>
-        <div class="header-bottom-bar color-2 my-1  d-md-block d-none"></div>
+        <div class="header-bottom-bar my-1  d-md-block d-none"></div>
         <p class=" d-md-block d-none">{{newsData?.newsSubheading}}</p>
       </div>
     </div>
     <div class="row">
-      <div class="col px-0" *ngIf="newsSliderConfig" >
-        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="newsSliderConfig" >
+      <div class="col px-0" *ngIf="sliderConfigs?.newsSliderConfig" >
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfigs.newsSliderConfig" >
           <div ngxSlickItem  class="slide" *ngFor="let newsArr of newsData.organizedNews">
             <div *ngFor="let news of newsArr">
               <app-frontend-news-card [news]="news"></app-frontend-news-card>

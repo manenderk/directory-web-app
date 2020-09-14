@@ -1,14 +1,14 @@
 <ng-container *ngIf="category">
   <a [routerLink]="['/listing']" [queryParams]="{catId: category.id}" routerLinkActive="router-link-active"
-    class="color-2 no-decoration"
+    class="no-decoration d-block f-color-primary"
   >
     <div class="category-card-container">
       <div class="category-card-content" [ngStyle]="{'background-image': 'url(' + category.thumbnail + ')'}">
       </div>
 
     </div>
-    <div class="the-category-title pt-0 pb-2">
-      <h5 class="text-center category-text">{{category.name}}</h5>
+    <div class="the-category-title mb-3">
+      <h5 class="text-center category-text fw-medium mb-0">{{category.name}}</h5>
     </div>
   </a>
 
