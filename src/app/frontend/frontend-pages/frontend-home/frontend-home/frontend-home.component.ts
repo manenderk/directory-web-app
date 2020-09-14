@@ -224,7 +224,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     // SETTING DEFAULT CATEGORY DATA
     this.eventData = {
       desktopRows: 2,
-      desktopCols: 4,
+      desktopCols: 5,
       tabletRows: 2,
       tabletCols: 3,
       mobileRows: 2,
@@ -328,7 +328,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     // SETTING DEFAULT CATEGORY DATA
     this.newsData = {
       desktopRows: 2,
-      desktopCols: 4,
+      desktopCols: 5,
       tabletRows: 2,
       tabletCols: 3,
       mobileRows: 2,
