@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class VariableService {
 
-  toggleScreenType = ['xs','sm'];
+  toggleScreenType = ['xs', 'sm'];
+  toggleScreenTypeDesktop = ['xs', 'sm', 'md'];
 
 
   constructor() { }

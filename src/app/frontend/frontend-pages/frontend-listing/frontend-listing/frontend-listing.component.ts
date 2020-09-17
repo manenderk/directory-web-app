@@ -17,12 +17,18 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
 
   cardDisplayType = 'horizontal';
 
+  listingType = 'regular';
+
   screenType: string;
+
   toggleScreenType: string[];
-  toggleDisplayVars = {
+
+  collapseDisplayVars = {
     filter: true,
-    map: true
+    map: true,
   };
+
+  listingScrolledUp = true;
 
   categoryDropdownSettings: IDropdownSettings;
   categories: Category[] = [];
@@ -55,7 +61,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   setCurrentScreenType() {
     this.subs.sink = this.screenService.currentScreenType.subscribe(screenType => {
       this.screenType = screenType;
-    })
+    });
   }
 
   async initializeCategories() {
@@ -86,16 +92,16 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     for (let i = 1; i <= 100; i++) {
       this.businesses.push({
         id: i.toString(),
-        name: names[i*2 - 1] + ' ' + names[i*2],
+        name: names[i * 2 - 1] + ' ' + names[i * 2],
         description: null,
         thumbnail: this.picsumService.getImageUrl(imageIds[i], 400, 300),
-        shortAddress: addresses[i*2 - 1] + ', ' + addresses[i*2],
-        categoryIds: this.categories.slice(0, i%10).map(i => {
-          return i.id.toString()
+        shortAddress: addresses[i * 2 - 1] + ', ' + addresses[i * 2],
+        categoryIds: this.categories.slice(0, i % 10).map(j => {
+          return j.id.toString();
         }),
-        reviews: Math.ceil(Math.random() & 100),
+        reviews: Math.ceil(Math.random() * 100),
         rating: Math.ceil(Math.random() * 5)
-      })
+      });
     }
   }
 
@@ -104,6 +110,41 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
       this.cardDisplayType = 'vertical';
     } else {
       this.cardDisplayType = 'horizontal';
+    }
+  }
+
+  toggleListingType() {
+    if (this.listingType === 'regular') {
+      this.listingType = 'top';
+    } else {
+      this.listingType = 'regular';
+    }
+  }
+
+  toggleScreenSectionsDisplay(currentScreen: string) {
+    if (!this.toggleScreenType.includes(this.screenType)) {
+      return;
+    }
+
+    if (currentScreen === 'filter' && this.collapseDisplayVars.filter) {
+
+      this.collapseDisplayVars = {
+        filter: false,
+        map: true,
+      };
+
+    } else if (currentScreen === 'map' && this.collapseDisplayVars.map) {
+
+      this.collapseDisplayVars = {
+        filter: true,
+        map: false,
+      };
+
+    } else {
+      this.collapseDisplayVars = {
+        filter: true,
+        map: true
+      };
     }
   }
 

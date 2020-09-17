@@ -169,7 +169,7 @@ html, body {
 }
 
 .header-bottom-bar {
-  border: 1px solid ;
+  border-top: 2px solid;
   width: 150px;
 }
 
@@ -184,7 +184,7 @@ html, body {
   color: #fff;
 }
 
-.mat-form-field {
+.mat-form-field, .mat-slider {
   width: 100%;
 }
 

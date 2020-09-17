@@ -11,31 +11,52 @@
   overflow-y: scroll;
 }
 
-.filter-container {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  z-index: 9;
-  background-color: #fff;
+.map-close-btn {
+  position: fixed;
+  top: 72px;
+  right: 15px;
+  height: 42px;
+  width: 42px;
+  z-index: 999;
 }
 
-mat-slider {
-  width: 100%;
+
+.mobile-search-section {
+  max-height: 0px;
+  transition: max-height 0.5s ease-out;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 767px) {
+.mobile-search-section.show {
+  max-height: 100px;
+  transition: max-height 0.5s ease-in;
+}
 
-  .filter-container {
-    padding-top: 0;
-    padding-bottom: 0;
+
+@media screen and (max-width: 991px) {
+  .filter-section, .map-section {
+    display: none;
   }
 
-  .map-mobile-view {
+  .filter-section.show {
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 15px;
     position: fixed;
-    top: 215px;
+    top: 56px;
     left: 0;
-    right: 0;
-    bottom: 0;
+    height: 100vh;
+    background: #fff;
+    z-index: 99;
+  }
+
+  .map-section.show {
+    display: block;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    height: 100vh;
+    background: none;
+    z-index: 99;
   }
 }
-
-

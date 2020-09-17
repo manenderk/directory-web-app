@@ -6,6 +6,7 @@ import { FrontendLeafletMapModule } from '../../frontend-modules/frontend-leafle
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { FrontendBusinessListingCardModule } from '../../frontend-modules/frontend-business-listing-card/frontend-business-listing-card.module';
 import { MatSliderModule } from '@angular/material/slider';
+import { ScrollDirectivesModule } from 'src/app/directives/scroll-directives/scroll-directives.module';
 
 
 const routes: Routes = [
@@ -13,7 +14,7 @@ const routes: Routes = [
     path: '',
     component: FrontendListingComponent
   }
-]
+];
 
 @NgModule({
   declarations: [FrontendListingComponent],
@@ -23,7 +24,8 @@ const routes: Routes = [
     FrontendLeafletMapModule,
     FrontendBusinessListingCardModule,
     NgMultiSelectDropDownModule.forRoot(),
-    MatSliderModule
+    MatSliderModule,
+    ScrollDirectivesModule
   ]
 })
 export class FrontendListingModule { }

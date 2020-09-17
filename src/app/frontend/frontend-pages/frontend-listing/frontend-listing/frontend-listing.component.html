@@ -1,90 +1,93 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-7">
-      <div class="row">
-        <div class="col-md-6 col-lg-8 py-2">
+    <div class="col-lg-7">
+
+      <div class="row py-2 d-flex align-items-center">
+        <div class="col-lg-8 pb-1 pb-lg-0 breadcrumb-section">
           <nav class="mb-1" aria-label="breadcrumb">
             <ol class="breadcrumb my-breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Library</li>
             </ol>
           </nav>
+        </div>
+        <div class="col-lg-4 action-buttons-section d-flex justify-content-between justify-content-lg-end">
+          <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
+            (click)="toggleScreenSectionsDisplay('filter')" >
+            <i class="fa fa-filter" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
+            (click)="toggleScreenSectionsDisplay('map')" >
+            <i class="fa fa-map" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="btn btn-info btn-icon-circle mr-2"
+            (click)="toggleCardDisplayType()" >
+            <i [ngClass]="cardDisplayType === 'horizontal' ? 'fa fa-bars' : 'fa fa-th'" aria-hidden="true"></i>
+          </button>
+          <button class="btn btn-info mr-2" (click)="toggleListingType()">
+            {{listingType === 'regular' ? 'Top Listing' : 'Regular Listing'}}
+          </button>
 
         </div>
-        <div class="col-md-6 col-lg-4 log- py-2">
-          <div class="row align-items-center">
-            <div class="col">
-              <select class="form-control">
-                <option selected>Sort</option>
-                <option>Top Listing</option>
-                <option>Distance</option>
-                <option>Name</option>
-              </select>
-            </div>
-            <div class="col text-right">
-              <button *ngIf="toggleScreenType.includes(screenType)" type="button" class="btn btn-info btn-icon-circle mr-1" (click)="toggleDisplayVars.filter = !toggleDisplayVars.filter" >
-                <i class="fa fa-filter"></i>
-              </button>
-              <button *ngIf="toggleScreenType.includes(screenType)" type="button" class="btn btn-info btn-icon-circle mr-1" (click)="toggleDisplayVars.map = !toggleDisplayVars.map" >
-                <i class="fa fa-map"></i>
-              </button>
-              <button type="button" class="btn btn-info btn-icon-circle mr-1" (click)="toggleCardDisplayType()" >
-                <i [ngClass]="cardDisplayType === 'horizontal' ? 'fa fa-bars' : 'fa fa-th'"></i>
-              </button>
+      </div>
+      <div class="row d-lg-none mobile-search-section" [ngClass]="{'show': listingScrolledUp}">
+        <div class="col pb-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="What are you looking for?">
+            <div class="input-group-append">
+              <span class="input-group-text" ><i class="fa fa-search"></i></span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-4 filter-container">
+        <div class="col-lg-4 filter-section" [ngClass]="{'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.filter}">
           <form>
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Whare are you looking for?">
-                    <div class="input-group-append">
-                      <span class="input-group-text" ><i class="fa fa-search"></i></span>
-                    </div>
-                  </div>
+            <div class="form-group">
+              <select class="form-control custom-select">
+                <option selected>Sort</option>
+                <option>Top Listing</option>
+                <option>Distance</option>
+                <option>Name</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="What are you looking for?">
+                <div class="input-group-append">
+                  <span class="input-group-text" ><i class="fa fa-search"></i></span>
                 </div>
               </div>
-              <div class="col text-right">
-                <button class="btn btn-info">Top Listing</button>
-              </div>
             </div>
-
-            <div [ngClass]="{'hide-element': toggleDisplayVars.filter && toggleScreenType.includes(screenType)}">
-              <div class="form-group">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Location">
-                  <div class="input-group-append">
-                    <span class="input-group-text" ><i class="fa fa-map-marker"></i></span>
-                  </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Location">
+                <div class="input-group-append">
+                  <span class="input-group-text" ><i class="fa fa-map-marker"></i></span>
                 </div>
               </div>
-              <div class="form-group">
-                <select class="form-control custom-select">
-                  <option *ngFor="let category of categories">{{category.name}}</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="distance-range-input" class="my-0">Distance</label><br>
-                <mat-slider
-                thumbLabel
-                tickInterval="1000"
-                min="1"
-                max="10"></mat-slider>
-              </div>
             </div>
-
+            <div class="form-group">
+              <select class="form-control custom-select">
+                <option *ngFor="let category of categories">{{category.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="distance-range-input" class="my-0">Distance</label><br>
+              <mat-slider
+              thumbLabel
+              tickInterval="1000"
+              min="1"
+              max="10"></mat-slider>
+            </div>
+            <div class="text-right d-lg-none" >
+              <button type="button" class="btn btn-default mr-2" (click)="toggleScreenSectionsDisplay('filter')">Cancel</button>
+              <button type="submit" class="btn btn-info">Done</button>
+            </div>
           </form>
         </div>
-
-
-        <div class="col-md-8 py-3 bg-grey-1 listing-grid">
-
+        <div class="col-lg-8 py-2 bg-grey-1 listing-grid" appMonitorScroll (scrolledUp)="listingScrolledUp = true" (scrolledDown)="listingScrolledUp = false">
           <div class="row">
             <ng-container *ngFor="let business of businesses; let odd = odd;">
               <div
@@ -98,17 +101,17 @@
             </ng-container>
 
           </div>
-
-
         </div>
       </div>
-    </div>
-    <div class="col-md-5 px-0">
-      <div class="map-mobile-view" [ngClass]="{'hide-element': this.toggleDisplayVars.map && toggleScreenType.includes(screenType) }" >
-        <app-frontend-listing-map></app-frontend-listing-map>
-      </div>
 
+
+    </div>
+
+    <div class="col-lg-5 px-0 map-section" [ngClass]="{'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.map}">
+      <button class="btn btn-info btn-icon-circle d-lg-none map-close-btn" (click)="toggleScreenSectionsDisplay('map')">
+        <i class="fa fa-times"></i>
+      </button>
+      <app-frontend-listing-map></app-frontend-listing-map>
     </div>
   </div>
-
 </div>
