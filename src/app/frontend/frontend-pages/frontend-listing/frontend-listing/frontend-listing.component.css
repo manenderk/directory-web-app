@@ -8,7 +8,7 @@
 
 .listing-grid {
   max-height: calc(100vh - 56px - 68px);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .map-close-btn {
@@ -21,19 +21,25 @@
 }
 
 
-.mobile-search-section {
+.top-section {
   max-height: 0px;
   transition: max-height 0.5s ease-out;
   overflow: hidden;
 }
 
-.mobile-search-section.show {
-  max-height: 100px;
+.top-section.show {
+  max-height: 300px;
   transition: max-height 0.5s ease-in;
 }
 
 
 @media screen and (max-width: 991px) {
+
+  .listing-grid {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
   .filter-section, .map-section {
     display: none;
   }

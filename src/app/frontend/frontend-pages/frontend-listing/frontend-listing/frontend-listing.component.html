@@ -2,44 +2,49 @@
   <div class="row">
     <div class="col-lg-7">
 
-      <div class="row py-2 d-flex align-items-center">
-        <div class="col-lg-8 pb-1 pb-lg-0 breadcrumb-section">
-          <nav class="mb-1" aria-label="breadcrumb">
-            <ol class="breadcrumb my-breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Library</li>
-            </ol>
-          </nav>
-        </div>
-        <div class="col-lg-4 action-buttons-section d-flex justify-content-between justify-content-lg-end">
-          <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
-            (click)="toggleScreenSectionsDisplay('filter')" >
-            <i class="fa fa-filter" aria-hidden="true"></i>
-          </button>
-          <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
-            (click)="toggleScreenSectionsDisplay('map')" >
-            <i class="fa fa-map" aria-hidden="true"></i>
-          </button>
-          <button type="button" class="btn btn-info btn-icon-circle mr-2"
-            (click)="toggleCardDisplayType()" >
-            <i [ngClass]="cardDisplayType === 'horizontal' ? 'fa fa-bars' : 'fa fa-th'" aria-hidden="true"></i>
-          </button>
-          <button class="btn btn-info mr-2" (click)="toggleListingType()">
-            {{listingType === 'regular' ? 'Top Listing' : 'Regular Listing'}}
-          </button>
+      <div class="top-section" [ngClass]="{'show': listingScrolledUp}">
+        <div class="row py-2 d-flex align-items-center">
+          <div class="col-lg-8 pb-1 pb-lg-0 breadcrumb-section">
+            <nav class="mb-1" aria-label="breadcrumb">
+              <ol class="breadcrumb my-breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Library</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-lg-4 action-buttons-section d-flex justify-content-between justify-content-lg-end">
+            <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
+              (click)="toggleScreenSectionsDisplay('filter')" >
+              <i class="fa fa-filter" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
+              (click)="toggleScreenSectionsDisplay('map')" >
+              <i class="fa fa-map" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-info btn-icon-circle mr-2"
+              (click)="toggleCardDisplayType()" >
+              <i [ngClass]="cardDisplayType === 'horizontal' ? 'fa fa-bars' : 'fa fa-th'" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-info mr-2" (click)="toggleListingType()">
+              {{listingType === 'regular' ? 'Top Listing' : 'Regular Listing'}}
+            </button>
 
+          </div>
         </div>
-      </div>
-      <div class="row d-lg-none mobile-search-section" [ngClass]="{'show': listingScrolledUp}">
-        <div class="col pb-2">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="What are you looking for?">
-            <div class="input-group-append">
-              <span class="input-group-text" ><i class="fa fa-search"></i></span>
+
+        <div class="row d-lg-none">
+          <div class="col pb-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="What are you looking for?">
+              <div class="input-group-append">
+                <span class="input-group-text" ><i class="fa fa-search"></i></span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+
 
       <div class="row">
         <div class="col-lg-4 filter-section" [ngClass]="{'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.filter}">
