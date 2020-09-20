@@ -1,6 +1,58 @@
-@media screen and (max-width: 767px) {
-  .header-bottom-bar {
-      margin-left: 0;
-      margin-right: 0;
-  }
+.view-more-img-overlay {
+  background-color: rgba(3,3,3,0.5);
+  color: #fff !important;
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  padding-top: calc(50% - 15px);
+}
+
+.user-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.team-member-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.section-seperator {
+  margin-top: 0;
+  margin-bottom: 0;
+  border-top: 1px solid #607D8B;
+}
+
+.img-gallary {
+  line-height: 0;
+}
+
+.img-gallary .gal-block {
+  display: inline-block;
+  padding: 2px;
+  position: relative;
+}
+
+.img-gallary .one {
+  width: 70%;
+  height: calc(100vw * 0.30);
+}
+
+.img-gallary .two {
+  width: 30%;
+  height: calc(100vw * 0.30);
+}
+
+.img-gallary .two-child {
+  width: 50%;
+  height: calc(100vw * 0.15);
+}
+
+.hours-table td {
+  border: none;
+  padding: 0;
 }

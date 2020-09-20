@@ -1,219 +1,247 @@
-<div class="container">
-  <div class="px-15px">
-
-    <div class="row">
-      <div class="col-8 p-1">
-        <img class="img-fluid" *ngIf="images[0]" [src]="images[0]">
+<!-- TOP GALLERY -->
+<div class="">
+  <div class="img-gallary">
+    <div class="one gal-block">
+      <app-frontend-div-background [imageUrl]="images[0]"></app-frontend-div-background>
+    </div>
+    <div class="two gal-block">
+      <div class="two-child gal-block">
+        <app-frontend-div-background [imageUrl]="images[1]"></app-frontend-div-background>
       </div>
-      <div class="col-4">
-        <div class="row">
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[1]" [src]="images[1]">
-          </div>
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[2]" [src]="images[2]">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[3]" [src]="images[3]">
-          </div>
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[4]" [src]="images[4]">
-          </div>
-        </div>
+      <div class="two-child gal-block">
+        <app-frontend-div-background [imageUrl]="images[2]"></app-frontend-div-background>
+      </div>
+      <div class="two-child gal-block">
+        <app-frontend-div-background [imageUrl]="images[3]"></app-frontend-div-background>
+      </div>
+      <div class="two-child gal-block">
+        <a class="view-more-img-overlay link">
+          <h5 class="text-center">View More</h5>
+        </a>
+        <app-frontend-div-background [imageUrl]="images[4]"></app-frontend-div-background>
       </div>
     </div>
-
   </div>
 
 </div>
-<div class="container my-3">
-  <div class="row">
-    <div class="col-md-8" *ngIf="business">
 
-      <!-- BUSINESS TITLE-->
-      <div class="row my-2">
-        <div class="col-lg-6">
-          <h2 class="color-1">{{business.name}}</h2>
-          <div class="header-bottom-bar color-2 my-1"></div>
-        </div>
-        <div class="col-lg-6 align-items-center">
-          <div class="text-lg-right text-muted">
-            <rating [(ngModel)]="business.rating" [max]="5" [readonly]="true"></rating> &nbsp; ({{business.reviews}}
-            Reviews)
-          </div>
-        </div>
+<section class="py-4 bg-grey-1">
+  <div class="container">
+    <!--BUSINESS AND OWNER DETAILS-->
+    <div class="row">
+      <div class="col-12 mb-4 text-center">
+        <h2 class="mb-1 f-color-primary">{{business?.name}}</h2>
+        <div class="header-bottom-bar mb-1 mx-auto b-color-primary-accent"></div>
+        <p class="text-muted mb-0">
+          <rating [(ngModel)]="business.rating" [max]="5" [readonly]="true"></rating> &nbsp; ({{business.reviews}} Reviews)
+        </p>
       </div>
-
-      <!-- BUSINESS AND OWNER DETAILS-->
-      <div class="card my-2">
-        <div class="row no-gutters">
-          <div class="col-3">
-            <img *ngIf="images[1]" [src]="images[1]" class="card-img" alt="...">
-          </div>
-          <div class="col-9">
-            <div class="card-body p-2">
-              <h5 class="card-title">Owner Name</h5>
-              <p class="card-text mb-1">Business Address</p>
-              <div class="d-flex flex-wrap justify-content-around">
-                <div>
-                  <a href="tel:9999999999"><i class="fa fa-phone"></i> 9999999999</a>
-                </div>
-                <div>
-                  <a href="https://example.com" target="_blank"><i class="fa fa-globe"></i> example.com</a>
-                </div>
-                <div>
-                  <a href="maps.google.com"><i class="fa fa-map-marker"></i> Directions</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="col-12 text-center">
+        <img class="user-avatar  mb-3" src="assets/demo/user-avatar.jpg">
+        <h4 class="mb-1 f-color-secondary">
+          Michael H Peebles
+        </h4>
+        <p class="mb-1">
+          657  Braxton Street, WILLIAMSTOWN, Ohio, 4587
+        </p>
+        <p class="mb-1">
+          <button type="button" class="btn btn-info m-1"><i class="fa fa-phone" aria-hidden="true"></i> 815-466-1915</button>
+          <button type="button" class="btn btn-info m-1"><i class="fa fa-envelope" aria-hidden="true"></i> 815-466-1915</button>
+          <button type="button" class="btn btn-info m-1"><i class="fa fa-location-arrow" aria-hidden="true"></i> Directions</button>
+          <button type="button" class="btn btn-info m-1"><i class="fa fa-globe" aria-hidden="true"></i> Website</button>
+          <button type="button" class="btn btn-info m-1"><i class="fa fa-clock-o" aria-hidden="true"></i> Opens util 5:00 PM</button>
+        </p>
+        <p class="mt-3 mb-0">
+          {{business.description}}
+        </p>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="my-2">
-        {{business.description}}
-      </div>
-
-      <hr>
-
-      <div class="my-2">
-        <h5 class="color-2">Products & Services</h5>
+<section class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Products & Services
+        </h4>
+        <div class="header-bottom-bar mb-3 b-color-primary-accent"></div>
         <div class="row">
-          <div class="col-md-6 mb-3">
+          <div class="col-sm-6 mb-3">
             <i class="fa fa-check"></i> Friendly workspace
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-sm-6 mb-3">
             <i class="fa fa-check"></i> Friendly workspace
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-sm-6 mb-3">
             <i class="fa fa-check"></i> Friendly workspace
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-sm-6 mb-3">
             <i class="fa fa-check"></i> Friendly workspace
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-sm-6 mb-3">
             <i class="fa fa-check"></i> Friendly workspace
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-sm-6 mb-3">
             <i class="fa fa-check"></i> Friendly workspace
           </div>
         </div>
         <div>
           <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfigs.productsAndServices">
-            <div ngxSlickItem class="slide" *ngFor="let img of images">
+            <div ngxSlickItem class="slide" *ngFor="let img of productsServicesImages">
               <img [src]="img" class="img-fluid">
             </div>
           </ngx-slick-carousel>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <hr>
-
-      <div class="my-2">
-        <h5 class="color-2">Specialties</h5>
-        <div class="mb-1">
-          <i class="fa fa-star"></i> Comprehensive Inspection, Diagnosis &amp; Repair,
+<section class="py-4 bg-grey-1">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Specialities
+        </h4>
+        <div class="header-bottom-bar mb-3 b-color-primary-accent"></div>
+        <div class="row">
+          <div class="col-sm-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-sm-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-sm-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-sm-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-sm-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
+          <div class="col-sm-6 mb-3">
+            <i class="fa fa-check"></i> Friendly workspace
+          </div>
         </div>
-        <div class="mb-1">
-          <i class="fa fa-star"></i> Preventative &amp; Scheduled Maintenance,
-        </div>
-        <div class="mb-1">
-          <i class="fa fa-star"></i> Reliable Auto Repairs on European Vehicles
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="my-2">
-        <h5 class="color-2">Team</h5>
-        <app-frontend-team-members [teamMembers]="teamMembers"></app-frontend-team-members>
-      </div>
-
-      <div id="business-map" class="my-2">
-        <h5 class="color-2">Location</h5>
-        <app-frontend-single-point-map></app-frontend-single-point-map>
       </div>
     </div>
+  </div>
+</section>
 
-
-
-
-    <div class="col-md-4 pt-3 bg-grey-1  px-sm-2">
-
-      <div class="card mb-3 d-none d-md-block d-lg-block d-xl-block">
-        <div class="card-body">
-          <div class="form-group pb-0 mb-0">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Whare are you looking for?">
-              <div class="input-group-append">
-                <span class="input-group-text"><i class="fa fa-search"></i></span>
-              </div>
-            </div>
-          </div>
+<section class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 mb-4 mb-sm-none">
+        <h4 class="f-color-primary">
+          Opening Hours
+        </h4>
+        <div class="header-bottom-bar mb-3 b-color-primary-accent"></div>
+        <div class="table-responsive">
+          <table class="table hours-table">
+            <tr class="mb-2">
+              <td>Mondary</td><td>9AM - 5PM</td>
+            </tr>
+            <tr class="mb-2">
+              <td>Tuesday</td><td>9AM - 5PM</td>
+            </tr>
+            <tr class="mb-2">
+              <td>Wednesday</td><td>9AM - 5PM</td>
+            </tr>
+            <tr class="mb-2">
+              <td>Thursday</td><td>9AM - 5PM</td>
+            </tr>
+            <tr class="mb-2">
+              <td>Friday</td><td>9AM - 5PM</td>
+            </tr>
+            <tr class="mb-2">
+              <td>Saturday</td><td>9AM - 5PM</td>
+            </tr>
+            <tr class="mb-2">
+              <td>Sunday</td><td>Closed</td>
+            </tr>
+          </table>
         </div>
       </div>
 
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title color-2">Opening Hours</h5>
-          <hr>
-          <ul class="custom-list-1">
-            <li>Monday <span>9 AM - 5 PM</span></li>
-            <li>Tuesday <span>9 AM - 5 PM</span></li>
-            <li>Wednesday <span>9 AM - 5 PM</span></li>
-            <li>Thursday <span>9 AM - 5 PM</span></li>
-            <li>Friday <span>9 AM - 5 PM</span></li>
-            <li>Saturday <span>9 AM - 3 PM</span></li>
-            <li>Sunday <span>Closed</span></li>
-          </ul>
+      <div class="col-sm-6">
+        <h4 class="f-color-primary">
+          Languages Spoken
+        </h4>
+        <div class="header-bottom-bar mb-3 b-color-primary-accent"></div>
+        <div class="table-responsive">
+          <table class="table hours-table">
+            <tr class="mb-2">
+              <td>English</td>
+            </tr>
+            <tr class="mb-2">
+              <td>Hindi</td>
+            </tr>
+            <tr class="mb-2">
+              <td>Punjabi</td>
+            </tr>
+          </table>
         </div>
       </div>
-
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title color-2">Contact</h5>
-          <hr>
-          <ul class="custom-list-1">
-            <li><i class="fa fa-phone"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="tel:123123123"
-                target="_blank">123-123-123</a></li>
-            <li><i class="fa fa-envelope"></i>&nbsp;&nbsp;<a class="color-default no-decoration"
-                href="mailto:someone@example.com" target="_blank">someone@example.com</a></li>
-            <li><i class="fa fa-globe"></i>&nbsp;&nbsp;<a class="color-default no-decoration" href="http://example.com/"
-                target="_blank">example.com</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title color-2">Payment Methods</h5>
-          <hr>
-          <div>
-            <img *ngIf="paymentMethods.visa" class="m-2" src="assets/payment-methods/visa.png">
-            <img *ngIf="paymentMethods.mastercard" class="m-2" src="assets/payment-methods/mastercard.png">
-            <img *ngIf="paymentMethods.amex" class="m-2" src="assets/payment-methods/american-express.png">
-            <img *ngIf="paymentMethods.paypal" class="m-2" src="assets/payment-methods/paypal.png">
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title color-2">Language Spoken</h5>
-          <hr>
-          <ul class="custom-list-1">
-            <li>English</li>
-            <li>Hindi</li>
-            <li>Punjabi</li>
-          </ul>
-        </div>
-      </div>
-
-
-
-
 
     </div>
   </div>
-</div>
+</section>
+
+<section class="py-4 bg-grey-1">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Payment Methods
+        </h4>
+        <div class="header-bottom-bar mb-1 b-color-primary-accent"></div>
+        <div>
+          <img *ngIf="paymentMethods.visa" class="m-2" src="assets/payment-methods/visa.png">
+          <img *ngIf="paymentMethods.mastercard" class="m-2" src="assets/payment-methods/mastercard.png">
+          <img *ngIf="paymentMethods.amex" class="m-2" src="assets/payment-methods/american-express.png">
+          <img *ngIf="paymentMethods.paypal" class="m-2" src="assets/payment-methods/paypal.png">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Team Members
+        </h4>
+        <div class="header-bottom-bar mb-3 b-color-primary-accent"></div>
+        <div class="row">
+          <div class="col-sm-4 mt-3 text-center">
+            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
+            <h5 class="mb-1 f-color-secondary">
+              Michael H Peebles
+            </h5>
+          </div>
+          <div class="col-sm-4 mt-3 text-center">
+            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
+            <h5 class="mb-1 f-color-secondary">
+              Michael H Peebles
+            </h5>
+          </div>
+          <div class="col-sm-4 mt-3 text-center">
+            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
+            <h5 class="mb-1 f-color-secondary">
+              Michael H Peebles
+            </h5>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

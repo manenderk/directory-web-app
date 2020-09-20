@@ -44,6 +44,10 @@ html, body {
   --c-color-primary-accent: #1976d2;
 }
 
+h1, h2, h3, h4, h5 {
+  font-weight: 400;
+}
+
 .fw-light, .fw-300 {
   font-weight: 300;
 }
@@ -71,7 +75,6 @@ html, body {
 .b-color-primary-accent {
   border-color: var(--c-color-primary-accent) !important;
 }
-
 
 .no-decoration, .no-decoration:hover {
   text-decoration: none;
@@ -154,30 +157,9 @@ html, body {
   height: 42px;
 }
 
-.custom-list-1 {
-  list-style: none;
-  padding-left: 0;
-}
-
-.custom-list-1 li {
-  display: block;
-  padding: 6px 8px;
-}
-
-.custom-list-1 span {
-  float: right;
-}
-
 .header-bottom-bar {
   border-top: 2px solid;
   width: 150px;
-}
-
-
-.hide-element {
-  height: 0;
-  width: 0;
-  visibility: hidden;
 }
 
 .text-white {

@@ -19,6 +19,8 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
 
   images: string[] = [];
 
+  productsServicesImages: string[] = [];
+
   paymentMethods: AvailablePaymentMethods = {
     mastercard: true,
     visa: true,
@@ -42,6 +44,7 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
     this.setSliderConfig();
     this.setBusinessImages();
     this.setBusinessData();
+    this.setProductsServicesImages();
     this.setTeamMmebers();
   }
 
@@ -50,11 +53,11 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
   }
 
   setBusinessImages(): void {
-    this.images.push('https://picsum.photos/id/237/800/600');
+    this.images.push('https://picsum.photos/id/1067/800/400');
     this.images.push('https://picsum.photos/id/1000/300');
     this.images.push('https://picsum.photos/id/1008/300');
-    this.images.push('https://picsum.photos/id/101/300');
-    this.images.push('https://picsum.photos/id/104/300');
+    this.images.push('https://picsum.photos/id/1082/300');
+    this.images.push('https://picsum.photos/id/160/300');
   }
 
   setBusinessData() {
@@ -69,6 +72,16 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
       reviews: 20,
       rating: 5
     };
+  }
+
+  setProductsServicesImages() {
+    this.productsServicesImages = [
+      'https://picsum.photos/id/1000/400/300',
+      'https://picsum.photos/id/101/400/300',
+      'https://picsum.photos/id/1026/400/300',
+      'https://picsum.photos/id/103/400/300',
+      'https://picsum.photos/id/106/400/300',
+    ];
   }
 
   setSliderConfig() {
