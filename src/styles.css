@@ -190,6 +190,21 @@ h1, h2, h3, h4, h5 {
   text-overflow: ellipsis;
 }
 
+hr {
+  margin: 0;
+}
+
+.list-no-decoration {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.team-member-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
 
 /************************/
 /*     MEDIA QUERIES    */

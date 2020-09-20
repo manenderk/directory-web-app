@@ -1,279 +1,216 @@
-<div class="container">
-  <div class="px-15px">
-
+<section class="p-1">
+  <div class="container">
     <div class="row">
-      <div class="col-8 p-1">
-        <img class="img-fluid" *ngIf="images[0]" [src]="images[0]">
+      <div class="col">
+        <img class="img-fluid" [src]="images[0]">
       </div>
-      <div class="col-4">
-        <div class="row">
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[1]" [src]="images[1]">
-          </div>
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[2]" [src]="images[2]">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[3]" [src]="images[3]">
-          </div>
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[4]" [src]="images[4]">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[1]" [src]="images[1]">
-          </div>
-          <div class="col-6 p-1">
-            <img class="img-fluid" *ngIf="images[2]" [src]="images[2]">
-          </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="mb-1 f-color-primary">{{theEvent?.name}}</h2>
+        <div class="header-bottom-bar mb-1 mx-auto b-color-primary-accent"></div>
+        <p class="mb-2"><i class="fa fa-calendar"></i> {{theEvent?.date | date}}</p>
+        <p class="mb-1"><i class="fa fa-map-marker"></i> 657  Braxton Street, WILLIAMSTOWN, Ohio, 4587</p>
+        <p class="mb-1">{{theEvent.priceRange}}</p>
+        <div>
+          <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/facebook.png"></a>
+          <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/instagram.png"></a>
+          <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/twitter.png"></a>
+          <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/youtube.png"></a>
         </div>
       </div>
     </div>
-
   </div>
+</section>
 
-</div>
+<section class="py-4">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Presented By
+        </h4>
+        <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
+        <div class="d-flex flex-wrap justify-content-center">
+          <ng-container *ngFor="let image of brandImages">
+            <img [src]="image" class="brand-image align-self-center mx-2">
+          </ng-container>
+        </div>
 
-<div class="container my-3">
-  <div class="row">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col">
+        <h4 class="f-color-primary">
+          In Association With
+        </h4>
+        <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
+        <div class="d-flex flex-wrap justify-content-center">
+          <ng-container *ngFor="let image of brandImages">
+            <img [src]="image" class="brand-image align-self-center mx-2">
+          </ng-container>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
 
-    <div class="col-md-8">
-
-      <!-- EVENT TITLE-->
-      <div class="row my-2">
-        <div class="col">
-          <h2 class="color-1">{{theEvent.name}}</h2>
-          <div class="header-bottom-bar color-2 my-1"></div>
-          <div class="row">
-            <div class="col-sm-4 ">
-              <h5 class="color-2 my-2"><i class="fa fa-map-marker"></i> {{theEvent.location}}</h5>
-            </div>
-            <div class="col-sm-4 ">
-              <h5 class="color-2 my-2"><i class="fa fa-calendar"></i> {{theEvent.date | date}}</h5>
-            </div>
-            <div class="col-sm-4 ">
-              <h5 class="color-2 my-2">{{theEvent.priceRange}}</h5>
-            </div>
+<section class="py-4">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Pricing
+        </h4>
+        <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
+        <div class="row">
+          <div class="col-sm-4 mb-2">
+            <h5 class="f-color-secondary mb-1">Package 1</h5>
+            <h5 class="mb-1">$100</h5>
+            <ul class="list-no-decoration">
+              <li>Feature 1</li>
+              <li>Feature 2</li>
+              <li>Feature 3</li>
+              <li>Feature 4</li>
+            </ul>
           </div>
-
-
-
-          <div class="my-3">
-            <a class="mr-2" href=""><img class="social-icon" src="assets/social-icons/facebook.png"></a>
-            <a class="mr-2" href=""><img class="social-icon" src="assets/social-icons/instagram.png"></a>
-            <a class="mr-2" href=""><img class="social-icon" src="assets/social-icons/twitter.png"></a>
-            <a class="mr-2" href=""><img class="social-icon" src="assets/social-icons/youtube.png"></a>
+          <div class="col-sm-4 mb-2">
+            <h5 class="f-color-secondary mb-1">Package 2</h5>
+            <h5 class="mb-1">$300</h5>
+            <ul class="list-no-decoration">
+              <li>Feature 1</li>
+              <li>Feature 2</li>
+              <li>Feature 3</li>
+              <li>Feature 4</li>
+            </ul>
+          </div>
+          <div class="col-sm-4 mb-2">
+            <h5 class="f-color-secondary mb-1">Package 3</h5>
+            <h5 class="mb-1">$500</h5>
+            <ul class="list-no-decoration">
+              <li>Feature 1</li>
+              <li>Feature 2</li>
+              <li>Feature 3</li>
+              <li>Feature 4</li>
+            </ul>
           </div>
         </div>
 
       </div>
+    </div>
+  </div>
+</section>
 
-      <hr>
-
-      <div class="row my-2">
-        <div class="col">
-          <h2>Presented By</h2>
-          <div class="header-bottom-bar color-2 my-1"></div>
-          <div class="my-3">
-            <div class="row">
-              <div class="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2 my-15px d-flex" *ngFor="let image of brandImages">
-                <img [src]="image" class="img-fluid align-self-center">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="row my-2">
-        <div class="col">
-          <h2>In Association With</h2>
-          <div class="header-bottom-bar color-2 my-1"></div>
-          <div class="my-3">
-            <div class="row">
-              <div class="col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2 my-15px d-flex" *ngFor="let image of brandImages">
-                <img [src]="image" class="img-fluid align-self-center">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="row my-2">
-        <div class="col">
-          <h2>Pricing</h2>
-          <div class="header-bottom-bar color-2 my-1"></div>
-          <div class="my-3">
-            <div class="row">
-              <!-- Free Tier -->
-              <div class="col-sm-4 text-center ">
-                <h4>Package 1</h4>
-                <hr>
-                <h5>$100</h5>
-                <hr>
-                <ul class="list-style-none p-0">
-                  <li><span></span>Single User</li>
-                  <li><span></span>5GB Storage</li>
-                  <li><span></span>Unlimited Public Projects</li>
-                  <li><span></span>Community Access</li>
-                </ul>
-
-              </div>
-
-              <div class="col-sm-4 text-center ">
-                <h4>Package 2</h4>
-                <hr>
-                <h5>$300</h5>
-                <hr>
-                <ul class="list-style-none p-0">
-                  <li><span></span>Single User</li>
-                  <li><span></span>5GB Storage</li>
-                  <li><span></span>Unlimited Public Projects</li>
-                  <li><span></span>Community Access</li>
-                </ul>
-
-              </div>
-
-              <div class="col-sm-4 text-center ">
-                <h4>Package 3</h4>
-                <hr>
-                <h5>$500</h5>
-                <hr>
-                <ul class="list-style-none p-0">
-                  <li><span></span>Single User</li>
-                  <li><span></span>5GB Storage</li>
-                  <li><span></span>Unlimited Public Projects</li>
-                  <li><span></span>Community Access</li>
-                </ul>
-
-              </div>
-
-            </div>
-          </div>
-        </div>
+<section class="py-4">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Tickets Available At
+        </h4>
+        <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
+        <ul class="list-no-decoration">
+          <li>Address 1</li>
+          <li>Address 2</li>
+          <li>Address 3</li>
+        </ul>
 
       </div>
+    </div>
+  </div>
+</section>
 
-      <hr>
-
-      <div class="row my-2">
-        <div class="col">
-          <h2>Details</h2>
-          <div class="header-bottom-bar color-2 my-1"></div>
-          <div class="my-3">
-            {{theEvent.description}}
+<section class="py-4">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Contact Details
+        </h4>
+        <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
+        <div class="row">
+          <div class="col-sm-4 mt-3 text-center">
+            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
+            <h5 class="mb-0 f-color-secondary">
+              Michael H Peebles
+            </h5>
+            <p class="mb-0">someone@example.com</p>
+            <p class="mb-0">815-466-1915</p>
+          </div>
+          <div class="col-sm-4 mt-3 text-center">
+            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
+            <h5 class="mb-0 f-color-secondary">
+              Michael H Peebles
+            </h5>
+            <p class="mb-0">someone@example.com</p>
+            <p class="mb-0">815-466-1915</p>
+          </div>
+          <div class="col-sm-4 mt-3 text-center">
+            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
+            <h5 class="mb-0 f-color-secondary">
+              Michael H Peebles
+            </h5>
+            <p class="mb-0">someone@example.com</p>
+            <p class="mb-0">815-466-1915</p>
           </div>
 
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-
-      <div class="row my-2">
-        <div class="col">
-          <h2>Sponsors</h2>
-          <div class="header-bottom-bar color-2 my-1"></div>
-          <div class="my-3">
-            <div class="row">
-              <div class="col-4 col-sm-4 col-md-3 col-lg-2 col-xl-2 my-15px d-flex" *ngFor="let image of brandImages">
-                <img [src]="image" class="img-fluid align-self-center">
-              </div>
-            </div>
-          </div>
-        </div>
+<section class="py-4">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Event Details
+        </h4>
+        <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
+        <p class="mb-0">{{theEvent?.description}}</p>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div id="business-map" class="my-2">
-        <h5 class="color-2">Location</h5>
+<section class="py-4">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col">
+        <h4 class="f-color-primary">
+          Sponsors
+        </h4>
+        <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
+        <div class="d-flex flex-wrap justify-content-center">
+          <ng-container *ngFor="let image of brandImages">
+            <img [src]="image" class="brand-image align-self-center mx-2">
+          </ng-container>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col">
         <app-frontend-single-point-map></app-frontend-single-point-map>
       </div>
     </div>
-
-
-
-
-    <div class="col-md-4 pt-3 bg-grey-1  px-sm-2">
-
-      <div class="card mb-3 d-none d-md-block d-lg-block d-xl-block">
-        <div class="card-body">
-          <div class="form-group pb-0 mb-0">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Whare are you looking for?">
-              <div class="input-group-append">
-                <span class="input-group-text"><i class="fa fa-search"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title color-2">Tickets Available At</h5>
-          <hr>
-          <ul class="custom-list-1">
-            <li>Address 1</li>
-            <li>Address 2</li>
-            <li>Address 3</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title color-2">Contact</h5>
-          <hr>
-
-          <div class="row no-gutter my-2">
-            <div class="col-4">
-              <img *ngIf="images[1]" [src]="images[1]" class="img-fluid" alt="...">
-            </div>
-            <div class="col-8">
-
-              <h5 class="card-title">Contact Name</h5>
-              <p class="card-text mb-1">example@someaddress.com</p>
-              <p class="card-text mb-1">999999</p>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    <!--   <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title color-2">Payment Methods</h5>
-          <hr>
-          <div>
-            <img *ngIf="paymentMethods.visa" class="m-2" src="assets/payment-methods/visa.png">
-            <img *ngIf="paymentMethods.mastercard" class="m-2" src="assets/payment-methods/mastercard.png">
-            <img *ngIf="paymentMethods.amex" class="m-2" src="assets/payment-methods/american-express.png">
-            <img *ngIf="paymentMethods.paypal" class="m-2" src="assets/payment-methods/paypal.png">
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title color-2">Language Spoken</h5>
-          <hr>
-          <ul class="custom-list-1">
-            <li>English</li>
-            <li>Hindi</li>
-            <li>Punjabi</li>
-          </ul>
-        </div>
-      </div> -->
-
-
-
-
-
-    </div>
   </div>
-</div>
+</section>

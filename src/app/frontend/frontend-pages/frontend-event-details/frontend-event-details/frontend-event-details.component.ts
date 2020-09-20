@@ -28,7 +28,7 @@ export class FrontendEventDetailsComponent implements OnInit {
 
 
   setEventImages(): void {
-    this.images.push('https://picsum.photos/id/237/800/600');
+    this.images.push('https://picsum.photos/id/122/1200/400');
     this.images.push('https://picsum.photos/id/1000/300');
     this.images.push('https://picsum.photos/id/1008/300');
     this.images.push('https://picsum.photos/id/101/300');
