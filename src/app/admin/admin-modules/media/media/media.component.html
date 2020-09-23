@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-9">
+    <h3>Media</h3>
+    <image-cropper
+      [imageChangedEvent]="imageChangeEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="currentAspectRatio"
+      format="jpg"
+      (imageCropped)="imageCropped($event)"
+      (loadImageFailed)="imageLoadingFailed()"
+    ></image-cropper>
+    <div class="action-row text-center" *ngIf="imageFile.croppedImageAsBase64">
+      <select class="form-control" [(ngModel)]="currentAspectRatio" >
+        <option>Select Image Type</option>
+        <option *ngFor="let item of imageDataService.aspectRatios" [value]="item.ratio" >{{item.displayratio}}</option>
+      </select>
+      <button type="button" class="btn btn-primary m-2" (click)="uploadImage()">Upload</button>
+      <button type="button" class="btn btn-primary m-2" (click)="resetCropper()">Cancel</button>
+    </div>
+  </div>
+  <div class="col-md-3 text-center text-md-right">
+    <input type="file" class="d-none" #uploadFile (change)="fileChanged($event)">
+    <button type="button" class="btn btn-primary" (click)="uploadFile.click()">Upload</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 mb-2">
+    <form class="form-inline">
+      <input type="text" class="form-control mr-sm-2" placeholder="File name" name="fileName" [(ngModel)]="search.name">
+      <select class="form-control mr-sm-2" name="ratio" [(ngModel)]="search.aspectRatio">
+        <option value="">Select</option>
+        <option *ngFor="let ratio of imageDataService.aspectRatios" [value]="ratio.ratio.toString()">{{ratio.displayratio}}</option>
+      </select>
+      <button type="submit" class="btn btn-primary mr-sm-2" (click)="getMedias()">Submit</button>
+      <button type="button" class="btn btn-secondary mr-sm-2" (click)="clearSearch()">Clear</button>
+    </form>
+  </div>
+  <div class="col-12">
+    <ng-container *ngFor="let media of medias">
+      <img *ngIf="imageDataService.imageFileTypes.includes(media.fileType);else showFileThumbnail" [src]="media.path" class="media">
+      <ng-template #showFileThumbnail>
+        <img src="/assets/application/file.png" class="media">
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
+

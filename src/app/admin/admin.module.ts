@@ -12,8 +12,11 @@ const routes: Routes = [
       {
         path: 'category',
         loadChildren: () => import('./admin-modules/category/category.module').then(mod => mod.CategoryModule)
+      },
+      {
+        path: 'media',
+        loadChildren: () => import('./admin-modules/media/media.module').then(mod => mod.MediaModule)
       }
-
     ]
   }
 ];

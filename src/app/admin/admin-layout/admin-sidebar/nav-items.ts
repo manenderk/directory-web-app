@@ -37,5 +37,10 @@ export const navItems: SidebarItem[] = [
         link: `${adminUrl}/events/add`
       }
     ]
+  },
+  {
+    name: 'Media',
+    icon: 'fa fa-file-image-o',
+    link: `${adminUrl}/media/list`
   }
 ];

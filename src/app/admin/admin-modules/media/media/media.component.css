@@ -1,0 +1,12 @@
+.hide {
+  height: 0;
+  width: 0;
+}
+
+.media {
+  max-width: 150px;
+  width: 150px;
+  height: auto;
+  margin: 6px;
+  display: inline-block;
+}
