@@ -6,15 +6,18 @@ import { environment } from 'src/environments/environment';
 import { Media } from 'src/app/models/app/media.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MediaService {
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(
-    private httpClient: HttpClient
-  ) { }
-
-  uploadMedia(file: File, fileBase64: string, fileType: string, fileName: string, ratio: number): Observable<Media> {
+  uploadMedia(
+    file: File,
+    fileBase64: string,
+    fileType: string,
+    fileName: string,
+    ratio: number
+  ): Observable<Media> {
     const formData = new FormData();
     if (file) {
       formData.append('file', file);
@@ -54,7 +57,7 @@ export class MediaService {
 
     return this.httpClient.get(url).pipe(
       map((medias: any[]) => {
-        return medias.map(media => {
+        return medias.map((media) => {
           return this.mapMediaResponseToModel(media);
         });
       })
@@ -68,7 +71,7 @@ export class MediaService {
       fileName: res.fileName,
       ratio: res.ratio,
       path: res.path ? environment.fileHost + res.path : null,
-      created: res.createdAt ? new Date(res.createdAt) : null
+      created: res.createdAt ? new Date(res.createdAt) : null,
     };
     return media;
   }

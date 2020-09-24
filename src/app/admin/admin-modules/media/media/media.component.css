@@ -4,9 +4,8 @@
 }
 
 .media {
+  max-height: 150px;
   max-width: 150px;
-  width: 150px;
-  height: auto;
   margin: 6px;
   display: inline-block;
 }

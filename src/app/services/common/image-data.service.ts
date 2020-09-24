@@ -17,6 +17,10 @@ export class ImageDataService {
     {
       displayratio: '3:5',
       ratio: 0.66
+    },
+    {
+      displayratio: '8:3',
+      ratio: 2.66
     }
   ];
 
@@ -25,6 +29,7 @@ export class ImageDataService {
     businessListing: 1,
     businessDetailsRect: 2.33,
     businessDetailSquare: 1,
+    homepageBanner: 2.66,
     event: 0.66,
     news: 0.66
   };

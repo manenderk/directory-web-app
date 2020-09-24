@@ -9,7 +9,7 @@
       (imageCropped)="imageCropped($event)"
       (loadImageFailed)="imageLoadingFailed()"
     ></image-cropper>
-    <div class="action-row text-center" *ngIf="imageFile.croppedImageAsBase64">
+    <div class="action-row text-center mb-5" *ngIf="imageFile.croppedImageAsBase64">
       <select class="form-control" [(ngModel)]="currentAspectRatio" >
         <option>Select Image Type</option>
         <option *ngFor="let item of imageDataService.aspectRatios" [value]="item.ratio" >{{item.displayratio}}</option>
