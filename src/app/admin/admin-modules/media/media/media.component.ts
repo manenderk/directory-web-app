@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Media } from 'src/app/models/app/media.model';
 import { ImageDataService } from 'src/app/services/common/image-data.service';
@@ -14,16 +13,17 @@ import Swal from 'sweetalert2';
 export class MediaComponent implements OnInit {
 
   imageFile: {
-    croppedImageAsBase64: string,
+    croppedImageEvent: ImageCroppedEvent,
     file: File
   } = {
-    croppedImageAsBase64: null,
+    croppedImageEvent: null,
     file: null
   };
 
   imageChangeEvent: any = '';
 
   currentAspectRatio: number;
+  maintainAspectRatio: number;
 
   medias: Media[];
 
@@ -31,8 +31,6 @@ export class MediaComponent implements OnInit {
     name: '',
     aspectRatio: ''
   };
-
-  mediaSearchFormGroup: FormGroup;
 
   constructor(
     public imageDataService: ImageDataService,
@@ -77,7 +75,7 @@ export class MediaComponent implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
     console.log('CROPPED IMAGE', event);
-    this.imageFile.croppedImageAsBase64 = event.base64;
+    this.imageFile.croppedImageEvent = event;
   }
 
   imageLoadingFailed() {
@@ -86,8 +84,11 @@ export class MediaComponent implements OnInit {
   }
 
   async uploadImage() {
+    if (this.currentAspectRatio.toString() === '0' ) {
+      this.currentAspectRatio = this.imageFile.croppedImageEvent.width / this.imageFile.croppedImageEvent.height;
+    }
     const media = await this.mediaService.uploadMedia(
-      null, this.imageFile.croppedImageAsBase64, this.imageFile.file.type, this.imageFile.file.name, this.currentAspectRatio
+      null, this.imageFile.croppedImageEvent.base64, this.imageFile.file.type, this.imageFile.file.name, this.currentAspectRatio
     ).toPromise();
     this.medias.unshift(media);
     Swal.fire('Success', 'File Uploaded', 'success');
@@ -97,7 +98,7 @@ export class MediaComponent implements OnInit {
   resetCropper() {
     this.imageChangeEvent = '';
     this.imageFile = {
-      croppedImageAsBase64: null,
+      croppedImageEvent: null,
       file: null
     };
   }

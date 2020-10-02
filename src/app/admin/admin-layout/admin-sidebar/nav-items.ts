@@ -42,5 +42,17 @@ export const navItems: SidebarItem[] = [
     name: 'Media',
     icon: 'fa fa-file-image-o',
     link: `${adminUrl}/media/list`
-  }
+  },
+  {
+    name: 'Customizations',
+    icon: 'fa fa-pencil-square-o',
+    link: null,
+    innerItems: [
+      {
+        name: 'Home Slider',
+        icon: 'fa fa-picture-o',
+        link: `${adminUrl}/home-slider/manage`
+      },
+    ]
+  },
 ];

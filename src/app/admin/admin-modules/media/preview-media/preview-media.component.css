@@ -1,0 +1,6 @@
+.media {
+  max-height: 150px;
+  max-width: 150px;
+  margin: 6px;
+  display: inline-block;
+}

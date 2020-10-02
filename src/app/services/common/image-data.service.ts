@@ -21,6 +21,10 @@ export class ImageDataService {
     {
       displayratio: '8:3',
       ratio: 2.66
+    },
+    {
+      displayratio: 'Free',
+      ratio: 0
     }
   ];
 

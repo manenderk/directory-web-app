@@ -16,6 +16,10 @@ const routes: Routes = [
       {
         path: 'media',
         loadChildren: () => import('./admin-modules/media/media.module').then(mod => mod.MediaModule)
+      },
+      {
+        path: 'home-slider',
+        loadChildren: () => import('./admin-modules/home-slider/home-slider.module').then(mod => mod.HomeSliderModule)
       }
     ]
   }

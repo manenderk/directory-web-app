@@ -64,6 +64,15 @@ export class MediaService {
     );
   }
 
+  getMedia(mediaId: string): Observable<Media> {
+    const url = `${environment.apiHost}media/${mediaId}`;
+    return this.httpClient.get(url).pipe(
+      map(mediaResponse => {
+        return this.mapMediaResponseToModel(mediaResponse);
+      })
+    );
+  }
+
   mapMediaResponseToModel(res: any): Media {
     const media: Media = {
       id: res._id,

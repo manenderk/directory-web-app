@@ -1,0 +1,7 @@
+<ng-container *ngIf="media">
+  <img *ngIf="imageDataService.imageFileTypes.includes(media.fileType);else showFileThumbnail" [src]="media.path" class="media">
+  <ng-template #showFileThumbnail>
+    <img src="assets/application/file.png" class="media">
+  </ng-template>
+</ng-container>
+

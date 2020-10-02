@@ -1,0 +1,71 @@
+<div class="row bg-grey-1 py-3">
+  <div class="col-12">
+    <h4 class="mb-0">Homepage Slider Images &nbsp;
+      <button type="button" class="btn btn-primary"
+        (click)="isCollapsedAddSliderSection = !isCollapsedAddSliderSection"
+      >Add Slider Image</button>
+    </h4>
+  </div>
+</div>
+<div class="row add-slider-image-section my-3" *ngIf="!isCollapsedAddSliderSection">
+  <div class="col-12">
+    <form *ngIf="addSliderFormGroup" [formGroup]="addSliderFormGroup">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <label><span class="text-danger">*</span>Link</label>
+          <input type="text" class="form-control" formControlName="link">
+        </div>
+        <div class="col-sm-6 form-group d-flex align-items-center justify-content-center">
+          <div class="form-check text-center">
+            <input class="form-check-input" type="checkbox" id="slider-active" formControlName="active">
+            <label class="form-check-label" for="slider-active">
+              Active
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-6 form-group">
+          <label><span class="text-danger">*</span>Image</label>
+          <app-media-picker (fileSelected)="addImageId($event)"></app-media-picker>
+          <app-preview-media [mediaId]="addSliderFormGroup.value.imageId"></app-preview-media>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-right">
+          <button type="button" class="btn btn-default mx-2" (click)="resetForm()">Cancel</button>
+          <button type="submit" class="btn btn-primary mx-2" (click)="addSlider()">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row py-3">
+  <div class="col">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Link</th>
+          <th>Active</th>
+          <th>Image</th>
+          <th>Created</th>
+          <th>Modified</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let slider of sliders">
+          <td>{{slider.link}}</td>
+          <td>{{slider.active ? 'Yes' : 'No'}}</td>
+          <td>
+            <img *ngIf="slider.imagePath" [src]="slider.imagePath" class="image-thumbnail">
+          </td>
+          <td>{{slider.createdAt | date}}</td>
+          <td>{{slider.modifiedAt | date}}</td>
+          <td>
+            <i class="fa fa-pencil link mr-2"></i>
+            <i class="fa fa-trash link" (click)="deleteSlider(slider.id)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
