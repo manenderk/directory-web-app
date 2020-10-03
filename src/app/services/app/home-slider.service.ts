@@ -26,6 +26,16 @@ export class HomeSliderService {
     );
   }
 
+  updateSlider(slider: HomeSlider): Observable<HomeSlider> {
+    const postData = {...slider, image: slider.image.id};
+    const url = `${environment.apiHost}home-slider/${slider.id}`;
+    return this.httpClient.put(url, postData).pipe(
+      map(res => {
+        return this.mapResponseToSliderModel(res);
+      })
+    );
+  }
+
   getSliders(): Observable<HomeSlider[]> {
     const url = `${environment.apiHost}home-slider`;
     return this.httpClient.get(url).pipe(
@@ -50,7 +60,7 @@ export class HomeSliderService {
       active: res.active,
       image: this.mediaService.mapMediaResponseToModel(res.image),
       createdAt: res.createdAt ? new Date(res.createdAt) : null,
-      modifiedAt: res.modifiedAt ? new Date(res.modifiedAt) : null
+      modifiedAt: res.updatedAt ? new Date(res.updatedAt) : null
     };
     return slider;
   }

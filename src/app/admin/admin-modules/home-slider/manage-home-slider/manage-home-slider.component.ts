@@ -1,7 +1,7 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HomeSlider } from 'src/app/models/app/home-slider.model';
-import { Media } from 'src/app/models/app/media.model';
 import { HomeSliderService } from 'src/app/services/app/home-slider.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class ManageHomeSliderComponent implements OnInit {
     private sliderService: HomeSliderService
   ) { }
 
-  addSliderFormGroup: FormGroup;
+  addEditSliderFormGroup: FormGroup;
 
   sliders: HomeSlider[] = [];
 
@@ -31,25 +31,41 @@ export class ManageHomeSliderComponent implements OnInit {
     this.sliders = await this.sliderService.getSliders().toPromise();
   }
 
-  initializeFormGroup() {
-    this.addSliderFormGroup = new FormGroup({
-      link: new FormControl(null, {
+  initializeFormGroup(slider?: HomeSlider) {
+    this.addEditSliderFormGroup = new FormGroup({
+      id: new FormControl(slider ? slider.id : null),
+      link: new FormControl(slider ? slider.link : null, {
         validators: [Validators.required]
       }),
-      active: new FormControl(false),
-      image: new FormControl(null, {
+      active: new FormControl(slider ? slider.active : false),
+      image: new FormControl(slider ? slider.image : null, {
         validators: [Validators.required]
       })
     });
   }
 
-  async addSlider() {
-    if (this.addSliderFormGroup.valid) {
-      let slider: HomeSlider = {...this.addSliderFormGroup.value};
-      slider = await this.sliderService.addSlider(slider).toPromise();
-      this.sliders.unshift(slider);
+  async saveSlider() {
+    if (this.addEditSliderFormGroup.valid) {
+      let slider: HomeSlider = {...this.addEditSliderFormGroup.value};
+      if (slider.id) {
+        slider = await this.sliderService.updateSlider(slider).toPromise();
+        this.sliders = this.sliders.map(s => {
+          if (s.id === slider.id) {
+            s = slider;
+          }
+          return s;
+        });
+      } else {
+        slider = await this.sliderService.addSlider(slider).toPromise();
+        this.sliders.unshift(slider);
+      }
       this.resetForm();
     }
+  }
+
+  editSlider(slider: HomeSlider) {
+    this.initializeFormGroup(slider);
+    this.isCollapsedAddSliderSection = false;
   }
 
   async deleteSlider(sliderId: string) {
@@ -58,7 +74,7 @@ export class ManageHomeSliderComponent implements OnInit {
   }
 
   resetForm() {
-    this.addSliderFormGroup.reset();
+    this.addEditSliderFormGroup.reset();
     this.isCollapsedAddSliderSection = true;
   }
 

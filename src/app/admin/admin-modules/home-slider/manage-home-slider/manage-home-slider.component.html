@@ -9,7 +9,7 @@
 </div>
 <div class="row add-slider-image-section my-3" *ngIf="!isCollapsedAddSliderSection">
   <div class="col-12">
-    <form *ngIf="addSliderFormGroup" [formGroup]="addSliderFormGroup">
+    <form *ngIf="addEditSliderFormGroup" [formGroup]="addEditSliderFormGroup">
       <div class="row">
         <div class="col-sm-6 form-group">
           <label><span class="text-danger">*</span>Link</label>
@@ -31,8 +31,8 @@
       <div class="row">
         <div class="col text-right">
           <button type="button" class="btn btn-default mx-2" (click)="resetForm()">Cancel</button>
-          <button type="submit" class="btn btn-primary mx-2" (click)="addSlider()"
-            [attr.disabled]="this.addSliderFormGroup.valid ? null : 'disabled'"
+          <button type="submit" class="btn btn-primary mx-2" (click)="saveSlider()"
+            [attr.disabled]="this.addEditSliderFormGroup.valid ? null : 'disabled'"
           >Save</button>
         </div>
       </div>
@@ -62,7 +62,7 @@
           <td>{{slider.createdAt | date}}</td>
           <td>{{slider.modifiedAt | date}}</td>
           <td>
-            <i class="fa fa-pencil link mr-2"></i>
+            <i class="fa fa-pencil link mr-2" (click)="editSlider(slider)"></i>
             <i class="fa fa-trash link" (click)="deleteSlider(slider.id)"></i>
           </td>
         </tr>
