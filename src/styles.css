@@ -206,6 +206,11 @@ hr {
   border-radius: 50%;
 }
 
+.mat-menu-panel {
+  padding: 10px;
+  max-width: initial;
+}
+
 /************************/
 /*     MEDIA QUERIES    */
 /************************/

@@ -5,7 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MediaPickerComponent } from './media-picker/media-picker.component';
-import { PreviewMediaComponent } from './preview-media/preview-media.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MediaItemComponent } from './media-item/media-item.component';
+
 
 const routes: Routes = [
   {
@@ -15,17 +17,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [MediaComponent, MediaPickerComponent, PreviewMediaComponent],
+  declarations: [MediaComponent, MediaPickerComponent, MediaItemComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ImageCropperModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule
   ],
   exports: [
     MediaPickerComponent,
-    PreviewMediaComponent
+    MediaItemComponent
   ]
 })
 export class MediaModule { }

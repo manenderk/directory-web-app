@@ -39,10 +39,7 @@
   </div>
   <div class="col-12">
     <ng-container *ngFor="let media of medias">
-      <img *ngIf="imageDataService.imageFileTypes.includes(media.fileType);else showFileThumbnail" [src]="media.path" class="media">
-      <ng-template #showFileThumbnail>
-        <img src="/assets/application/file.png" class="media">
-      </ng-template>
+      <app-media-item [media]="media"></app-media-item>
     </ng-container>
   </div>
 </div>

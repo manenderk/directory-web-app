@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { Media } from 'src/app/models/app/media.model';
 import { ImageDataService } from 'src/app/services/common/image-data.service';
 import { MediaService } from 'src/app/services/media/media.service';
@@ -21,6 +22,11 @@ export class MediaPickerComponent implements OnInit, ControlValueAccessor {
     name: '',
     aspectRatio: ''
   };
+
+  @ViewChild(MatMenuTrigger)
+  contextMenu: MatMenuTrigger;
+
+  contextMenuPosition = { x: '0px', y: '0px' };
 
   private onChange: (media: Media) => void;
 
@@ -71,5 +77,14 @@ export class MediaPickerComponent implements OnInit, ControlValueAccessor {
 
   clearSelection() {
     this.selectedMedia = null;
+  }
+
+  onContextMenu(event: MouseEvent, media: Media) {
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    this.contextMenu.menuData = { media };
+    this.contextMenu.menu.focusFirstItem('mouse');
+    this.contextMenu.openMenu();
   }
 }

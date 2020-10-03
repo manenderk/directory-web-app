@@ -1,0 +1,29 @@
+<ng-container *ngIf="media">
+  <div class="media-container text-center">
+    <img
+        *ngIf="imageDataService.imageFileTypes.includes(media.fileType);else showFileThumbnail"
+        [src]="media.path"
+        class="media"
+        (contextmenu)="onContextMenu($event, media)"
+      >
+      <ng-template #showFileThumbnail>
+        <img
+          src="/assets/application/file.png" class="media"
+          (contextmenu)="onContextMenu($event, media)"
+        >
+      </ng-template>
+  </div>
+  <div style="visibility: hidden; position: fixed"
+      [style.left]="contextMenuPosition.x"
+      [style.top]="contextMenuPosition.y"
+      [matMenuTriggerFor]="contextMenu">
+  </div>
+  <mat-menu #contextMenu="matMenu">
+    <ng-template matMenuContent let-media="media">
+      <div><strong>Name: </strong>{{media.fileName}}</div>
+      <div><strong>Ratio: </strong>{{getRatio(media.ratio)}}</div>
+      <div><strong>File Type: </strong>{{media.fileType}}</div>
+      <div><strong>Url: </strong>{{media.path}}</div>
+    </ng-template>
+  </mat-menu>
+</ng-container>

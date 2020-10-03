@@ -1,0 +1,9 @@
+.media-container {
+  max-width: 200px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.media {
+  width: 100%;
+}

@@ -8,6 +8,7 @@
 .picker-container {
   position: fixed;
   background: #fff;
+  z-index: 99;
   top: 10px;
   left: 10px;
   right: 10px;
