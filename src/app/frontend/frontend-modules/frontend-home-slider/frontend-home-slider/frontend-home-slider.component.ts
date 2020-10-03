@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { HomeSlider } from 'src/app/models/app/home-slider.model';
+import { HomeSliderService } from 'src/app/services/app/home-slider.service';
 
 @Component({
   selector: 'app-frontend-home-slider',
@@ -7,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FrontendHomeSliderComponent implements OnInit {
 
-  @Input() images: string[];
+  sliders: HomeSlider[] = [];
 
   slideConfig = {
     slidesToShow: 1,
@@ -32,9 +34,11 @@ export class FrontendHomeSliderComponent implements OnInit {
     ]
   };
 
-  constructor() { }
+  constructor(
+    private homeSliderService: HomeSliderService
+  ) { }
 
-  ngOnInit(): void {
-    // this.initializeSlideUrls();
+  async ngOnInit() {
+    this.sliders = await this.homeSliderService.getSliders({active: true}).toPromise();
   }
 }
