@@ -37,15 +37,9 @@ export class ManageHomeSliderComponent implements OnInit {
         validators: [Validators.required]
       }),
       active: new FormControl(false),
-      imageId: new FormControl(null, {
+      image: new FormControl(null, {
         validators: [Validators.required]
       })
-    });
-  }
-
-  addImageId(media: Media) {
-    this.addSliderFormGroup.patchValue({
-      imageId: media.id
     });
   }
 

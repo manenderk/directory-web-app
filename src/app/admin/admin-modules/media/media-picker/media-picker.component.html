@@ -1,8 +1,19 @@
 <div class="row">
-  <div class="col-sm-6">
-    <button type="button" class="btn btn-info" (click)="isPickerOpen = true">Select File</button>
+  <div class="col">
+    <button type="button" class="btn btn-info mr-3" (click)="isPickerOpen = true">Select File</button>
+    <span *ngIf="selectedMedia">
+      <img *ngIf="imageDataService.imageFileTypes.includes(selectedMedia.fileType);else showFileThumbnail2"
+      [src]="selectedMedia.path"
+      class="media">
+      <ng-template #showFileThumbnail2>
+      <div>
+        <img src="/assets/application/file.png" class="media">
+      </div>
+      <div>{{selectedMedia.fileName}}</div>
+    </ng-template>
+    </span>
   </div>
-  <div class="col-sm-6"></div>
+
 </div>
 
 

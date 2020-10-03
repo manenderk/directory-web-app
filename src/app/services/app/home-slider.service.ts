@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HomeSlider } from 'src/app/models/app/home-slider.model';
 import { environment } from 'src/environments/environment';
+import { MediaService } from '../media/media.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,12 @@ import { environment } from 'src/environments/environment';
 export class HomeSliderService {
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private mediaService: MediaService
   ) { }
 
   addSlider(slider: HomeSlider): Observable<HomeSlider> {
-    const postData = {...slider, image: slider.imageId};
+    const postData = {...slider, image: slider.image.id};
     const url = `${environment.apiHost}home-slider`;
     return this.httpClient.post(url, postData).pipe(
       map(res => {
@@ -46,8 +48,7 @@ export class HomeSliderService {
       id: res._id,
       link: res.link,
       active: res.active,
-      imageId: res.image ? res.image._id : null,
-      imagePath: res.image ? environment.fileHost + res.image.path : null,
+      image: this.mediaService.mapMediaResponseToModel(res.image),
       createdAt: res.createdAt ? new Date(res.createdAt) : null,
       modifiedAt: res.modifiedAt ? new Date(res.modifiedAt) : null
     };

@@ -25,14 +25,15 @@
         </div>
         <div class="col-sm-6 form-group">
           <label><span class="text-danger">*</span>Image</label>
-          <app-media-picker (fileSelected)="addImageId($event)"></app-media-picker>
-          <app-preview-media [mediaId]="addSliderFormGroup.value.imageId"></app-preview-media>
+          <app-media-picker formControlName="image"></app-media-picker>
         </div>
       </div>
       <div class="row">
         <div class="col text-right">
           <button type="button" class="btn btn-default mx-2" (click)="resetForm()">Cancel</button>
-          <button type="submit" class="btn btn-primary mx-2" (click)="addSlider()">Save</button>
+          <button type="submit" class="btn btn-primary mx-2" (click)="addSlider()"
+            [attr.disabled]="this.addSliderFormGroup.valid ? null : 'disabled'"
+          >Save</button>
         </div>
       </div>
     </form>
@@ -56,7 +57,7 @@
           <td>{{slider.link}}</td>
           <td>{{slider.active ? 'Yes' : 'No'}}</td>
           <td>
-            <img *ngIf="slider.imagePath" [src]="slider.imagePath" class="image-thumbnail">
+            <img *ngIf="slider?.image?.path" [src]="slider.image.path" class="image-thumbnail">
           </td>
           <td>{{slider.createdAt | date}}</td>
           <td>{{slider.modifiedAt | date}}</td>
