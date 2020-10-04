@@ -1,0 +1,80 @@
+<div class="row bg-grey-1 py-3">
+  <div class="col-12">
+    <h4 class="mb-0">{{eventId ? 'Edit Event' : 'Add Event'}}</h4>
+  </div>
+</div>
+<form [formGroup]="eventFormGroup">
+  <div class="row py-3">
+    <div class="col-sm-6 form-group">
+      <label><span class="text-danger">*</span>Name</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+    <div class="col-sm-3 form-group">
+      <label>Date</label>
+      <input class="form-control" type="text"
+        formControlName="date"
+        [owlDateTime]="eventDatePicker" [owlDateTimeTrigger]="eventDatePicker">
+      <owl-date-time #eventDatePicker [pickerType]="'calendar'"></owl-date-time>
+    </div>
+    <div class="col-sm-3 form-group">
+      <label>Time</label>
+      <input class="form-control" type="text"
+        formControlName="time"
+        [owlDateTime]="eventTimePicker" [owlDateTimeTrigger]="eventTimePicker">
+      <owl-date-time #eventTimePicker [pickerType]="'timer'"></owl-date-time>
+    </div>
+    <div class="col-sm-6 form-group">
+      <label>Order</label>
+      <input type="number" class="form-control" formControlName="order">
+    </div>
+    <div class="col-sm-3 form-group d-flex align-items-end justify-content-center">
+      <div class="form-check text-center">
+        <input class="form-check-input" type="checkbox" id="cat-active" formControlName="active">
+        <label class="form-check-label" for="cat-active">
+          Active
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-3 form-group d-flex align-items-end justify-content-center">
+      <div class="form-check text-center">
+        <input class="form-check-input" type="checkbox" id="slider-featured" formControlName="featured">
+        <label class="form-check-label" for="slider-featured">
+          Featured
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-12 form-group">
+      <label>Description</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+    </div>
+    <div class="col-sm-12 form-group">
+      <label>Location</label>
+      <textarea class="form-control" formControlName="location"></textarea>
+    </div>
+
+    <div class="col-sm-6 form-group">
+      <label><span class="text-danger">*</span>Thumbnail Image <small class="text-muted">Upload an image having 3:5 aspect ratio</small></label>
+      <app-media-picker formControlName="thumbnailImage"></app-media-picker>
+    </div>
+    <div class="col-sm-6 form-group">
+      <label><span class="text-danger">*</span>Banner Image <small class="text-muted">Upload an image having 7:3 aspect ratio</small></label>
+      <app-media-picker formControlName="bannerImage"></app-media-picker>
+    </div>
+    <div class="col-sm-6 form-group">
+      <label>Social Links</label>
+      <app-multi-string-input formControlName="socialLinks"></app-multi-string-input>
+    </div>
+    <div class="col-sm-6 form-group">
+      <label>Ticket Locations</label>
+      <app-multi-string-input formControlName="ticketsLocations"></app-multi-string-input>
+    </div>
+    <div class="col-sm-12 form-group">
+      <label>Event Images</label>
+      <app-media-picker formControlName="eventImages" [pickerType]="'multiple'"></app-media-picker>
+    </div>
+    <div class="col-sm-12 text-right">
+      <button type="button" class="btn btn-default mx-2">Cancel</button>
+      <button type="submit" class="btn btn-primary mx-2" (click)="saveEvent()">Save</button>
+    </div>
+  </div>
+</form>

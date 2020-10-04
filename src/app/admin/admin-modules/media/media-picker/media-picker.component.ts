@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Media } from 'src/app/models/app/media.model';
@@ -16,8 +16,14 @@ import { MediaService } from 'src/app/services/media/media.service';
 export class MediaPickerComponent implements OnInit, ControlValueAccessor {
 
   selectedMedia: Media;
+  selectedMedias: Media[];
+
+  @Input() pickerType = 'single';
+
   isPickerOpen = false;
+
   medias: Media[];
+
   search = {
     name: '',
     aspectRatio: ''
@@ -26,9 +32,9 @@ export class MediaPickerComponent implements OnInit, ControlValueAccessor {
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
 
-  contextMenuPosition = { x: '0px', y: '0px' };
+  contextMenuPosition = {x: '0px', y: '0px'};
 
-  private onChange: (media: Media) => void;
+  private onChange: (selection: any) => void;
 
   constructor(
     public imageDataService: ImageDataService,
@@ -38,16 +44,6 @@ export class MediaPickerComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
     this.initializeVariables();
   }
-
-  writeValue(media: Media) {
-    this.selectedMedia = media;
-  }
-
-  registerOnChange(onChange: (media: Media) => void) {
-    this.onChange = onChange;
-  }
-
-  registerOnTouched() {}
 
   initializeVariables() {
     this.getMedias();
@@ -69,14 +65,48 @@ export class MediaPickerComponent implements OnInit, ControlValueAccessor {
     this.getMedias();
   }
 
-  selectMedia(media: Media = null) {
+  writeValue(selection: Media | Media[]) {
+    if (this.pickerType === 'single') {
+      this.selectedMedia = JSON.parse(JSON.stringify(selection));
+    } else {
+      if (selection) {
+        this.selectedMedias = JSON.parse(JSON.stringify(selection));
+      } else {
+        this.selectedMedias = [];
+      }
+    }
+  }
+
+  registerOnChange(onChange: (selection: Media | Media[]) => void) {
+    this.onChange = onChange;
+  }
+
+  registerOnTouched() {}
+
+  selectMedia(media: Media) {
     this.isPickerOpen = false;
-    this.selectedMedia = media;
-    this.onChange(media);
+    if (this.pickerType === 'single') {
+      this.selectedMedia = media;
+      this.onChange(this.selectedMedia);
+    } else {
+      this.selectedMedias.push(media);
+      this.onChange(this.selectedMedias);
+    }
+  }
+
+  removeSelection(media: Media) {
+    if (this.pickerType === 'single') {
+      this.selectedMedia = null;
+      this.onChange(null);
+    } else {
+      this.selectedMedias = this.selectedMedias.filter(m => m.id !== media.id);
+      this.onChange(this.selectedMedias);
+    }
   }
 
   clearSelection() {
     this.selectedMedia = null;
+    this.selectedMedias = [];
   }
 
   onContextMenu(event: MouseEvent, media: Media) {

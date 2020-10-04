@@ -20,6 +20,10 @@ const routes: Routes = [
       {
         path: 'home-slider',
         loadChildren: () => import('./admin-modules/home-slider/home-slider.module').then(mod => mod.HomeSliderModule)
+      },
+      {
+        path: 'events',
+        loadChildren: () => import('./admin-modules/event/event.module').then(mod => mod.EventModule)
       }
     ]
   }

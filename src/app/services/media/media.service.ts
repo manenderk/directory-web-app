@@ -49,8 +49,6 @@ export class MediaService {
       queryParams.push(`ratio=${aspectRatio}`);
     }
 
-    console.log(queryParams);
-
     if (queryParams.length > 0) {
       url += '?' + queryParams.join('&');
     }

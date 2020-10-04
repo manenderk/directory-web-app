@@ -28,7 +28,7 @@ const routes: Routes = [
   ],
   exports: [
     MediaPickerComponent,
-    MediaItemComponent
+    MediaItemComponent,
   ]
 })
 export class MediaModule { }
