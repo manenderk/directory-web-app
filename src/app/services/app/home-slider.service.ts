@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HomeSlider } from 'src/app/models/app/home-slider.model';
 import { addQueryParamsToUrl } from 'src/app/utils/functions/addQueryParamsToUrl.function';
-import { getQueryParamString } from 'src/app/utils/functions/getQueryParamString.function';
 import { environment } from 'src/environments/environment';
 import { MediaService } from '../media/media.service';
 
