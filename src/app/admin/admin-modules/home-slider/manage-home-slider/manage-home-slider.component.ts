@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HomeSlider } from 'src/app/models/app/home-slider.model';
 import { HomeSliderService } from 'src/app/services/app/home-slider.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-manage-home-slider',
@@ -33,14 +34,10 @@ export class ManageHomeSliderComponent implements OnInit {
 
   initializeFormGroup(slider?: HomeSlider) {
     this.addEditSliderFormGroup = new FormGroup({
-      id: new FormControl(slider ? slider.id : null),
-      link: new FormControl(slider ? slider.link : null, {
-        validators: [Validators.required]
-      }),
-      active: new FormControl(slider ? slider.active : false),
-      image: new FormControl(slider ? slider.image : null, {
-        validators: [Validators.required]
-      })
+      id: new FormControl(slider?.id),
+      link: new FormControl(slider?.link, Validators.required),
+      active: new FormControl(slider?.active || false),
+      image: new FormControl(slider?.image, Validators.required)
     });
   }
 
@@ -59,6 +56,7 @@ export class ManageHomeSliderComponent implements OnInit {
         slider = await this.sliderService.addSlider(slider).toPromise();
         this.sliders.unshift(slider);
       }
+      Swal.fire('Done', 'Slider Saved', 'success');
       this.resetForm();
     }
   }
@@ -71,6 +69,7 @@ export class ManageHomeSliderComponent implements OnInit {
   async deleteSlider(sliderId: string) {
     await this.sliderService.deleteSlider(sliderId).toPromise();
     this.sliders = this.sliders.filter(slider => slider.id !== sliderId);
+    Swal.fire('Done', 'Slider deleted', 'success');
   }
 
   resetForm() {

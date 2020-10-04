@@ -30,7 +30,7 @@
       <button type="button" class="btn btn-secondary mr-sm-2" (click)="clearSearch()">Clear</button>
     </form>
   </div>
-  <div class="images">
+  <div class="medias media-container">
     <ng-container *ngFor="let media of medias">
       <app-media-item [media]="media" (click)="selectMedia(media)"></app-media-item>
     </ng-container>

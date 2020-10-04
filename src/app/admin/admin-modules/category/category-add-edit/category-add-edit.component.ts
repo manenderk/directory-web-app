@@ -25,30 +25,33 @@ export class CategoryAddEditComponent implements OnInit {
     private router: Router
   ) { }
 
-  async ngOnInit() {
-    this.categoryId = this.route.snapshot.paramMap.get('id');
-    if (this.category) {
+  ngOnInit() {
+    this.getAllCategories();
+    this.route.paramMap.subscribe(async params => {
+      this.categoryId = params.get('id');
       await this.getCategory();
-    }
-
-    this.generateFormGroup();
-
+      this.generateFormGroup();
+    });
   }
 
   async getCategory() {
-    this.category = await this.catService.getCategory(this.categoryId).toPromise();
+    if (this.categoryId) {
+      this.category = await this.catService.getCategory(this.categoryId).toPromise();
+      console.log(this.category);
+    }
   }
 
   generateFormGroup() {
     this.catFormGroup = new FormGroup({
       name: new FormControl(this.category?.name, Validators.required),
       description: new FormControl(this.category?.description),
-      thumbnailFile: new FormControl(),
-      parentCategoryId: new FormControl(this.category?.parentCategoryId),
+      image: new FormControl(this.category?.image, Validators.required),
+      parentCategory: new FormControl(this.category?.parentCategory),
       active: new FormControl(this.category?.active || true),
       featured: new FormControl(this.category?.featured || false),
-      order: new FormControl(this.category?.order || 100)
+      order: new FormControl(this.category?.order || 1000)
     });
+    console.log(this.catFormGroup.value);
   }
 
   patchImage(files: File[]) {
@@ -61,23 +64,25 @@ export class CategoryAddEditComponent implements OnInit {
 
   async saveCategory() {
     if (this.catFormGroup.valid) {
-      const categoryToSave = this.getCategoryFromFormGroup();
-      if (categoryToSave.id) {
 
+      const category: Category = {...this.catFormGroup.value, id: this.categoryId};
+
+      if (this.categoryId) {
+        await this.catService.updateCategory(category).toPromise();
       } else {
-        await this.catService.addCategory(categoryToSave).toPromise();
+        await this.catService.addCategory(category).toPromise();
       }
-      Swal.fire('Success', 'Category saved', 'success');
+      Swal.fire('Done', 'Category Saved', 'success');
       this.router.navigate([`/${environment.adminRoutePrefix}/category/category-list`]);
     }
   }
 
-  getCategoryFromFormGroup(): Category {
-    const category: Category = {
-      ... this.catFormGroup.value,
-      id: this.categoryId ? this.categoryId : null
-    };
-    return category;
+  async getAllCategories() {
+    this.allCategories = await this.catService.getCategories().toPromise();
+  }
+
+  resetForm() {
+    this.catFormGroup.reset();
   }
 
 }

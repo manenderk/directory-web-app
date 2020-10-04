@@ -74,6 +74,9 @@ export class MediaService {
   }
 
   mapMediaResponseToModel(res: any): Media {
+    if (!res) {
+      return null;
+    }
     const media: Media = {
       id: res._id,
       fileType: res.fileType,

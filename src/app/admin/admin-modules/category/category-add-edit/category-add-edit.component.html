@@ -1,52 +1,54 @@
-<div class="row">
+<div class="row bg-grey-1 py-3">
   <div class="col-12">
-    <h3>{{categoryId ? 'Edit Category' : 'Add Category'}}</h3>
+    <h4 class="mb-0">{{categoryId ? 'Edit Category' : 'Add Category'}}</h4>
   </div>
 </div>
 <form *ngIf="catFormGroup" [formGroup]="catFormGroup">
   <div class="row">
-    <div class="col-sm-6">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input type="text" matInput formControlName="name" required>
-      </mat-form-field>
+    <div class="col-sm-6 form-group">
+      <label><span class="text-danger">*</span>Name</label>
+      <input type="text" class="form-control" formControlName="name">
     </div>
-    <div class="col-sm-6">
-      <mat-form-field>
-        <mat-label>Parent Category</mat-label>
-        <mat-select formControlName="parentCategoryId">
-          <mat-option *ngFor="let category of allCategories" [value]="category.id">{{category.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="col-sm-6 form-group">
+      <label>Parent Category</label>
+      <select class="form-control" formControlName="parentCategory">
+        <option [ngValue]="null">Select</option>
+        <option *ngFor="let cat of allCategories" [ngValue]="cat">{{cat.name}}</option>
+      </select>
     </div>
-    <div class="col-sm-4">
-      <mat-form-field>
-        <mat-label>Order</mat-label>
-        <input type="number" matInput formControlName="order">
-      </mat-form-field>
+    <div class="col-sm-6 form-group">
+      <label>Order</label>
+      <input type="number" class="form-control" formControlName="order">
     </div>
-    <div class="col-sm-4 align-self-center">
-      <mat-checkbox formControlName="active" [color]="'primary'">Active</mat-checkbox>
+    <div class="col-sm-3 form-group d-flex align-items-end justify-content-center">
+      <div class="form-check text-center">
+        <input class="form-check-input" type="checkbox" id="cat-active" formControlName="active">
+        <label class="form-check-label" for="cat-active">
+          Active
+        </label>
+      </div>
     </div>
-    <div class="col-sm-4 align-self-center">
-      <mat-checkbox formControlName="featured" [color]="'primary'">Featured</mat-checkbox>
+    <div class="col-sm-3 form-group d-flex align-items-end justify-content-center">
+      <div class="form-check text-center">
+        <input class="form-check-input" type="checkbox" id="slider-featured" formControlName="featured">
+        <label class="form-check-label" for="slider-featured">
+          Featured
+        </label>
+      </div>
     </div>
-    <div class="col-sm-12">
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" cdkTextareaAutosize></textarea>
-      </mat-form-field>
+    <div class="col-sm-12 form-group">
+      <label>Description</label>
+      <textarea class="form-control" formControlName="description"></textarea>
     </div>
-    <div class="col-sm-12 mb-20px">
-      <p>Upload square image for better image adjustments</p>
-      <app-image-input-preview
-      [allowedFileTypes]="['png', 'jpg', 'jpeg']"
-      [showImagePreview]="true"
-      (filesAdded)="patchImage($event)"
-      ></app-image-input-preview>
+    <div class="col-sm-12 form-group">
+      <label><span class="text-danger">*</span>Image <small class="text-muted">Upload an image having 1:1 aspect ratio</small></label>
+      <app-media-picker formControlName="image"></app-media-picker>
     </div>
     <div class="col-sm-12 text-right">
-      <button mat-raised-button type="button" (click)="saveCategory()">Save</button>
+      <button type="button" class="btn btn-default mx-2" (click)="resetForm()">Cancel</button>
+      <button type="submit" class="btn btn-primary mx-2" (click)="saveCategory()"
+        [attr.disabled]="this.catFormGroup.valid ? null : 'disabled'"
+      >Save</button>
     </div>
   </div>
 </form>

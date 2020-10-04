@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormErrorModule } from 'src/app/utils/form-error/form-error.module';
 import { ImageInputPreviewModule } from 'src/app/utils/image-input-preview/image-input-preview.module';
 import { NgxBasicTableModule } from '@manenderk/ngx-basic-table';
+import { MediaModule } from '../media/media.module';
 
 const routes: Routes = [
   {
@@ -35,13 +36,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    FormErrorModule,
-    ImageInputPreviewModule,
+    MediaModule,
     NgxBasicTableModule
   ]
 })

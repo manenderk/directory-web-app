@@ -1,10 +1,11 @@
+import { Media } from '../app/media.model';
+
 export interface Category {
   id: string;
   name: string;
   description: string;
-  thumbnailFile?: File;
-  thumbnail: string;
-  parentCategoryId: string;
+  image: Media;
+  parentCategory: Category;
   active: boolean;
   featured: boolean;
   order: number;

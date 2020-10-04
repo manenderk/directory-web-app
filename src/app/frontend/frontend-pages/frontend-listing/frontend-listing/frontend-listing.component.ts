@@ -7,6 +7,7 @@ import { WordsService } from 'src/app/services/extra/words.service';
 import { ScreenService } from 'src/app/services/common/screen.service';
 import { VariableService } from 'src/app/services/common/variable.service';
 import { SubSink } from 'subsink';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-frontend-listing',
@@ -37,6 +38,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
 
   constructor(
+    private catService: CategoryService,
     private picsumService: PicsumService,
     private wordService: WordsService,
     private screenService: ScreenService,
@@ -65,22 +67,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   }
 
   async initializeCategories() {
-    const names: string[] = await this.wordService.getRandomWords(11).toPromise();
-
-    for (let i = 1; i <= 10; i++) {
-      this.categories.push({
-        id: i.toString(),
-        name: names[i],
-        description: null,
-        thumbnail: null,
-        parentCategoryId: null,
-        active: null,
-        featured: null,
-        order: null,
-        createdAt: null,
-        updatedAt: null
-      });
-    }
+    this.categories = await this.catService.getFrontendCategories().toPromise();
   }
 
 

@@ -1,14 +1,38 @@
-<div class="row">
+<div class="row bg-grey-1 py-3">
   <div class="col-12">
-    <h3>Categories</h3>
+    <h4 class="mb-0">Categories
+    </h4>
   </div>
-  <div class="col-12">
-    <ngx-basic-table
-    [data]="categories"
-    [tabMeta]="tabMeta"
-    [colMeta]="colMeta"
-    (linkColClicked)="categoryClicked($event)"
-  ></ngx-basic-table>
+</div>
+<div class="row">
+  <div class="col">
+    <p>Showing total {{categories?.length}} Categories</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Image</td>
+          <td>Parent Category</td>
+          <td>Active</td>
+          <td>Featured</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{category.name}}</td>
+          <td>
+            <app-media-item [media]="category.image"></app-media-item>
+          </td>
+          <td>{{category.parentCategory?.name}}</td>
+          <td>{{category.active ? 'Yes' : 'No'}}</td>
+          <td>{{category.featured ? 'Yes' : 'No'}}</td>
+          <td>
+            <i class="fa fa-pencil link" (click)="editCategory(category)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 

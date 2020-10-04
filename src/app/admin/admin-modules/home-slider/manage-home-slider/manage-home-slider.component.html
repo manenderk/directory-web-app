@@ -15,7 +15,7 @@
           <label><span class="text-danger">*</span>Link</label>
           <input type="text" class="form-control" formControlName="link">
         </div>
-        <div class="col-sm-6 form-group d-flex align-items-center justify-content-center">
+        <div class="col-sm-6 form-group d-flex align-items-end justify-content-center">
           <div class="form-check text-center">
             <input class="form-check-input" type="checkbox" id="slider-active" formControlName="active">
             <label class="form-check-label" for="slider-active">
@@ -57,12 +57,12 @@
           <td>{{slider.link}}</td>
           <td>{{slider.active ? 'Yes' : 'No'}}</td>
           <td>
-            <img *ngIf="slider?.image?.path" [src]="slider.image.path" class="image-thumbnail">
+            <app-media-item [media]="slider.image"></app-media-item>
           </td>
           <td>{{slider.createdAt | date}}</td>
           <td>{{slider.modifiedAt | date}}</td>
           <td>
-            <i class="fa fa-pencil link mr-2" (click)="editSlider(slider)"></i>
+            <i class="fa fa-pencil link mr-4" (click)="editSlider(slider)"></i>
             <i class="fa fa-trash link" (click)="deleteSlider(slider.id)"></i>
           </td>
         </tr>

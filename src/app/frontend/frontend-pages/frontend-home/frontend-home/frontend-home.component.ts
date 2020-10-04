@@ -8,6 +8,7 @@ import { newArray } from '@angular/compiler/src/util';
 import { SubSink } from 'subsink';
 import { NgxSlickCarouselService } from 'src/app/services/common/ngx-slick-carousel.service';
 import { NgxSlickSliderModel } from 'src/app/models/app/ngx-slick-slider.model';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-frontend-home',
@@ -68,7 +69,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
 
   constructor(
-    private picsumService: PicsumService,
+    private catService: CategoryService,
     private screenService: ScreenService,
     private sliderService: NgxSlickCarouselService
   ) {
@@ -138,45 +139,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
       cols = this.categoryData.tabletCols;
     }
 
-
-    const categoryNames = [
-      'Restaurants',
-      'Movies',
-      'Medical',
-      'Travel',
-      'Flights',
-      'Luxury',
-      'Cabs',
-      'Bars & Lounges',
-      'Shopping',
-      'Daily Needs',
-      'Flowers',
-      'Coffee Shops',
-      'Home Services',
-      'Auto Services',
-      'Beauty & Spa',
-      'Home Service',
-      'Pets',
-      'Education'
-    ];
-
-    const i = 1;
-    categoryNames.forEach(catName => {
-      const imgName = catName.replace('&', '').replace('  ', '').replace(' ', '');
-      this.categoryData.categories.push({
-        id: i.toString(),
-        name: catName,
-        description: null,
-        thumbnail: `assets/demo/${imgName}.jpg`,
-        parentCategoryId: null,
-        active: true,
-        featured: true,
-        order: i,
-        createdAt: null,
-        updatedAt: null
-      });
-    });
-
+    this.categoryData.categories = await this.catService.getFrontendCategories().toPromise();
 
     this.organizeCategories(rows);
 

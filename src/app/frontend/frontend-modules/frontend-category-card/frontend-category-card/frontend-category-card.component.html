@@ -3,7 +3,8 @@
     class="no-decoration d-block f-color-primary"
   >
     <div class="category-card-container">
-      <div class="category-card-content" [ngStyle]="{'background-image': 'url(' + category.thumbnail + ')'}">
+      <div class="category-card-content" [ngStyle]="{'background-image': 'url(' + category.image?.path + ')'}">
+        <img [src]="category.image?.path" class="d-none" [alt]="category.name">
       </div>
 
     </div>
