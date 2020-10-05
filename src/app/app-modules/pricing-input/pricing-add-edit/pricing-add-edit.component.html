@@ -1,0 +1,30 @@
+<div class="row py-2">
+  <div class="col-12">
+    <h5>
+      {{pricing?.id ? 'Update Pricing' : 'Add Pricing'}}
+    </h5>
+  </div>
+</div>
+
+<form [formGroup]="pricingFormGroup">
+  <div class="row">
+    <div class="col-12 form-group">
+      <label><span class="text text-danger">*</span>Name</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+    <div class="col-12 form-group">
+      <label><span class="text text-danger">*</span>Price</label>
+      <input type="text" class="form-control" formControlName="price">
+    </div>
+    <div class="col-12 form-group">
+      <label>Features</label>
+      <app-multi-string-input formControlName="features"></app-multi-string-input>
+    </div>
+    <div class="col-12 text-right">
+      <button type="button" class="btn btn-default mr-2" (click)="cancel()">Cancel</button>
+      <button type="submit" class="btn btn-primary" (click)="save()"
+      [attr.disabled]="pricingFormGroup.valid ? null : 'disabled'"
+      >Save</button>
+    </div>
+  </div>
+</form>

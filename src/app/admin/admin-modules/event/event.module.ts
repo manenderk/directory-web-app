@@ -6,6 +6,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { MediaModule } from '../media/media.module';
 import { MultiStringInputModule } from 'src/app/app-modules/multi-string-input/multi-string-input.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PricingInputModule } from 'src/app/app-modules/pricing-input/pricing-input.module';
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     MediaModule,
-    MultiStringInputModule
+    MultiStringInputModule,
+    PricingInputModule
   ]
 })
 export class EventModule { }
