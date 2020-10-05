@@ -86,12 +86,18 @@
     </div>
     <div class="col-sm-12 form-group">
       <label>Pricing Packages</label>
-      <app-pricing-input formControlName="sponsors" ></app-pricing-input>
+      <app-pricing-input formControlName="pricings" ></app-pricing-input>
+    </div>
+    <div class="col-sm-12 form-group">
+      <label>Contact Persons</label>
+      <app-contact-person-input formControlName="contacts"></app-contact-person-input>
     </div>
 
     <div class="col-sm-12 text-right">
       <button type="button" class="btn btn-default mx-2">Cancel</button>
-      <button type="submit" class="btn btn-primary mx-2" (click)="saveEvent()">Save</button>
+      <button type="submit" class="btn btn-primary mx-2" (click)="saveEvent()"
+
+      >Save</button>
     </div>
   </div>
 </form>

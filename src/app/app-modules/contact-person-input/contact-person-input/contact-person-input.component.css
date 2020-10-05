@@ -1,0 +1,10 @@
+.pricing-item {
+  display: inline-block;
+  width: 200px;
+}
+
+.feature-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

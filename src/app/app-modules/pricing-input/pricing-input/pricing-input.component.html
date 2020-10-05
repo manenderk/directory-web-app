@@ -5,7 +5,7 @@
         Add Pricing
       </button>
     </div>
-    <div class="p-2">
+    <div class="p-2" *ngIf="pricingInputs?.length > 0">
       <div *ngFor="let pricing of pricingInputs" class="pricing-item m-2 p-2 bg-grey-1">
         <h5 class="mb-2">{{pricing.name}}</h5>
         <p class="mb-1">{{pricing.price}}</p>

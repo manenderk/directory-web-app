@@ -7,6 +7,7 @@ import { MediaModule } from '../media/media.module';
 import { MultiStringInputModule } from 'src/app/app-modules/multi-string-input/multi-string-input.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PricingInputModule } from 'src/app/app-modules/pricing-input/pricing-input.module';
+import { ContactPersonInputModule } from 'src/app/app-modules/contact-person-input/contact-person-input.module';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
     OwlNativeDateTimeModule,
     MediaModule,
     MultiStringInputModule,
-    PricingInputModule
+    PricingInputModule,
+    ContactPersonInputModule
   ]
 })
 export class EventModule { }

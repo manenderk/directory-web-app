@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col">
+    <div class="p-2">
+      <button type="button" class="btn btn-info" (click)="openAddEditForm()">
+        Add Person
+      </button>
+    </div>
+    <div class="p-2" *ngIf="personInputs?.length > 0">
+      <div *ngFor="let person of personInputs" class="pricing-item m-2 p-2 bg-grey-1">
+        <app-media-item [media]="person.image"></app-media-item>
+        <h5 class="mb-2">{{person.name}}</h5>
+        <ul class="feature-list">
+          <li>{{person.email}}</li>
+          <li>{{person.phone}}</li>
+        </ul>
+        <button type="button" class="btn btn-info m-2" (click)="openAddEditForm(person)">Edit</button>
+        <button type="button" class="btn btn-warning m-2" (click)="deletePerson(person)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="popup pricing-add-edit-popup" *ngIf="isAddEditFormOpen">
+  <div class="popup-container">
+    <app-contact-person-add-edit [person]="currentPerson" (personUpdated)="personUpdated($event)" (inputCanceleed)="isAddEditFormOpen = false"></app-contact-person-add-edit>
+  </div>
+</div>

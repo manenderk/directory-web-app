@@ -1,0 +1,35 @@
+<div class="row py-2">
+  <div class="col-12">
+    <h5>
+      {{person?.id ? 'Update Contact Person' : 'Add Contact Person'}}
+    </h5>
+  </div>
+</div>
+
+<form [formGroup]="personFormGroup">
+  <div class="row">
+    <div class="col-12 form-group">
+      <label>Image</label>
+      <app-media-picker formControlName="image"></app-media-picker>
+    </div>
+    <div class="col-12 form-group">
+      <label><span class="text text-danger">*</span>Name</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+    <div class="col-12 form-group">
+      <label>Phone</label>
+      <input type="text" class="form-control" formControlName="phone">
+    </div>
+    <div class="col-12 form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" formControlName="email">
+    </div>
+
+    <div class="col-12 text-right">
+      <button type="button" class="btn btn-default mr-2" (click)="cancel()">Cancel</button>
+      <button type="submit" class="btn btn-primary" (click)="save()"
+      [attr.disabled]="personFormGroup.valid ? null : 'disabled'"
+      >Save</button>
+    </div>
+  </div>
+</form>
