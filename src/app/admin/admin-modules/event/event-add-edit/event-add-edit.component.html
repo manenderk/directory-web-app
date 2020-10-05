@@ -3,7 +3,7 @@
     <h4 class="mb-0">{{eventId ? 'Edit Event' : 'Add Event'}}</h4>
   </div>
 </div>
-<form [formGroup]="eventFormGroup">
+<form *ngIf="eventFormGroup" [formGroup]="eventFormGroup">
   <div class="row py-3">
     <div class="col-sm-6 form-group">
       <label><span class="text-danger">*</span>Name</label>
@@ -96,7 +96,7 @@
     <div class="col-sm-12 text-right">
       <button type="button" class="btn btn-default mx-2">Cancel</button>
       <button type="submit" class="btn btn-primary mx-2" (click)="saveEvent()"
-
+        [attr.disabled]="eventFormGroup.valid ? null : 'disabled'"
       >Save</button>
     </div>
   </div>

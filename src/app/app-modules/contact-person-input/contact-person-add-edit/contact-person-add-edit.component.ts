@@ -28,7 +28,7 @@ export class ContactPersonAddEditComponent implements OnInit, OnChanges {
     this.personFormGroup = new FormGroup({
       image: new FormControl(this.person?.image),
       name: new FormControl(this.person?.name, Validators.required),
-      email: new FormControl(this.person?.email),
+      email: new FormControl(this.person?.email, Validators.email),
       phone: new FormControl(this.person?.phone),
     });
   }
