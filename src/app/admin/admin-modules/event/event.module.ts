@@ -8,9 +8,14 @@ import { MultiStringInputModule } from 'src/app/app-modules/multi-string-input/m
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PricingInputModule } from 'src/app/app-modules/pricing-input/pricing-input.module';
 import { ContactPersonInputModule } from 'src/app/app-modules/contact-person-input/contact-person-input.module';
+import { EventListComponent } from './event-list/event-list.component';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    component: EventListComponent
+  },
   {
     path: 'add',
     component: EventAddEditComponent
@@ -22,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [EventAddEditComponent],
+  declarations: [EventAddEditComponent, EventListComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -94,7 +94,7 @@
     </div>
 
     <div class="col-sm-12 text-right">
-      <button type="button" class="btn btn-default mx-2">Cancel</button>
+      <button type="button" class="btn btn-default mx-2" (click)="navigateToList()">Cancel</button>
       <button type="submit" class="btn btn-primary mx-2" (click)="saveEvent()"
         [attr.disabled]="eventFormGroup.valid ? null : 'disabled'"
       >Save</button>

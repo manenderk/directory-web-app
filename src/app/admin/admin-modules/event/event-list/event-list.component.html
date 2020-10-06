@@ -1,0 +1,37 @@
+<div class="row bg-grey-1 py-3">
+  <div class="col-12">
+    <h4 class="mb-0">Events
+    </h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <p>Showing total {{events?.length}} Events</p>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Active</th>
+        <th>Featured</th>
+        <th>Order</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>{{event.name}}</td>
+        <td>{{event.active ? 'Yes' : 'No'}}</td>
+        <td>{{event.featured ? 'Yes' : 'No'}}</td>
+        <td>{{event.order}}</td>
+        <td>{{event.date | date}}</td>
+        <td>{{event.location}}</td>
+        <td>
+          <i class="fa fa-edit" (click)="editEvent(event)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -229,7 +229,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
       const monthIncrement = Math.ceil(Math.random() * 10);
       const eventDate = new Date(new Date().getTime() + (dateIncrement * 24 * 60 * 60 * 1000));
       eventDate.setMonth(eventDate.getMonth() + monthIncrement);
-      this.eventData.events.push({
+      /* this.eventData.events.push({
         id: name,
         name,
         description: null,
@@ -242,7 +242,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
         order: i,
         created: null,
         modified: null
-      });
+      }); */
     });
 
 

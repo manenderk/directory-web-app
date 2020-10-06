@@ -21,7 +21,7 @@ export class EventService {
   ) { }
 
   getEvents(): Observable<TheEvent[]> {
-    const url = `${environment.apiHost}event`;
+    const url = `${environment.apiHost}event/list`;
     return this.httpClient.get(url).pipe(
       map((events: any[]) => {
         return events.map(event => {

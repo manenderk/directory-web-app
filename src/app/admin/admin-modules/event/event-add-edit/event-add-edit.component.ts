@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TheEvent } from 'src/app/models/event/event.model';
 import { EventService } from 'src/app/services/event/event.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,7 +20,8 @@ export class EventAddEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private eventService: EventService
+    private eventService: EventService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -72,7 +74,12 @@ export class EventAddEditComponent implements OnInit {
       }
       Swal.fire('Done', 'Event Saved', 'success');
       this.eventFormGroup.reset();
+      this.navigateToList();
     }
+  }
+
+  navigateToList() {
+    this.router.navigate(['/' + environment.adminRoutePrefix + '/events']);
   }
 
 }
