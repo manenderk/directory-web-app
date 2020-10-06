@@ -9,6 +9,7 @@ import { SubSink } from 'subsink';
 import { NgxSlickCarouselService } from 'src/app/services/common/ngx-slick-carousel.service';
 import { NgxSlickSliderModel } from 'src/app/models/app/ngx-slick-slider.model';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { EventService } from 'src/app/services/event/event.service';
 
 @Component({
   selector: 'app-frontend-home',
@@ -70,6 +71,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private catService: CategoryService,
+    private eventService: EventService,
     private screenService: ScreenService,
     private sliderService: NgxSlickCarouselService
   ) {
@@ -223,28 +225,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
       cols = this.eventData.tabletCols;
     }
 
-    let i = 1;
-    eventNames.forEach(name => {
-      const dateIncrement = Math.ceil(Math.random() * 10);
-      const monthIncrement = Math.ceil(Math.random() * 10);
-      const eventDate = new Date(new Date().getTime() + (dateIncrement * 24 * 60 * 60 * 1000));
-      eventDate.setMonth(eventDate.getMonth() + monthIncrement);
-      /* this.eventData.events.push({
-        id: name,
-        name,
-        description: null,
-        imageUrl: `assets/demo/event${i++}.jpg`,
-        date: eventDate,
-        priceRange: null,
-        location: null,
-        active: true,
-        featured: true,
-        order: i,
-        created: null,
-        modified: null
-      }); */
-    });
-
+    this.eventData.events = await this.eventService.getEventsForFrontend().toPromise();
 
     this.organizeEvents(rows);
 

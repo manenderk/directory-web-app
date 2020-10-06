@@ -47,11 +47,14 @@
       <label>Description</label>
       <textarea class="form-control" formControlName="description"></textarea>
     </div>
-    <div class="col-sm-12 form-group">
+    <div class="col-sm-6 form-group">
       <label>Location</label>
-      <textarea class="form-control" formControlName="location"></textarea>
+      <input type="text" class="form-control" formControlName="location">
     </div>
-
+    <div class="col-sm-6 form-group">
+      <label>Price Range</label>
+      <input type="text" class="form-control" formControlName="priceRange">
+    </div>
     <div class="col-sm-6 form-group">
       <label><span class="text-danger">*</span>Thumbnail Image <small class="text-muted">Upload an image having 3:5 aspect ratio</small></label>
       <app-media-picker formControlName="thumbnailImage"></app-media-picker>

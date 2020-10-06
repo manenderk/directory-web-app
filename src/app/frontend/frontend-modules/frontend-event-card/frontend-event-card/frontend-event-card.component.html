@@ -2,11 +2,11 @@
   <a [routerLink]="['/event/', theEvent.id]" routerLinkActive="router-link-active" class="no-decoration d-block f-color-primary">
     <div class="the-card-container">
       <div class="card the-card">
-        <img class="card-img-top" [src]="theEvent.imageUrl">
+        <img class="card-img-top" [src]="theEvent.thumbnailImage?.path">
         <div class="card-body">
           <h5 class="card-title fw-medium text-overflow-ellipses">{{theEvent.name}}</h5>
           <p class="card-text"><i class="fa fa-calendar"></i> {{theEvent.date | date}} </p>
-          <p class="card-text">{{theEvent.description}}</p>
+          <p class="card-text text-overflow-ellipses">{{theEvent.description}}</p>
         </div>
       </div>
     </div>

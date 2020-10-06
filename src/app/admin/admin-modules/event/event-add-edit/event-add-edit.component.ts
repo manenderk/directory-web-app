@@ -44,6 +44,7 @@ export class EventAddEditComponent implements OnInit {
       date: new FormControl(this.event?.date),
       time: new FormControl(this.event?.time),
       location: new FormControl(this.event?.location),
+      priceRange: new FormControl(this.event?.priceRange),
       description: new FormControl(this.event?.description),
       thumbnailImage: new FormControl(this.event?.thumbnailImage, Validators.required),
       bannerImage: new FormControl(this.event?.bannerImage, Validators.required),

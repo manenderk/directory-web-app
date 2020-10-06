@@ -31,6 +31,17 @@ export class EventService {
     );
   }
 
+  getEventsForFrontend(): Observable<TheEvent[]> {
+    const url = `${environment.apiHost}event/featured`;
+    return this.httpClient.get(url).pipe(
+      map((events: any[]) => {
+        return events.map(event => {
+          return this.mapResponseToEventModel(event);
+        });
+      })
+    );
+  }
+
   getEvent(eventId: string): Observable<TheEvent> {
     const url = `${environment.apiHost}event/id/${eventId}`;
     return this.httpClient.get(url).pipe(
@@ -64,7 +75,7 @@ export class EventService {
     const postData = {
       ...event,
       thumbnailImage: event.thumbnailImage?.id || null,
-      bannerImage: event.thumbnailImage?.id || null,
+      bannerImage: event.bannerImage?.id || null,
       eventImages: event.eventImages?.length > 0 ? event.eventImages.map(m => {
         return m.id;
       }) : [],
@@ -96,6 +107,7 @@ export class EventService {
       date: res.date ? new Date(res.date) : null,
       time: res.time ? new Date(res.time) : null,
       location: res.location,
+      priceRange: res.priceRange,
       description: res.description,
       thumbnailImage: this.mediaService.mapMediaResponseToModel(res.thumbnailImage),
       bannerImage: this.mediaService.mapMediaResponseToModel(res.bannerImage),

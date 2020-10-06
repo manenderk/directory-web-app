@@ -8,6 +8,7 @@ export interface TheEvent {
   date: Date;
   time: Date;
   location: string;
+  priceRange: string;
   description: string;
   thumbnailImage: Media;
   bannerImage: Media;

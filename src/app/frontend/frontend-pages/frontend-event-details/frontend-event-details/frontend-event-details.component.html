@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <img class="img-fluid" [src]="images[0]">
+        <img class="img-fluid" [src]="event?.bannerImage?.path" [alt]="event.name">
       </div>
     </div>
   </div>
@@ -12,11 +12,11 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h2 class="mb-1 f-color-primary">{{theEvent?.name}}</h2>
+        <h2 class="mb-1 f-color-primary">{{event?.name}}</h2>
         <div class="header-bottom-bar mb-1 mx-auto b-color-primary-accent"></div>
-        <p class="mb-2"><i class="fa fa-calendar"></i> {{theEvent?.date | date}}</p>
-        <p class="mb-1"><i class="fa fa-map-marker"></i> 657  Braxton Street, WILLIAMSTOWN, Ohio, 4587</p>
-        <p class="mb-1">{{theEvent.priceRange}}</p>
+        <p class="mb-1"><i class="fa fa-calendar" *ngIf="event?.date || event?.time"></i> {{event?.date | date}} {{event?.time | date: 'shortTime'}}</p>
+        <p class="mb-1"><i class="fa fa-map-marker" *ngIf="event?.location"></i> {{event?.location}}</p>
+        <p class="mb-1" *ngIf="event?.priceRange"> {{event?.priceRange}}</p>
         <div>
           <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/facebook.png"></a>
           <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/instagram.png"></a>
@@ -28,7 +28,7 @@
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="event?.presentedBy?.length > 0">
   <div class="container">
     <div class="row text-center">
       <div class="col">
@@ -37,8 +37,8 @@
         </h4>
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
         <div class="d-flex flex-wrap justify-content-center">
-          <ng-container *ngFor="let image of brandImages">
-            <img [src]="image" class="brand-image align-self-center mx-2">
+          <ng-container *ngFor="let media of event?.presentedBy">
+            <img [src]="media.path" class="brand-image align-self-center mx-2" [alt]="media.fileName">
           </ng-container>
         </div>
 
@@ -47,7 +47,7 @@
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="event?.inAssociationWith?.length > 0">
   <div class="container">
     <div class="row text-center">
       <div class="col">
@@ -56,8 +56,8 @@
         </h4>
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
         <div class="d-flex flex-wrap justify-content-center">
-          <ng-container *ngFor="let image of brandImages">
-            <img [src]="image" class="brand-image align-self-center mx-2">
+          <ng-container *ngFor="let media of event?.inAssociationWith">
+            <img [src]="media.path" class="brand-image align-self-center mx-2">
           </ng-container>
         </div>
 
@@ -67,7 +67,7 @@
 </section>
 
 
-<section class="py-4">
+<section class="py-4" *ngIf="event?.pricings?.length > 0">
   <div class="container">
     <div class="row text-center">
       <div class="col">
@@ -75,45 +75,21 @@
           Pricing
         </h4>
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
-        <div class="row">
-          <div class="col-sm-4 mb-2">
-            <h5 class="f-color-secondary mb-1">Package 1</h5>
-            <h5 class="mb-1">$100</h5>
+        <div class="row d-flex justify-content-center flex-wrap">
+          <div class="col-sm-4 mb-2" *ngFor="let pricing of event?.pricings">
+            <h5 class="f-color-secondary mb-1">{{pricing.name}}</h5>
+            <h5 class="mb-1">{{pricing.price}}</h5>
             <ul class="list-no-decoration">
-              <li>Feature 1</li>
-              <li>Feature 2</li>
-              <li>Feature 3</li>
-              <li>Feature 4</li>
-            </ul>
-          </div>
-          <div class="col-sm-4 mb-2">
-            <h5 class="f-color-secondary mb-1">Package 2</h5>
-            <h5 class="mb-1">$300</h5>
-            <ul class="list-no-decoration">
-              <li>Feature 1</li>
-              <li>Feature 2</li>
-              <li>Feature 3</li>
-              <li>Feature 4</li>
-            </ul>
-          </div>
-          <div class="col-sm-4 mb-2">
-            <h5 class="f-color-secondary mb-1">Package 3</h5>
-            <h5 class="mb-1">$500</h5>
-            <ul class="list-no-decoration">
-              <li>Feature 1</li>
-              <li>Feature 2</li>
-              <li>Feature 3</li>
-              <li>Feature 4</li>
+              <li *ngFor="let feature of pricing.features">{{feature}}</li>
             </ul>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="event?.ticketsLocations?.length > 0">
   <div class="container">
     <div class="row text-center">
       <div class="col">
@@ -122,9 +98,7 @@
         </h4>
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
         <ul class="list-no-decoration">
-          <li>Address 1</li>
-          <li>Address 2</li>
-          <li>Address 3</li>
+          <li *ngFor="let location of event?.ticketsLocations">{{location}}</li>
         </ul>
 
       </div>
@@ -132,7 +106,7 @@
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="event?.contacts?.length > 0">
   <div class="container">
     <div class="row text-center">
       <div class="col">
@@ -140,39 +114,22 @@
           Contact Details
         </h4>
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
-        <div class="row">
-          <div class="col-sm-4 mt-3 text-center">
-            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
+        <div class="row d-flex justify-content-center flex-wrap">
+          <div class="col-sm-4 mt-3 text-center" *ngFor="let contact of event?.contacts">
+            <img class="team-member-avatar mb-3" [src]="contact.image?.path" [alt]="contact.name">
             <h5 class="mb-0 f-color-secondary">
-              Michael H Peebles
+              {{contact.name}}
             </h5>
-            <p class="mb-0">someone@example.com</p>
-            <p class="mb-0">815-466-1915</p>
+            <p class="mb-0">{{contact.email}}</p>
+            <p class="mb-0">{{contact.phone}}</p>
           </div>
-          <div class="col-sm-4 mt-3 text-center">
-            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
-            <h5 class="mb-0 f-color-secondary">
-              Michael H Peebles
-            </h5>
-            <p class="mb-0">someone@example.com</p>
-            <p class="mb-0">815-466-1915</p>
-          </div>
-          <div class="col-sm-4 mt-3 text-center">
-            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
-            <h5 class="mb-0 f-color-secondary">
-              Michael H Peebles
-            </h5>
-            <p class="mb-0">someone@example.com</p>
-            <p class="mb-0">815-466-1915</p>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="event?.description">
   <div class="container">
     <div class="row text-center">
       <div class="col">
@@ -180,13 +137,13 @@
           Event Details
         </h4>
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
-        <p class="mb-0">{{theEvent?.description}}</p>
+        <p class="mb-0">{{event?.description}}</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="event?.sponsors?.length > 0">
   <div class="container">
     <div class="row text-center">
       <div class="col">
@@ -195,8 +152,8 @@
         </h4>
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
         <div class="d-flex flex-wrap justify-content-center">
-          <ng-container *ngFor="let image of brandImages">
-            <img [src]="image" class="brand-image align-self-center mx-2">
+          <ng-container *ngFor="let media of event?.sponsors">
+            <img [src]="media.path" class="brand-image align-self-center mx-2" [alt]="'sponsor' + event?.name">
           </ng-container>
         </div>
 
