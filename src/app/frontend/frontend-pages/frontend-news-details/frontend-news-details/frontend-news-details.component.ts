@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { News } from 'src/app/models/news/news.model';
+import { NewsService } from 'src/app/services/news/news.service';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-frontend-news-details',
@@ -8,21 +11,22 @@ import { News } from 'src/app/models/news/news.model';
 })
 export class FrontendNewsDetailsComponent implements OnInit {
 
-  news: News = {
-    id: '',
-    name: 'The News',
-    description: `Ut euismod ultricies sollicitudin. Curabitur sed dapibus nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.`,
-    imageUrl: `https://picsum.photos/id/1026/1200/300`,
-    date: new Date(),
-    active: true,
-    featured: true,
-    created: new Date(),
-    modified: new Date()
-  };
+  news: News;
 
-  constructor() { }
+  private subSink = new SubSink();
+
+  constructor(
+    private newsService: NewsService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.subSink.sink = this.route.paramMap.subscribe(async params => {
+      const newsId = params.get('id');
+      if (newsId) {
+        this.news = await this.newsService.getNewsItem(newsId).toPromise();
+      }
+    });
   }
 
 }

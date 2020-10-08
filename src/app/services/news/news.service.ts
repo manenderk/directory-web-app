@@ -29,6 +29,17 @@ export class NewsService {
     );
   }
 
+  getNewsItemsForFrontend(): Observable<News[]> {
+    const url = `${environment.apiHost}news/frontend`;
+    return this.httpClient.get(url).pipe(
+      map((res: any[]) => {
+        return res.map(r => {
+          return this.mapResponseToNewsModel(r);
+        });
+      })
+    );
+  }
+
   getNewsItem(id: string): Observable<News> {
     const url = `${environment.apiHost}news/id/${id}`;
     return this.httpClient.get(url).pipe(

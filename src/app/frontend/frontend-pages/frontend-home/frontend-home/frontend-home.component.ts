@@ -10,6 +10,7 @@ import { NgxSlickCarouselService } from 'src/app/services/common/ngx-slick-carou
 import { NgxSlickSliderModel } from 'src/app/models/app/ngx-slick-slider.model';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { EventService } from 'src/app/services/event/event.service';
+import { NewsService } from 'src/app/services/news/news.service';
 
 @Component({
   selector: 'app-frontend-home',
@@ -72,8 +73,9 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
   constructor(
     private catService: CategoryService,
     private eventService: EventService,
+    private newsService: NewsService,
     private screenService: ScreenService,
-    private sliderService: NgxSlickCarouselService
+    private sliderService: NgxSlickCarouselService,
   ) {
 
   }
@@ -283,22 +285,6 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
       organizedNews: [],
     };
 
-    const news = [
-      'f9 Go Karting',
-      'Paramotor Air Safari',
-      'Set Menu at County',
-      'Staycation at Country',
-      'Shooting Activity',
-      'Dine on Wings',
-      'Flying Experience',
-      'Air Adventure Paragliding',
-      'Online Clue Hunt',
-      'The Great India Heist',
-      'Online Game Mission',
-      'The Quarantine Murder'
-    ];
-
-
     let rows: number = this.newsData.desktopRows;
     let cols: number = this.newsData.desktopCols;
     if (this.screenSize === 'xs') {
@@ -310,25 +296,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     }
 
 
-    let i = 1;
-    news.forEach(title => {
-      const dateIncrement = Math.ceil(Math.random() * 10);
-      const monthIncrement = Math.ceil(Math.random() * 10);
-      const eventDate = new Date(new Date().getTime() + (dateIncrement * 24 * 60 * 60 * 1000));
-      eventDate.setMonth(eventDate.getMonth() + monthIncrement);
-      this.newsData.news.push({
-        id: title,
-        name: title,
-        description: null,
-        imageUrl: `assets/demo/news${i++}.jpg`,
-        date: eventDate,
-        active: true,
-        featured: true,
-        created: null,
-        modified: null
-      });
-    });
-
+    this.newsData.news = await this.newsService.getNewsItemsForFrontend().toPromise();
 
     this.organizeNews(rows);
 
