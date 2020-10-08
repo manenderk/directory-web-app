@@ -39,6 +39,23 @@ export const navItems: SidebarItem[] = [
     ]
   },
   {
+    name: 'News',
+    icon: 'fa fa-newspaper-o',
+    link: null,
+    innerItems: [
+      {
+        name: 'All',
+        icon: 'fa fa-bars',
+        link: `${adminUrl}/news`
+      },
+      {
+        name: 'Add',
+        icon: 'fa fa-plus',
+        link: `${adminUrl}/news/add`
+      }
+    ]
+  },
+  {
     name: 'Media',
     icon: 'fa fa-file-image-o',
     link: `${adminUrl}/media/list`

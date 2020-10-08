@@ -1,11 +1,15 @@
+import { Media } from '../app/media.model';
+
 export interface News {
   id: string;
-  name: string;
-  description: string;
-  imageUrl: string;
-  date: Date;
+  title: string;
+  thumbnailImage: Media;
+  bannerImage: Media;
+  body: string;
+  views: number;
   active: boolean;
   featured: boolean;
-  created: Date;
-  modified: Date;
+  order: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
