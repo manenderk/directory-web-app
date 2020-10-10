@@ -51,7 +51,7 @@ export class FrontendListingMapComponent implements OnInit {
       };
       console.log(this.userLoc);
     }
-    catch(e) {
+    catch (e) {
       console.log(e);
     }
     finally {
@@ -62,7 +62,7 @@ export class FrontendListingMapComponent implements OnInit {
   getUserCoordinates(): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      if(!window.navigator.geolocation) {
+      if (!window.navigator.geolocation) {
         reject('Geolocation is not supported by your browser');
       } else {
         console.log('Locating…');
@@ -72,7 +72,7 @@ export class FrontendListingMapComponent implements OnInit {
           reject(error);
         });
       }
-    })
+    });
   }
 
   generateLocations() {
@@ -83,7 +83,7 @@ export class FrontendListingMapComponent implements OnInit {
 
     const range = 0.5;
 
-    for (var i = 0; i < 100; i++) {
+    for (let i = 0; i < 100; i++) {
       let multiplier1 = 1;
       let multiplier2 = 1;
       if (Math.random() < 0.5) {
@@ -105,20 +105,20 @@ export class FrontendListingMapComponent implements OnInit {
   }
 
   distance(lat1, lon1, lat2, lon2, unit) {
-    var radlat1 = Math.PI * lat1/180
-    var radlat2 = Math.PI * lat2/180
-    var theta = lon1-lon2
-    var radtheta = Math.PI * theta/180
-    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    let radlat1 = Math.PI * lat1 / 180;
+    let radlat2 = Math.PI * lat2 / 180;
+    let theta = lon1 - lon2;
+    let radtheta = Math.PI * theta / 180;
+    let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
     if (dist > 1) {
       dist = 1;
     }
-    dist = Math.acos(dist)
-    dist = dist * 180/Math.PI
-    dist = dist * 60 * 1.1515
-    if (unit=="K") { dist = dist * 1.609344 }
-    if (unit=="N") { dist = dist * 0.8684 }
-    return dist
+    dist = Math.acos(dist);
+    dist = dist * 180 / Math.PI;
+    dist = dist * 60 * 1.1515;
+    if (unit =='K') { dist = dist * 1.609344; }
+    if (unit =='N') { dist = dist * 0.8684; }
+    return dist;
   }
 
 
@@ -164,7 +164,7 @@ export class FrontendListingMapComponent implements OnInit {
           title: l.title
         })
       );
-    })
+    });
   }
 
   getRandomNumber(num: number) {
