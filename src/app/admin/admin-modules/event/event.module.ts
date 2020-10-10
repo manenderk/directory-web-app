@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PricingInputModule } from 'src/app/app-modules/pricing-input/pricing-input.module';
 import { ContactPersonInputModule } from 'src/app/app-modules/contact-person-input/contact-person-input.module';
 import { EventListComponent } from './event-list/event-list.component';
+import { LeafletMapModule } from 'src/app/app-modules/leaflet-map/leaflet-map.module';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
     MediaModule,
     MultiStringInputModule,
     PricingInputModule,
-    ContactPersonInputModule
+    ContactPersonInputModule,
+    LeafletMapModule
   ]
 })
 export class EventModule { }

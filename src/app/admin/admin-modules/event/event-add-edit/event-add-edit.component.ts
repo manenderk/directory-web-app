@@ -62,6 +62,10 @@ export class EventAddEditComponent implements OnInit {
     });
   }
 
+  coordinatesUpdates(event: {lat: number, lng: number}) {
+    console.log(event);
+  }
+
   async saveEvent() {
     if (this.eventFormGroup.valid) {
       const event: TheEvent = {

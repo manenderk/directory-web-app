@@ -1,0 +1,36 @@
+
+<button type="button" class="btn btn-info" (click)="showMap = true">Select Location on Map</button>
+
+<ng-container *ngIf="showMap">
+  <div class="map"
+    *ngIf="leafletMapOptions"
+    leaflet
+    [leafletOptions]="leafletMapOptions"
+    [(leafletCenter)]="mapData.center"
+    (leafletClick)="userClicked($event)"
+  >
+    <div *ngIf="mapData?.userPositionMarkerLayer"
+      [leafletLayer]="mapData.userPositionMarkerLayer"
+    ></div>
+    <div *ngIf="mapData?.userInputMarkerLayer"
+      [leafletLayer]="mapData.userInputMarkerLayer"
+    ></div>
+  </div>
+
+
+  <div class="search-box">
+    <input type="text" class="form-control" placeholder="Search" (keyup)="searchLocation($event)">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let result of locationSearch.results">
+        <a (click)="selectLocation(result)" class="link">{{result.label}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="text-right action-buttons">
+    <button type="button" class="btn btn-default m-2" (click)="cancelInput()">Cancel</button>
+    <button type="button" class="btn btn-primary m-2" (click)="saveInput()">Save</button>
+  </div>
+</ng-container>
+
+
