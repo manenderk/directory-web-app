@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { TheEvent } from 'src/app/models/event/event.model';
 import { environment } from 'src/environments/environment';
 import { ContactPersonService } from '../app/contact-person.service';
+import { LatLngService } from '../app/lat-lng.service';
 import { PricingService } from '../app/pricing.service';
 import { MediaService } from '../media/media.service';
 
@@ -17,7 +18,8 @@ export class EventService {
     private httpClient: HttpClient,
     private mediaService: MediaService,
     private personService: ContactPersonService,
-    private pricingService: PricingService
+    private pricingService: PricingService,
+    private latLngService: LatLngService
   ) { }
 
   getEvents(): Observable<TheEvent[]> {
@@ -95,7 +97,8 @@ export class EventService {
         return m.id;
       }) : [],
       socialLinks: event.socialLinks?.length > 0 ? event.socialLinks : [],
-      ticketsLocations: event.ticketsLocations?.length > 0 ? event.ticketsLocations : []
+      ticketsLocations: event.ticketsLocations?.length > 0 ? event.ticketsLocations : [],
+      latLng: this.latLngService.mapLatLngToRequestObj(event.latLng)
     };
     return postData;
   }
@@ -135,7 +138,8 @@ export class EventService {
         return this.personService.mapResponseToPersonModel(c);
       }) : [],
       createdAt: res.createdAt ? new Date(res.createdAt) : null,
-      updatedAt: res.updatedAt ? new Date(res.updatedAt) : null
+      updatedAt: res.updatedAt ? new Date(res.updatedAt) : null,
+      latLng: this.latLngService.mapResponseToLatLng(res.latLng)
     };
     return event;
   }

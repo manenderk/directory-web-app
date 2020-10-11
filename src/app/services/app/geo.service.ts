@@ -1,6 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import * as L from 'leaflet';
 
 @Injectable({
   providedIn: 'root'
@@ -26,22 +25,7 @@ export class GeoService implements OnDestroy {
     });
   }
 
-  getDefaultLeafletMapOption(): L.MapOptions {
-    const option: L.MapOptions = {
-      layers: [
-        L.tileLayer(
-          'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=en',
-          {
-            maxZoom: 18,
-            attribution: '@Wikimedia Maps'
-          }
-        )
-      ],
-      zoom: 12,
-      center: L.latLng(49.312926, -123.207645)
-    };
-    return option;
-  }
+
 
 
   ngOnDestroy() {

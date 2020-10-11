@@ -3,15 +3,12 @@
 
 <ng-container *ngIf="showMap">
   <div class="map"
-    *ngIf="leafletMapOptions"
+    *ngIf="mapData?.leafletMapOptions"
     leaflet
-    [leafletOptions]="leafletMapOptions"
+    [leafletOptions]="mapData.leafletMapOptions"
     [(leafletCenter)]="mapData.center"
     (leafletClick)="userClicked($event)"
   >
-    <div *ngIf="mapData?.userPositionMarkerLayer"
-      [leafletLayer]="mapData.userPositionMarkerLayer"
-    ></div>
     <div *ngIf="mapData?.userInputMarkerLayer"
       [leafletLayer]="mapData.userInputMarkerLayer"
     ></div>
@@ -19,16 +16,20 @@
 
 
   <div class="search-box">
-    <input type="text" class="form-control" placeholder="Search" (keyup)="searchLocation($event)">
+    <input type="text" class="form-control" placeholder="Search"
+      (keyup)="searchLocation($event)"
+      (keyup.enter)="searchLocation($event)"
+    >
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let result of locationSearch.results">
-        <a (click)="selectLocation(result)" class="link">{{result.label}}</a>
+        <a class="link" (click)="selectLocation(result)">{{result.label}}</a>
       </li>
     </ul>
   </div>
 
   <div class="text-right action-buttons">
     <button type="button" class="btn btn-default m-2" (click)="cancelInput()">Cancel</button>
+    <button type="button" class="btn btn-warning m-2" (click)="resetInput()">Reset</button>
     <button type="button" class="btn btn-primary m-2" (click)="saveInput()">Save</button>
   </div>
 </ng-container>

@@ -59,11 +59,8 @@ export class EventAddEditComponent implements OnInit {
       pricings: new FormControl(this.event?.pricings),
       ticketsLocations: new FormControl(this.event?.ticketsLocations),
       contacts: new FormControl(this.event?.contacts),
+      latLng: new FormControl(this.event?.latLng)
     });
-  }
-
-  coordinatesUpdates(event: {lat: number, lng: number}) {
-    console.log(event);
   }
 
   async saveEvent() {
@@ -72,11 +69,13 @@ export class EventAddEditComponent implements OnInit {
         ... this.eventFormGroup.value,
         id: this.event?.id ? this.event.id : null
       };
+
       if (event.id) {
         this.event = await this.eventService.updateEvent(event).toPromise();
       } else {
         this.event = await this.eventService.addEvent(event).toPromise();
       }
+
       Swal.fire('Done', 'Event Saved', 'success');
       this.eventFormGroup.reset();
       this.navigateToList();

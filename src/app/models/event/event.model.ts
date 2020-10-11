@@ -1,4 +1,5 @@
 import { ContactPerson } from '../app/contact-person.model';
+import { LatLng } from '../app/latLng.model';
 import { Media } from '../app/media.model';
 import { Pricing } from '../app/pricing.model';
 
@@ -25,4 +26,5 @@ export interface TheEvent {
   contacts: ContactPerson[];
   createdAt?: Date;
   updatedAt?: Date;
+  latLng: LatLng;
 }

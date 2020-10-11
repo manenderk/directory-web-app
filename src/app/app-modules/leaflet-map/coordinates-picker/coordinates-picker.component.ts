@@ -1,54 +1,49 @@
-import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubSink } from 'subsink';
 import * as L from 'leaflet';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, debounceTime} from 'rxjs/operators';
-import { GeoService } from 'src/app/services/app/geo.service';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { LatLng } from 'src/app/models/app/latLng.model';
+import { LeafletService } from 'src/app/services/app/leaflet.service';
 
 @Component({
   selector: 'app-coordinates-picker',
   templateUrl: './coordinates-picker.component.html',
-  styleUrls: ['./coordinates-picker.component.css']
+  styleUrls: ['./coordinates-picker.component.css'],
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: CoordinatesPickerComponent, multi: true}
+  ]
 })
-export class CoordinatesPickerComponent implements OnInit, OnDestroy {
+export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   showMap = false;
-
-  userPosition: Position;
-  userPositionError: PositionError;
 
   locationSearch = {
     searchSubject: new Subject<string>(),
     results: []
   };
 
-  @Output() coordinatesChanged: EventEmitter<{lat: number, lng: number}> = new EventEmitter();
-
-  userInputLatLng: {
-    lat: number,
-    lng: number
-  } = null;
+  userInputLatLng: LatLng = null;
 
   mapData: {
+    leafletMapOptions?: L.MapOptions,
     center?: L.LatLng,
-    userPositionMarkerLayer?: L.CircleMarker,
     userInputMarkerLayer?: L.Layer
   } = {};
 
-  leafletMapOptions: L.MapOptions;
-
   provider = new OpenStreetMapProvider();
+
+  private onChange: (userInputLatLng: LatLng) => void;
 
   private subSink = new SubSink();
 
   constructor(
-    private geoService: GeoService
+    private leafletService: LeafletService
   ) { }
 
   ngOnInit(): void {
-    this.leafletMapOptions = this.geoService.getDefaultLeafletMapOption();
-    this.subsribeUserPositionUpdates();
     this.subscribeSearchInput();
   }
 
@@ -56,62 +51,36 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy {
     this.subSink.unsubscribe();
   }
 
-  subsribeUserPositionUpdates() {
-    this.subSink.sink = this.geoService.userPosition.subscribe((position: Position) => {
-      if (position) {
-        this.userPosition = position;
-        this.updateUserPositionInMap();
-      }
-    });
-    this.subSink.sink = this.geoService.userPositionError.subscribe((positionError: PositionError) => {
-      this.userPositionError = positionError;
-    });
+  writeValue(userInputLatLng: LatLng) {
+    this.userInputLatLng = userInputLatLng;
+
+    this.mapData.leafletMapOptions = this.leafletService.getDefaultMapOption(this.userInputLatLng);
+
+    if (this.userInputLatLng) {
+      this.mapData.userInputMarkerLayer = this.leafletService.getMarker(this.userInputLatLng);
+      this.mapData.center = L.latLng(this.userInputLatLng.lat, this.userInputLatLng.lng);
+    }
   }
 
-  updateUserPositionInMap() {
-    this.mapData.center = L.latLng(this.userPosition.coords.latitude, this.userPosition.coords.longitude);
-    this.mapData.userPositionMarkerLayer = L.circleMarker(
-      [
-        this.userPosition.coords.latitude,
-        this.userPosition.coords.longitude
-      ],
-      {
-        radius: 6,
-        fillColor: '#2196f3',
-        fillOpacity: 1,
-        stroke: false
-      }
-    ).bindTooltip('You are currently here...', {
-      direction: 'top'
-    });
+  registerOnChange(onChange: (userInputLatLng: LatLng) => void) {
+    this.onChange = onChange;
   }
+
+  registerOnTouched() {}
 
   userClicked(event: any) {
-    this.mapData.userInputMarkerLayer = L.marker(
-      event.latlng,
-      {
-        title: 'Your Pinned Location',
-        icon: L.icon({
-          iconSize: [ 25, 41 ],
-            iconAnchor: [ 13, 41 ],
-            iconUrl: 'assets/leaflet/marker-icon.png',
-            shadowUrl: 'assets/leaflet/marker-shadow.png'
-        })
-      }
-    );
-
     this.userInputLatLng = {
       lat: event.latlng.lat,
       lng: event.latlng.lng
     };
 
-    this.coordinatesChanged.emit({
-      lat: this.userInputLatLng.lat,
-      lng: this.userInputLatLng.lng
-    });
+    this.mapData.userInputMarkerLayer = this.leafletService.getMarker(this.userInputLatLng);
+    this.onChange(this.userInputLatLng);
+
   }
 
-  searchLocation(event) {
+  searchLocation(event: any) {
+    event.preventDefault();
     const value = event.target.value;
     this.locationSearch.searchSubject.next(value);
   }
@@ -135,14 +104,25 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy {
     this.locationSearch.results = [];
   }
 
+  updateInput() {
+    this.onChange(this.userInputLatLng);
+  }
+
   cancelInput() {
-    this.coordinatesChanged.emit({lat: null, lng: null});
     this.showMap = false;
   }
 
   saveInput() {
-    this.coordinatesChanged.emit({lat: this.userInputLatLng.lat, lng: this.userInputLatLng.lng});
+    this.onChange(this.userInputLatLng);
     this.showMap = false;
+  }
+
+  resetInput() {
+    this.userInputLatLng = {
+      lat: null,
+      lng: null
+    };
+    this.onChange(this.userInputLatLng);
   }
 
 }
