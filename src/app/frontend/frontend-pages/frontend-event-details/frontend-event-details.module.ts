@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FrontendEventDetailsComponent } from './frontend-event-details/frontend-event-details.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgxMasonryModule } from 'ngx-masonry';
-import { FrontendLeafletMapModule } from '../../frontend-modules/frontend-leaflet-map/frontend-leaflet-map.module';
+import { LeafletMapModule } from 'src/app/app-modules/leaflet-map/leaflet-map.module';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     NgxMasonryModule,
-    FrontendLeafletMapModule
+    LeafletMapModule
   ]
 })
 export class FrontendEventDetailsModule { }

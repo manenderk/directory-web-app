@@ -5,8 +5,9 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LatLng } from 'src/app/models/app/latLng.model';
+import { LatLng } from 'src/app/models/app/map/latLng.model';
 import { LeafletService } from 'src/app/services/app/leaflet.service';
+import { Marker } from 'src/app/models/app/map/marker.model';
 
 @Component({
   selector: 'app-coordinates-picker',
@@ -57,7 +58,12 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
     this.mapData.leafletMapOptions = this.leafletService.getDefaultMapOption(this.userInputLatLng);
 
     if (this.userInputLatLng) {
-      this.mapData.userInputMarkerLayer = this.leafletService.getMarker(this.userInputLatLng);
+      this.mapData.leafletMapOptions.center = L.latLng(this.userInputLatLng.lat, this.userInputLatLng.lng);
+
+      const marker: Marker = {
+        latLng: this.userInputLatLng
+      };
+      this.mapData.userInputMarkerLayer = this.leafletService.getMarker(marker);
       this.mapData.center = L.latLng(this.userInputLatLng.lat, this.userInputLatLng.lng);
     }
   }
@@ -74,7 +80,11 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
       lng: event.latlng.lng
     };
 
-    this.mapData.userInputMarkerLayer = this.leafletService.getMarker(this.userInputLatLng);
+    const marker: Marker = {
+      latLng: this.userInputLatLng
+    };
+
+    this.mapData.userInputMarkerLayer = this.leafletService.getMarker(marker);
     this.onChange(this.userInputLatLng);
 
   }

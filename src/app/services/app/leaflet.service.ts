@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { LatLng } from 'src/app/models/app/latLng.model';
+import { LatLng } from 'src/app/models/app/map/latLng.model';
 import * as L from 'leaflet';
+import { Marker } from 'src/app/models/app/map/marker.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +10,37 @@ export class LeafletService {
 
   constructor() { }
 
-  getMarker(latLng: LatLng): L.Marker {
-    const marker: L.Marker = L.marker(
-      latLng,
+  getMarker(marker: Marker): L.Marker {
+    const m: L.Marker = L.marker(
+      marker.latLng,
       {
-        title: 'Your Pinned Location',
+        title: marker.title || 'Your Pinned Location',
         icon: L.icon({
           iconSize: [ 25, 41 ],
           iconAnchor: [ 13, 41 ],
-          iconUrl: 'assets/leaflet/marker-icon.png',
-          shadowUrl: 'assets/leaflet/marker-shadow.png'
+          iconUrl: marker.iconUrl || 'assets/leaflet/marker-icon.png',
+          shadowUrl: marker.shadowIconUrl || 'assets/leaflet/marker-shadow.png'
         })
       }
     );
+    return m;
+  }
+
+  getUserPositionMarker(latLng: LatLng): L.CircleMarker {
+    const marker: L.CircleMarker = L.circleMarker(
+      [
+        latLng.lat,
+        latLng.lng
+      ],
+      {
+        radius: 6,
+        fillColor: '#2196f3',
+        fillOpacity: 1,
+        stroke: false
+      }
+    ).bindTooltip('You are currently here...', {
+      direction: 'top'
+    });
     return marker;
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LatLng } from 'src/app/models/app/latLng.model';
+import { LatLng } from 'src/app/models/app/map/latLng.model';
 import * as L from 'leaflet';
 
 @Injectable({

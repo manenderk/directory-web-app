@@ -1,5 +1,5 @@
 import { ContactPerson } from '../app/contact-person.model';
-import { LatLng } from '../app/latLng.model';
+import { LatLng } from '../app/map/latLng.model';
 import { Media } from '../app/media.model';
 import { Pricing } from '../app/pricing.model';
 

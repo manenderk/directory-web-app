@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <img class="img-fluid" [src]="event?.bannerImage?.path" [alt]="event.name">
+        <img class="img-fluid" [src]="event?.bannerImage?.path" [alt]="event?.name">
       </div>
     </div>
   </div>
@@ -162,11 +162,11 @@
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="eventMarker">
   <div class="container">
     <div class="row">
       <div class="col">
-        <app-frontend-single-point-map></app-frontend-single-point-map>
+        <app-map-with-markers [markers]="[eventMarker]" [height]="'50vh'"></app-map-with-markers>
       </div>
     </div>
   </div>
