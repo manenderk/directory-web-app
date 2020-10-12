@@ -21,6 +21,9 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
   userPosition: Position;
   userPositionError: PositionError;
 
+  private window = window;
+  private navigator = window.navigator;
+
   mapData: {
     center?: L.LatLng,
     userPositionMarkerLayer?: L.CircleMarker,
@@ -34,7 +37,7 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     private geoService: GeoService,
-    private leafletService: LeafletService
+    private leafletService: LeafletService,
   ) { }
 
   ngOnInit(): void {
@@ -85,6 +88,21 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
         this.leafletService.getMarker(marker)
       );
     });
+    this.mapData.markerLayers.forEach(marker => {
+      marker.on('click', (e: L.LeafletMouseEvent) => {
+        /* if we're on iOS, open in Apple Maps */
+        if (
+          (this.navigator.platform.indexOf('iPhone') !== -1) ||
+          (navigator.platform.indexOf('iPad') !== -1) ||
+          (navigator.platform.indexOf('iPod') !== -1)
+        ) {
+          this.window.open(`maps://maps.google.com/maps?daddr=${e.latlng.lat},${e.latlng.lng}&amp;ll=`);
+        }
+        else { /* else use Google */
+          this.window.open(`https://maps.google.com/maps?daddr=${e.latlng.lat},${e.latlng.lng}&amp;ll=`);
+        }
+      });
+    });
   }
 
   updateMapCenter() {
@@ -114,4 +132,6 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
       L.latLng(boundingBox.bottomRight.lat, boundingBox.bottomRight.lon)
     );
   }
+
+  openLinkInMap() {}
 }
