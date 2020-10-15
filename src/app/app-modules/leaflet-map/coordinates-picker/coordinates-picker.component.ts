@@ -132,6 +132,7 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
       lat: null,
       lng: null
     };
+    this.mapData.userInputMarkerLayer = null;
     this.onChange(this.userInputLatLng);
   }
 
