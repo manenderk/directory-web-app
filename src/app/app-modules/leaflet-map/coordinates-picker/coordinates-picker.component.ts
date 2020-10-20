@@ -26,6 +26,8 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
     results: []
   };
 
+  thumbnailMarker: Marker;
+
   userInputLatLng: LatLng = null;
 
   mapData: {
@@ -66,6 +68,7 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
       this.mapData.userInputMarkerLayer = this.leafletService.getMarker(marker);
       this.mapData.center = L.latLng(this.userInputLatLng.lat, this.userInputLatLng.lng);
     }
+    this.updateThumbnailMarker();
   }
 
   registerOnChange(onChange: (userInputLatLng: LatLng) => void) {
@@ -116,6 +119,7 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
 
   updateInput() {
     this.onChange(this.userInputLatLng);
+    this.updateThumbnailMarker();
   }
 
   cancelInput() {
@@ -125,6 +129,7 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
   saveInput() {
     this.onChange(this.userInputLatLng);
     this.showMap = false;
+    this.updateThumbnailMarker();
   }
 
   resetInput() {
@@ -134,6 +139,17 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
     };
     this.mapData.userInputMarkerLayer = null;
     this.onChange(this.userInputLatLng);
+    this.updateThumbnailMarker();
+  }
+
+  updateThumbnailMarker() {
+    if (this.userInputLatLng) {
+      this.thumbnailMarker = {
+        latLng: this.userInputLatLng
+      };
+    } else {
+      this.thumbnailMarker = null;
+    }
   }
 
 }

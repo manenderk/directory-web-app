@@ -1,5 +1,8 @@
 
 <button type="button" class="btn btn-info" (click)="showMap = true">Select Location on Map</button>
+<div *ngIf="thumbnailMarker" class="my-2">
+  <app-map-with-markers [markers]="[thumbnailMarker]" [height]="'200px'" [width]="'200px'"></app-map-with-markers>
+</div>
 
 <ng-container *ngIf="showMap">
   <div class="map"
