@@ -61,7 +61,7 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="What are you looking for?">
+              <input type="text" class="form-control" placeholder="What are you looking for?" [(ngModel)]="filters.name" (keyup)="searchBusiness()">
               <div class="input-group-append">
                 <span class="input-group-text" ><i class="fa fa-search"></i></span>
               </div>
@@ -69,11 +69,15 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Location">
+              <input type="text" class="form-control" placeholder="Location" [(ngModel)]="filters.locationName" (keyup)="searchLocation()">
               <div class="input-group-append">
                 <span class="input-group-text" ><i class="fa fa-map-marker"></i></span>
               </div>
             </div>
+            <ul class="list-group location-search-results" *ngIf="showLocationSuggestions">
+              <li class="list-group-item link" *ngFor="let result of locationResults" (click)="updateCurrentLocation(result)">{{result.label}}</li>
+              <li *ngIf="locationResults.length === 0">No Results found</li>
+            </ul>
           </div>
           <div class="form-group">
             <select [(ngModel)]="filters.categoryId" class="form-control custom-select" (change)="getBusinesses()">
@@ -120,7 +124,7 @@
       <button class="btn btn-info btn-icon-circle d-lg-none map-close-btn" (click)="toggleScreenSectionsDisplay('map')">
         <i class="fa fa-times"></i>
       </button>
-      <app-map-with-markers [markers]="[]" [class]="'height100vhResHeader'"></app-map-with-markers>
+      <app-map-with-markers [markers]="businessMarkers" [class]="'height100vhResHeader'"></app-map-with-markers>
     </div>
   </div>
 </div>

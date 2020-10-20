@@ -9,6 +9,12 @@ import { CategoryService } from 'src/app/services/category/category.service';
 import { BusinessService } from 'src/app/services/business/business.service';
 import { ActivatedRoute } from '@angular/router';
 import { CompareById } from 'src/app/utils/functions/compareById.function';
+import { LatLng } from 'src/app/models/app/map/latLng.model';
+import { GeoService } from 'src/app/services/app/geo.service';
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Marker } from 'src/app/models/app/map/marker.model';
 
 @Component({
   selector: 'app-frontend-listing',
@@ -37,11 +43,21 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   currentCategory: Category;
   businesses: Business[] = [];
 
-  filters = {
+  businessMarkers: Marker[] = [];
+
+  filters: {
+    name: string,
+    categoryId: string,
+    sortBy: string,
+    locationName: string,
+    locationCoordinates: LatLng,
+    distance: number
+  } = {
     name: '',
     categoryId: '',
     sortBy: 'name',
-    location: '',
+    locationName: '',
+    locationCoordinates: null,
     distance: 10
   };
 
@@ -55,8 +71,16 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     { label: 'Top Listing', value: 'featured'},
   ];
 
+  showLocationSuggestions = false;
+  locationResults: any[] = [];
+
   compareById = CompareById;
 
+
+  private provider = new OpenStreetMapProvider();
+
+  private businessNameSearchSubject: Subject<string> = new Subject();
+  private locationSearchSubject: Subject<string> = new Subject();
   private subs = new SubSink();
 
   constructor(
@@ -64,21 +88,50 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     private screenService: ScreenService,
     private variableService: VariableService,
     private businessService: BusinessService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private geoService: GeoService,
   ) { }
 
   ngOnInit(): void {
+
+    this.subsribeLocationSearch();
+    this.subsribeBusinessNameSearch();
+
     this.subs.sink = this.route.paramMap.subscribe(params => {
       if (params.get('id')) {
         this.filters.categoryId = params.get('id');
         this.getBusinesses();
       }
     });
+
     this.intialize();
+    this.getUserPosition();
   }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  getUserPosition() {
+    this.subs.sink = this.geoService.userPosition.subscribe(async pos => {
+      if (!this.filters.locationCoordinates && pos?.coords) {
+        this.filters.locationCoordinates = {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
+        };
+        this.getBusinesses();
+
+        if (this.filters.locationCoordinates) {
+          const locationData: any = await this.geoService.getAddress(this.filters.locationCoordinates).toPromise();
+          if (locationData?.address) {
+            const address: any = locationData.address;
+            this.filters.locationName = address.city || address.state_district || address.state;
+          }
+
+        }
+
+      }
+    });
   }
 
   async intialize() {
@@ -100,10 +153,60 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
 
   async getBusinesses() {
     this.businesses = await this.businessService.getFrontendBusinesses(this.filters, this.filters.sortBy).toPromise();
+    this.updateMapMarkers();
   }
 
   updateMapMarkers() {
+    console.log(this.businesses);
+    this.businessMarkers = [];
+    this.businesses.forEach(business => {
+      if (business.latLng?.lat && business.latLng?.lng) {
+        const marker: Marker = {
+          latLng: business.latLng,
+          title: business.name
+        };
+        this.businessMarkers.push(marker);
+      }
+    });
+    console.log(this.businessMarkers);
+  }
 
+  searchLocation() {
+    this.locationSearchSubject.next(this.filters.locationName);
+  }
+
+  searchBusiness() {
+    this.businessNameSearchSubject.next(this.filters.name);
+  }
+
+  subsribeLocationSearch() {
+    this.subs.sink = this.locationSearchSubject.asObservable().pipe(
+      debounceTime(1000),
+      distinctUntilChanged()
+    ).subscribe(async value => {
+      this.showLocationSuggestions = true;
+      this.locationResults = await this.provider.search({ query: value });
+    });
+  }
+
+  subsribeBusinessNameSearch() {
+    this.subs.sink = this.businessNameSearchSubject.asObservable().pipe(
+      debounceTime(1000),
+      distinctUntilChanged()
+    ).subscribe(value => {
+      this.filters.name = value;
+      this.getBusinesses();
+    });
+  }
+
+  updateCurrentLocation(location: any) {
+    this.showLocationSuggestions = false;
+    this.filters.locationName = location.label;
+    this.filters.locationCoordinates = {
+      lat: location.y,
+      lng: location.x
+    };
+    this.getBusinesses();
   }
 
   toggleCardDisplayType() {
@@ -126,21 +229,16 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     if (!this.toggleScreenType.includes(this.screenType)) {
       return;
     }
-
     if (currentScreen === 'filter' && this.collapseDisplayVars.filter) {
-
       this.collapseDisplayVars = {
         filter: false,
         map: true,
       };
-
     } else if (currentScreen === 'map' && this.collapseDisplayVars.map) {
-
       this.collapseDisplayVars = {
         filter: true,
         map: false,
       };
-
     } else {
       this.collapseDisplayVars = {
         filter: true,
