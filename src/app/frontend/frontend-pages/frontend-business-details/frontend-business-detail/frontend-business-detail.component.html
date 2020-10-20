@@ -33,7 +33,7 @@
         <h2 class="mb-1 f-color-primary">{{business?.name}}</h2>
         <div class="header-bottom-bar mb-1 mx-auto b-color-primary-accent"></div>
         <p class="text-muted mb-0">
-          <rating [(ngModel)]="business.rating" [max]="5" [readonly]="true"></rating> &nbsp; ({{business.reviews}} Reviews)
+          <rating [(ngModel)]="business.starRating" [max]="5" [readonly]="true"></rating> &nbsp; ( Reviews)
         </p>
       </div>
       <div class="col-12 text-center">

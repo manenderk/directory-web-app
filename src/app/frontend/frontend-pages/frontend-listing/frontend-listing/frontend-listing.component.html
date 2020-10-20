@@ -7,8 +7,13 @@
           <div class="col-lg-8 pb-1 pb-lg-0 breadcrumb-section">
             <nav class="mb-1" aria-label="breadcrumb">
               <ol class="breadcrumb my-breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Library</li>
+                <li class="breadcrumb-item"><a [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page"
+                  *ngIf="currentCategory"
+                  [routerLink]="['/listing', currentCategory?.id]" routerLinkActive="router-link-active"
+                >
+                  {{currentCategory?.name}}
+                </li>
               </ol>
             </nav>
           </div>
@@ -48,49 +53,48 @@
 
       <div class="row">
         <div class="col-lg-4 filter-section" [ngClass]="{'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.filter}">
-          <form>
-            <div class="form-group">
-              <select class="form-control custom-select">
-                <option selected>Sort</option>
-                <option>Top Listing</option>
-                <option>Distance</option>
-                <option>Name</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="What are you looking for?">
-                <div class="input-group-append">
-                  <span class="input-group-text" ><i class="fa fa-search"></i></span>
-                </div>
+          <div class="form-group">
+            <select class="form-control custom-select" [(ngModel)]="filters.sortBy" (change)="getBusinesses()">
+              <option value="" disabled>Sort By</option>
+              <option *ngFor="let option of sortOptions" [value]="option.value">{{option.label}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="What are you looking for?">
+              <div class="input-group-append">
+                <span class="input-group-text" ><i class="fa fa-search"></i></span>
               </div>
             </div>
-            <div class="form-group">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Location">
-                <div class="input-group-append">
-                  <span class="input-group-text" ><i class="fa fa-map-marker"></i></span>
-                </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Location">
+              <div class="input-group-append">
+                <span class="input-group-text" ><i class="fa fa-map-marker"></i></span>
               </div>
             </div>
-            <div class="form-group">
-              <select class="form-control custom-select">
-                <option *ngFor="let category of categories">{{category.name}}</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="distance-range-input" class="my-0">Distance</label><br>
-              <mat-slider
-              thumbLabel
-              tickInterval="1000"
-              min="1"
-              max="10"></mat-slider>
-            </div>
-            <div class="text-right d-lg-none" >
-              <button type="button" class="btn btn-default mr-2" (click)="toggleScreenSectionsDisplay('filter')">Cancel</button>
-              <button type="submit" class="btn btn-info">Done</button>
-            </div>
-          </form>
+          </div>
+          <div class="form-group">
+            <select [(ngModel)]="filters.categoryId" class="form-control custom-select" (change)="getBusinesses()">
+              <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="distance-range-input" class="my-0">Distance : {{filters.distance + 'Kms'}}</label><br>
+            <mat-slider
+            thumbLabel
+            tickInterval="1000"
+            min="1"
+            max="50"
+            [(ngModel)]="filters.distance"
+            (change)="getBusinesses()"
+            ></mat-slider>
+          </div>
+          <div class="text-right d-lg-none" >
+            <button type="button" class="btn btn-default mr-2" (click)="toggleScreenSectionsDisplay('filter')">Cancel</button>
+            <button type="submit" class="btn btn-info">Done</button>
+          </div>
         </div>
         <div class="col-lg-8 py-2 bg-grey-1 listing-grid" appMonitorScroll (scrolledUp)="listingScrolledUp = true" (scrolledDown)="listingScrolledUp = false">
           <div class="row">
@@ -116,7 +120,7 @@
       <button class="btn btn-info btn-icon-circle d-lg-none map-close-btn" (click)="toggleScreenSectionsDisplay('map')">
         <i class="fa fa-times"></i>
       </button>
-      <app-frontend-listing-map></app-frontend-listing-map>
+      <app-map-with-markers [markers]="[]" [class]="'height100vhResHeader'"></app-map-with-markers>
     </div>
   </div>
 </div>

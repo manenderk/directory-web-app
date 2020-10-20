@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Business } from 'src/app/models/business/business.model';
-import { PicsumService } from 'src/app/services/extra/picsum.service';
 import { ScreenService } from 'src/app/services/common/screen.service';
 import { NgxSlickCarouselService } from 'src/app/services/common/ngx-slick-carousel.service';
 import { AvailablePaymentMethods } from 'src/app/models/payment/available-payment-methods.model';
@@ -35,7 +34,6 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
   teamMembers: TeamMember[];
 
   constructor(
-    private picsumService: PicsumService,
     private screenService: ScreenService,
     private sliderConfigService: NgxSlickCarouselService
   ) { }
@@ -43,7 +41,6 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setSliderConfig();
     this.setBusinessImages();
-    this.setBusinessData();
     this.setProductsServicesImages();
     this.setTeamMmebers();
   }
@@ -58,20 +55,6 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
     this.images.push('https://picsum.photos/id/1008/300');
     this.images.push('https://picsum.photos/id/1082/300');
     this.images.push('https://picsum.photos/id/160/300');
-  }
-
-  setBusinessData() {
-    /* this.business = {
-      id: '',
-      name: 'Business Name',
-      description: `Ut euismod ultricies sollicitudin. Curabitur sed dapibus nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.`,
-      thumbnail: null,
-      shortAddress: null,
-      categoryIds: null,
-      reviews: 20,
-      rating: 5
-    }; */
   }
 
   setProductsServicesImages() {

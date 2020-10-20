@@ -14,7 +14,7 @@ const routes: Routes = [
         loadChildren: () => import('./frontend-pages/frontend-home/frontend-home.module').then(mod => mod.FrontendHomeModule)
       },
       {
-        path: 'listing',
+        path: 'listing/:id',
         loadChildren: () => import('./frontend-pages/frontend-listing/frontend-listing.module').then(mod => mod.FrontendListingModule)
       },
       {

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Business } from 'src/app/models/business/business.model';
+import { addQueryParamsToUrl } from 'src/app/utils/functions/addQueryParamsToUrl.function';
 import { environment } from 'src/environments/environment';
 import { ContactPersonService } from '../app/contact-person.service';
 import { LatLngService } from '../app/lat-lng.service';
@@ -40,6 +41,19 @@ export class BusinessService {
     return this.httpClient.get(url).pipe(
       map(res => {
         return this.mapResponseToBusinessModel(res);
+      })
+    );
+  }
+
+  getFrontendBusinesses(filters: any, sortBy: string = 'name'): Observable<Business[]> {
+    let url = `${environment.apiHost}business/frontend`;
+    filters.sortBy = sortBy;
+    url = addQueryParamsToUrl(url, filters);
+    return this.httpClient.get(url).pipe(
+      map((businesses: any[]) => {
+        return businesses.map(business => {
+          return this.mapResponseToBusinessModel(business);
+        });
       })
     );
   }

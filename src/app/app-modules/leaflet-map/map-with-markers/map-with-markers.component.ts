@@ -14,9 +14,9 @@ import { SubSink } from 'subsink';
 export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() markers: Marker[] = [];
-
   @Input() height: string;
   @Input() width: string;
+  @Input() class: string;
 
   userPosition: Position;
   userPositionError: PositionError;
@@ -106,6 +106,11 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateMapCenter() {
+
+    if (!this.markers || this.markers.length === 0) {
+      return;
+    }
+
     const locations: any[] = [];
     this.markers.forEach(marker => {
       locations.push({

@@ -10,7 +10,7 @@ export class FrontendBusinessListingCardComponent implements OnInit {
 
   @Input() business: Business;
 
-  @Input() displayType: string = 'horizontal';
+  @Input() displayType = 'horizontal';
 
 
   constructor() { }

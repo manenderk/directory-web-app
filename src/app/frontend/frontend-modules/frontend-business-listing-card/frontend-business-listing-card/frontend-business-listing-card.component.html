@@ -5,7 +5,7 @@
 
           <div [ngClass]="displayType === 'horizontal' ? 'col-4' : 'col-12'">
             <a class="d-block height100Per" [routerLink]="['/business', business.id]" routerLinkActive="router-link-active" >
-              <div class="rounded business-thumbnail height100Per" [ngStyle]="{'background-image': 'url(' + business.thumbnail + ')'}">
+              <div class="rounded business-thumbnail height100Per" [ngStyle]="{'background-image': 'url(' + business.thumbnailImage?.path + ')'}">
 
               </div>
             </a>
@@ -17,9 +17,9 @@
             <a class="no-decoration" [routerLink]="['/business', business.id]" routerLinkActive="router-link-active" >
               <h5 class="card-title mb-1 fw-medium f-color-primary">{{business.name}}</h5>
               <p class="card-text f-color-secondary">
-                {{business.shortAddress}}
+                {{business.address}}
                 <br>
-                <small class="text-muted">{{business.rating}} {{business.reviews}}</small>
+                <small class="text-muted">{{business.starRating}} <!--REVIEWS--></small>
               </p>
             </a>
 

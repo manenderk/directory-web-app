@@ -1,13 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Category } from 'src/app/models/category/category.model';
 import { TheEvent } from 'src/app/models/event/event.model';
-import { PicsumService } from 'src/app/services/extra/picsum.service';
 import { ScreenService } from 'src/app/services/common/screen.service';
 import { News } from 'src/app/models/news/news.model';
-import { newArray } from '@angular/compiler/src/util';
 import { SubSink } from 'subsink';
 import { NgxSlickCarouselService } from 'src/app/services/common/ngx-slick-carousel.service';
-import { NgxSlickSliderModel } from 'src/app/models/app/ngx-slick-slider.model';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { EventService } from 'src/app/services/event/event.service';
 import { NewsService } from 'src/app/services/news/news.service';

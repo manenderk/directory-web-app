@@ -23,13 +23,13 @@
 
 .top-section {
   max-height: 0px;
-  transition: max-height 0.5s ease-out;
+  transition: max-height 1s ease-out;
   overflow: hidden;
 }
 
 .top-section.show {
   max-height: 300px;
-  transition: max-height 0.5s ease-in;
+  transition: max-height 1s ease-in;
 }
 
 

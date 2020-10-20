@@ -130,7 +130,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .height100vhResHeader{
-  height: calc(100vh - 56px);
+  height: calc(100vh - 56px) !important;
 }
 
 .input-group .input-group-text {
