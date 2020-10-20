@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Business } from 'src/app/models/business/business.model';
 import { Category } from 'src/app/models/category/category.model';
 import { BusinessService } from 'src/app/services/business/business.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { CompareById } from 'src/app/utils/functions/compareById.function';
 import { SortArrayOfObjectsByKey } from 'src/app/utils/functions/sortArrayOfObjectsByKey.function';
+import { environment } from 'src/environments/environment';
 import { SubSink } from 'subsink';
 import Swal from 'sweetalert2';
 
@@ -32,6 +33,7 @@ export class BusinessAddEditComponent implements OnInit {
     private route: ActivatedRoute,
     private businessService: BusinessService,
     private categoryService: CategoryService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -96,6 +98,10 @@ export class BusinessAddEditComponent implements OnInit {
 
       Swal.fire('Done', 'Business Saved', 'success');
     }
+  }
+
+  navigateToList() {
+    this.router.navigate(['/' + environment.adminRoutePrefix + '/business']);
   }
 
 }

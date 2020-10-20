@@ -77,7 +77,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     const imageIds: number[] = await this.picsumService.getPicsumImageIds(104).toPromise();
 
     for (let i = 1; i <= 100; i++) {
-      this.businesses.push({
+      /* this.businesses.push({
         id: i.toString(),
         name: names[i * 2 - 1] + ' ' + names[i * 2],
         description: null,
@@ -88,7 +88,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
         }),
         reviews: Math.ceil(Math.random() * 100),
         rating: Math.ceil(Math.random() * 5)
-      });
+      }); */
     }
   }
 

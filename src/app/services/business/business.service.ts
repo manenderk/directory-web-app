@@ -36,7 +36,7 @@ export class BusinessService {
   }
 
   getBusiness(id: string): Observable<Business> {
-    const url = `${environment.apiHost}business/${id}`;
+    const url = `${environment.apiHost}business/id/${id}`;
     return this.httpClient.get(url).pipe(
       map(res => {
         return this.mapResponseToBusinessModel(res);
@@ -55,7 +55,6 @@ export class BusinessService {
   }
 
   updateBusiness(business: Business): Observable<Business> {
-    console.log(business);
     const url = `${environment.apiHost}business/${business.id}`;
     const postData = this.mapModelToRequestObject(business);
     return this.httpClient.put(url, postData).pipe(

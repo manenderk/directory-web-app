@@ -61,7 +61,7 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
   }
 
   setBusinessData() {
-    this.business = {
+    /* this.business = {
       id: '',
       name: 'Business Name',
       description: `Ut euismod ultricies sollicitudin. Curabitur sed dapibus nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus.
@@ -71,7 +71,7 @@ export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
       categoryIds: null,
       reviews: 20,
       rating: 5
-    };
+    }; */
   }
 
   setProductsServicesImages() {

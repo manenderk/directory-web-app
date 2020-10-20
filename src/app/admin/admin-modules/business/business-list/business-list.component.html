@@ -1,1 +1,39 @@
-<p>business-list works!</p>
+<div class="row bg-grey-1 py-3">
+  <div class="col-12">
+    <h4 class="mb-0">Businesss
+    </h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <p>Showing total {{businesses?.length}} Businesss</p>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Active</th>
+        <th>Featured</th>
+        <th>Category</th>
+        <th>Contact</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let business of businesses">
+        <td>{{business.name}}</td>
+        <td>{{business.active ? 'Yes' : 'No'}}</td>
+        <td>{{business.featured ? 'Yes' : 'No'}}</td>
+        <td>{{business.category?.name}}</td>
+        <td>{{business.phone}}</td>
+        <td>{{business.email}}</td>
+        <td>{{business.address}}</td>
+        <td>
+          <i class="fa fa-edit" (click)="editBusiness(business)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
