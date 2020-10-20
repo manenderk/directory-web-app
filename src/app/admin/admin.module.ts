@@ -14,6 +14,10 @@ const routes: Routes = [
         loadChildren: () => import('./admin-modules/category/category.module').then(mod => mod.CategoryModule)
       },
       {
+        path: 'business',
+        loadChildren: () => import('./admin-modules/business/business.module').then(mod => mod.BusinessModule)
+      },
+      {
         path: 'media',
         loadChildren: () => import('./admin-modules/media/media.module').then(mod => mod.MediaModule)
       },

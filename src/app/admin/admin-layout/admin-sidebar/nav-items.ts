@@ -39,6 +39,23 @@ export const navItems: SidebarItem[] = [
     ]
   },
   {
+    name: 'Business',
+    icon: 'fa fa-building-o',
+    link: null,
+    innerItems: [
+      {
+        name: 'All',
+        icon: 'fa fa-bars',
+        link: `${adminUrl}/business`
+      },
+      {
+        name: 'Add',
+        icon: 'fa fa-plus',
+        link: `${adminUrl}/business/add`
+      }
+    ]
+  },
+  {
     name: 'News',
     icon: 'fa fa-newspaper-o',
     link: null,

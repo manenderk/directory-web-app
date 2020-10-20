@@ -1,0 +1,219 @@
+<div class="p-2">
+  <div>
+    <button class="btn btn-info mr-2" type="button" *ngIf="!this.openingHours"  (click)="showAddEditForm = true">Add</button>
+    <button class="btn btn-info mr-2" type="button" *ngIf="this.openingHours"  (click)="showAddEditForm = true">Edit</button>
+    <button class="btn btn-info mr-2" type="button" *ngIf="this.openingHours"  (click)="deleteHour()">Delete</button>
+  </div>
+  <div *ngIf="openingHours">
+    <div>
+      <strong>Monday</strong>
+      {{!openingHours.monday.closed ? (openingHours.monday.startTime | date : 'shortTime') + ' - ' + (openingHours.monday.endTime | date : 'shortTime') : 'closed'}}
+    </div>
+    <div><strong>Tuesday</strong>
+      {{!openingHours.tuesday.closed ? (openingHours.tuesday.startTime | date : 'shortTime') + ' - ' + (openingHours.tuesday.endTime | date : 'shortTime') : 'closed'}}
+    </div>
+    <div><strong>Wednesday</strong>
+      {{!openingHours.wednesday.closed ? (openingHours.wednesday.startTime | date : 'shortTime') + ' - ' + (openingHours.wednesday.endTime | date : 'shortTime') : 'closed'}}
+    </div>
+    <div><strong>Thursday</strong>
+      {{!openingHours.thursday.closed ? (openingHours.thursday.startTime | date : 'shortTime') + ' - ' + (openingHours.thursday.endTime | date : 'shortTime') : 'closed'}}
+    </div>
+    <div><strong>Friday</strong>
+      {{!openingHours.friday.closed ? (openingHours.friday.startTime | date : 'shortTime') + ' - ' + (openingHours.friday.endTime | date : 'shortTime') : 'closed'}}
+    </div>
+    <div><strong>Saturday</strong>
+      {{!openingHours.saturday.closed ? (openingHours.saturday.startTime | date : 'shortTime') + ' - ' + (openingHours.saturday.endTime | date : 'shortTime') : 'closed'}}
+    </div>
+    <div><strong>Sunday</strong>
+      {{!openingHours.sunday.closed ? (openingHours.sunday.startTime | date : 'shortTime') + ' - ' + (openingHours.sunday.endTime | date : 'shortTime') : 'closed'}}
+    </div>
+  </div>
+</div>
+
+
+<div class="popup" *ngIf="showAddEditForm && addEditFormGroup">
+  <div class="popup-container p-2">
+    <form [formGroup]="addEditFormGroup">
+      <table class="table hours-add-edit-table">
+        <tr>
+          <th>Day</th>
+          <th>Closed</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+        </tr>
+        <tr>
+          <th>Monday</th>
+          <td>
+            <input type="checkbox" formControlName="mondayClosed" #mondayClosed>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="mondayStartTime"
+              [owlDateTime]="monStartTime" [owlDateTimeTrigger]="monStartTime"
+              [attr.disabled]="mondayClosed.checked  ? 'disabled' : null"
+              placeholder="08:00 AM"
+            >
+            <owl-date-time #monStartTime [pickerType]="'timer'" [disabled]="mondayClosed.checked"></owl-date-time>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="mondayEndTime"
+              [owlDateTime]="monEndTime" [owlDateTimeTrigger]="monEndTime"
+              [attr.disabled]="mondayClosed.checked  ? 'disabled' : null"
+              placeholder="05:00 PM"
+            >
+            <owl-date-time #monEndTime [pickerType]="'timer'" [disabled]="mondayClosed.checked"></owl-date-time>
+          </td>
+        </tr>
+        <tr>
+          <th>Tuesday</th>
+          <td>
+            <input type="checkbox" formControlName="tuesdayClosed" #tuesdayClosed>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="tuesdayStartTime"
+              [owlDateTime]="tueStartTime" [owlDateTimeTrigger]="tueStartTime"
+              [attr.disabled]="tuesdayClosed.checked  ? 'disabled' : null"
+              placeholder="08:00 AM"
+            >
+            <owl-date-time #tueStartTime [pickerType]="'timer'" [disabled]="tuesdayClosed.checked"></owl-date-time>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="tuesdayEndTime"
+              [owlDateTime]="tueEndTime" [owlDateTimeTrigger]="tueEndTime"
+              [attr.disabled]="tuesdayClosed.checked  ? 'disabled' : null"
+              placeholder="05:00 PM"
+            >
+            <owl-date-time #tueEndTime [pickerType]="'timer'" [disabled]="tuesdayClosed.checked"></owl-date-time>
+          </td>
+        </tr>
+        <tr>
+          <th>Wednesday</th>
+          <td>
+            <input type="checkbox" formControlName="wednesdayClosed" #wednesdayClosed>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="wednesdayStartTime"
+              [owlDateTime]="wedStartTime" [owlDateTimeTrigger]="wedStartTime"
+              [attr.disabled]="wednesdayClosed.checked  ? 'disabled' : null"
+              placeholder="08:00 AM"
+            >
+            <owl-date-time #wedStartTime [pickerType]="'timer'" [disabled]="wednesdayClosed.checked"></owl-date-time>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="wednesdayEndTime"
+              [owlDateTime]="wedEndTime" [owlDateTimeTrigger]="wedEndTime"
+              [attr.disabled]="wednesdayClosed.checked  ? 'disabled' : null"
+              placeholder="05:00 PM"
+            >
+            <owl-date-time #wedEndTime [pickerType]="'timer'" [disabled]="wednesdayClosed.checked"></owl-date-time>
+          </td>
+        </tr>
+        <tr>
+          <th>Thursday</th>
+          <td>
+            <input type="checkbox" formControlName="thursdayClosed" #thursdayClosed>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="thursdayStartTime"
+              [owlDateTime]="thuStartTime" [owlDateTimeTrigger]="thuStartTime"
+              [attr.disabled]="thursdayClosed.checked  ? 'disabled' : null"
+              placeholder="08:00 AM"
+            >
+            <owl-date-time #thuStartTime [pickerType]="'timer'" [disabled]="thursdayClosed.checked"></owl-date-time>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="thursdayEndTime"
+              [owlDateTime]="thuEndTime" [owlDateTimeTrigger]="thuEndTime"
+              [attr.disabled]="thursdayClosed.checked  ? 'disabled' : null"
+              placeholder="05:00 PM"
+            >
+            <owl-date-time #thuEndTime [pickerType]="'timer'" [disabled]="thursdayClosed.checked"></owl-date-time>
+          </td>
+        </tr>
+        <tr>
+          <th>Friday</th>
+          <td>
+            <input type="checkbox" formControlName="fridayClosed" #fridayClosed>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="fridayStartTime"
+              [owlDateTime]="friStartTime" [owlDateTimeTrigger]="friStartTime"
+              [attr.disabled]="fridayClosed.checked  ? 'disabled' : null"
+              placeholder="08:00 AM"
+            >
+            <owl-date-time #friStartTime [pickerType]="'timer'" [disabled]="fridayClosed.checked"></owl-date-time>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="fridayEndTime"
+              [owlDateTime]="friEndTime" [owlDateTimeTrigger]="friEndTime"
+              [attr.disabled]="fridayClosed.checked  ? 'disabled' : null"
+              placeholder="05:00 PM"
+            >
+            <owl-date-time #friEndTime [pickerType]="'timer'" [disabled]="fridayClosed.checked"></owl-date-time>
+          </td>
+        </tr>
+        <tr>
+          <th>Saturday</th>
+          <td>
+            <input type="checkbox" formControlName="saturdayClosed" #saturdayClosed>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="saturdayStartTime"
+              [owlDateTime]="satStartTime" [owlDateTimeTrigger]="satStartTime"
+              [attr.disabled]="saturdayClosed.checked  ? 'disabled' : null"
+              placeholder="08:00 AM"
+            >
+            <owl-date-time #satStartTime [pickerType]="'timer'" [disabled]="saturdayClosed.checked"></owl-date-time>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="saturdayEndTime"
+              [owlDateTime]="satEndTime" [owlDateTimeTrigger]="satEndTime"
+              [attr.disabled]="saturdayClosed.checked  ? 'disabled' : null"
+              placeholder="05:00 PM"
+            >
+            <owl-date-time #satEndTime [pickerType]="'timer'" [disabled]="saturdayClosed.checked"></owl-date-time>
+          </td>
+        </tr>
+        <tr>
+          <th>Sunday</th>
+          <td>
+            <input type="checkbox" formControlName="sundayClosed" #sundayClosed>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="sundayStartTime"
+              [owlDateTime]="sunStartTime" [owlDateTimeTrigger]="sunStartTime"
+              [attr.disabled]="sundayClosed.checked  ? 'disabled' : null"
+              placeholder="08:00 AM"
+            >
+            <owl-date-time #sunStartTime [pickerType]="'timer'" [disabled]="sundayClosed.checked"></owl-date-time>
+          </td>
+          <td>
+            <input class="form-control" type="text"
+              formControlName="sundayEndTime"
+              [owlDateTime]="sunEndTime" [owlDateTimeTrigger]="sunEndTime"
+              [attr.disabled]="sundayClosed.checked  ? 'disabled' : null"
+              placeholder="05:00 PM"
+            >
+            <owl-date-time #sunEndTime [pickerType]="'timer'" [disabled]="sundayClosed.checked"></owl-date-time>
+          </td>
+        </tr>
+      </table>
+      <div class="text-right">
+        <button type="button" class="btn btn-default m-2" (click)="showAddEditForm = false">Cancel</button>
+        <button type="submit" class="btn btn-primary m-2" (click)="saveHours()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

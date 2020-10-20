@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Category } from 'src/app/models/category/category.model';
 import { environment } from 'src/environments/environment';
-import { FormDataService } from '../common/form-data.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MediaService } from '../media/media.service';
@@ -14,7 +13,6 @@ export class CategoryService {
 
   constructor(
     private httpClient: HttpClient,
-    private formDataService: FormDataService,
     private mediaService: MediaService,
   ) { }
 

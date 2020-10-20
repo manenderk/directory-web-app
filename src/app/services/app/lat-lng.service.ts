@@ -10,6 +10,9 @@ export class LatLngService {
   constructor() { }
 
   mapLatLngToRequestObj(latLng: LatLng): any {
+    if (!latLng) {
+      return null;
+    }
     const obj = {
       type: 'Point',
       coordinates: [latLng.lat, latLng.lng]
