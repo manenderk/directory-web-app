@@ -26,5 +26,4 @@ export class MonitorScrollDirective {
     }
     this.lastScrollTop = st <= 0 ? 0 : st;
   }
-
 }
