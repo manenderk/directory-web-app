@@ -10,6 +10,7 @@
     <table class="table">
       <thead>
         <tr>
+          <td>Number</td>
           <td>Name</td>
           <td>Image</td>
           <td>Parent Category</td>
@@ -20,6 +21,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let category of categories">
+          <td>{{category.number}}</td>
           <td>{{category.name}}</td>
           <td>
             <app-media-item [media]="category.image"></app-media-item>

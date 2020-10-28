@@ -48,10 +48,10 @@ export class LeafletService {
     const option: L.MapOptions = {
       layers: [
         L.tileLayer(
-          'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=en',
+          'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png?lang=en',
           {
             maxZoom: 18,
-            attribution: '@Wikimedia Maps'
+            attribution: '@Open Street Maps'
           }
         )
       ],

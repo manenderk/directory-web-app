@@ -82,6 +82,7 @@ export class CategoryService {
     }
     const category: Category = {
       id: res._id,
+      number: res.number,
       name: res.name,
       image: this.mediaService.mapMediaResponseToModel(res.image),
       parentCategory: this.mapCategoryToModel(res.parentCategory),

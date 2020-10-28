@@ -157,7 +157,6 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   }
 
   updateMapMarkers() {
-    console.log(this.businesses);
     this.businessMarkers = [];
     this.businesses.forEach(business => {
       if (business.latLng?.lat && business.latLng?.lng) {
@@ -168,7 +167,6 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
         this.businessMarkers.push(marker);
       }
     });
-    console.log(this.businessMarkers);
   }
 
   searchLocation() {
