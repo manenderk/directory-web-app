@@ -22,7 +22,6 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
   userPositionError: PositionError;
 
   private window = window;
-  private navigator = window.navigator;
 
   mapData: {
     center?: L.LatLng,
@@ -90,17 +89,8 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
     });
     this.mapData.markerLayers.forEach(marker => {
       marker.on('click', (e: L.LeafletMouseEvent) => {
-        /* if we're on iOS, open in Apple Maps */
-        if (
-          (this.navigator.platform.indexOf('iPhone') !== -1) ||
-          (navigator.platform.indexOf('iPad') !== -1) ||
-          (navigator.platform.indexOf('iPod') !== -1)
-        ) {
-          this.window.open(`maps://maps.google.com/maps?daddr=${e.latlng.lat},${e.latlng.lng}&amp;ll=`);
-        }
-        else { /* else use Google */
-          this.window.open(`https://maps.google.com/maps?daddr=${e.latlng.lat},${e.latlng.lng}&amp;ll=`);
-        }
+        const link = this.leafletService.getGoogleMapLink(e.latlng);
+        this.window.open(link);
       });
     });
   }

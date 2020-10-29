@@ -8,6 +8,9 @@ import { Marker } from 'src/app/models/app/map/marker.model';
 })
 export class LeafletService {
 
+  window = window;
+  navigator = window.navigator;
+
   constructor() { }
 
   getMarker(marker: Marker): L.Marker {
@@ -62,5 +65,20 @@ export class LeafletService {
       )
     };
     return option;
+  }
+
+  getGoogleMapLink(latLng: LatLng): string {
+    let link = '';
+    if (
+      (this.navigator.platform.indexOf('iPhone') !== -1) ||
+      (navigator.platform.indexOf('iPad') !== -1) ||
+      (navigator.platform.indexOf('iPod') !== -1)
+    ) {
+      link = `maps://maps.google.com/maps?daddr=${latLng.lat},${latLng.lng}&amp;ll=`;
+    }
+    else { /* else use Google */
+      link = `https://maps.google.com/maps?daddr=${latLng.lat},${latLng.lng}&amp;ll=`;
+    }
+    return link;
   }
 }

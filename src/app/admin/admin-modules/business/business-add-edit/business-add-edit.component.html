@@ -6,6 +6,10 @@
 <form *ngIf="businessFormGroup" [formGroup]="businessFormGroup">
   <div class="row py-3">
     <div class="form-group col-sm-4">
+      <label>Number</label>
+      <input type="text" class="form-control" readonly disabled>
+    </div>
+    <div class="form-group col-sm-4">
       <label><span class="text text-danger">*</span>Name</label>
       <input type="text" class="form-control" formControlName="name">
     </div>
@@ -31,6 +35,10 @@
     <div class="form-group col-sm-4">
       <label>Email</label>
       <input type="string" class="form-control" formControlName="email">
+    </div>
+    <div class="form-group col-sm-4">
+      <label>Website</label>
+      <input type="string" class="form-control" formControlName="website">
     </div>
     <div class="col-sm-2 form-group d-flex align-items-end justify-content-center">
       <div class="form-check text-center">
@@ -61,15 +69,15 @@
       <app-contact-person-input formControlName="owner"></app-contact-person-input>
     </div>
     <div class="form-group col-sm-12">
-      <label>Thumbnail Image</label>
+      <label><span class="text text-danger">*</span>Thumbnail Image <small class="text-muted">Upload an image having 1:1 aspect ratio</small></label>
       <app-media-picker formControlName="thumbnailImage"></app-media-picker>
     </div>
     <div class="form-group col-sm-12">
-      <label>Banner Image</label>
+      <label><span class="text text-danger">*</span>Banner Image <small class="text-muted">Upload an image having 7:3 aspect ratio</small></label>
       <app-media-picker formControlName="bannerImage" ></app-media-picker>
     </div>
     <div class="form-group col-sm-12">
-      <label>Images</label>
+      <label><span class="text text-danger">*</span>Images <small class="text-muted">Upload an image having 1:1 aspect ratio (minimum 4 images)</small></label>
       <app-media-picker [pickerType]="'multiple'" formControlName="images"></app-media-picker>
     </div>
     <div class="form-group col-sm-12">

@@ -2,23 +2,23 @@
 <div class="">
   <div class="img-gallary">
     <div class="one gal-block">
-      <app-frontend-div-background [imageUrl]="images[0]"></app-frontend-div-background>
+      <app-frontend-div-background [imageUrl]="business?.bannerImage?.path"></app-frontend-div-background>
     </div>
     <div class="two gal-block">
       <div class="two-child gal-block">
-        <app-frontend-div-background [imageUrl]="images[1]"></app-frontend-div-background>
+        <app-frontend-div-background [imageUrl]="business?.images[0]?.path"></app-frontend-div-background>
       </div>
       <div class="two-child gal-block">
-        <app-frontend-div-background [imageUrl]="images[2]"></app-frontend-div-background>
+        <app-frontend-div-background [imageUrl]="business?.images[1]?.path"></app-frontend-div-background>
       </div>
       <div class="two-child gal-block">
-        <app-frontend-div-background [imageUrl]="images[3]"></app-frontend-div-background>
+        <app-frontend-div-background [imageUrl]="business?.images[2]?.path"></app-frontend-div-background>
       </div>
       <div class="two-child gal-block">
         <a class="view-more-img-overlay link">
           <h5 class="text-center">View More</h5>
         </a>
-        <app-frontend-div-background [imageUrl]="images[4]"></app-frontend-div-background>
+        <app-frontend-div-background [imageUrl]="business?.images[3]?.path"></app-frontend-div-background>
       </div>
     </div>
   </div>
@@ -33,33 +33,37 @@
         <h2 class="mb-1 f-color-primary">{{business?.name}}</h2>
         <div class="header-bottom-bar mb-1 mx-auto b-color-primary-accent"></div>
         <p class="text-muted mb-0">
-          <rating [(ngModel)]="business.starRating" [max]="5" [readonly]="true"></rating> &nbsp; ( Reviews)
+          <rating *ngIf="business?.starRating" [(ngModel)]="business.starRating" [max]="5" [readonly]="true"></rating> &nbsp; ( Reviews)
         </p>
       </div>
-      <div class="col-12 text-center">
-        <img class="user-avatar  mb-3" src="assets/demo/user-avatar.jpg">
+      <div class="col-12 text-center" *ngIf="business?.owner?.length > 0">
+        <img class="user-avatar  mb-3" *ngIf="business?.owner[0]?.image" [src]="business?.owner[0]?.image?.path">
         <h4 class="mb-1 f-color-secondary">
-          Michael H Peebles
+          {{business?.owner[0]?.name}}
         </h4>
-        <p class="mb-1">
-          657  Braxton Street, WILLIAMSTOWN, Ohio, 4587
+        <p class="mb-1" *ngIf="business?.address">
+          {{business?.address}}
         </p>
         <p class="mb-1">
-          <button type="button" class="btn btn-info m-1"><i class="fa fa-phone" aria-hidden="true"></i> 815-466-1915</button>
-          <button type="button" class="btn btn-info m-1"><i class="fa fa-envelope" aria-hidden="true"></i> 815-466-1915</button>
-          <button type="button" class="btn btn-info m-1"><i class="fa fa-location-arrow" aria-hidden="true"></i> Directions</button>
-          <button type="button" class="btn btn-info m-1"><i class="fa fa-globe" aria-hidden="true"></i> Website</button>
-          <button type="button" class="btn btn-info m-1"><i class="fa fa-clock-o" aria-hidden="true"></i> Opens util 5:00 PM</button>
+          <a class="btn btn-info m-1" *ngIf="business?.phone" [href]="'tel:' + business?.phone"><i class="fa fa-phone" aria-hidden="true"></i> {{business?.phone}}</a>
+          <a class="btn btn-info m-1" *ngIf="business?.email" [href]="'mailto:' + business?.email"><i class="fa fa-envelope" aria-hidden="true"></i> {{business?.email}}</a>
+          <a class="btn btn-info m-1" *ngIf="directionsLink" [href]="directionsLink" target="_blank"><i class="fa fa-location-arrow" aria-hidden="true"></i> Directions</a>
+          <a class="btn btn-info m-1" *ngIf="business?.website" [href]="business?.website" target="_blank"><i class="fa fa-globe" aria-hidden="true"></i> {{business?.website}}</a>
+          <a class="btn btn-info m-1 text-white" *ngIf="business?.openingHours?.id && openToday" (click)="slideTo('openingHoursSection')"><i class="fa fa-clock-o" aria-hidden="true"></i>
+            {{
+              openToday?.closed ? 'Closed' : 'Open till ' + (openToday.endTime | date: 'shortTime')
+            }}
+          </a>
         </p>
         <p class="mt-3 mb-0">
-          {{business.description}}
+          {{business?.description}}
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="business?.productsAndServices?.length > 0">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -68,29 +72,14 @@
         </h4>
         <div class="header-bottom-bar mb-3 b-color-primary-accent"></div>
         <div class="row">
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
+          <div class="col-sm-6 mb-3" *ngFor="let item of business?.productsAndServices">
+            <i class="fa fa-check"></i> {{item}}
           </div>
         </div>
         <div>
           <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfigs.productsAndServices">
-            <div ngxSlickItem class="slide" *ngFor="let img of productsServicesImages">
-              <img [src]="img" class="img-fluid">
+            <div ngxSlickItem class="slide" *ngFor="let img of business?.productsAndServicesImages">
+              <img [src]="img.path"  class="productsAndServiceSliderImage">
             </div>
           </ngx-slick-carousel>
         </div>
@@ -99,7 +88,7 @@
   </div>
 </section>
 
-<section class="py-4 bg-grey-1">
+<section class="py-4 bg-grey-1" *ngIf="business?.specialities?.length > 0">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -108,23 +97,8 @@
         </h4>
         <div class="header-bottom-bar mb-3 b-color-primary-accent"></div>
         <div class="row">
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
-          </div>
-          <div class="col-sm-6 mb-3">
-            <i class="fa fa-check"></i> Friendly workspace
+          <div class="col-sm-6 mb-3" *ngFor="let item of business?.specialities">
+            <i class="fa fa-check"></i> {{item}}
           </div>
         </div>
       </div>
@@ -132,10 +106,10 @@
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" id="openingHoursSection">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6 mb-4 mb-sm-none">
+      <div class="col-sm-6 mb-4 mb-sm-none" *ngIf="business?.openingHours?.id">
         <h4 class="f-color-primary">
           Opening Hours
         </h4>
@@ -143,45 +117,60 @@
         <div class="table-responsive">
           <table class="table hours-table">
             <tr class="mb-2">
-              <td>Mondary</td><td>9AM - 5PM</td>
+              <td>Monday</td>
+              <td>
+                {{business?.openingHours?.monday?.closed ? 'Closed' : (business?.openingHours?.monday?.startTime | date: 'shortTime') + ' - ' + (business?.openingHours?.monday?.endTime | date: 'shortTime')}}
+              </td>
             </tr>
             <tr class="mb-2">
-              <td>Tuesday</td><td>9AM - 5PM</td>
+              <td>Tuesday</td>
+              <td>
+                {{business?.openingHours?.tuesday?.closed ? 'Closed' : (business?.openingHours?.tuesday?.startTime | date: 'shortTime') + ' - ' + (business?.openingHours?.tuesday?.endTime | date: 'shortTime')}}
+              </td>
             </tr>
             <tr class="mb-2">
-              <td>Wednesday</td><td>9AM - 5PM</td>
+              <td>Wendesday</td>
+              <td>
+                {{business?.openingHours?.wednesday?.closed ? 'Closed' : (business?.openingHours?.wednesday?.startTime | date: 'shortTime') + ' - ' + (business?.openingHours?.wednesday?.endTime | date: 'shortTime')}}
+              </td>
             </tr>
             <tr class="mb-2">
-              <td>Thursday</td><td>9AM - 5PM</td>
+              <td>Thursday</td>
+              <td>
+                {{business?.openingHours?.thursday?.closed ? 'Closed' : (business?.openingHours?.thursday?.startTime | date: 'shortTime') + ' - ' + (business?.openingHours?.thursday?.endTime | date: 'shortTime')}}
+              </td>
             </tr>
             <tr class="mb-2">
-              <td>Friday</td><td>9AM - 5PM</td>
+              <td>Friday</td>
+              <td>
+                {{business?.openingHours?.friday?.closed ? 'Closed' : (business?.openingHours?.friday?.startTime | date: 'shortTime') + ' - ' + (business?.openingHours?.friday?.endTime | date: 'shortTime')}}
+              </td>
             </tr>
             <tr class="mb-2">
-              <td>Saturday</td><td>9AM - 5PM</td>
+              <td>Saturday</td>
+              <td>
+                {{business?.openingHours?.saturday?.closed ? 'Closed' : (business?.openingHours?.saturday?.startTime | date: 'shortTime') + ' - ' + (business?.openingHours?.saturday?.endTime | date: 'shortTime')}}
+              </td>
             </tr>
             <tr class="mb-2">
-              <td>Sunday</td><td>Closed</td>
+              <td>Sunday</td>
+              <td>
+                {{business?.openingHours?.sunday?.closed ? 'Closed' : (business?.openingHours?.sunday?.startTime | date: 'shortTime') + ' - ' + (business?.openingHours?.sunday?.endTime | date: 'shortTime')}}
+              </td>
             </tr>
           </table>
         </div>
       </div>
 
-      <div class="col-sm-6">
+      <div class="col-sm-6" *ngIf="business?.languagesSpoken?.length > 0">
         <h4 class="f-color-primary">
           Languages Spoken
         </h4>
         <div class="header-bottom-bar mb-3 b-color-primary-accent"></div>
         <div class="table-responsive">
           <table class="table hours-table">
-            <tr class="mb-2">
-              <td>English</td>
-            </tr>
-            <tr class="mb-2">
-              <td>Hindi</td>
-            </tr>
-            <tr class="mb-2">
-              <td>Punjabi</td>
+            <tr class="mb-2" *ngFor="let item of business?.languagesSpoken">
+              <td>{{item}}</td>
             </tr>
           </table>
         </div>
@@ -191,7 +180,7 @@
   </div>
 </section>
 
-<section class="py-4 bg-grey-1">
+<section class="py-4 bg-grey-1" *ngIf="business?.paymentMethods?.length > 0">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -200,17 +189,16 @@
         </h4>
         <div class="header-bottom-bar mb-1 b-color-primary-accent"></div>
         <div>
-          <img *ngIf="paymentMethods.visa" class="m-2" src="assets/payment-methods/visa.png">
-          <img *ngIf="paymentMethods.mastercard" class="m-2" src="assets/payment-methods/mastercard.png">
-          <img *ngIf="paymentMethods.amex" class="m-2" src="assets/payment-methods/american-express.png">
-          <img *ngIf="paymentMethods.paypal" class="m-2" src="assets/payment-methods/paypal.png">
+          <span *ngFor="let item of business?.paymentMethods">
+            <img class="m-2 payment-method-image" [src]="item?.path">
+          </span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="business?.team?.length > 0">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -219,36 +207,23 @@
         </h4>
         <div class="header-bottom-bar mb-3 b-color-primary-accent"></div>
         <div class="row">
-          <div class="col-sm-4 mt-3 text-center">
-            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
+          <div class="col-sm-4 mt-3 text-center" *ngFor="let member of business?.team">
+            <img class="team-member-avatar mb-3" [src]="member.image?.path">
             <h5 class="mb-1 f-color-secondary">
-              Michael H Peebles
+              {{member.name}}
             </h5>
           </div>
-          <div class="col-sm-4 mt-3 text-center">
-            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
-            <h5 class="mb-1 f-color-secondary">
-              Michael H Peebles
-            </h5>
-          </div>
-          <div class="col-sm-4 mt-3 text-center">
-            <img class="team-member-avatar mb-3" src="assets/demo/user-avatar.jpg">
-            <h5 class="mb-1 f-color-secondary">
-              Michael H Peebles
-            </h5>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-4">
+<section class="py-4" *ngIf="businessLocationMarker">
   <div class="container">
     <div class="row">
       <div class="col">
-        <app-frontend-single-point-map></app-frontend-single-point-map>
+        <app-map-with-markers [markers]="[businessLocationMarker]" [height]="'50vh'"></app-map-with-markers>
       </div>
     </div>
   </div>
