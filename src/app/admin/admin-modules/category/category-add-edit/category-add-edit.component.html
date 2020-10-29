@@ -5,11 +5,15 @@
 </div>
 <form *ngIf="catFormGroup" [formGroup]="catFormGroup">
   <div class="row py-3">
-    <div class="col-sm-6 form-group">
+    <div class="col-sm-4 form-group">
+      <label>Number</label>
+      <input type="number" class="form-control" formControlName="number" readonly disabled>
+    </div>
+    <div class="col-sm-4 form-group">
       <label><span class="text-danger">*</span>Name</label>
       <input type="text" class="form-control" formControlName="name">
     </div>
-    <div class="col-sm-6 form-group">
+    <div class="col-sm-4 form-group">
       <label>Parent Category</label>
       <select class="form-control" formControlName="parentCategory">
         <option [ngValue]="null">Select</option>
