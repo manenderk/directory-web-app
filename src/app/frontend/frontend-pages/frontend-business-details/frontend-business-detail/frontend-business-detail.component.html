@@ -34,6 +34,7 @@
         <div class="header-bottom-bar mb-1 mx-auto b-color-primary-accent"></div>
         <p class="text-muted mb-0">
           <!-- <rating *ngIf="business?.starRating" [(ngModel)]="business.starRating" [max]="5" [readonly]="true"></rating> &nbsp; ( Reviews) -->
+          <a class="link f-color-secondary" (click)="showAddReviewBox = true">Add Review</a>
         </p>
       </div>
       <div class="col-12 text-center" *ngIf="business?.owner?.length > 0">
@@ -229,3 +230,6 @@
   </div>
 </section>
 
+
+
+<app-frontend-add-business-review [(show)]="showAddReviewBox"></app-frontend-add-business-review>

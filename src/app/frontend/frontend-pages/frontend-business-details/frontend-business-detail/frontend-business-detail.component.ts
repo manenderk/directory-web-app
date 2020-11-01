@@ -18,17 +18,8 @@ import { Marker } from 'src/app/models/app/map/marker.model';
 })
 export class FrontendBusinessDetailComponent implements OnInit, OnDestroy {
 
+  showAddReviewBox = false;
   business: Business;
-
-  paymentMethods: AvailablePaymentMethods = {
-    mastercard: true,
-    visa: true,
-    amex: true,
-    paypal: true
-  };
-
-  teamMembers: TeamMember[];
-
   directionsLink: string;
   businessLocationMarker: Marker;
   openToday: Day;

@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { FrontendDivBackgroundModule } from '../../frontend-modules/frontend-div-background/frontend-div-background.module';
 import { LeafletMapModule } from 'src/app/app-modules/leaflet-map/leaflet-map.module';
+import { FrontendAddBusinessReviewComponent } from './frontend-add-business-review/frontend-add-business-review.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [FrontendBusinessDetailComponent],
+  declarations: [FrontendBusinessDetailComponent, FrontendAddBusinessReviewComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
