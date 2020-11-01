@@ -232,4 +232,6 @@
 
 
 
-<app-frontend-add-business-review [(show)]="showAddReviewBox"></app-frontend-add-business-review>
+<app-frontend-add-business-review
+*ngIf="business?.id"
+[(show)]="showAddReviewBox" [businessId]="business.id"></app-frontend-add-business-review>
