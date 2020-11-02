@@ -32,6 +32,10 @@ const routes: Routes = [
       {
         path: 'news',
         loadChildren: () => import('./admin-modules/news/news.module').then(mod => mod.NewsModule)
+      },
+      {
+        path: 'ui',
+        loadChildren: () => import('./admin-modules/ui/ui.module').then(mod => mod.UiModule)
       }
     ]
   }

@@ -87,6 +87,11 @@ export const navItems: SidebarItem[] = [
         icon: 'fa fa-picture-o',
         link: `${adminUrl}/home-slider/manage`
       },
+      {
+        name: 'UI',
+        icon: 'fa fa-code',
+        link: `${adminUrl}/ui/customize`
+      },
     ]
   },
 ];
