@@ -1,1 +1,97 @@
-<p>customize-ui works!</p>
+<div class="row bg-grey-1 py-3">
+  <div class="col-12">
+    <h4 class="mb-0">Customize App UI
+    </h4>
+  </div>
+</div>
+
+<div class="row py-3" *ngIf="ui">
+  <div class="col-12">
+
+    <div class="mb-2">
+      <!-- <h5>Home Page</h5> -->
+      <p class="mt-3 mb-1"><strong>Sections Order</strong></p>
+
+      <ul class="list-group section-order-list">
+        <li class="list-group-item" *ngFor="let item of ui.homeData.sectionOrder; let i = index">
+          <span class="mr-1">
+            <button type="button" class="btn btn-sm btn-info mx-1" (click)="moveSectionOrder(i, 'up')"><i class="fa fa-caret-up"></i></button>
+            <button type="button" class="btn btn-sm btn-info mx-1" (click)="moveSectionOrder(i, 'down')"><i class="fa fa-caret-down"></i></button>
+          </span>
+          {{item}}
+        </li>
+      </ul>
+      <p class="mt-3 mb-1"><strong>Category Layout</strong></p>
+      <table class="table">
+        <tr>
+          <td>View</td>
+          <td>Rows</td>
+          <td>Cols</td>
+        </tr>
+        <tr>
+          <td>Desktop</td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.category.desktop.rows" (change)="updateData(varService.uiKeys.homeCatDeskRow, $event.target.value)"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.category.desktop.cols" (change)="updateData(varService.uiKeys.homeCatDeskCol, $event.target.value)"></td>
+        </tr>
+        <tr>
+          <td>Tablet</td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.category.tablet.rows" (change)="updateData(varService.uiKeys.homeCatTabRow, $event.target.value)"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.category.tablet.cols" (change)="updateData(varService.uiKeys.homeCatTabCol, $event.target.value)"></td>
+        </tr>
+        <tr>
+          <td>Mobile</td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.category.mobile.rows" (change)="updateData(varService.uiKeys.homeCatMobRow, $event.target.value)"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.category.mobile.cols" (change)="updateData(varService.uiKeys.homeCatMobCol, $event.target.value)"></td>
+        </tr>
+      </table>
+      <p class="mt-3 mb-1"><strong>Event Layout</strong></p>
+      <table class="table">
+        <tr>
+          <td>View</td>
+          <td>Rows</td>
+          <td>Cols</td>
+        </tr>
+        <tr>
+          <td>Desktop</td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.event.desktop.rows" (change)="updateData(varService.uiKeys.homeEventDeskRow, $event.target.value)"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.event.desktop.cols" (change)="updateData(varService.uiKeys.homeEventDeskCol, $event.target.value)"></td>
+        </tr>
+        <tr>
+          <td>Tablet</td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.event.tablet.rows" (change)="updateData(varService.uiKeys.homeEventTabRow, $event.target.value)"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.event.tablet.cols" (change)="updateData(varService.uiKeys.homeEventTabCol, $event.target.value)"></td>
+        </tr>
+        <tr>
+          <td>Mobile</td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.event.mobile.rows" (change)="updateData(varService.uiKeys.homeEventMobRow, $event.target.value)"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.event.mobile.cols" (change)="updateData(varService.uiKeys.homeEventMobCol, $event.target.value)"></td>
+        </tr>
+      </table>
+      <p class="mt-3 mb-1"><strong>News Layout</strong></p>
+      <table class="table">
+        <tr>
+          <td>View</td>
+          <td>Rows</td>
+          <td>Cols</td>
+        </tr>
+        <tr>
+          <td>Desktop</td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.news.desktop.rows" (change)="updateData(varService.uiKeys.homeNewsDeskRow, $event.target.value)"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.news.desktop.cols" (change)="updateData(varService.uiKeys.homeNewsDeskCol, $event.target.value)"></td>
+        </tr>
+        <tr>
+          <td>Tablet</td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.news.tablet.rows" (change)="updateData(varService.uiKeys.homeNewsTabRow, $event.target.value)"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.news.tablet.cols" (change)="updateData(varService.uiKeys.homeNewsTabCol, $event.target.value)"></td>
+        </tr>
+        <tr>
+          <td>Mobile</td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.news.mobile.rows" (change)="updateData(varService.uiKeys.homeNewsMobRow, $event.target.value)"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="ui.homeData.news.mobile.cols" (change)="updateData(varService.uiKeys.homeNewsMobCol, $event.target.value)"></td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>
+</div>
