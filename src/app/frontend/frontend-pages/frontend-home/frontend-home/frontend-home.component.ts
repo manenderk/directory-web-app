@@ -8,6 +8,8 @@ import { NgxSlickCarouselService } from 'src/app/services/common/ngx-slick-carou
 import { CategoryService } from 'src/app/services/category/category.service';
 import { EventService } from 'src/app/services/event/event.service';
 import { NewsService } from 'src/app/services/news/news.service';
+import { UI } from 'src/app/models/app/ui.model';
+import { VariableService } from 'src/app/services/common/variable.service';
 
 @Component({
   selector: 'app-frontend-home',
@@ -15,8 +17,6 @@ import { NewsService } from 'src/app/services/news/news.service';
   styleUrls: ['./frontend-home.component.css']
 })
 export class FrontendHomeComponent implements OnInit, OnDestroy {
-
-  bannerSlides: string[] = [];
 
   screenSize: string;
 
@@ -67,20 +67,23 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
 
   private subs = new SubSink();
 
+  private ui: UI;
+
   constructor(
     private catService: CategoryService,
     private eventService: EventService,
     private newsService: NewsService,
     private screenService: ScreenService,
     private sliderService: NgxSlickCarouselService,
+    private varService: VariableService
   ) {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.initializeVariables();
     this.setCurrentScreenType();
-    this.setBannerSlides();
+    await this.getUIData();
     this.setCategoriesData();
     this.setEventsData();
     this.setNewsData();
@@ -104,25 +107,21 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     });
   }
 
-
-  async setBannerSlides() {
-    for (let i = 1; i <= 5; i++) {
-      this.bannerSlides.push(
-        `assets/demo/slider${i}.jpg`
-      );
-    }
+  async getUIData() {
+    this.ui = await this.varService.getUiVars().toPromise();
   }
+
 
   async setCategoriesData() {
 
     // SETTING DEFAULT CATEGORY DATA
     this.categoryData = {
-      desktopRows: 2,
-      desktopCols: 5,
-      tabletRows: 2,
-      tabletCols: 4,
-      mobileRows: 3,
-      mobileCols: 4,
+      desktopRows: this.ui.homeData.category.desktop.rows,
+      desktopCols: this.ui.homeData.category.desktop.cols,
+      tabletRows: this.ui.homeData.category.tablet.rows,
+      tabletCols: this.ui.homeData.category.tablet.cols,
+      mobileRows: this.ui.homeData.category.mobile.rows,
+      mobileCols: this.ui.homeData.category.mobile.cols,
       categoryHeading: 'Categories',
       categorySubheading: 'Browse through our catalog',
       categories: [],
@@ -187,32 +186,17 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
 
     // SETTING DEFAULT CATEGORY DATA
     this.eventData = {
-      desktopRows: 2,
-      desktopCols: 5,
-      tabletRows: 2,
-      tabletCols: 3,
-      mobileRows: 2,
-      mobileCols: 2,
+      desktopRows: this.ui.homeData.event.desktop.rows,
+      desktopCols: this.ui.homeData.event.desktop.cols,
+      tabletRows: this.ui.homeData.event.tablet.rows,
+      tabletCols: this.ui.homeData.event.tablet.cols,
+      mobileRows: this.ui.homeData.event.mobile.rows,
+      mobileCols: this.ui.homeData.event.mobile.cols,
       eventHeading: 'Events',
       eventSubheading: 'Find nearby events',
       events: [],
       organizedEvents: [],
     };
-
-    const eventNames = [
-      'Festival of Festivals',
-      'South Side Story',
-      'Opening Night Gala',
-      'Learn French',
-      'Personal Branding',
-      'Alex Back International',
-      'Sing like a pro',
-      'NGT- Food and Travel',
-      'Junior MBA Programmes',
-      'Fitness for Kids',
-      'Indenpendent Together',
-      'Gaurav Gupta Live'
-    ];
 
     let rows: number = this.eventData.desktopRows;
     let cols: number = this.eventData.desktopCols;

@@ -107,44 +107,44 @@ export class VariableService {
         sectionOrder: data[this.uiKeys.homeSectionOrder] || this.ui.homeData.sectionOrder,
         category: {
           desktop: {
-            rows: data[this.uiKeys.homeCatDeskRow] || this.ui.homeData.category.desktop.rows,
-            cols: data[this.uiKeys.homeCatDeskCol] || this.ui.homeData.category.desktop.cols
+            rows: parseInt(data[this.uiKeys.homeCatDeskRow] || this.ui.homeData.category.desktop.rows, 10),
+            cols: parseInt(data[this.uiKeys.homeCatDeskCol] || this.ui.homeData.category.desktop.cols, 10)
           },
           tablet: {
-            rows: data[this.uiKeys.homeCatTabRow] || this.ui.homeData.category.tablet.rows,
-            cols: data[this.uiKeys.homeCatTabCol] || this.ui.homeData.category.tablet.cols
+            rows: parseInt(data[this.uiKeys.homeCatTabRow] || this.ui.homeData.category.tablet.rows, 10),
+            cols: parseInt(data[this.uiKeys.homeCatTabCol] || this.ui.homeData.category.tablet.cols, 10)
           },
           mobile: {
-            rows: data[this.uiKeys.homeCatMobRow] || this.ui.homeData.category.mobile.rows,
-            cols: data[this.uiKeys.homeCatMobCol] || this.ui.homeData.category.mobile.cols
+            rows: parseInt(data[this.uiKeys.homeCatMobRow] || this.ui.homeData.category.mobile.rows, 10),
+            cols: parseInt(data[this.uiKeys.homeCatMobCol] || this.ui.homeData.category.mobile.cols, 10)
           }
         },
         event: {
           desktop: {
-            rows: data[this.uiKeys.homeEventDeskRow] || this.ui.homeData.event.desktop.rows,
-            cols: data[this.uiKeys.homeEventDeskCol] || this.ui.homeData.event.desktop.cols
+            rows: parseInt(data[this.uiKeys.homeEventDeskRow] || this.ui.homeData.event.desktop.rows, 10),
+            cols: parseInt(data[this.uiKeys.homeEventDeskCol] || this.ui.homeData.event.desktop.cols, 10)
           },
           tablet: {
-            rows: data[this.uiKeys.homeEventTabRow] || this.ui.homeData.event.tablet.rows,
-            cols: data[this.uiKeys.homeEventTabCol] || this.ui.homeData.event.tablet.cols
+            rows: parseInt(data[this.uiKeys.homeEventTabRow] || this.ui.homeData.event.tablet.rows, 10),
+            cols: parseInt(data[this.uiKeys.homeEventTabCol] || this.ui.homeData.event.tablet.cols, 10)
           },
           mobile: {
-            rows: data[this.uiKeys.homeEventMobRow] || this.ui.homeData.event.mobile.rows,
-            cols: data[this.uiKeys.homeEventMobCol] || this.ui.homeData.event.mobile.cols
+            rows: parseInt(data[this.uiKeys.homeEventMobRow] || this.ui.homeData.event.mobile.rows, 10),
+            cols: parseInt(data[this.uiKeys.homeEventMobCol] || this.ui.homeData.event.mobile.cols, 10)
           }
         },
         news: {
           desktop: {
-            rows: data[this.uiKeys.homeNewsDeskRow] || this.ui.homeData.news.desktop.rows,
-            cols: data[this.uiKeys.homeNewsDeskCol] || this.ui.homeData.news.desktop.cols
+            rows: parseInt(data[this.uiKeys.homeNewsDeskRow] || this.ui.homeData.news.desktop.rows, 10),
+            cols: parseInt(data[this.uiKeys.homeNewsDeskCol] || this.ui.homeData.news.desktop.cols, 10)
           },
           tablet: {
-            rows: data[this.uiKeys.homeNewsTabRow] || this.ui.homeData.news.tablet.rows,
-            cols: data[this.uiKeys.homeNewsTabCol] || this.ui.homeData.news.tablet.cols
+            rows: parseInt(data[this.uiKeys.homeNewsTabRow] || this.ui.homeData.news.tablet.rows, 10),
+            cols: parseInt(data[this.uiKeys.homeNewsTabCol] || this.ui.homeData.news.tablet.cols, 10)
           },
           mobile: {
-            rows: data[this.uiKeys.homeNewsMobRow] || this.ui.homeData.news.mobile.rows,
-            cols: data[this.uiKeys.homeNewsMobCol] || this.ui.homeData.news.mobile.cols
+            rows: parseInt(data[this.uiKeys.homeNewsMobRow] || this.ui.homeData.news.mobile.rows, 10),
+            cols: parseInt(data[this.uiKeys.homeNewsMobCol] || this.ui.homeData.news.mobile.cols, 10)
           }
         }
       }
