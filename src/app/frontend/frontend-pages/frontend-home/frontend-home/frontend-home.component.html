@@ -8,8 +8,18 @@
   </div>
 </section>
 
-<section class="bg-grey py-2 py-sm-3 py-md-4">
-  <div class="container">
+
+<div class="content">
+  <section *ngFor="let section of ui?.homeData?.sectionOrder">
+    <ng-container *ngIf="section === 'category'" [ngTemplateOutlet]="categorySection"></ng-container>
+    <ng-container *ngIf="section === 'event'" [ngTemplateOutlet]="eventSection"></ng-container>
+    <ng-container *ngIf="section === 'news'" [ngTemplateOutlet]="newsSection"></ng-container>
+  </section>
+</div>
+
+
+<ng-template #categorySection>
+  <div class="container  py-2 py-sm-3 py-md-4 ">
     <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
       <div class="col px-0 section-heading">
         <h2 class="fw-medium mb-1 f-color-primary">{{categoryData?.categoryHeading}}</h2>
@@ -34,10 +44,10 @@
       </div>
     </div>
   </div>
-</section>
+</ng-template>
 
 
-<section>
+<ng-template #eventSection>
   <div class="container py-2 py-sm-3 py-md-4">
     <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
       <div class="col px-0 section-heading">
@@ -63,9 +73,9 @@
       </div>
     </div>
   </div>
-</section>
+</ng-template>
 
-<section class="bg-grey-1">
+<ng-template #newsSection>
   <div class="container py-2 py-sm-3 py-md-4 ">
     <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
       <div class="col px-0 section-heading">
@@ -91,5 +101,7 @@
       </div>
     </div>
   </div>
-</section>
+</ng-template>
+
+
 

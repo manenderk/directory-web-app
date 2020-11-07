@@ -65,9 +65,11 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     organizedNews: News[][],
   };
 
+  ui: UI;
+
   private subs = new SubSink();
 
-  private ui: UI;
+
 
   constructor(
     private catService: CategoryService,
