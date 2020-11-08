@@ -11,6 +11,20 @@ export class LeafletService {
   window = window;
   navigator = window.navigator;
 
+  mapDefaults = {
+    zoom: 12,
+    maxZoom: 18,
+    center: {
+      lat: 49.312926,
+      lng: -123.207645
+    },
+    userPositionMarker: {
+      radius: 6,
+      color: '#2196f3',
+
+    }
+  };
+
   constructor() { }
 
   getMarker(marker: Marker): L.Marker {
@@ -36,8 +50,8 @@ export class LeafletService {
         latLng.lng
       ],
       {
-        radius: 6,
-        fillColor: '#2196f3',
+        radius: this.mapDefaults.userPositionMarker.radius,
+        fillColor: this.mapDefaults.userPositionMarker.color,
         fillOpacity: 1,
         stroke: false
       }
@@ -53,15 +67,15 @@ export class LeafletService {
         L.tileLayer(
           'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png?lang=en',
           {
-            maxZoom: 18,
+            maxZoom: this.mapDefaults.maxZoom,
             attribution: '@Open Street Maps'
           }
         )
       ],
-      zoom: 12,
+      zoom: this.mapDefaults.zoom,
       center: L.latLng(
-        center?.lat || 49.312926,
-        center?.lng || -123.207645
+        center?.lat || this.mapDefaults.center.lat,
+        center?.lng || this.mapDefaults.center.lng
       )
     };
     return option;

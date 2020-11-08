@@ -58,7 +58,6 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
     this.userInputLatLng = userInputLatLng;
 
     this.mapData.leafletMapOptions = this.leafletService.getDefaultMapOption(this.userInputLatLng);
-
     if (this.userInputLatLng) {
       this.mapData.leafletMapOptions.center = L.latLng(this.userInputLatLng.lat, this.userInputLatLng.lng);
 
@@ -67,6 +66,11 @@ export class CoordinatesPickerComponent implements OnInit, OnDestroy, ControlVal
       };
       this.mapData.userInputMarkerLayer = this.leafletService.getMarker(marker);
       this.mapData.center = L.latLng(this.userInputLatLng.lat, this.userInputLatLng.lng);
+    }
+
+    if (!this.mapData.center) {
+      this.mapData.center = L.latLng(this.leafletService.mapDefaults.center.lat, this.leafletService.mapDefaults.center.lng);
+      this.mapData.leafletMapOptions.center = this.mapData.center;
     }
     this.updateThumbnailMarker();
   }

@@ -46,6 +46,7 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(): void {
     this.initializeBaseMapLayer();
+    this.filterInvalidMarkers();
     this.updateMarkers();
     this.updateMapCenter();
   }
@@ -69,6 +70,10 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
     this.subSink.sink = this.geoService.userPositionError.subscribe((positionError: PositionError) => {
       this.userPositionError = positionError;
     });
+  }
+
+  filterInvalidMarkers() {
+    this.markers = this.markers.filter(marker => marker?.latLng?.lat && marker?.latLng?.lng);
   }
 
   updateUserPositionInMap() {
