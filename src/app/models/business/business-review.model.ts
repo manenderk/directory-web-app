@@ -9,6 +9,7 @@ export interface BusinessReview {
   ratedBy: string;
   active: boolean;
   featured: boolean;
+  businessName?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -1,0 +1,38 @@
+<div class="row bg-grey-1 py-3">
+  <div class="col-12">
+    <h4 class="mb-0">News
+    </h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <p>Showing total {{reviews?.length}} News</p>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Comment</th>
+        <th>Displayed</th>
+        <th>Featured</th>
+        <th>Added On</th>
+        <th>Approve/Reject</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let review of reviews">
+        <td>{{review.title}}</td>
+        <td>{{review.comment}}</td>
+        <td>{{review.active ? 'Yes' : 'No'}}</td>
+        <td>{{review.featured ? 'Yes' : 'No'}}</td>
+        <td>{{review.createdAt | date}}</td>
+        <td>
+          <i *ngIf="review.active; else approveAction" class="fa fa-times" (click)="rejectReview(review)"></i>
+          <ng-template #approveAction>
+            <i class="fa fa-check" (click)="approveReview(review)"></i>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

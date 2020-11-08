@@ -36,6 +36,10 @@ const routes: Routes = [
       {
         path: 'ui',
         loadChildren: () => import('./admin-modules/ui/ui.module').then(mod => mod.UiModule)
+      },
+      {
+        path: 'reviews',
+        loadChildren: () => import('./admin-modules/reviews/reviews.module').then(mod => mod.ReviewsModule)
       }
     ]
   }

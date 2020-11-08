@@ -94,4 +94,16 @@ export const navItems: SidebarItem[] = [
       },
     ]
   },
+  {
+    name: 'Reviews',
+    icon: 'fa fa-comment-o',
+    link: null,
+    innerItems: [
+      {
+        name: 'All',
+        icon: 'fa fa-bars',
+        link: `${adminUrl}/reviews/list`
+      }
+    ]
+  }
 ];
