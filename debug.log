@@ -8,3 +8,5 @@
 [1104/154104.114:ERROR:exception_snapshot_win.cc(99)] thread ID 11380 not found in process
 [1104/154104.114:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
 [1107/043056.770:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1109/061425.805:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1111/041646.097:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
