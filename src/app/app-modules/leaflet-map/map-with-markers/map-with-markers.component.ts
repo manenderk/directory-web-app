@@ -18,6 +18,9 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
   @Input() width: string;
   @Input() class: string;
 
+  mapInstance: L.Map;
+  mapMarkerClusterInstance: L.MarkerClusterGroup;
+
   userPosition: Position;
   userPositionError: PositionError;
 
@@ -41,7 +44,6 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.subsribeUserPositionUpdates();
-
   }
 
   ngOnChanges(): void {
@@ -72,6 +74,14 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
+  onMapReady(map: L.Map) {
+    this.mapInstance = map;
+  }
+
+  onMarkerClusterReady(markerCluster: L.MarkerClusterGroup) {
+    this.mapMarkerClusterInstance = markerCluster;
+  }
+
   filterInvalidMarkers() {
     this.markers = this.markers.filter(marker => marker?.latLng?.lat && marker?.latLng?.lng);
   }
@@ -86,6 +96,11 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
 
 
   updateMarkers() {
+    if (this.mapMarkerClusterInstance) {
+      this.mapMarkerClusterInstance.remove();
+    }
+
+
     this.mapData.markerLayers = [];
     this.markers.forEach(marker => {
       this.mapData.markerLayers.push(
@@ -98,12 +113,16 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
         this.window.open(link);
       });
     });
+
+    if (this.mapMarkerClusterInstance) {
+      this.mapMarkerClusterInstance.refreshClusters();
+    }
   }
 
   updateMapCenter() {
 
-    if (!this.markers || this.markers.length === 0) {
-      return;
+    /* if (!this.markers || this.markers.length === 0) {
+      this.markers
     }
 
     const locations: any[] = [];
@@ -118,6 +137,28 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
         lat: this.userPosition.coords.latitude,
         lon: this.userPosition.coords.longitude
       });
+    } */
+
+    const locations: any[] = [];
+
+    if (this.markers?.length > 0) {
+      this.markers.forEach(marker => {
+        locations.push({
+          lat: marker.latLng.lat,
+          lon: marker.latLng.lng
+        });
+      });
+    }
+
+    if (this.userPosition?.coords) {
+      locations.push({
+        lat: this.userPosition.coords.latitude,
+        lon: this.userPosition.coords.longitude
+      });
+    }
+
+    if (locations?.length === 0) {
+      return;
     }
 
     const centerLoation: any = average(locations);

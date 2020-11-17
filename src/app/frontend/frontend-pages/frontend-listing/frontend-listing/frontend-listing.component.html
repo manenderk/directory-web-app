@@ -80,7 +80,7 @@
             </ul>
           </div>
           <div class="form-group">
-            <select [(ngModel)]="filters.categoryId" class="form-control custom-select" (change)="getBusinesses()">
+            <select [(ngModel)]="filters.categoryId" class="form-control custom-select" (change)="filterChanged('category')">
               <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
             </select>
           </div>

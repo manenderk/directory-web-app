@@ -7,14 +7,14 @@ import { VariableService } from 'src/app/services/common/variable.service';
 import { SubSink } from 'subsink';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { BusinessService } from 'src/app/services/business/business.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CompareById } from 'src/app/utils/functions/compareById.function';
-import { LatLng } from 'src/app/models/app/map/latLng.model';
 import { GeoService } from 'src/app/services/app/geo.service';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Marker } from 'src/app/models/app/map/marker.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-frontend-listing',
@@ -50,14 +50,16 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     categoryId: string,
     sortBy: string,
     locationName: string,
-    locationCoordinates: LatLng,
+    lat: number,
+    lng: number,
     distance: number
   } = {
     name: '',
     categoryId: '',
     sortBy: 'name',
     locationName: '',
-    locationCoordinates: null,
+    lat: null,
+    lng: null,
     distance: 10
   };
 
@@ -89,6 +91,8 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     private variableService: VariableService,
     private businessService: BusinessService,
     private route: ActivatedRoute,
+    private router: Router,
+    private location: Location,
     private geoService: GeoService,
   ) { }
 
@@ -114,15 +118,13 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
 
   getUserPosition() {
     this.subs.sink = this.geoService.userPosition.subscribe(async pos => {
-      if (!this.filters.locationCoordinates && pos?.coords) {
-        this.filters.locationCoordinates = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        };
+      if ((!this.filters.lat || !this.filters.lng) && pos?.coords) {
+        this.filters.lat = pos.coords.latitude;
+        this.filters.lng = pos.coords.longitude;
         this.getBusinesses();
 
-        if (this.filters.locationCoordinates) {
-          const locationData: any = await this.geoService.getAddress(this.filters.locationCoordinates).toPromise();
+        if (this.filters.lat && this.filters.lng) {
+          const locationData: any = await this.geoService.getAddress({lat: this.filters.lat, lng: this.filters.lng}).toPromise();
           if (locationData?.address) {
             const address: any = locationData.address;
             this.filters.locationName = address.city || address.state_district || address.state;
@@ -152,7 +154,9 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   }
 
   async getBusinesses() {
-    this.businesses = await this.businessService.getFrontendBusinesses(this.filters, this.filters.sortBy).toPromise();
+    this.businesses = await this.businessService.getFrontendBusinesses({
+        ...this.filters, distance: this.filters.distance * 1000 // convert km to meters
+      }, this.filters.sortBy).toPromise();
     this.updateMapMarkers();
   }
 
@@ -200,11 +204,35 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   updateCurrentLocation(location: any) {
     this.showLocationSuggestions = false;
     this.filters.locationName = location.label;
-    this.filters.locationCoordinates = {
-      lat: location.y,
-      lng: location.x
-    };
+    this.filters.lat = location.y;
+    this.filters.lng = location.x;
     this.getBusinesses();
+  }
+
+
+  filterChanged(filterName?: string) {
+    localStorage.setItem('businessFilters', JSON.stringify(this.filters));
+
+    if (filterName === 'category') {
+      this.router.navigate(['/listing', this.filters.categoryId]);
+      return;
+    }
+
+    this.getBusinesses();
+  }
+
+  getFiltersFromLocalStorage() {
+    let filters = localStorage.getItem('businessFilters');
+    if (!filters) {
+      return null;
+    }
+    try {
+      filters = JSON.parse(filters);
+    } catch (e) {
+      console.log(e);
+      filters = null;
+    }
+    return filters;
   }
 
   toggleCardDisplayType() {

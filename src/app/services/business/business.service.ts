@@ -46,7 +46,7 @@ export class BusinessService {
   }
 
   getFrontendBusinesses(filters: any, sortBy: string = 'name'): Observable<Business[]> {
-    let url = `${environment.apiHost}business/frontend`;
+    let url = `${environment.apiHost}business/frontend-listing`;
     filters.sortBy = sortBy;
     url = addQueryParamsToUrl(url, filters);
     return this.httpClient.get(url).pipe(
