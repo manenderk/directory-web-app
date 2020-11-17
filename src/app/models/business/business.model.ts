@@ -27,6 +27,8 @@ export interface Business {
   images: Media[];
   featured: boolean;
   active: boolean;
+  reviewCount?: number;
+  averageRating?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

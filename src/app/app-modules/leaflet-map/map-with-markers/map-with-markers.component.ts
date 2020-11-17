@@ -96,9 +96,9 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
 
 
   updateMarkers() {
-    if (this.mapMarkerClusterInstance) {
+    /* if (this.mapMarkerClusterInstance) {
       this.mapMarkerClusterInstance.remove();
-    }
+    } */
 
 
     this.mapData.markerLayers = [];
@@ -114,9 +114,9 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
       });
     });
 
-    if (this.mapMarkerClusterInstance) {
+    /* if (this.mapMarkerClusterInstance) {
       this.mapMarkerClusterInstance.refreshClusters();
-    }
+    } */
   }
 
   updateMapCenter() {
