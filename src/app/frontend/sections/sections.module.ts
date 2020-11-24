@@ -4,6 +4,7 @@ import { FrontendHeaderComponent } from './frontend-header/frontend-header.compo
 import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FrontendFooterComponent } from './frontend-footer/frontend-footer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,6 +12,8 @@ import { FrontendFooterComponent } from './frontend-footer/frontend-footer.compo
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     BsDropdownModule.forRoot()
   ],
   exports: [
