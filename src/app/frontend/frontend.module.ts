@@ -39,7 +39,10 @@ const routes: Routes = [
           './frontend-pages/frontend-news-details/frontend-news-details.module'
         ).then(mod => mod.FrontendNewsDetailsModule)
       }
-    ]
+    ],
+  }, {
+    path: 'auth',
+    loadChildren: () => import('./frontend-pages/frontend-auth/frontend-auth.module').then(mod => mod.FrontendAuthModule)
   }
 ];
 

@@ -58,6 +58,7 @@ export class FrontendAddBusinessReviewComponent implements OnInit {
         email: this.reviewFormGroup.value.email,
         firstName: this.reviewFormGroup.value.firstName,
         lastName: this.reviewFormGroup.value.lastName,
+        role: null,
         active: false
       };
       await this.reviewService.addReview(review, user).toPromise();

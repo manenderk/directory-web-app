@@ -21,20 +21,26 @@
 
 
   <div class="text-white" dropdown [isAnimated]="true">
-    <a
-      dropdownToggle
-      (click)="false"
-    >
-      <i class="fa fa-user"></i>
-    </a>
-    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-      <li>
-        <a class="dropdown-item" >Settings</a>
-      </li>
-      <li>
-        <a class="dropdown-item" >Logout</a>
-      </li>
-    </ul>
+    <ng-container *ngIf="loggedInUser;else showLoginButton">
+      <a
+        dropdownToggle
+        (click)="false"
+      >
+        <i class="fa fa-user"></i>
+      </a>
+      <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+        <li>
+          <a class="dropdown-item" >Settings</a>
+        </li>
+        <li>
+          <a class="dropdown-item" >Logout</a>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-template #showLoginButton>
+      <a class="text-white" [routerLink]="['/auth/login']" routerLinkActive="router-link-active" >Login</a>
+    </ng-template>
+
   </div>
 </nav>
 
@@ -50,3 +56,4 @@
     <button id="search-button" type="submit" class="btn btn-danger right-round" (click)="doSearch()">Search</button>
   </form>
 </ng-template>
+

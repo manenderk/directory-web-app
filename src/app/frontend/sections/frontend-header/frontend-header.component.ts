@@ -7,6 +7,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category/category.model';
+import { User } from 'src/app/models/user/user.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-frontend-header',
@@ -15,11 +17,12 @@ import { Category } from 'src/app/models/category/category.model';
 })
 export class FrontendHeaderComponent implements OnInit, OnDestroy {
 
-
   appName: string = environment.appName;
   appLogo: string = environment.appLogo;
 
   isCollapsed = true;
+
+  loggedInUser: User;
 
   searchFormGroup: FormGroup;
 
@@ -34,7 +37,8 @@ export class FrontendHeaderComponent implements OnInit, OnDestroy {
     private screenService: ScreenService,
     private variableService: VariableService,
     private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +46,7 @@ export class FrontendHeaderComponent implements OnInit, OnDestroy {
     this.setCurrentScreenType();
     this.initializeFormGroup();
     this.getCategories();
+    this.subscribeLoggedInUser();
   }
 
   initializeFormGroup() {
@@ -71,5 +76,12 @@ export class FrontendHeaderComponent implements OnInit, OnDestroy {
 
   doSearch() {
     this.router.navigate(['/listing', this.searchFormGroup.value.categoryId || 'all'], {queryParams: this.searchFormGroup.value});
+  }
+
+  subscribeLoggedInUser() {
+    this.subs.sink = this.authService.loggedInUserSubject.subscribe(user => {
+      this.loggedInUser = user;
+      console.log(this.loggedInUser);
+    });
   }
 }
