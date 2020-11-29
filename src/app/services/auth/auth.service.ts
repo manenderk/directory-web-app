@@ -43,31 +43,55 @@ export class AuthService {
       };
       const loginData: any = await this.httpClient.post(url, postData).toPromise();
 
-      if (loginData.token && loginData.user) {
-        const token: string = loginData.token;
-        const user: User = this.userService.mapResponseToUserModel(loginData.user);
-        this.saveAuthData(token, user);
+      if (loginData.data) {
+        const authData = this.parseAuthData(loginData.data);
+        this.saveAuthData(authData.token, authData.user);
         return 'success';
       } else {
         return 'Login Error, contact administrator';
       }
     } catch (e) {
+      console.log(e);
       return e.error.message;
     }
 
   }
 
+  saveAuthDataFromSocialLogin(data: string) {
+    const authData = this.parseAuthData(data);
+    this.saveAuthData(authData.token, authData.user);
+  }
 
+  clearAuthData() {
+    this.saveAuthData(null, null);
+  }
 
-  saveAuthData(token: string, user: User) {
+  private parseAuthData(data: string) {
+    data = atob(data);
+    const authData = JSON.parse(data);
+    if (!authData.token || !authData.user) {
+      throw new Error('Login error, contact administrator');
+    }
+    return {
+      token: authData.token,
+      user: this.userService.mapResponseToUserModel(authData.user)
+    };
+  }
+
+  private saveAuthData(token: string, user: User) {
     this.token = token;
     this.loggedInUser = user;
 
     this.tokenSubject.next(this.token);
     this.loggedInUserSubject.next(this.loggedInUser);
 
-    localStorage.setItem(this.localStorageKeys.token, this.token);
-    localStorage.setItem(this.localStorageKeys.user, JSON.stringify(this.loggedInUser));
+    if (this.token && this.loggedInUser) {
+      localStorage.setItem(this.localStorageKeys.token, this.token);
+      localStorage.setItem(this.localStorageKeys.user, JSON.stringify(this.loggedInUser));
+    } else {
+      localStorage.removeItem(this.localStorageKeys.token);
+      localStorage.removeItem(this.localStorageKeys.user);
+    }
   }
 
   checkForExistingAuthData() {
@@ -90,4 +114,6 @@ export class AuthService {
 
     this.saveAuthData(token, JSON.parse(user));
   }
+
+
 }

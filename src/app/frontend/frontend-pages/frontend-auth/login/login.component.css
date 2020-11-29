@@ -4,10 +4,6 @@
   background: linear-gradient(to left, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.brand-wrapper {
-  margin-bottom: 19px;
-}
-
 .brand-wrapper .logo {
   height: 37px;
 }
@@ -42,7 +38,6 @@
   font-size: 25px;
   color: #000;
   font-weight: normal;
-  margin-bottom: 23px;
 }
 
 .login-card form {
@@ -117,4 +112,18 @@
 .login-card-footer-nav a {
   font-size: 14px;
   color: #919aa3;
+}
+
+.login-icon {
+  height: 48px;
+  width: auto;
+}
+
+.social-login-container {
+  max-width: 326px;
+}
+
+.go-back {
+  width: 38px;
+  height: auto;
 }

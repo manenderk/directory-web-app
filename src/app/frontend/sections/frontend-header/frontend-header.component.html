@@ -25,15 +25,16 @@
       <a
         dropdownToggle
         (click)="false"
+        class="link"
       >
-        <i class="fa fa-user"></i>
+        {{'Hi ' + loggedInUser.firstName}} &nbsp; <i class="fa fa-user"></i>
       </a>
       <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
         <li>
           <a class="dropdown-item" >Settings</a>
         </li>
         <li>
-          <a class="dropdown-item" >Logout</a>
+          <a class="dropdown-item link" (click)="doLogout()">Logout</a>
         </li>
       </ul>
     </ng-container>

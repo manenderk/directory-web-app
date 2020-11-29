@@ -78,6 +78,11 @@ export class FrontendHeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/listing', this.searchFormGroup.value.categoryId || 'all'], {queryParams: this.searchFormGroup.value});
   }
 
+  doLogout() {
+    this.authService.clearAuthData();
+    this.router.navigate(['/']);
+  }
+
   subscribeLoggedInUser() {
     this.subs.sink = this.authService.loggedInUserSubject.subscribe(user => {
       this.loggedInUser = user;
