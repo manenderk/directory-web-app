@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
+import { SubSink } from 'subsink';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,12 +11,23 @@ import Swal from 'sweetalert2';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginFormGroup: FormGroup;
+  passwordValidationErrors = {
+    isValid: true,
+    isMatches: true,
+    length: false,
+    upperCaseLetter: false,
+    lowerCaseLetter: false,
+    number: false,
+    specialCharacter: false
+  };
   registerFormGroup: FormGroup;
   showRegisterForm = false;
-  window: Window;
+
+  private subsink = new SubSink();
+  private window: Window;
 
   constructor(
     private authService: AuthService,
@@ -25,6 +37,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.initializeLoginForm();
     this.initializeRegisterForm();
+  }
+
+  ngOnDestroy() {
+    this.subsink.unsubscribe();
   }
 
   initializeLoginForm() {
@@ -46,6 +62,64 @@ export class LoginComponent implements OnInit {
       password: new FormControl(null, Validators.required),
       passwordConfirm: new FormControl(null, Validators.required)
     });
+
+    this.subsink.sink = this.registerFormGroup.valueChanges.subscribe(values => {
+      if (values.password) {
+        this.passwordValidationErrors.isValid = this.validatePassword(values.password);
+      }
+
+      if (values.passwordConfirm) {
+        if (values.password !== values.passwordConfirm) {
+          this.passwordValidationErrors.isMatches = false;
+        } else {
+          this.passwordValidationErrors.isMatches = true;
+        }
+      }
+    });
+  }
+
+  validatePassword(password: string) {
+    if (!password) {
+      return;
+    }
+    let isValid = true;
+    if (password.length < 8) {
+      this.passwordValidationErrors.length = true;
+      isValid = false;
+    } else {
+      this.passwordValidationErrors.length = false;
+    }
+
+    if (!password.match(/[A-Z]/)) {
+      this.passwordValidationErrors.upperCaseLetter = true;
+      isValid = false;
+    } else {
+      this.passwordValidationErrors.upperCaseLetter = false;
+    }
+
+    if (!password.match(/[a-z]/)) {
+      this.passwordValidationErrors.lowerCaseLetter = true;
+      isValid = false;
+    } else {
+      this.passwordValidationErrors.lowerCaseLetter = false;
+    }
+
+    if (!password.match(/\d/)) {
+      this.passwordValidationErrors.number = true;
+      isValid = false;
+    } else {
+      this.passwordValidationErrors.number = false;
+    }
+
+    if (!password.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)) {
+      this.passwordValidationErrors.specialCharacter = true;
+      isValid = false;
+    } else {
+      this.passwordValidationErrors.specialCharacter = false;
+    }
+
+    return isValid;
+
   }
 
   async doLogin() {
@@ -60,11 +134,27 @@ export class LoginComponent implements OnInit {
   }
 
   async doLoginByGoogle() {
-    window.open(environment.apiHost + 'auth/login-google', '_top');
+    this.window.open(environment.apiHost + 'auth/login-google', '_top');
   }
 
   async doRegister() {
-    if (this.registerFormGroup.valid) {
+    console.log(this.registerFormGroup.valid, this.passwordValidationErrors.isValid, this.passwordValidationErrors.isMatches);
+    if (this.registerFormGroup.valid && this.passwordValidationErrors.isValid && this.passwordValidationErrors.isMatches) {
+      try {
+        await this.authService.doRegister(
+          this.registerFormGroup.value.firstName,
+          this.registerFormGroup.value.lastName,
+          this.registerFormGroup.value.email,
+          this.registerFormGroup.value.password
+        );
+        Swal.fire('Done', 'You are registered', 'success');
+      } catch (e) {
+        if (e.error.message.includes('DuplicateRecordError')) {
+          Swal.fire('Error', 'User with this email already exists', 'error');
+        } else {
+          Swal.fire('Error', 'System error, please contact support', 'error');
+        }
+      }
 
     }
   }

@@ -115,5 +115,16 @@ export class AuthService {
     this.saveAuthData(token, JSON.parse(user));
   }
 
+  async doRegister(firstName, lastName, email, password) {
+    const postData = {
+      firstName,
+      lastName,
+      email,
+      password
+    };
+    const url = `${environment.apiHost}users/register`;
+    return this.httpClient.post(url, postData).toPromise();
+  }
+
 
 }
