@@ -30,6 +30,10 @@ export class AuthService {
     this.tokenSubject = new BehaviorSubject(this.token);
   }
 
+  getToken() {
+    return this.token || null;
+  }
+
   getUserId() {
     return this.loggedInUser?.id || null;
   }
