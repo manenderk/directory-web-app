@@ -40,6 +40,10 @@ const routes: Routes = [
       {
         path: 'reviews',
         loadChildren: () => import('./admin-modules/reviews/reviews.module').then(mod => mod.ReviewsModule)
+      },
+      {
+        path: 'data-management',
+        loadChildren: () => import('./admin-modules/data-management/data-management.module').then(mod => mod.DataManagementModule)
       }
     ]
   }

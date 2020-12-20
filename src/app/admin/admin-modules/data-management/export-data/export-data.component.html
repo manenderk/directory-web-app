@@ -1,0 +1,14 @@
+<div class="row bg-grey-1 py-3">
+  <div class="col-12">
+    <h4 class="mb-0">Export Data</h4>
+  </div>
+</div>
+<div class="row py-3">
+  <div class="col-12 form-inline">
+    <select class="form-control mr-3" [(ngModel)]="selectedEntity">
+      <option value="">Select Entity</option>
+      <option *ngFor="let entity of entities" [value]="entity.name">{{entity.label}}</option>
+    </select>
+    <button class="btn btn-primary" (click)="exportData()">Export</button>
+  </div>
+</div>

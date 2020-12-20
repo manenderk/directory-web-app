@@ -105,5 +105,17 @@ export const navItems: SidebarItem[] = [
         link: `${adminUrl}/reviews/list`
       }
     ]
+  },
+  {
+    name: 'Data Managment',
+    icon: 'fa fa-database',
+    link: null,
+    innerItems: [
+      {
+        name: 'Export Data',
+        icon: 'fa fa-download',
+        link: `${adminUrl}/data-management/export-data`
+      }
+    ]
   }
 ];
