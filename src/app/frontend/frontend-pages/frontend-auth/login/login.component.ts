@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   showRegisterForm = false;
 
   private subsink = new SubSink();
-  private window: Window;
+  private window = window;
 
   constructor(
     private authService: AuthService,
