@@ -115,6 +115,11 @@ export const navItems: SidebarItem[] = [
         name: 'Export Data',
         icon: 'fa fa-download',
         link: `${adminUrl}/data-management/export-data`
+      },
+      {
+        name: 'Import Data',
+        icon: 'fa fa-upload',
+        link: `${adminUrl}/data-management/import-data`
       }
     ]
   }

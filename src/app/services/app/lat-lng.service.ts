@@ -15,7 +15,7 @@ export class LatLngService {
     }
     const obj = {
       type: 'Point',
-      coordinates: [latLng.lat, latLng.lng]
+      coordinates: [latLng.lng, latLng.lat]
     };
     return obj;
   }
@@ -26,10 +26,10 @@ export class LatLngService {
       lng: null
     };
     if (latLngRes?.coordinates[0]) {
-      latLng.lat = latLngRes.coordinates[0];
+      latLng.lng = latLngRes.coordinates[0];
     }
     if (latLngRes?.coordinates[1]) {
-      latLng.lng = latLngRes.coordinates[1];
+      latLng.lat = latLngRes.coordinates[1];
     }
 
     return latLng;

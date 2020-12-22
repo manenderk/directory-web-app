@@ -47,6 +47,7 @@
     "sweetalert2": "^9.17.2",
     "tslib": "^1.10.0",
     "turf-featurecollection": "^1.0.1",
+    "xlsx": "^0.16.9",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagementService } from 'src/app/services/data-management/data-management.service';
 import { environment } from 'src/environments/environment';
+import { entities } from '../entities';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,25 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class ExportDataComponent implements OnInit {
 
-  entities = [
-    {
-      name: 'category',
-      label: 'Categories'
-    },
-    {
-      name: 'business',
-      label: 'Businesses'
-    },
-    {
-      name: 'event',
-      label: 'Events'
-    },
-    {
-      name: 'news',
-      label: 'News'
-    }
-  ];
-
+  entities = entities;
   selectedEntity = '';
 
   constructor(
