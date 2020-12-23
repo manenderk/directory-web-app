@@ -103,7 +103,12 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
 
     this.subs.sink = this.route.paramMap.subscribe(params => {
       if (params.get('id')) {
-        this.filters.categoryId = params.get('id');
+        if (params.get('id') == 'all') {
+          this.filters.categoryId = '';
+        } else {
+          this.filters.categoryId = params.get('id');
+        }
+
         this.getBusinesses();
       }
     });
@@ -214,7 +219,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     localStorage.setItem('businessFilters', JSON.stringify(this.filters));
 
     if (filterName === 'category') {
-      this.router.navigate(['/listing', this.filters.categoryId]);
+      this.router.navigate(['/listing', this.filters.categoryId || 'all']);
       return;
     }
 
