@@ -1,0 +1,24 @@
+<div class="p-2" [ngClass]="{'bg-grey-1': socialInputs?.length > 0}">
+  <div class="row">
+    <div class="col">
+      <button type="button" class="btn btn-info mb-2" (click)="addInput()">Add Link</button>
+    </div>
+  </div>
+  <div class="row" *ngFor="let input of socialInputs; let i = index">
+    <div class="col-sm-3 form-group">
+      <select class="form-control" [(ngModel)]="input.platform" (change)="updateInput()">
+        <option value="">Select Social Platform</option>
+        <option *ngFor="let platform of platforms" [value]="platform">
+          {{platform}}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-6 form-group">
+      <input type="text" class="form-control" [(ngModel)]="input.link" >
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-warning" (click)="deleteInput(i)">Delete</button>
+    </div>
+  </div>
+</div>
+

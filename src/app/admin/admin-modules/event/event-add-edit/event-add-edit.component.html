@@ -5,6 +5,10 @@
 </div>
 <form *ngIf="eventFormGroup" [formGroup]="eventFormGroup">
   <div class="row py-3">
+    <div class="col-sm-3 form-group">
+      <label>Number</label>
+      <input type="number" class="form-control" formControlName="number">
+    </div>
     <div class="col-sm-6 form-group">
       <label><span class="text-danger">*</span>Name</label>
       <input type="text" class="form-control" formControlName="name">
@@ -23,7 +27,7 @@
         [owlDateTime]="eventTimePicker" [owlDateTimeTrigger]="eventTimePicker">
       <owl-date-time #eventTimePicker [pickerType]="'timer'"></owl-date-time>
     </div>
-    <div class="col-sm-6 form-group">
+    <div class="col-sm-3 form-group">
       <label>Order</label>
       <input type="number" class="form-control" formControlName="order">
     </div>
@@ -65,7 +69,7 @@
     </div>
     <div class="col-sm-6 form-group">
       <label>Social Links</label>
-      <app-multi-string-input formControlName="socialLinks"></app-multi-string-input>
+      <app-social-share-input formControlName="socialLinks"></app-social-share-input>
     </div>
     <div class="col-sm-6 form-group">
       <label>Ticket Locations</label>

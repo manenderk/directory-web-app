@@ -2,9 +2,11 @@ import { ContactPerson } from '../app/contact-person.model';
 import { LatLng } from '../app/map/latLng.model';
 import { Media } from '../app/media.model';
 import { Pricing } from '../app/pricing.model';
+import { SocialShare } from '../app/social-share.model';
 
 export interface TheEvent {
   id: string;
+  number: number;
   name: string;
   date: Date;
   time: Date;
@@ -16,7 +18,7 @@ export interface TheEvent {
   featured: boolean;
   active: boolean;
   order: number;
-  socialLinks: string[];
+  socialLinks: SocialShare[];
   eventImages: Media[];
   presentedBy: Media[];
   inAssociationWith: Media[];

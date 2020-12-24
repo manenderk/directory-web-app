@@ -105,18 +105,12 @@ export class EventService {
 
   mapResponseToEventModel(res: any): TheEvent {
     const event: TheEvent = {
+      ...res,
       id: res._id,
-      name: res.name,
       date: res.date ? new Date(res.date) : null,
       time: res.time ? new Date(res.time) : null,
-      location: res.location,
-      priceRange: res.priceRange,
-      description: res.description,
       thumbnailImage: this.mediaService.mapMediaResponseToModel(res.thumbnailImage),
       bannerImage: this.mediaService.mapMediaResponseToModel(res.bannerImage),
-      featured: res.featured,
-      active: res.active,
-      order: res.order,
       socialLinks: res.socialLinks?.length > 0 ? res.socialLinks : [],
       eventImages: res.eventImages?.length > 0 ? res.eventImages.map(m => {
         return this.mediaService.mapMediaResponseToModel(m);

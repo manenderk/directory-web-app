@@ -18,10 +18,16 @@
         <p class="mb-1"><i class="fa fa-map-marker" *ngIf="event?.location"></i> {{event?.location}}</p>
         <p class="mb-1" *ngIf="event?.priceRange"> {{event?.priceRange}}</p>
         <div>
-          <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/facebook.png"></a>
-          <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/instagram.png"></a>
-          <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/twitter.png"></a>
-          <a class="m-1" href=""><img class="social-icon" src="assets/social-icons/youtube.png"></a>
+          <a *ngFor="let socialLink of event?.socialLinks" class="m-1" [href]="socialLink.link" target="_blank">
+            <span [ngSwitch]="socialLink.platform">
+              <img *ngSwitchCase="'facebook'" class="social-icon" src="assets/social-icons/facebook.png">
+              <img *ngSwitchCase="'instagram'" class="social-icon" src="assets/social-icons/instagram.png">
+              <img *ngSwitchCase="'twitter'" class="social-icon" src="assets/social-icons/twitter.png">
+              <img *ngSwitchCase="'youtube'" class="social-icon" src="assets/social-icons/youtube.png">
+
+            </span>
+
+          </a>
         </div>
       </div>
     </div>
@@ -116,7 +122,7 @@
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
         <div class="row d-flex justify-content-center flex-wrap">
           <div class="col-sm-4 mt-3 text-center" *ngFor="let contact of event?.contacts">
-            <img class="team-member-avatar mb-3" [src]="contact.image?.path" [alt]="contact.name">
+            <img class="team-member-avatar mb-3" *ngIf="contact.image?.path" [src]="contact.image?.path" [alt]="contact.name">
             <h5 class="mb-0 f-color-secondary">
               {{contact.name}}
             </h5>

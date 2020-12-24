@@ -40,6 +40,7 @@ export class EventAddEditComponent implements OnInit {
 
   initializeFormGroup() {
     this.eventFormGroup = new FormGroup({
+      number: new FormControl({value: this.event?.number, disabled: true}),
       name: new FormControl(this.event?.name, Validators.required),
       date: new FormControl(this.event?.date),
       time: new FormControl(this.event?.time),

@@ -43,7 +43,7 @@ export class CategoryAddEditComponent implements OnInit {
 
   generateFormGroup() {
     this.catFormGroup = new FormGroup({
-      number: new FormControl(this.category?.number),
+      number: new FormControl({value: this.category?.number, disabled: true}),
       name: new FormControl(this.category?.name, Validators.required),
       description: new FormControl(this.category?.description),
       image: new FormControl(this.category?.image, Validators.required),

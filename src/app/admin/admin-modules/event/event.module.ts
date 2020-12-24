@@ -10,6 +10,7 @@ import { PricingInputModule } from 'src/app/app-modules/pricing-input/pricing-in
 import { ContactPersonInputModule } from 'src/app/app-modules/contact-person-input/contact-person-input.module';
 import { EventListComponent } from './event-list/event-list.component';
 import { LeafletMapModule } from 'src/app/app-modules/leaflet-map/leaflet-map.module';
+import { SocialShareInputModule } from 'src/app/app-modules/social-share-input/social-share-input.module';
 
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
     MultiStringInputModule,
     PricingInputModule,
     ContactPersonInputModule,
+    SocialShareInputModule,
     LeafletMapModule
   ]
 })
