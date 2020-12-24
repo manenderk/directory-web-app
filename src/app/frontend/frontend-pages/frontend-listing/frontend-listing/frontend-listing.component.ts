@@ -79,6 +79,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   compareById = CompareById;
 
 
+  private localStorageFilterKey = 'listingFilters';
   private provider = new OpenStreetMapProvider();
 
   private businessNameSearchSubject: Subject<string> = new Subject();
@@ -101,16 +102,19 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     this.subsribeLocationSearch();
     this.subsribeBusinessNameSearch();
 
+    const filters = this.getFiltersLocally();
+    if (filters) {
+      this.filters = filters;
+    }
+
     this.subs.sink = this.route.paramMap.subscribe(params => {
-      if (params.get('id')) {
-        if (params.get('id') == 'all') {
+
+        if (!params.get('id') || params.get('id') == 'all') {
           this.filters.categoryId = '';
         } else {
           this.filters.categoryId = params.get('id');
         }
-
         this.getBusinesses();
-      }
     });
 
     this.intialize();
@@ -202,6 +206,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
       distinctUntilChanged()
     ).subscribe(value => {
       this.filters.name = value;
+      this.filterChanged();
       this.getBusinesses();
     });
   }
@@ -211,12 +216,13 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     this.filters.locationName = location.label;
     this.filters.lat = location.y;
     this.filters.lng = location.x;
+    this.filterChanged();
     this.getBusinesses();
   }
 
 
   filterChanged(filterName?: string) {
-    localStorage.setItem('businessFilters', JSON.stringify(this.filters));
+    this.saveFiltersLocally();
 
     if (filterName === 'category') {
       this.router.navigate(['/listing', this.filters.categoryId || 'all']);
@@ -224,20 +230,6 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     }
 
     this.getBusinesses();
-  }
-
-  getFiltersFromLocalStorage() {
-    let filters = localStorage.getItem('businessFilters');
-    if (!filters) {
-      return null;
-    }
-    try {
-      filters = JSON.parse(filters);
-    } catch (e) {
-      console.log(e);
-      filters = null;
-    }
-    return filters;
   }
 
   toggleCardDisplayType() {
@@ -275,6 +267,20 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
         filter: true,
         map: true
       };
+    }
+  }
+
+
+  saveFiltersLocally() {
+    localStorage.setItem(this.localStorageFilterKey, JSON.stringify(this.filters))
+  }
+
+  getFiltersLocally() {
+    const filterString = localStorage.getItem(this.localStorageFilterKey);
+    if (filterString) {
+      return JSON.parse(filterString);
+    } else {
+      return null;
     }
   }
 

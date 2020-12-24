@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { AdminGuard } from './guards/admin.guard';
 import { PasswordGuard } from './guards/password.guard';
 
 
@@ -13,7 +14,7 @@ const routes: Routes = [
   {
     path: environment.adminRoutePrefix,
     loadChildren: () => import ('./admin/admin.module').then(mod => mod.AdminModule),
-    canActivate: [PasswordGuard]
+    canActivate: [PasswordGuard, AdminGuard]
   }
 ];
 
