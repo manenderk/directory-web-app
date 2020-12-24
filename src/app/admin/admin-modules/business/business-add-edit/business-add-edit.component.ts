@@ -51,6 +51,7 @@ export class BusinessAddEditComponent implements OnInit {
 
   initializeFormGroup() {
     this.businessFormGroup = new FormGroup({
+      number: new FormControl({value: this.business?.number, disabled: true}),
       name: new FormControl(this.business?.name, Validators.required),
       category: new FormControl(this.business?.category, Validators.required),
       owner: new FormControl(this.business?.owner),

@@ -6,6 +6,7 @@ import { Category } from '../category/category.model';
 
 export interface Business {
   id: string;
+  number: number;
   name: string;
   category: Category;
   owner: ContactPerson[];

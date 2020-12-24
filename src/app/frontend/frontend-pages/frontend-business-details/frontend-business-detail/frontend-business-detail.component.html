@@ -37,7 +37,7 @@
           <a class="link f-color-secondary" (click)="showAddReviewBox = true">Add Review</a>
         </p>
       </div>
-      <div class="col-12 text-center" *ngIf="business?.owner?.length > 0">
+      <div class="col-12 text-center">
         <img class="user-avatar  mb-3" *ngIf="business?.owner[0]?.image" [src]="business?.owner[0]?.image?.path">
         <h4 class="mb-1 f-color-secondary">
           {{business?.owner[0]?.name}}
