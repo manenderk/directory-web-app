@@ -51,12 +51,7 @@ export class NewsService {
 
   addNews(news: News): Observable<News> {
     const url = `${environment.apiHost}news`;
-    const postData = {
-      ...news,
-      thumbnailImage: news.thumbnailImage?.id ? news.thumbnailImage.id : null,
-      bannerImage: news.bannerImage?.id ? news.bannerImage.id : null,
-      body: Html5Entities.encode(news.body)
-    };
+    const postData = this.mapModelToRequestBody(news);
     return this.httpClient.post(url, postData).pipe(
       map(res => {
         return this.mapResponseToNewsModel(res);
@@ -66,12 +61,7 @@ export class NewsService {
 
   updateNews(news: News): Observable<News> {
     const url = `${environment.apiHost}news/id/${news.id}`;
-    const postData = {
-      ...news,
-      thumbnailImage: news.thumbnailImage?.id ? news.thumbnailImage.id : null,
-      bannerImage: news.bannerImage?.id ? news.bannerImage.id : null,
-      body: Html5Entities.encode(news.body)
-    };
+    const postData = this.mapModelToRequestBody(news);
     return this.httpClient.put(url, postData).pipe(
       map(res => {
         return this.mapResponseToNewsModel(res);
@@ -82,18 +72,24 @@ export class NewsService {
 
   mapResponseToNewsModel(res: any): News {
     const news: News = {
+      ...res,
       id: res._id,
-      title: res.title,
       thumbnailImage: this.mediaService.mapMediaResponseToModel(res.thumbnailImage),
       bannerImage: this.mediaService.mapMediaResponseToModel(res.bannerImage),
       body: Html5Entities.decode(res.body),
-      views: res.views,
-      active: res.active,
-      featured: res.featured,
-      order: res.order,
       createdAt: res.createdAt ? new Date(res.createdAt) : null,
       updatedAt: res.updatedAt ? new Date(res.updatedAt) : null
     };
     return news;
+  }
+
+  mapModelToRequestBody(news: News): any {
+    const postData = {
+      ...news,
+      thumbnailImage: news.thumbnailImage?.id ? news.thumbnailImage.id : null,
+      bannerImage: news.bannerImage?.id ? news.bannerImage.id : null,
+      body: Html5Entities.encode(news.body)
+    };
+    return postData;
   }
 }

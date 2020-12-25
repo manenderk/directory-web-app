@@ -59,6 +59,7 @@ export class AddEditNewsComponent implements OnInit {
 
   generateFormGroup() {
     this.newsFormGroup = new FormGroup({
+      number: new FormControl({value: this.news?.number, disabled: true}),
       title: new FormControl(this.news?.title, Validators.required),
       thumbnailImage: new FormControl(this.news?.thumbnailImage, Validators.required),
       bannerImage: new FormControl(this.news?.bannerImage, Validators.required),

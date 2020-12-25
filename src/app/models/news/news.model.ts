@@ -2,6 +2,7 @@ import { Media } from '../app/media.model';
 
 export interface News {
   id: string;
+  number: number;
   title: string;
   thumbnailImage: Media;
   bannerImage: Media;

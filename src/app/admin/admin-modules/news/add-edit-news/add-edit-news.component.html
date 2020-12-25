@@ -5,11 +5,15 @@
 </div>
 <form *ngIf="newsFormGroup" [formGroup]="newsFormGroup">
   <div class="row py-3">
+    <div class="col-sm-3 form-group">
+      <label>Number</label>
+      <input type="number" class="form-control" formControlName="number">
+    </div>
     <div class="col-sm-6 form-group">
       <label><span class="text-danger">*</span>Title</label>
       <input type="text" class="form-control" formControlName="title">
     </div>
-    <div class="col-sm-6 form-group">
+    <div class="col-sm-3 form-group">
       <label>Views</label>
       <input type="number" class="form-control" formControlName="views">
     </div>
