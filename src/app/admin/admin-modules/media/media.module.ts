@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MediaPickerComponent } from './media-picker/media-picker.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MediaItemComponent } from './media-item/media-item.component';
+import { MediaUploaderComponent } from './media-uploader/media-uploader.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [MediaComponent, MediaPickerComponent, MediaItemComponent],
+  declarations: [MediaComponent, MediaPickerComponent, MediaItemComponent, MediaUploaderComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

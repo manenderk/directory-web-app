@@ -9,11 +9,6 @@
   -webkit-box-shadow: 0px 0px 50px 50px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 50px 50px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 50px 50px rgba(0,0,0,0.75);
-}
-
-
-.media-container {
-  height: 86%;
   overflow-y: auto;
 }
 

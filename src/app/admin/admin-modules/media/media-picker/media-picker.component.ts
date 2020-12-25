@@ -117,4 +117,8 @@ export class MediaPickerComponent implements OnInit, ControlValueAccessor {
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
   }
+
+  mediaUploaded(media: Media) {
+    this.medias.unshift(media);
+  }
 }
