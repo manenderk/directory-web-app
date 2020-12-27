@@ -14,7 +14,8 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Marker } from 'src/app/models/app/map/marker.model';
-import { Location } from '@angular/common';
+import { ListingFilter } from 'src/app/models/app/listing-filter.model';
+import { ListingFilterService } from 'src/app/services/app/listing-filter.service';
 
 @Component({
   selector: 'app-frontend-listing',
@@ -45,23 +46,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
 
   businessMarkers: Marker[] = [];
 
-  filters: {
-    name: string,
-    categoryId: string,
-    sortBy: string,
-    locationName: string,
-    lat: number,
-    lng: number,
-    distance: number
-  } = {
-    name: '',
-    categoryId: '',
-    sortBy: 'name',
-    locationName: '',
-    lat: null,
-    lng: null,
-    distance: 10
-  };
+  filters: ListingFilter;
 
   sortOptions: {
     label: string,
@@ -79,7 +64,6 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   compareById = CompareById;
 
 
-  private localStorageFilterKey = 'listingFilters';
   private provider = new OpenStreetMapProvider();
 
   private businessNameSearchSubject: Subject<string> = new Subject();
@@ -93,8 +77,8 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     private businessService: BusinessService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location,
     private geoService: GeoService,
+    private listingFilterService: ListingFilterService
   ) { }
 
   ngOnInit(): void {
@@ -102,10 +86,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     this.subsribeLocationSearch();
     this.subsribeBusinessNameSearch();
 
-    const filters = this.getFiltersLocally();
-    if (filters) {
-      this.filters = filters;
-    }
+    this.filters = this.listingFilterService.getFilterData();
 
     this.subs.sink = this.route.paramMap.subscribe(params => {
 
@@ -222,7 +203,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
 
 
   filterChanged(filterName?: string) {
-    this.saveFiltersLocally();
+    this.listingFilterService.saveFilterData(this.filters);
 
     if (filterName === 'category') {
       this.router.navigate(['/listing', this.filters.categoryId || 'all']);
@@ -269,19 +250,4 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
       };
     }
   }
-
-
-  saveFiltersLocally() {
-    localStorage.setItem(this.localStorageFilterKey, JSON.stringify(this.filters))
-  }
-
-  getFiltersLocally() {
-    const filterString = localStorage.getItem(this.localStorageFilterKey);
-    if (filterString) {
-      return JSON.parse(filterString);
-    } else {
-      return null;
-    }
-  }
-
 }

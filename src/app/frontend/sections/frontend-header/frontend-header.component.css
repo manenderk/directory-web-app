@@ -20,6 +20,11 @@
   height: 36px;
 }
 
+.location-search-result-container {
+  position: absolute;
+  top: 50px;
+}
+
 @media (max-width: 1200px) {
   #keyword-search, #location-search {
     width: 180px;

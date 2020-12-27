@@ -47,14 +47,23 @@
 
 
 <ng-template #headerSearchBar>
-  <form class="form-inline ml-auto mr-auto header-form" [formGroup]="searchFormGroup" >
-    <input id="keyword-search" class="form-control" type="text" placeholder="Search for a place" aria-label="Search" formControlName="name">
-    <input id="location-search" class="form-control" type="text" placeholder="Location" aria-label="Search" formControlName="locationName">
-    <select id="category-search" class="form-control" placeholder="Category" aria-label="Search" formControlName="categoryId">
+  <form class="form-inline ml-auto mr-auto header-form" autocomplete="off">
+    <input id="keyword-search" class="form-control" type="text" placeholder="Search for a place" aria-label="Search" [(ngModel)]="filters.name" name="businessName">
+    <input id="location-search" class="form-control" type="text" placeholder="Location" aria-label="Search" name="businessLocation"
+      [(ngModel)]="filters.locationName"
+      (keyup)="searchLocation()"
+    >
+    <select id="category-search" class="form-control" placeholder="Category" aria-label="Search" [(ngModel)]="filters.categoryId" name="businessCategory">
       <option value="">Category</option>
       <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
     </select>
     <button id="search-button" type="submit" class="btn btn-danger right-round" (click)="doSearch()">Search</button>
+    <span class="location-search-result-container">
+      <ul class="list-group location-search-results" *ngIf="showLocationSuggestions">
+        <li class="list-group-item link" *ngFor="let result of locationResults" (click)="updateCurrentLocation(result)">{{result.label}}</li>
+        <li *ngIf="locationResults.length === 0">No Results found</li>
+      </ul>
+    </span>
   </form>
 </ng-template>
 
