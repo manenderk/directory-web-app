@@ -12,15 +12,24 @@ import Swal from 'sweetalert2';
 })
 export class MediaUploaderComponent implements OnInit {
 
-  imageFile: {
-    croppedImageEvent: ImageCroppedEvent,
-    file: File
-  } = {
-    croppedImageEvent: null,
-    file: null
+  imageValidations = {
+    width: 1000,
+    height: 500
   };
 
-  imageChangeEvent: any = '';
+  imageCropper: {
+    changeEvent: any,
+    cropEvent: ImageCroppedEvent,
+    file: File,
+    resizeWidth: number,
+    resizeHeight: number,
+  } = {
+    changeEvent: null,
+    cropEvent: null,
+    file: null,
+    resizeWidth: 0,
+    resizeHeight: 0
+  };
 
   currentAspectRatio: number;
   maintainAspectRatio: number;
@@ -44,17 +53,37 @@ export class MediaUploaderComponent implements OnInit {
     const file: File = event.target.files[0];
 
     if (this.imageDataService.imageFileTypes.includes(file.type)) {
-      this.imageFile.file = file;
-      this.imageChangeEvent = event;
+      this.imageCropper = {
+        changeEvent: event,
+        cropEvent: null,
+        file: null,
+        resizeWidth: 0,
+        resizeHeight: 0
+      };
       return;
     } else {
       this.uploadFile(file);
     }
   }
 
+  imageLoaded(image: any) {
+    const imageWidth: number = image.original.size.width;
+    const imageHeight: number = image.original.size.height;
+
+    this.imageCropper.resizeWidth = imageWidth < this.imageValidations.width ? imageWidth : this.imageValidations.width;
+    this.imageCropper.resizeHeight = imageHeight < this.imageValidations.height ? imageHeight : this.imageValidations.height;
+  }
+
   imageCropped(event: ImageCroppedEvent) {
-    console.log('CROPPED IMAGE', event);
-    this.imageFile.croppedImageEvent = event;
+    this.imageCropper.cropEvent = event;
+    const imageBase64 = event.base64.replace('data:image/png;base64,', '');
+    let imageName: any = this.imageCropper.changeEvent.target.files[0].name;
+    imageName = imageName.split('.');
+    imageName.pop();
+    imageName.push('png');
+    imageName = imageName.join('.');
+    const imageBlob = this.dataURItoBlob(imageBase64);
+    this.imageCropper.file = new File([imageBlob], imageName, { type: 'image/png' });
   }
 
   imageLoadingFailed() {
@@ -62,30 +91,40 @@ export class MediaUploaderComponent implements OnInit {
     Swal.fire('Error', 'Image loading failed. Please try again or try another image', 'error');
   }
 
-  async uploadImage() {
-    if (this.currentAspectRatio.toString() === '0' ) {
-      this.currentAspectRatio = this.imageFile.croppedImageEvent.width / this.imageFile.croppedImageEvent.height;
+  async uploadFile(file?: File) {
+    if (!file && !this.imageCropper.file) {
+      Swal.fire('Error', 'No input file', 'error');
+      return;
     }
-    const media = await this.mediaService.uploadMedia(
-      null, this.imageFile.croppedImageEvent.base64, this.imageFile.file.type, this.imageFile.file.name, this.currentAspectRatio
-    ).toPromise();
-    this.mediaUploaded.emit(media);
-    Swal.fire('Success', 'File Uploaded', 'success');
-    this.resetCropper();
-  }
+    if (!file && this.imageCropper.file) {
+      file = this.imageCropper.file;
+      this.resetCropper();
+    }
 
-  async uploadFile(file: File) {
     const media = await this.mediaService.uploadMedia(file, null, file.type, file.name, null).toPromise();
     this.mediaUploaded.emit(media);
     Swal.fire('Success', 'File Uploaded', 'success');
   }
 
   resetCropper() {
-    this.imageChangeEvent = '';
-    this.imageFile = {
-      croppedImageEvent: null,
-      file: null
-    };
+    this.imageCropper = {
+      changeEvent: null,
+      cropEvent: null,
+      file: null,
+      resizeWidth: 0,
+      resizeHeight: 0
+    }
+  }
+
+  private dataURItoBlob(dataURI: string) {
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/png' });
+    return blob;
   }
 
 }

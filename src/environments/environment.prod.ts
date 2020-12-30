@@ -3,8 +3,8 @@ export const environment = {
   appName: 'BizBox',
   appLogo: 'assets/frontend/images/logo-bb.JPG',
   adminRoutePrefix: 'dir-adm',
-  apiHost: 'https://manender.com/directory-api/',
-  fileHost: 'https://manender.com/directory-api/'
+  apiHost: 'https://directory.manender.com/api/',
+  fileHost: 'https://directory.manender.com/api/'
 };
 
 

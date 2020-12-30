@@ -1,24 +1,26 @@
 <div class="py-2">
-  <button type="button" class="btn btn-primary" (click)="uploadFile.click()">Upload</button>
+  <button type="button" class="btn btn-primary" (click)="uploadFileInput.click()">Upload</button>
 </div>
 
 <div>
-  <input type="file" class="d-none" #uploadFile (change)="fileChanged($event)">
+  <input type="file" class="d-none" #uploadFileInput (change)="fileChanged($event)">
     <image-cropper
-      [imageChangedEvent]="imageChangeEvent"
-      [maintainAspectRatio]="true"
+      [imageChangedEvent]="imageCropper.changeEvent"
       [aspectRatio]="currentAspectRatio"
       [maintainAspectRatio]="currentAspectRatio > 0"
-      format="jpg"
-      (imageCropped)="imageCropped($event)"
+      [resizeToWidth]="imageCropper.resizeWidth"
+      [resizeToHeight]="imageCropper.resizeHeight"
+      [onlyScaleDown]="true"
+      (imageLoaded)="imageLoaded($event)"
       (loadImageFailed)="imageLoadingFailed()"
+      (imageCropped)="imageCropped($event)"
     ></image-cropper>
-    <div class="action-row text-center mb-5" *ngIf="imageFile?.croppedImageEvent?.base64">
+    <div class="action-row text-center mb-5" *ngIf="imageCropper.cropEvent?.base64">
       <select class="form-control" [(ngModel)]="currentAspectRatio" >
         <option>Select Image Type</option>
         <option *ngFor="let item of imageDataService.aspectRatios" [value]="item.ratio" >{{item.displayratio}}</option>
       </select>
-      <button type="button" class="btn btn-primary m-2" (click)="uploadImage()">Upload</button>
+      <button type="button" class="btn btn-primary m-2" (click)="uploadFile()">Upload</button>
       <button type="button" class="btn btn-primary m-2" (click)="resetCropper()">Cancel</button>
     </div>
 </div>
