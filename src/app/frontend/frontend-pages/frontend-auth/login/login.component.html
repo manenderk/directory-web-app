@@ -7,7 +7,7 @@
           <img src="assets/frontend/images/login-back.jpg" alt="login" class="login-card-img">
         </div>
         <div class="col-md-7">
-          <div class="card-body">
+          <div class="card-body text-center">
             <div class="brand-wrapper" *ngIf="!showRegisterForm">
               <!-- <img src="assets/images/logo.svg" alt="logo" class="logo"> -->
               <h2>BizBox</h2>
@@ -16,13 +16,19 @@
               <span *ngIf="showRegisterForm" class="link" (click)="showRegisterForm = false">
                 <img class="go-back" src="assets/frontend/images/left-arrow.png">
               </span>
-              {{showRegisterForm ? 'Register your account' : 'Signin into your account'}}
+              {{showRegisterForm ? 'Register' : 'Login'}}
             </p>
-            <div class="d-flex justify-content-center mb-3 social-login-container">
-              <a (click)="doLoginByGoogle()" class="link">
-                <img class="login-icon" src="assets/social-icons/google.png">
-              </a>
+            <div class="social-login-block">
+              <div class="d-flex justify-content-center mb-3 social-login-container">
+                <a (click)="doLoginByGoogle()" class="link">
+                  <img class="login-icon" src="assets/social-icons/google.png">
+                </a>
+              </div>
             </div>
+
+            <hr class="mb-3">
+
+            <p>Login using email id and password</p>
             <form *ngIf="showRegisterForm; else showLoginForm" [formGroup]="registerFormGroup">
               <div class="form-group">
                 <label for="first-name" class="sr-only"></label>
