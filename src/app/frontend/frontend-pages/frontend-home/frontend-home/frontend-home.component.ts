@@ -256,12 +256,12 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
 
     // SETTING DEFAULT CATEGORY DATA
     this.newsData = {
-      desktopRows: 2,
-      desktopCols: 5,
-      tabletRows: 2,
-      tabletCols: 3,
-      mobileRows: 2,
-      mobileCols: 2,
+      desktopRows: this.ui.homeData.news.desktop.rows,
+      desktopCols: this.ui.homeData.news.desktop.cols,
+      tabletRows: this.ui.homeData.news.tablet.rows,
+      tabletCols: this.ui.homeData.news.tablet.cols,
+      mobileRows: this.ui.homeData.news.mobile.rows,
+      mobileCols: this.ui.homeData.news.mobile.cols,
       newsHeading: 'News',
       newsSubheading: 'Our latest publications',
       news: [],

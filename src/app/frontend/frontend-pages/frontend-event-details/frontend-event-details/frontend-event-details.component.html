@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <img class="img-fluid" [src]="event?.bannerImage?.path" [alt]="event?.name">
+        <img class="img-fluid event-banner-image" [src]="event?.bannerImage?.path" [alt]="event?.name">
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
         <div class="d-flex flex-wrap justify-content-center">
           <ng-container *ngFor="let media of event?.presentedBy">
-            <img [src]="media.path" class="brand-image align-self-center mx-2" [alt]="media.fileName">
+            <img [src]="media.path" class="brand-image align-self-center m-1" [alt]="media.fileName">
           </ng-container>
         </div>
 
@@ -63,7 +63,7 @@
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
         <div class="d-flex flex-wrap justify-content-center">
           <ng-container *ngFor="let media of event?.inAssociationWith">
-            <img [src]="media.path" class="brand-image align-self-center mx-2">
+            <img [src]="media.path" class="brand-image align-self-center m-1">
           </ng-container>
         </div>
 
