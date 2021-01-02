@@ -18,6 +18,10 @@ const routes: Routes = [
         loadChildren: () => import('./frontend-pages/frontend-home/frontend-home.module').then(mod => mod.FrontendHomeModule)
       },
       {
+        path: 'categories',
+        loadChildren: () => import('./frontend-pages/frontend-category-listing/frontend-category-listing.module').then(mod => mod.FrontendCategoryListingModule)
+      },
+      {
         path: 'listing/:id',
         loadChildren: () => import('./frontend-pages/frontend-listing/frontend-listing.module').then(mod => mod.FrontendListingModule)
       },

@@ -134,7 +134,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   initializeScreen() {
     this.toggleScreenType = this.variableService.toggleScreenType;
     this.setCurrentScreenType();
-    this.platformLocation.onPopState(() => {
+    /* this.platformLocation.onPopState(() => {
       console.log('L1');
       if ((!this.collapseDisplayVars.filter || !this.collapseDisplayVars.map) && this.toggleScreenType.includes(this.screenType)) {
         console.log('L2');
@@ -146,7 +146,7 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
         }
         this.platformLocation.pushState(null, '', window.location.href);
       }
-    })
+    }) */
   }
 
   setCurrentScreenType() {
