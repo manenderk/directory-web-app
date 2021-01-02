@@ -38,6 +38,10 @@ const routes: Routes = [
         ).then(mod => mod.FrontendEventDetailsModule)
       },
       {
+        path: 'events',
+        loadChildren: () => import('./frontend-pages/frontend-event-listing/frontend-event-listing.module').then(mod => mod.FrontendEventListingModule)
+      },
+      {
         path: 'news/:id',
         loadChildren: () => import(
           './frontend-pages/frontend-news-details/frontend-news-details.module'
