@@ -46,6 +46,10 @@ const routes: Routes = [
         loadChildren: () => import(
           './frontend-pages/frontend-news-details/frontend-news-details.module'
         ).then(mod => mod.FrontendNewsDetailsModule)
+      },
+      {
+        path: 'news',
+        loadChildren: () => import('./frontend-pages/frontend-news-listing/frontend-news-listing.module').then(mod => mod.FrontendNewsListingModule)
       }
     ],
   }, {
