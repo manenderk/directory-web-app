@@ -16,6 +16,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Marker } from 'src/app/models/app/map/marker.model';
 import { ListingFilter } from 'src/app/models/app/listing-filter.model';
 import { ListingFilterService } from 'src/app/services/app/listing-filter.service';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-frontend-listing',
@@ -61,6 +62,8 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
   showLocationSuggestions = false;
   locationResults: any[] = [];
 
+  mapLoaded = false;
+
   compareById = CompareById;
 
 
@@ -78,7 +81,8 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private geoService: GeoService,
-    private listingFilterService: ListingFilterService
+    private listingFilterService: ListingFilterService,
+    private platformLocation: PlatformLocation
   ) { }
 
   ngOnInit(): void {
@@ -98,7 +102,8 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
         this.getBusinesses();
     });
 
-    this.intialize();
+    this.initializeScreen();
+    this.initializeCategories();
     this.getUserPosition();
   }
 
@@ -126,10 +131,22 @@ export class FrontendListingComponent implements OnInit, OnDestroy {
     });
   }
 
-  async intialize() {
+  initializeScreen() {
     this.toggleScreenType = this.variableService.toggleScreenType;
     this.setCurrentScreenType();
-    await this.initializeCategories();
+    this.platformLocation.onPopState(() => {
+      console.log('L1');
+      if ((!this.collapseDisplayVars.filter || !this.collapseDisplayVars.map) && this.toggleScreenType.includes(this.screenType)) {
+        console.log('L2');
+        if (!this.collapseDisplayVars.filter) {
+          this.toggleScreenSectionsDisplay('filter');
+        }
+        if (!this.collapseDisplayVars.map) {
+          this.toggleScreenSectionsDisplay('map');
+        }
+        this.platformLocation.pushState(null, '', window.location.href);
+      }
+    })
   }
 
   setCurrentScreenType() {

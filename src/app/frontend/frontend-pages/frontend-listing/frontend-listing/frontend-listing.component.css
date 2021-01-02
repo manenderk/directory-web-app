@@ -18,6 +18,7 @@
   height: 42px;
   width: 42px;
   z-index: 999;
+  display: none;
 }
 
 
@@ -53,9 +54,13 @@
     overflow-y: auto;
   }
 
-  .filter-section, .map-section {
+  .filter-section {
     display: none;
   }
+
+  /* .map-section {
+    visibility: hidden;
+  } */
 
   .filter-section.show {
     display: block;
@@ -64,18 +69,36 @@
     position: fixed;
     top: 56px;
     left: 0;
-    height: 100vh;
     background: #fff;
-    z-index: 99;
+    z-index: 199;
+  }
+
+  .filter-backdrop.show {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 199;
+  }
+
+  .map-section.map-loaded {
+    display: none;
   }
 
   .map-section.show {
-    display: block;
+/*     visibility: visible;
+ */    display: block;
     position: fixed;
     top: 56px;
     left: 0;
     height: 100vh;
     background: none;
     z-index: 99;
+  }
+
+  .map-section.show .map-close-btn {
+    display: inline;
   }
 }

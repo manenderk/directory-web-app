@@ -52,6 +52,7 @@
 
 
       <div class="row">
+        <div class="filter-backdrop" [ngClass]="{'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.filter}"></div>
         <div class="col-lg-4 filter-section" [ngClass]="{'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.filter}">
           <div class="form-group">
             <select class="form-control custom-select" [(ngModel)]="filters.sortBy" (change)="filterChanged()">
@@ -98,7 +99,7 @@
           </div>
           <div class="text-right d-lg-none" >
             <button type="button" class="btn btn-default mr-2" (click)="toggleScreenSectionsDisplay('filter')">Cancel</button>
-            <button type="submit" class="btn btn-info">Done</button>
+            <button type="submit" class="btn btn-info" (click)="toggleScreenSectionsDisplay('filter')">Done</button>
           </div>
         </div>
         <div class="col-lg-8 py-2 bg-grey-1 listing-grid" appMonitorScroll (scrolledUp)="listingScrolledUp = true" (scrolledDown)="listingScrolledUp = false">
@@ -121,11 +122,14 @@
 
     </div>
 
-    <div class="col-lg-5 px-0 map-section" [ngClass]="{'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.map}">
+    <div class="col-lg-5 px-0 map-section" [ngClass]="{
+      'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.map,
+      'map-loaded': mapLoaded
+    }">
       <button class="btn btn-info btn-icon-circle d-lg-none map-close-btn" (click)="toggleScreenSectionsDisplay('map')">
         <i class="fa fa-times"></i>
       </button>
-      <app-map-with-markers [markers]="businessMarkers" [class]="'height100vhResHeader'"></app-map-with-markers>
+      <app-map-with-markers [markers]="businessMarkers" [class]="'height100vhResHeader'" (mapLoaded)="mapLoaded = true"></app-map-with-markers>
     </div>
   </div>
 </div>

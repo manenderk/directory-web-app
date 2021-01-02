@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { average, getBoundingBox } from 'geolocation-utils';
 import * as L from 'leaflet';
 import { Marker } from 'src/app/models/app/map/marker.model';
@@ -18,11 +18,13 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
   @Input() width: string;
   @Input() class: string;
 
+  @Output() mapLoaded: EventEmitter<L.Map> = new EventEmitter();
+
   mapInstance: L.Map;
   mapMarkerClusterInstance: L.MarkerClusterGroup;
 
-  userPosition: Position;
-  userPositionError: PositionError;
+  userPosition: any;
+  userPositionError: any;
 
   private window = window;
 
@@ -62,20 +64,21 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   subsribeUserPositionUpdates() {
-    this.subSink.sink = this.geoService.userPosition.subscribe((position: Position) => {
+    this.subSink.sink = this.geoService.userPosition.subscribe((position: any) => {
       if (position) {
         this.userPosition = position;
         this.updateUserPositionInMap();
         this.updateMapCenter();
       }
     });
-    this.subSink.sink = this.geoService.userPositionError.subscribe((positionError: PositionError) => {
+    this.subSink.sink = this.geoService.userPositionError.subscribe((positionError: any) => {
       this.userPositionError = positionError;
     });
   }
 
   onMapReady(map: L.Map) {
     this.mapInstance = map;
+    this.mapLoaded.emit(map);
   }
 
   onMarkerClusterReady(markerCluster: L.MarkerClusterGroup) {
