@@ -23,6 +23,11 @@ export class DataManagementService {
     return this.httpClient.post(url, data);
   }
 
+  copyData(entityName: string, recordId: string): Observable<any> {
+    const url = environment.apiHost + 'data-management/copy/' + entityName + '/' + recordId;
+    return this.httpClient.put(url, {});
+  }
+
   getLatLngFromPlace(placeName: string): Observable<any> {
     const url = 'https://api.opencagedata.com/geocode/v1/json?key=e5456f7a861f4709baec9012683a2f01&q=' + placeName;
     return this.httpClient.get(url);

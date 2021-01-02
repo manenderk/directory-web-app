@@ -120,6 +120,11 @@ export const navItems: SidebarItem[] = [
         name: 'Import Data',
         icon: 'fa fa-upload',
         link: `${adminUrl}/data-management/import-data`
+      },
+      {
+        name: 'Copy Data',
+        icon: 'fa fa-clone',
+        link: `${adminUrl}/data-management/copy-data`
       }
     ]
   }

@@ -4,6 +4,7 @@ import { ExportDataComponent } from './export-data/export-data.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ImportDataComponent } from './import-data/import-data.component';
+import { CopyDataComponent } from './copy-data/copy-data.component';
 
 const routes: Routes = [
   {
@@ -13,11 +14,15 @@ const routes: Routes = [
   {
     path: 'import-data',
     component: ImportDataComponent
+  },
+  {
+    path: 'copy-data',
+    component: CopyDataComponent
   }
 ]
 
 @NgModule({
-  declarations: [ExportDataComponent, ImportDataComponent],
+  declarations: [ExportDataComponent, ImportDataComponent, CopyDataComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
