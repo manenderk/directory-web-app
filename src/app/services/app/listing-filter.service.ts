@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ListingFilter } from 'src/app/models/app/listing-filter.model';
 
 @Injectable({
@@ -6,16 +7,18 @@ import { ListingFilter } from 'src/app/models/app/listing-filter.model';
 })
 export class ListingFilterService {
 
+
+  listingFilter: ListingFilter;
+  listingFilterSubject: Subject<ListingFilter> = new Subject();
+
   private localStorageFilterKey = 'listingFilters';
 
-  constructor() { }
-
-  saveFilterData(filters: ListingFilter) {
-    localStorage.setItem(this.localStorageFilterKey, JSON.stringify(filters))
+  constructor() {
+    this.initializeFilter();
   }
 
-  getFilterData(): ListingFilter {
-    let listingFilters: ListingFilter = {
+  private getDefaultFilter(): ListingFilter {
+    const filter: ListingFilter = {
       name: '',
       categoryId: '',
       sortBy: 'name',
@@ -24,12 +27,38 @@ export class ListingFilterService {
       lng: null,
       distance: 10
     };
+    return filter;
+  }
+
+  initializeFilter() {
+    let filter: ListingFilter;
+    const filterString = localStorage.getItem(this.localStorageFilterKey);
+    if (filterString) {
+      filter = JSON.parse(filterString);
+    } else {
+      filter = this.getDefaultFilter();
+    }
+    this.saveFilterData(filter);
+  }
+
+  saveFilterData(filter: ListingFilter) {
+    this.listingFilter = filter;
+    this.listingFilterSubject.next(filter);
+    localStorage.setItem(this.localStorageFilterKey, JSON.stringify(this.listingFilter));
+  }
+
+
+
+  getFilterData(): ListingFilter {
+    /* let listingFilters: ListingFilter = {
+
+    };
     const filterString = localStorage.getItem(this.localStorageFilterKey);
     if (filterString) {
       const filters = JSON.parse(filterString);
       listingFilters = {...filters}
     }
-    return listingFilters;
-
+    return listingFilters; */
+    return this.listingFilter;
   }
 }

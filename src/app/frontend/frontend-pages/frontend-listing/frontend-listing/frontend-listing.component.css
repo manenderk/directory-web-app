@@ -11,7 +11,7 @@
   overflow-y: auto;
 }
 
-.map-close-btn {
+/* .map-close-btn {
   position: fixed;
   top: 72px;
   right: 15px;
@@ -19,7 +19,7 @@
   width: 42px;
   z-index: 999;
   display: none;
-}
+} */
 
 
 .top-section {
@@ -49,12 +49,20 @@
 
 @media screen and (max-width: 991px) {
 
-  .listing-grid {
+  /* .listing-grid {
     max-height: 100vh;
     overflow-y: auto;
+  } */
+
+  .listing-grid {
+    max-height: initial;
   }
 
   .filter-section {
+    display: none;
+  }
+
+  .map-section {
     display: none;
   }
 

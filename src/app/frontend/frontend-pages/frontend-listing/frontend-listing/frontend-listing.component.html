@@ -22,8 +22,10 @@
               (click)="toggleScreenSectionsDisplay('filter')" >
               <i class="fa fa-filter" aria-hidden="true"></i>
             </button>
+            <!-- <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
+              (click)="toggleScreenSectionsDisplay('map')" > -->
             <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
-              (click)="toggleScreenSectionsDisplay('map')" >
+              [routerLink]="['/map-listing']" routerLinkActive="router-link-active"  >
               <i class="fa fa-map" aria-hidden="true"></i>
             </button>
             <button type="button" class="btn btn-info btn-icon-circle mr-2"
@@ -122,14 +124,14 @@
 
     </div>
 
-    <div class="col-lg-5 px-0 map-section" [ngClass]="{
-      'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.map,
-      'map-loaded': mapLoaded
-    }">
-      <button class="btn btn-info btn-icon-circle d-lg-none map-close-btn" (click)="toggleScreenSectionsDisplay('map')">
+    <!-- <div class="col-lg-5 px-0 map-section" [ngClass]="{
+      'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.map
+    }"> -->
+    <div class="col-lg-5 px-0 map-section">
+      <!-- <button class="btn btn-info btn-icon-circle d-lg-none map-close-btn" (click)="toggleScreenSectionsDisplay('map')">
         <i class="fa fa-times"></i>
-      </button>
-      <app-map-with-markers [markers]="businessMarkers" [class]="'height100vhResHeader'" (mapLoaded)="mapLoaded = true"></app-map-with-markers>
+      </button> -->
+      <app-map-with-markers [markers]="businessMarkers" class="height100vhResHeader" (mapLoaded)="mapLoaded = true"></app-map-with-markers>
     </div>
   </div>
 </div>

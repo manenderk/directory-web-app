@@ -26,6 +26,10 @@ const routes: Routes = [
         loadChildren: () => import('./frontend-pages/frontend-listing/frontend-listing.module').then(mod => mod.FrontendListingModule)
       },
       {
+        path: 'map-listing',
+        loadChildren: () => import('./mobile-map-business-listing/mobile-map-business-listing.module').then(mod => mod.MobileMapBusinessListingModule)
+      },
+      {
         path: 'business/:id',
         loadChildren: () => import(
           './frontend-pages/frontend-business-details/frontend-business-details.module'

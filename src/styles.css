@@ -278,6 +278,10 @@ hr {
 .my-sidebar.show25per .my-sidebar-overlay {
   display: block;
 }
+
+.mobile-map {
+  height: 60vh;
+}
 /************************/
 /*     MEDIA QUERIES    */
 /************************/

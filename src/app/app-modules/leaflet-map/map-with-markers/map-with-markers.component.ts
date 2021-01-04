@@ -68,7 +68,6 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
       if (position) {
         this.userPosition = position;
         this.updateUserPositionInMap();
-        this.updateMapCenter();
       }
     });
     this.subSink.sink = this.geoService.userPositionError.subscribe((positionError: any) => {
@@ -90,7 +89,10 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateUserPositionInMap() {
-    this.mapData.center = L.latLng(this.userPosition.coords.latitude, this.userPosition.coords.longitude);
+    if (!this.mapData.center) {
+      this.mapData.center = L.latLng(this.userPosition.coords.latitude, this.userPosition.coords.longitude);
+    }
+
     this.mapData.userPositionMarkerLayer = this.leafletService.getUserPositionMarker({
       lat: this.userPosition.coords.latitude,
       lng: this.userPosition.coords.longitude
@@ -170,7 +172,7 @@ export class MapWithMarkersComponent implements OnInit, OnChanges, OnDestroy {
     this.mapData.center = centerLatLng;
     this.leafletMapOptions.center = centerLatLng;
 
-    const boundingBox: any = getBoundingBox(locations, 500);
+    const boundingBox: any = getBoundingBox(locations, 2000);
     this.mapData.boundingBox = L.latLngBounds(
       L.latLng(boundingBox.topLeft.lat, boundingBox.topLeft.lon),
       L.latLng(boundingBox.bottomRight.lat, boundingBox.bottomRight.lon)
