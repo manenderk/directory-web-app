@@ -19,15 +19,15 @@
 
 
 <ng-template #categorySection>
-  <div class="container  py-2 py-sm-3 py-md-4 ">
-    <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
+  <div class="container py-1 py-md-2 py-lg-4">
+    <div class="row my-0 my-lg-1">
       <div class="col px-0 section-heading">
         <h2 class="fw-medium mb-1 f-color-primary">{{categoryData?.categoryHeading}}</h2>
         <div class="header-bottom-bar mb-1 d-none d-md-block b-color-primary-accent"></div>
         <h5 class="d-none d-md-block mb-0 fw-medium f-color-secondary">{{categoryData?.categorySubheading}}</h5>
       </div>
     </div>
-    <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
+    <div class="row my-0 my-lg-1">
       <div class="col px-0" *ngIf="sliderConfigs?.categorySliderConfig" >
         <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfigs.categorySliderConfig" >
           <div ngxSlickItem  class="slide" *ngFor="let catArr of categoryData.organizedCategories">
@@ -38,10 +38,10 @@
         </ngx-slick-carousel>
       </div>
     </div>
-    <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
+    <div class="row my-0 my-lg-1">
       <div class="col px-2 px-sm-0 text-right">
         <a [routerLink]="['/categories']" routerLinkActive="router-link-active"
-        class="btn" [ngClass]="toggleScreenTypes.includes(screenSize) ? 'btn-link view-more-mob-btn py-0' : ' btn-info do-zoom-hover'"
+        class="btn" [ngClass]="toggleScreenTypes.includes(screenSize) ? 'btn-link view-more-mob-btn my-0 py-0' : ' btn-info do-zoom-hover'"
         role="button">View More <i class="fa fa-angle-right"></i></a>
       </div>
     </div>
@@ -50,15 +50,15 @@
 
 
 <ng-template #eventSection>
-  <div class="container py-2 py-sm-3 py-md-4">
-    <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
+  <div class="container py-1 py-md-2 py-lg-4">
+    <div class="row my-0 my-lg-1">
       <div class="col px-0 section-heading">
         <h2 class="fw-medium mb-1 f-color-primary">{{eventData?.eventHeading}}</h2>
         <div class="header-bottom-bar mb-1 d-none d-md-block b-color-primary-accent"></div>
         <h5 class="d-none d-md-block mb-0 fw-medium f-color-secondary">{{eventData?.eventSubheading}}</h5>
       </div>
     </div>
-    <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
+    <div class="row my-0 my-lg-1">
       <div class="col px-0 " *ngIf="sliderConfigs?.eventSliderConfig" >
         <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfigs.eventSliderConfig" >
           <div ngxSlickItem  class="slide" *ngFor="let eventArr of eventData.organizedEvents">
@@ -69,10 +69,10 @@
         </ngx-slick-carousel>
       </div>
     </div>
-    <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
+    <div class="row my-0 my-lg-1">
       <div class="col px-2 px-sm-0 text-right">
         <a [routerLink]="['/events']" routerLinkActive="router-link-active"
-        class="btn" [ngClass]="toggleScreenTypes.includes(screenSize) ? 'btn-link view-more-mob-btn py-0' : ' btn-info do-zoom-hover'"
+        class="btn" [ngClass]="toggleScreenTypes.includes(screenSize) ? 'btn-link view-more-mob-btn my-0 py-0' : ' btn-info do-zoom-hover'"
         role="button">View More <i class="fa fa-angle-right"></i></a>
       </div>
     </div>
@@ -80,15 +80,15 @@
 </ng-template>
 
 <ng-template #newsSection>
-  <div class="container py-2 py-sm-3 py-md-4 ">
-    <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
+  <div class="container py-1 py-md-2 py-lg-4 ">
+    <div class="row my-0 my-lg-1">
       <div class="col px-0 section-heading">
         <h2 class="fw-medium mb-1 f-color-primary">{{newsData?.newsHeading}}</h2>
         <div class="header-bottom-bar mb-1 d-none d-md-block b-color-primary-accent"></div>
         <h5 class="d-none d-md-block mb-0 fw-medium f-color-secondary">{{newsData?.newsSubheading}}</h5>
       </div>
     </div>
-    <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
+    <div class="row my-0 my-lg-1">
       <div class="col px-0" *ngIf="sliderConfigs?.newsSliderConfig" >
         <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfigs.newsSliderConfig" >
           <div ngxSlickItem  class="slide" *ngFor="let newsArr of newsData.organizedNews">
@@ -99,10 +99,10 @@
         </ngx-slick-carousel>
       </div>
     </div>
-    <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
+    <div class="row my-0 my-lg-1">
       <div class="col px-2 px-sm-0 text-right">
         <a [routerLink]="['/news']" routerLinkActive="router-link-active"
-        class="btn" [ngClass]="toggleScreenTypes.includes(screenSize) ? 'btn-link view-more-mob-btn py-0' : ' btn-info do-zoom-hover'"
+        class="btn" [ngClass]="toggleScreenTypes.includes(screenSize) ? 'btn-link view-more-mob-btn my-0 py-0' : ' btn-info do-zoom-hover'"
         role="button">View More <i class="fa fa-angle-right"></i></a>
       </div>
     </div>
