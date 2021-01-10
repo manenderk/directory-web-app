@@ -7,8 +7,8 @@ import { NgxSlickSliderModel } from 'src/app/models/app/ngx-slick-slider.model';
 })
 export class NgxSlickCarouselService {
 
-  private defaultPrevArrow = '<button type="button" class="btn btn-secondary slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>';
-  private defaultNextArrow = '<button type="button" class="btn btn-secondary slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>';
+  defaultPrevArrow = '<button type="button" class="btn btn-secondary slider-action-btn slider-action-prev do-zoom-hover"><i class="fa fa-2x fa-angle-left"></i></button>';
+  defaultNextArrow = '<button type="button" class="btn btn-secondary slider-action-btn slider-action-next do-zoom-hover"><i class="fa fa-2x fa-angle-right"></i></button>';
 
   private defaultConfig: NgxSlickSliderModel = {
     slidesToShow: 3,

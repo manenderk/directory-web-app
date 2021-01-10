@@ -1,10 +1,29 @@
 <section class="p-1">
   <div class="container">
     <div class="row">
-      <div class="col">
-        <img class="img-fluid event-banner-image" [src]="event?.bannerImage?.path" [alt]="event?.name">
+      <div class="col-12 mb-1 mb-lg-2" *ngIf="currentBannerImage">
+        <img class="img-fluid event-banner-image" [src]="currentBannerImage.path" [alt]="event?.name">
+      </div>
+      <div class="col-12" >
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sliderConfig" >
+          <div ngxSlickItem  class="slide p-1" *ngFor="let image of event?.eventImages" (click)="currentBannerImage = image">
+            <div class="slide-item" [ngStyle]="{'background-image': 'url(' + image?.path + ')'}">
+            </div>
+
+          </div>
+        </ngx-slick-carousel>
       </div>
     </div>
+
+    <!-- <div class="row no-gutters d-flex flex-wrap justify-content-center">
+
+      <div class="col-2 col-lg-1" *ngIf="event?.bannerImage?.path">
+        <img class="img-fluid" [src]="event?.bannerImage.path">
+      </div>
+      <div class="col-2 col-lg-1" *ngFor="let image of event?.eventImages">
+        <img class="img-fluid" *ngIf="image.path" [src]="image.path">
+      </div>
+    </div> -->
   </div>
 </section>
 
@@ -18,15 +37,13 @@
         <p class="mb-1"><i class="fa fa-map-marker" *ngIf="event?.location"></i> {{event?.location}}</p>
         <p class="mb-1" *ngIf="event?.priceRange"> {{event?.priceRange}}</p>
         <div>
-          <a *ngFor="let socialLink of event?.socialLinks" class="m-1" [href]="socialLink.link" target="_blank">
+          <a *ngFor="let socialLink of event?.socialLinks" class="my-1 mx-2" [href]="socialLink.link" target="_blank">
             <span [ngSwitch]="socialLink.platform">
               <img *ngSwitchCase="'facebook'" class="social-icon" src="assets/social-icons/facebook.png">
               <img *ngSwitchCase="'instagram'" class="social-icon" src="assets/social-icons/instagram.png">
               <img *ngSwitchCase="'twitter'" class="social-icon" src="assets/social-icons/twitter.png">
               <img *ngSwitchCase="'youtube'" class="social-icon" src="assets/social-icons/youtube.png">
-
             </span>
-
           </a>
         </div>
       </div>
@@ -47,7 +64,6 @@
             <img [src]="media.path" class="brand-image align-self-center m-1" [alt]="media.fileName">
           </ng-container>
         </div>
-
       </div>
     </div>
   </div>
@@ -82,7 +98,7 @@
         </h4>
         <div class="header-bottom-bar mx-auto mb-3 b-color-primary-accent"></div>
         <div class="row d-flex justify-content-center flex-wrap">
-          <div class="col-sm-4 mb-2" *ngFor="let pricing of event?.pricings">
+          <div class="col-4 mb-2" *ngFor="let pricing of event?.pricings">
             <h5 class="f-color-secondary mb-1">{{pricing.name}}</h5>
             <h5 class="mb-1">{{pricing.price}}</h5>
             <ul class="list-no-decoration">
