@@ -6,4 +6,5 @@ export interface Marker {
   link?: string;
   iconUrl?: string;
   shadowIconUrl?: string;
+  record?: any;
 }

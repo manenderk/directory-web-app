@@ -1,0 +1,59 @@
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+.action-row {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 15px;
+  z-index: 9999;
+}
+
+.business-popup {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+.business-card {
+  box-shadow: 0px 15px 80px 10px rgba(0,0,0,0.6);
+}
+
+.listing-section-mobile {
+  position: absolute;
+  z-index: 99999;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.5s ease-out;;
+}
+
+.listing-section-mobile.show {
+  height: calc(100vh - var(--header-height));
+  overflow: hidden;
+}
+
+.listing-section-mobile .backdrop {
+  background-color: transparent;
+  transition: background-color 1s cubic-bezier(0.7, 0, 0.84, 0);;
+}
+
+.listing-section-mobile.show .backdrop {
+  height: 70px;
+  background-color: rgba(3, 3, 3, 0.5);
+}
+
+.listing-content {
+  margin-top: -10px;
+  padding: 15px 10px;
+  background: #fff;
+  border-radius: 6px 6px 0 0;
+  height: 100%;
+  overflow-y: auto;
+}

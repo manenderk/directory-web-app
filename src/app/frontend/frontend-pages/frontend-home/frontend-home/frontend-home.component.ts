@@ -65,6 +65,8 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
     organizedNews: News[][],
   };
 
+  toggleScreenTypes: string[] = [];
+
   ui: UI;
 
   private subs = new SubSink();
@@ -104,6 +106,7 @@ export class FrontendHomeComponent implements OnInit, OnDestroy {
   }
 
   setCurrentScreenType() {
+    this.toggleScreenTypes = this.varService.toggleScreenType;
     this.subs.sink = this.screenService.currentScreenType.subscribe(screenType => {
       this.screenSize = screenType;
     });

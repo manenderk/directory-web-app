@@ -50,6 +50,7 @@ html, body {
   --c-color-primary: #1a237e;
   --c-color-secondary: #283593;
   --c-color-primary-accent: #1976d2;
+  --header-height: 56px;
 }
 
 h1, h2, h3, h4, h5 {
@@ -134,7 +135,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .height100vhResHeader{
-  height: calc(100vh - 56px) !important;
+  height: calc(100vh - var(--header-height)) !important;
 }
 
 .height100vh {

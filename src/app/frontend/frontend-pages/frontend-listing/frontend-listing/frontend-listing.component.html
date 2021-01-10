@@ -25,7 +25,7 @@
             <!-- <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
               (click)="toggleScreenSectionsDisplay('map')" > -->
             <button type="button" class="btn btn-info btn-icon-circle mr-2 d-lg-none"
-              [routerLink]="['/map-listing']" routerLinkActive="router-link-active"  >
+              [routerLink]="['/listing/map']" routerLinkActive="router-link-active"  >
               <i class="fa fa-map" aria-hidden="true"></i>
             </button>
             <button type="button" class="btn btn-info btn-icon-circle mr-2"
@@ -57,12 +57,14 @@
         <div class="filter-backdrop" [ngClass]="{'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.filter}"></div>
         <div class="col-lg-4 filter-section" [ngClass]="{'show': toggleScreenType.includes(screenType) && !collapseDisplayVars.filter}">
           <div class="form-group">
+            <label>Sort By</label>
             <select class="form-control custom-select" [(ngModel)]="filters.sortBy" (change)="filterChanged()">
               <option value="" disabled>Sort By</option>
               <option *ngFor="let option of sortOptions" [value]="option.value">{{option.label}}</option>
             </select>
           </div>
           <div class="form-group">
+            <label>Filter By</label>
             <div class="input-group">
               <input type="text" class="form-control" placeholder="What are you looking for?" [(ngModel)]="filters.name" (keyup)="searchBusiness()">
               <div class="input-group-append">

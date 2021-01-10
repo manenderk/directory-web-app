@@ -9,17 +9,32 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ScrollDirectivesModule } from 'src/app/directives/scroll-directives/scroll-directives.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LeafletMapModule } from 'src/app/app-modules/leaflet-map/leaflet-map.module';
+import { FrontendBusinessListingMapComponent } from './frontend-business-listing-map/frontend-business-listing-map.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster';
 
 
 const routes: Routes = [
   {
     path: '',
     component: FrontendListingComponent
+  },
+  {
+    path: 'cat/:id',
+    component: FrontendListingComponent
+  },
+  {
+    path: 'map',
+    component: FrontendBusinessListingMapComponent
+  },
+  {
+    path: 'map/:id',
+    component: FrontendBusinessListingMapComponent
   }
 ];
 
 @NgModule({
-  declarations: [FrontendListingComponent],
+  declarations: [FrontendListingComponent, FrontendBusinessListingMapComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -29,7 +44,9 @@ const routes: Routes = [
     ScrollDirectivesModule,
     FormsModule,
     ReactiveFormsModule,
-    LeafletMapModule
+    LeafletMapModule,
+    LeafletModule,
+    LeafletMarkerClusterModule
   ]
 })
 export class FrontendListingModule { }

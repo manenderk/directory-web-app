@@ -4,3 +4,6 @@
 .content section:nth-child(odd) {
   background: #f7f7f7;
 }
+.view-more-mob-btn {
+  margin-top: -1em;
+}

@@ -33,7 +33,7 @@ export class ScreenService {
   subscribecurrentScreenTypeUpdates() {
     this.setCurrentScreenType();
     fromEvent(window, 'resize').pipe(
-      debounceTime(1000)
+      debounceTime(500)
     ).subscribe(() => {
       this.setCurrentScreenType()
     })

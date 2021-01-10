@@ -1,0 +1,151 @@
+<div class="container-fluid p-0">
+  <div class="row no-gutters">
+    <!-- MOBILE VIEW -->
+    <ng-container *ngIf="screen.toggleScreenTypes.includes(screen.currentScreenType); else showDesktopView">
+      <div class="col-12">
+        <ng-container *ngTemplateOutlet="mapBlock"></ng-container>
+      </div>
+      <!-- <div class="height100vhResHeader">
+        <div class="listing-section height100vhResHeader" [ngClass]="{'show': screen.currentView === 'listing'}">
+          <div class="row">
+            <ng-container *ngTemplateOutlet="listingBlock"></ng-container>
+          </div>
+
+        </div>
+      </div> -->
+      <div class="listing-section-mobile" [ngClass]="{'show': screen.currentView === 'listing'}">
+        <div class="backdrop text-center p-2">
+          <button type="button" class="btn btn-info btn-icon-circle" (click)="toggleCurrentView('map')">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="listing-content">
+          <div class="row">
+            <ng-container *ngTemplateOutlet="listingBlock"></ng-container>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+    <!-- END MOBILE VIEW -->
+
+    <!-- DESKTOP VIEW -->
+    <ng-template #showDesktopView>
+      <div class="col-6">
+        <div>BREADCRUMBS</div>
+        <div class="row">
+          <div class="col-4">FILTERS</div>
+          <div class="col-8">
+            <div class="col-lg-8 py-2 bg-grey-1 listing-grid">
+              <div class="row py-2">
+                <ng-container *ngTemplateOutlet="listingBlock"></ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <ng-container *ngTemplateOutlet="mapBlock"></ng-container>
+      </div>
+    </ng-template>
+    <!-- END DESKTOP VIEW -->
+  </div>
+</div>
+
+
+<ng-template #mapBlock>
+  <div class="height100vhResHeader" *ngIf="mapData?.mapOptions">
+    <div class="map"
+    leaflet
+    [leafletOptions]="mapData.mapOptions"
+    [(leafletCenter)]="mapData.mapOptions.center"
+    [leafletFitBounds]="mapData.boundingBox"
+    >
+      <div *ngIf="mapData?.userPositionMarkerLayer" [leafletLayer]="mapData.userPositionMarkerLayer"></div>
+      <div *ngIf="mapData?.markerLayers" [leafletMarkerCluster]="mapData.markerLayers"></div>
+    </div>
+  </div>
+
+  <div class="action-row">
+    <div class="mb-2">
+      <button type="button" class="btn btn-info btn-icon-circle" (click)="toggleCurrentView('filter')">
+        <i class="fa fa-filter" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-info btn-icon-circle" (click)="toggleCurrentView('listing')">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+
+
+  <div class="business-popup" *ngIf="currentBusiness">
+    <div class="text-right mb-2 mx-2">
+      <button type="button" class="btn btn-info btn-icon-circle" (click)="removeBusinessPopup()">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="business-card">
+      <app-frontend-business-listing-card [business]="currentBusiness"></app-frontend-business-listing-card>
+    </div>
+  </div>
+
+</ng-template>
+
+<ng-template #filtersBlock>
+
+  <!-- <div class="col-lg-4 filter-section">
+    <div class="form-group">
+      <select class="form-control custom-select" [(ngModel)]="filters.sortBy" (change)="filterChanged()">
+        <option value="" disabled>Sort By</option>
+        <option *ngFor="let option of sortOptions" [value]="option.value">{{option.label}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="What are you looking for?" [(ngModel)]="filters.name"
+          (keyup)="searchBusiness()">
+        <div class="input-group-append">
+          <span class="input-group-text"><i class="fa fa-search"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Location" [(ngModel)]="filters.locationName"
+          (keyup)="searchLocation()">
+        <div class="input-group-append">
+          <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+        </div>
+      </div>
+      <ul class="list-group location-search-results" *ngIf="showLocationSuggestions">
+        <li class="list-group-item link" *ngFor="let result of locationResults" (click)="updateCurrentLocation(result)">
+          {{result.label}}</li>
+        <li *ngIf="locationResults.length === 0">No Results found</li>
+      </ul>
+    </div>
+    <div class="form-group">
+      <select [(ngModel)]="filters.categoryId" class="form-control custom-select" (change)="filterChanged('category')">
+        <option value=''>All Categories</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="distance-range-input" class="my-0">Distance : {{filters.distance + 'Kms'}}</label><br>
+      <mat-slider thumbLabel tickInterval="1000" min="1" max="50" [(ngModel)]="filters.distance"
+        (change)="filterChanged()"></mat-slider>
+    </div>
+  </div> -->
+</ng-template>
+
+<ng-template #listingBlock>
+  <ng-container *ngFor="let business of businesses; let odd = odd;">
+    <div class="mb-3"
+      [ngClass]="{'col-12': screen.cardDisplayType === 'horizontal', 'col-6 vertical-card': screen.cardDisplayType !== 'horizontal', 'odd-place': odd, 'even-place': !odd }">
+      <app-frontend-business-listing-card [business]="business" [displayType]="screen.cardDisplayType">
+      </app-frontend-business-listing-card>
+    </div>
+  </ng-container>
+</ng-template>

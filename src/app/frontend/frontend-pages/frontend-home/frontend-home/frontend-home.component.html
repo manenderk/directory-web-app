@@ -40,7 +40,9 @@
     </div>
     <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
       <div class="col px-2 px-sm-0 text-right">
-        <a [routerLink]="['/categories']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
+        <a [routerLink]="['/categories']" routerLinkActive="router-link-active"
+        class="btn" [ngClass]="toggleScreenTypes.includes(screenSize) ? 'btn-link view-more-mob-btn py-0' : ' btn-info do-zoom-hover'"
+        role="button">View More <i class="fa fa-angle-right"></i></a>
       </div>
     </div>
   </div>
@@ -69,7 +71,9 @@
     </div>
     <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
       <div class="col px-2 px-sm-0 text-right">
-        <a [routerLink]="['/events']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
+        <a [routerLink]="['/events']" routerLinkActive="router-link-active"
+        class="btn" [ngClass]="toggleScreenTypes.includes(screenSize) ? 'btn-link view-more-mob-btn py-0' : ' btn-info do-zoom-hover'"
+        role="button">View More <i class="fa fa-angle-right"></i></a>
       </div>
     </div>
   </div>
@@ -97,7 +101,9 @@
     </div>
     <div class="row mb-1 mb-sm-3 mt-1 mt-sm-0">
       <div class="col px-2 px-sm-0 text-right">
-        <a [routerLink]="['/news']" routerLinkActive="router-link-active"  class="btn btn-info do-zoom-hover" role="button">View More <i class="fa fa-angle-right"></i></a>
+        <a [routerLink]="['/news']" routerLinkActive="router-link-active"
+        class="btn" [ngClass]="toggleScreenTypes.includes(screenSize) ? 'btn-link view-more-mob-btn py-0' : ' btn-info do-zoom-hover'"
+        role="button">View More <i class="fa fa-angle-right"></i></a>
       </div>
     </div>
   </div>
